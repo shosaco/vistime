@@ -1,6 +1,6 @@
 Package: vistime
 Title: Interactive R Timelines using 'plotly.js'
-Version: 0.1.0
+Version: 0.2.0
 Date: 2017-02-01
 Authors@R: person(
             "Sandro", "Raabe"
