@@ -1,5 +1,5 @@
 Package: vistime
-Title: Interactive R Timelines using Plotly.js
+Title: Interactive R timelines using plotly.js
 Version: 0.1.0
 Date: 2017-02-01
 Authors@R: person(
@@ -8,9 +8,7 @@ Authors@R: person(
             , email = "shosaco_nospam@hotmail.com>"
             )
 Maintainer: Sandro Raabe <shosaco_nospam@hotmail.com>
-Description: vistime is the first R package to create fully interactive
-    timelines/Gantt charts using Plotly.js. The charts can be included in Shiny apps
-    and manipulated via 'plotly_build()'.
+Description: The first R package to create fully interactive time lines or gantt charts using 'plotly.js'. The charts can be included in Shiny apps and manipulated via 'plotly_build()'.
 License: GPL-3 | file LICENSE
 URL: https://github.com/shosaco/vistime
 BugReports: https://github.com/shosaco/vistime/issues
@@ -18,9 +16,7 @@ Depends:
     R (>= 3.1.0)
 Imports:
     plotly (>= 4.5.2),
-    RColorBrewer (>= 1.1.2),
-    knitr (>= 1.15.1)
+    RColorBrewer (>= 1.1.2)
 Encoding: UTF-8
-VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 5.0.1
