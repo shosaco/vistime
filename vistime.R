@@ -12,7 +12,7 @@
 #' @param groups (optional) the column name in \code{data} to be used for grouping
 #' @param events (optional) the column name in \code{data} that contains event names
 #' @param colors (optional) the column name in \code{data} that contains colors for events
-
+#' @import plotly
 
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
 
@@ -43,9 +43,8 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
 
   # set the colors
   if(is.null(colors)){
-    require(RColorBrewer)
     palette <- "Set3"
-    data$col <- rep(brewer.pal(min(12, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
+    data$col <- rep(RColorBrewer::brewer.pal(min(12, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
   }else{
     names(data)[names(data)==colors] <- "col"
   }
@@ -76,7 +75,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
         }else{
           next.y <- 1
         }
-      # for ranges: if this event starts before previous ends, set on new y level (up or below)
+        # for ranges: if this event starts before previous ends, set on new y level (up or below)
       }else if(row>1 && toAdd$start < thisData[row-1, "end"]){
         if(next.y == 2) next.y <- 1
         else next.y <- next.y + 1
@@ -120,7 +119,6 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   #  5. Plots for the ranges  #####
   #
   #############################################################################
-  require(plotly)
   rangeNumbers <- unique(subset(data, start != end)$subplot)
   ranges <- lapply(rangeNumbers, function(sp) {
     next.y <- 1
@@ -159,17 +157,17 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
     }
 
     return(p %>% layout(hovermode = 'closest',
-                    margin = list(l=max(nchar(data$event)) * 10),
-                    # Axis options:
-                    # 1. Remove gridlines
-                    # 2. Customize y-axis tick labels and show group names instead of numbers
-                    xaxis = list(showgrid = F, title = ''),
-                    yaxis = list(showgrid = F, title = '',
-                                 tickmode = "array", tickvals = 1:maxY,
-                                 ticktext = c(rep("", (maxY-1)/2), # Leerzeilen
-                                              as.character(toAdd$group), # group name in the center
-                                              rep("", (maxY+1)/2)) # Leerzeilen
-                    )))
+                        margin = list(l=max(nchar(data$event)) * 10),
+                        # Axis options:
+                        # 1. Remove gridlines
+                        # 2. Customize y-axis tick labels and show group names instead of numbers
+                        xaxis = list(showgrid = F, title = ''),
+                        yaxis = list(showgrid = F, title = '',
+                                     tickmode = "array", tickvals = 1:maxY,
+                                     ticktext = c(rep("", (maxY-1)/2), # Leerzeilen
+                                                  as.character(toAdd$group), # group name in the center
+                                                  rep("", (maxY+1)/2)) # Leerzeilen
+                        )))
   })
 
 
@@ -196,9 +194,9 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
 
     # add all the markers for this Category
     p <- add_markers(p, x=~start, y=~y,
-                        marker = list(color = ~col, size=15,
-                                      line = list(color = 'black', width = 1)),
-                        showlegend = F, hoverinfo="text", text=~tooltip)
+                     marker = list(color = ~col, size=15,
+                                   line = list(color = 'black', width = 1)),
+                     showlegend = F, hoverinfo="text", text=~tooltip)
 
     # add annotations
     p <- add_text(p, x=~start, y=~y, textfont = list(family = "sans serif", size = 14, color = toRGB("black")),
@@ -207,13 +205,13 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
     # fix layout
     p <-  layout(p, hovermode = 'closest',
                  margin = list(l=max(nchar(data$event)) * 10),
-                    xaxis = list(showgrid = F, title=''),
-                     yaxis = list(showgrid = F, title = '',
+                 xaxis = list(showgrid = F, title=''),
+                 yaxis = list(showgrid = F, title = '',
                               tickmode = "array", tickvals = 1:maxY,
                               ticktext = c(rep("", (maxY-1)/2), # Leerzeilen
                                            thisData$group[1], # group name in the center
                                            rep("", (maxY+1)/2)) # Leerzeilen
-                  ))
+                 ))
   })
 
 
