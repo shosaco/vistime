@@ -1,6 +1,7 @@
 
 # 0.2.0
 
+- major bugfix: function `vistime(...)` was not available after package loading
 - improved error checking
 - improved README
 
