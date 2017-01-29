@@ -1,5 +1,4 @@
 library(plotly)
-library(data.table)
 library(RColorBrewer)
 
 
