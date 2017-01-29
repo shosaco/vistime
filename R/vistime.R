@@ -12,7 +12,7 @@
 #' @examples
 #' # basic example
 #' data(school)
-#' \donttest{vistime(school, events = "Language", groups = "Room")}
+#' vistime(school, events = "Language", groups = "Room")
 #'
 #' # choose your own colors
 #' dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
@@ -22,13 +22,6 @@
 #'                   colors = c('#cbb69d', '#603913', '#c69c6e'))
 #'
 #' vistime(dat, events="Position", groups="Name")
-#'
-#' ## Not run:
-#' require(timeline)
-#' data(ww2)
-#' \donttest{vistime(ww2, events="Person", groups="Group", start="StartDate", end="EndDate")}
-#' ## End(Not run)
-#'
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
 
   data <- data.frame(data)
