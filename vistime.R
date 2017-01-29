@@ -1,44 +1,25 @@
-library(plotly)
-library(RColorBrewer)
+#' Creates an interactive timeline plot.
+#' 
+#' This function will create a timeline using the \code{Plotly.js} framework.
+#' There are two types of events, those that have a range (i.e. a start and end date) and
+#' and points-in-time (where end date is NA or equal to start date). 
+#' The latter can be grouped in separate rows to prevent. The data is distributes in a
+#' non-overlapping matter and coloured.
+#' 
+#' @param data data for time periods and events (data frame)
+#' @param start (optional) the column name in \code{data} that contains start dates
+#' @param end (optional) the column name in \code{data} that contains end dates
+#' @param groups (optional) the column name in \code{data} to be used for grouping
+#' @param events (optional) the column name in \code{data} that contains event names
+#' @param colors (optional) the column name in \code{data} that contains colors for events
 
 
-#########################
-#ex1:
-dat <- data.frame(Room = c("Room 1", "Room 2", "Room 3"),
-                  Language = c("English", "German", "French"),
-                  start = c("2017-03-14 14:00"," 2017-03-14 15:00", "2017-03-14 14:30"),
-                  end = c("2017-03-14 15:00", "2017-03-14 16:00", "2017-03-14 15:30"))
-vistime(dat, events="Language", groups="Room")
-
-#################################################
-
-##################
-# ex2:
-# dataGroups <- data.frame(
-#   content = c("Open", "Open", "Open", "Open", "Half price entry", "Staff meeting", "Open", "Adults only", "Open", "Hot tub closes"),
-#   start = c("2017-05-01 07:30:00", "2017-05-01 14:00:00", "2017-05-01 06:00:00", "2017-05-01 14:00:00", "2017-05-01 08:00:00",
-#             "2017-05-01 08:00:00", "2017-05-01 08:30:00", "2017-05-01 14:00:00","2017-05-01 16:00:00", "2017-05-01 19:30:00"),
-#   end   = c("2017-05-01 12:00:00", "2017-05-01 20:00:00", "2017-05-01 12:00:00", "2017-05-01 22:00:00", "2017-05-01 10:00:00",
-#             "2017-05-01 08:30:00", "2017-05-01 12:00:00", "2017-05-01 16:00:00", "2017-05-01 20:00:00", NA),
-#   group = c(rep("Tennis Court", 2), rep("Billard", 3), rep("Pool", 5)))
-# 
-# vistime(dataGroups, events="content")
-
-############################
-# ex.3
-# library(timeline)
-# data(ww2)
-# ww2.events$end <- ww2.events$Date
-# ww2.events$start <- ww2.events$Date
-# names(ww2.events)<-c("Person", "Date", "Group", "end", "start")
-# ww2.events<- ww2.events[,names(ww2)]
-# vistime(rbind(ww2, ww2.events), events="Person", start="StartDate", end="EndDate")
-
+require(plotly)
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
   
   # error checking
   if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)))
-  if(is.na(data[, start]) < 1) stop(paste("error in start column: Please provide at least one point in time"))
+  if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
   
   # set column names
   if(! groups %in% names(data)) data$group <- ""
@@ -63,6 +44,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   
   # set the colors
   if(is.null(colors)){
+    require(RColorBrewer)
     palette <- "Set3"
     data$col <- rep(brewer.pal(min(12, nrow(data)), palette), nrow(data))[1:nrow(data)]
   }else{
