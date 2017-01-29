@@ -7,31 +7,32 @@ Given a data frame containing event names and dates (can be `String`, `Date` or 
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
-******
-## example 1:
-```{r}
-dat <- data.frame(Room = c("Room 1", "Room 2", "Room 3"),
-                  Language = c("English", "German", "French"),
-                  start = c("2017-03-14 14:00"," 2017-03-14 15:00", "2017-03-14 14:30"),
-                  end = c("2017-03-14 15:00", "2017-03-14 16:00", "2017-03-14 15:30"))
-vistime(dat, events="Language", groups="Room")
-```
+
+### Installation
+
+To install the package from CRAN:
+
+    install.packages("vistime")
+
+To install the development version (most recent fixes and improvements, but not released on CRAN yet), you will first have to install [devtools][] and then install this package from GitHub:
+
+    devtools::install_github("shosaco/vistime")
+    
+
+### Use
+
+To create a timeline, your data needs to have a name for the **event** and a starting date **start**. If your column names differ, just hand them over as arguments in `events="myEventNames"` or `start="myStartDates"` respectively. For data ranges, you need to provide the ending date for each range (otherwise they are assumed to be single events). You can provide a `colors` column if you have colouring preferences and if you provide a `group` column (names group or by parameter `group="MyGroups"`), the chart is grouped into the given group levels.
+
+    library(vistime)
+    data(school)
+    school
+    vistime(school, events="Language", groups="Room")
+
+
+![](inst/img/ex1data.png)
 ![](inst/img/ex1.png)
  
-   
-## example 2:
-```{r}
-dataGroups <- data.frame(
-  content = c("Open", "Open", "Open", "Open", "Half price entry", "Staff meeting", "Open", "Adults only", "Open", "Hot tub closes"),
-  start = c("2017-05-01 07:30:00", "2017-05-01 14:00:00", "2017-05-01 06:00:00", "2017-05-01 14:00:00", "2017-05-01 08:00:00",
-            "2017-05-01 08:00:00", "2017-05-01 08:30:00", "2017-05-01 14:00:00","2017-05-01 16:00:00", "2017-05-01 19:30:00"),
-  end   = c("2017-05-01 12:00:00", "2017-05-01 20:00:00", "2017-05-01 12:00:00", "2017-05-01 22:00:00", "2017-05-01 10:00:00",
-            "2017-05-01 08:30:00", "2017-05-01 12:00:00", "2017-05-01 16:00:00", "2017-05-01 20:00:00", NA),
-  group = c(rep("Tennis Court", 2), rep("Billard", 3), rep("Pool", 5)))
-
-vistime(dataGroups, events="content"))
-```
-![](inst/img/ex2.png)
+  
 
 
 
