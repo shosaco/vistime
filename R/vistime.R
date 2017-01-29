@@ -9,17 +9,20 @@
 #' @param colors (optional) the column name in \code{data} that contains colors for events
 #' @import plotly
 #' @examples
-#' data(example)
+#' data(school)
 #' \donttest{vistime(school, events = "Language", groups = "Room")}
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
 
   # error checking
   if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)))
   if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
+  if(class(try(as.POSIXct(data$start), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
+  if(! events %in% names(dat)) stop("Please provide the name of the events column in parameter 'events'")
+  if(! start %in% names(dat)) stop("Please provide the name of the start date column in parameter 'start'")
+  if(! groups %in% names(dat)) data$group <- ""
+  if(! end %in% names(dat)) data$end <- data[, start]
 
   # set column names
-  if(! groups %in% names(data)) data$group <- ""
-  if(! end %in% names(data)) data$end <- data[, start]
   if(events == groups){
     data$group <- data[, groups]
   }else{
@@ -30,9 +33,9 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   names(data)[names(data)==events] <- "event"
 
   # sort out the classes
+  data <- as.data.frame(sapply(data, as.character), stringsAsFactors=F)
   data$start <- as.POSIXct(data$start)
   data$end <- as.POSIXct(data$end)
-  data[, c("event", "group")] <- sapply(data[, c("event", "group")], as.character)
 
   # fix missing ends for events
   if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
