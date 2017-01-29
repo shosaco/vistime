@@ -7,10 +7,10 @@ library(RColorBrewer)
 #ex1:
 # dat <- data.frame(Room=c("Room 1","Room 2","Room 3"),
 #                   Language=c("English", "German", "French"),
-#                   start=as.POSIXct(c("2014-03-14 14:00", 
+#                   start=as.POSIXct(c("2014-03-14 14:00",
 #                                      "2014-03-14 15:00",
 #                                      "2014-03-14 14:30")),
-#                   end=as.POSIXct(c("2014-03-14 15:00", 
+#                   end=as.POSIXct(c("2014-03-14 15:00",
 #                                    "2014-03-14 16:00",
 #                                    "2014-03-14 15:30")))
 # vistime(dat, start="start", end="end", groups="Room", events="Language")
@@ -38,6 +38,15 @@ library(RColorBrewer)
 # 
 # vistime(dataGroups, start="start", end="end", groups="group", events="content")
 
+############################
+# ex.3
+# library(timeline)
+# data(ww2)
+# ww2.events$EndDate <- ww2.events$Date
+# ww2.events$StartDate <- ww2.events$Date
+# names(ww2.events)<-c("Person", "Date", "Group", "EndDate", "StartDate")
+# ww2.events<- ww2.events[,names(ww2)]
+# vistime(rbind(ww2, ww2.events), events="Person")
 
 
 vistime <- function(data, start="StartDate", end="EndDate", groups="Group", events="Event", colors=NULL){
@@ -118,6 +127,22 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
   data$label <- ifelse(data$StartDate == data$EndDate, 
                        ifelse(nchar(data$Event) > 10, paste0(substr(data$Event, 1, 8), "..."), data$Event),
                        data$Event)
+  
+  #############################################################################
+  #  4. set interval for vertical lines                                   #####
+  #############################################################################  
+  
+  total_range <- difftime(max(data$EndDate), min(data$StartDate), units="secs")
+  if(total_range < 60*60){ # max 1 hour
+    interval <- 60*10 # 10-min-intervals
+  }else if(total_range < 60*60*24){ # max 1 day
+    interval <- 60*60*2 # 2-hour-intervals
+  }else if(total_range < 60*60*24*365){ # max 1 year
+    interval <- 60*60*24*7 # 1-week-intervals
+  }else{
+    interval <- 60*60*24 *30*12 # 1-year-intervals
+  }
+  
  
   #############################################################################
   #  4. Plots for the ranges  #####
@@ -125,10 +150,7 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
   #############################################################################
   
   rangeNumbers <- unique(subset(data, StartDate != EndDate)$subplot)
-  nPlot <- 0
   ranges <- lapply(rangeNumbers, function(sp) {
-    
-    nPlot <<- nPlot+1
     next.y <- 1
     
     # subset data for this Group
@@ -138,17 +160,6 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
     p <- plot_ly(type = "scatter", mode="lines") 
     
     # 1. add vertical line for each year/day
-    total_range <- difftime(max(data$EndDate), min(data$StartDate), units="secs")
-    if(total_range < 60*60){ # max 1 hour
-      interval <- 60*10 # 10-min-intervals
-    }else if(total_range < 60*60*24){ # max 1 day
-      interval <- 60*60*2 # 2-hour-intervals
-    }else if(total_range < 60*60*24*365){ # max 1 year
-      interval <- 60*60*24*7 # 1-week-intervals
-    }else{
-      interval <- 60*60*24 *30*12 # 1-year-intervals
-    }
-    
     for(day in seq(min(data$StartDate), max(data$EndDate), interval)){
       p <- add_trace(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines", 
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
@@ -196,16 +207,16 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
   #######################################################################
   
   eventNumbers <- unique(subset(data, StartDate == EndDate)$subplot)
-  nPlot <- 1
   events <- lapply(eventNumbers, function(sp) {
-  
-    nPlot <<- nPlot+1
     # subset data for this Category
     thisData <- subset(data, StartDate == EndDate & subplot == sp)
     maxY <- max(thisData$y) + 1
   
     # add vertical lines to plot
     p <- plot_ly(thisData, type="scatter", mode="markers")
+    
+    # 1. add vertical line for each year/day
+
     for(day in seq(min(data$StartDate), max(data$EndDate), interval)){
       p <- add_lines(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY),
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
