@@ -12,7 +12,9 @@ Given a data frame containing event names and dates (can be `String`, `Date` or 
 
 To install the package from CRAN:
 
+```{r}
     install.packages("vistime")
+```
 
 To install the development version (most recent fixes and improvements, but not released on CRAN yet), run the following code in an R console:
 ```{r}
@@ -25,10 +27,12 @@ devtools::install_github("shosaco/vistime")
 
 To create a timeline, your data needs to have a name for the **event** and a starting date **start**. If your column names differ, just hand them over as arguments in `events="myEventNames"` or `start="myStartDates"` respectively. For data ranges, you need to provide the ending date for each range (otherwise they are assumed to be single events). You can provide a `colors` column if you have colouring preferences and if you provide a `group` column (names group or by parameter `group="MyGroups"`), the chart is grouped into the given group levels.
 
-    library(vistime)
-    data(school)
-    school
-    vistime(school, events="Language", groups="Room")
+```{r}
+library(vistime)
+data(school)
+school
+vistime(school, events="Language", groups="Room")
+```
 
 
 ![](inst/img/ex1data.png)
