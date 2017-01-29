@@ -13,10 +13,12 @@
 #' \donttest{vistime(school, events = "Language", groups = "Room")}
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
 
+  data <- data.frame(data)
+
   # error checking
   if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)))
   if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
-  if(class(try(as.POSIXct(data$start), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
+  if(class(try(as.POSIXct(data[, start]), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
   if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
   if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
   if(! groups %in% names(data)) data$group <- ""
@@ -123,7 +125,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   }else if(total_range < 60*60*24*365){ # max 1 year
     interval <- 60*60*24*7 # 1-week-intervals
   }else if(total_range < 60*60*24*365*10){ # max 20 years
-    interval <- 60*60*24 *30*12 # 1-year-intervals
+    interval <- 60*60*24 *30*6 # 6-months-intervals
   }else{
     interval <- 60*60*24 *30*12*10 # 5-year-intervals
   }
