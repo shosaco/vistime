@@ -10,7 +10,7 @@ vistime(data, start = "start", end = "end", groups = "group",
   events = "event", colors = NULL)
 }
 \arguments{
-\item{data}{data for time periods and events (data frame)}
+\item{data}{data.frame that contains the data to be visualised}
 
 \item{start}{(optional) the column name in \code{data} that contains start dates}
 
@@ -22,15 +22,34 @@ vistime(data, start = "start", end = "end", groups = "group",
 
 \item{colors}{(optional) the column name in \code{data} that contains colors for events}
 }
+\value{
+\code{vistime} returns an object of class "\code{plotly}" and "\code{htmlwidget}".
+}
 \description{
-Package to create interactive timelines
+Create interactive and offline timelines using the \code{plotly.js} framework.
 
-Create an interactive timeline using the \code{plotly.js} framework.
-There are two types of events: those that define a range (i.e. have a start and end date) and points-in-time (where end date is NA or equal to start date). The data is distributed in a non-overlapping matter and coloured. It can then be edited via \code{plotly_build()} and e.g. be used in Shiny apps
+Time data that is provided is distributed and grouped in a non-overlapping matter. It can then be edited via \code{plotly_build()} and e.g. be used in Shiny apps. The process works offline.
 }
 \examples{
+# basic example
 data(school)
 \donttest{vistime(school, events = "Language", groups = "Room")}
+
+# choose your own colors
+dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
+                  Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
+                  start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
+                  end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
+                  colors = c('#cbb69d', '#603913', '#c69c6e'))
+
+vistime(dat, events="Position", groups="Name")
+
+## Not run:
+require(timeline)
+data(ww2)
+\donttest{vistime(ww2, events="Person", groups="Group", start="StartDate", end="EndDate")}
+## End(Not run)
+
 }
 \author{
 Sandro Raabe \email{shosaco_nospam@hotmail.com}

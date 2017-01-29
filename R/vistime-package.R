@@ -1,4 +1,4 @@
-#' Package to create interactive timelines
+#' Create interactive and offline timelines using the \code{plotly.js} framework.
 #'
 #' @name vistime
 #' @docType package
