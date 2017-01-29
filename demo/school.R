@@ -1,3 +1,3 @@
 data(example)
 
-#vistime(school, events = "Language", groups="Room")
+vistime(school, events = "Language", groups="Room")
