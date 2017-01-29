@@ -15,15 +15,15 @@ vistime(dat, events="Language", groups="Room")
 
 ##################
 # ex2:
-dataGroups <- data.frame(
-  content = c("Open", "Open", "Open", "Open", "Half price entry", "Staff meeting", "Open", "Adults only", "Open", "Hot tub closes"),
-  start = c("2017-05-01 07:30:00", "2017-05-01 14:00:00", "2017-05-01 06:00:00", "2017-05-01 14:00:00", "2017-05-01 08:00:00",
-            "2017-05-01 08:00:00", "2017-05-01 08:30:00", "2017-05-01 14:00:00","2017-05-01 16:00:00", "2017-05-01 19:30:00"),
-  end   = c("2017-05-01 12:00:00", "2017-05-01 20:00:00", "2017-05-01 12:00:00", "2017-05-01 22:00:00", "2017-05-01 10:00:00",
-            "2017-05-01 08:30:00", "2017-05-01 12:00:00", "2017-05-01 16:00:00", "2017-05-01 20:00:00", NA),
-  group = c(rep("Tennis Court", 2), rep("Billard", 3), rep("Pool", 5)))
-
-vistime(dataGroups, events="content")
+# dataGroups <- data.frame(
+#   content = c("Open", "Open", "Open", "Open", "Half price entry", "Staff meeting", "Open", "Adults only", "Open", "Hot tub closes"),
+#   start = c("2017-05-01 07:30:00", "2017-05-01 14:00:00", "2017-05-01 06:00:00", "2017-05-01 14:00:00", "2017-05-01 08:00:00",
+#             "2017-05-01 08:00:00", "2017-05-01 08:30:00", "2017-05-01 14:00:00","2017-05-01 16:00:00", "2017-05-01 19:30:00"),
+#   end   = c("2017-05-01 12:00:00", "2017-05-01 20:00:00", "2017-05-01 12:00:00", "2017-05-01 22:00:00", "2017-05-01 10:00:00",
+#             "2017-05-01 08:30:00", "2017-05-01 12:00:00", "2017-05-01 16:00:00", "2017-05-01 20:00:00", NA),
+#   group = c(rep("Tennis Court", 2), rep("Billard", 3), rep("Pool", 5)))
+# 
+# vistime(dataGroups, events="content")
 
 ############################
 # ex.3
@@ -37,6 +37,11 @@ vistime(dataGroups, events="content")
 
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
   
+  # error checking
+  if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)))
+  if(is.na(data[, start]) < 1) stop(paste("error in start column: Please provide at least one point in time"))
+  
+  # set column names
   if(! groups %in% names(data)) data$group <- ""
   if(! end %in% names(data)) data$end <- data[, start]
   names(data)[names(data)==start] <- "start"
