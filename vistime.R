@@ -2,62 +2,81 @@ library(plotly)
 library(data.table)
 library(RColorBrewer)
 
-library(timeline)
-data(ww2)
-data <- ww2
 
-data <- rbind(data, data.frame(Person = "Test", Group="UK Prime Minister", StartDate="1938-01-01", EndDate="1945-01-01"))
+#########################
+#ex1:
+# dat <- data.frame(Room=c("Room 1","Room 2","Room 3"),
+#                   Language=c("English", "German", "French"),
+#                   start=as.POSIXct(c("2014-03-14 14:00", 
+#                                      "2014-03-14 15:00",
+#                                      "2014-03-14 14:30")),
+#                   end=as.POSIXct(c("2014-03-14 15:00", 
+#                                    "2014-03-14 16:00",
+#                                    "2014-03-14 15:30")))
+# vistime(dat, start="start", end="end", groups="Room", events="Language")
 
-# add events
-data <- rbind(data,
-              data.frame(Person = ww2.events$Event,
-                         Group = ww2.events$Side,
-                         StartDate = ww2.events$Date,
-                         EndDate = ww2.events$Date))
+#################################################
 
-data <- rbind(data,
-              data.frame(Person = "Testevent",
-                         Group = "Axis",
-                         StartDate = "1937-07-07",
-                         EndDate = "1937-07-07"))
+##################
+# ex2:
+# dataGroups <- data.frame(
+#   content = c("Open", "Open",
+#               "Open", "Open", "Half price entry",
+#               "Staff meeting", "Open", "Adults only", "Open", "Hot tub closes",
+#               "Siesta"),
+#   start = c("2016-05-01 07:30:00", "2016-05-01 14:00:00",
+#             "2016-05-01 06:00:00", "2016-05-01 14:00:00", "2016-05-01 08:00:00",
+#             "2016-05-01 08:00:00", "2016-05-01 08:30:00", "2016-05-01 14:00:00",
+#             "2016-05-01 16:00:00", "2016-05-01 19:30:00",
+#             "2016-05-01 12:00:00"),
+#   end   = c("2016-05-01 12:00:00", "2016-05-01 20:00:00",
+#             "2016-05-01 12:00:00", "2016-05-01 22:00:00", "2016-05-01 10:00:00",
+#             "2016-05-01 08:30:00", "2016-05-01 12:00:00", "2016-05-01 16:00:00",
+#             "2016-05-01 20:00:00", NA,
+#             "2016-05-01 14:00:00"),
+#   group = c(rep("lib", 2), rep("gym", 3), rep("pool", 5), "siesta"))
+# 
+# vistime(dataGroups, start="start", end="end", groups="group", events="content")
 
 
-data <- data[order(data$StartDate),]
 
-
-
-vistime <- function(data){
+vistime <- function(data, start="StartDate", end="EndDate", groups="Group", events="Event", colors=NULL){
     
+  names(data)[names(data)==start] <- "StartDate"
+  names(data)[names(data)==end] <- "EndDate"
+  names(data)[names(data)==groups] <- "Group"
+  names(data)[names(data)==events] <- "Event"
   
+  # sort out the classes
+  data$StartDate <- as.POSIXct(data$StartDate)
+  data$EndDate <- as.POSIXct(data$EndDate)
+  data[, c("Event", "Group")] <- sapply(data[, c("Event", "Group")], as.character)
   
-  names(data)[1] <- "Event"
-  
+  # fix missing EndDates for events
+  if(any(is.na(data$EndDate))) data$EndDate[is.na(data$EndDate)] <- data$StartDate[is.na(data$EndDate)]
+
+  # set the tooltips
   data$Tooltip <- ifelse(data$StartDate == data$EndDate,
-                         paste0("<b>",data$Event,":</b>",data$StartDate,"</b>"),
+                         paste0("<b>",data$Event,": ",data$StartDate,"</b>"),
                          paste0("<b>",data$Event,":</b> from <b>",data$StartDate,"</b> to <b>",data$EndDate,"</b>"))
-  palette <- "Set3"
-  data$col <- rep(brewer.pal(min(12, nrow(data)), palette), nrow(data))[1:nrow(data)]
   
-  
-  
+  # set the colors
+  if(is.null(colors)){
+    palette <- "Set3"
+    data$col <- rep(brewer.pal(min(12, nrow(data)), palette), nrow(data))[1:nrow(data)]
+  }else{
+    names(data)[names(data)==colors] <- "col"
+  }
+    
   ########################################################################
   #  1. Determine the correct subplot for each event                ######
   ########################################################################
   
   data$subplot <- as.numeric(as.factor(data$Group))
   
-  ########################################################################
-  #  2. set x values (Events begin to 12 mid-day, ranges at 12 a.m.) #####
-  #  important for Event drawing (need to be centered in a day)
-  ########################################################################
-  
-  data$x <- as.POSIXct(data$StartDate)
-  data$x[data$StartDate == data$EndDate] <- as.POSIXct(data$StartDate[data$StartDate == data$EndDate]) + as.ITime("12:00")
-  data$x[data$StartDate != data$EndDate] <- as.POSIXct(data$StartDate[data$StartDate != data$EndDate]) + as.ITime("00:00")
-  
   
   ########################################################################
-  #  3. set y values                                                ######
+  #  2. set y values                                                ######
   ########################################################################
   for(sp in unique(data$subplot)){
     next.y <- 1
@@ -88,43 +107,20 @@ vistime <- function(data){
   
   
   ###########################################################################
-  #  5. Set "intelligent" labels for events                           #######
+  #  3. Set "intelligent" labels for events                           #######
   ###########################################################################
   
-  data$labelPos <- ifelse(data$StartDate == data$EndDate, 
-                          rep(c("top", "bottom"), nrow(data[data$StartDate == data$EndDate,])/2),
-                          "center")
+  # data$labelPos <- ifelse(data$StartDate == data$EndDate, 
+  #                         rep(c("top", "bottom"), ceiling(nrow(data[data$StartDate == data$EndDate,])/2)),
+  #                         "center")
+  data$labelPos <- "center"
   
   data$label <- ifelse(data$StartDate == data$EndDate, 
                        ifelse(nchar(data$Event) > 10, paste0(substr(data$Event, 1, 8), "..."), data$Event),
                        data$Event)
-  # 
-  #  for(row in 1:nrow(data)){
-  #   myY <- data[row, "y"]
-  #   myStartDate <- data[row, "StartDate"]
-  #   mySubplot <- data[row, "subplot"]
-  # 
-  #   # hat irgendein Ereignis, das in den nächten 2 Tagen anfängt, gleiches y und gleichen Subplot?
-  #   right <- any(myY == data$y[(data$StartDate - myStartDate) %in% c(1,2) ] &
-  #                mySubplot == data$subplot[(data$StartDate - myStartDate) %in% c(1,2) ],
-  #                na.rm = T)
-  #   # hat irgendein Ereignis, das in den letzten 2 Tagen anfängt, gleiches y und gleichen Subplot?
-  #   left <- any(myY == data$y[(data$StartDate - myStartDate) %in% c(-1,-2)] &
-  #               mySubplot == data$subplot[(data$StartDate - myStartDate) %in% c(-1,-2) ],
-  #               na.rm = T)
-  # 
-  #   if(right & left){
-  #     data[row, "label"] <- ""
-  #     data[row, "labelPos"] <- "center"
-  #   }else if(right){
-  #     data[row, "labelPos"] <- "left"
-  #   }else if(left){
-  #     data[row, "labelPos"] <- "right"
-  #   }
-  # }
-  
+ 
   #############################################################################
-  #  6. Plots for the ranges  #####
+  #  4. Plots for the ranges  #####
   #  
   #############################################################################
   
@@ -136,14 +132,25 @@ vistime <- function(data){
     next.y <- 1
     
     # subset data for this Group
-    thisData <- subset(data, subplot == sp)
+    thisData <- subset(data, StartDate != EndDate & subplot == sp)
     maxY <- max(thisData$y) + 1
   
     p <- plot_ly(type = "scatter", mode="lines") 
     
-    # 1. add vertical line for each year
-    for(day in seq(min(data$StartDate), max(data$EndDate), 365)){
-      p <- add_trace(p, x = as.Date(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines", 
+    # 1. add vertical line for each year/day
+    total_range <- difftime(max(data$EndDate), min(data$StartDate), units="secs")
+    if(total_range < 60*60){ # max 1 hour
+      interval <- 60*10 # 10-min-intervals
+    }else if(total_range < 60*60*24){ # max 1 day
+      interval <- 60*60*2 # 2-hour-intervals
+    }else if(total_range < 60*60*24*365){ # max 1 year
+      interval <- 60*60*24*7 # 1-week-intervals
+    }else{
+      interval <- 60*60*24 *30*12 # 1-year-intervals
+    }
+    
+    for(day in seq(min(data$StartDate), max(data$EndDate), interval)){
+      p <- add_trace(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines", 
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }
     
@@ -165,29 +172,28 @@ vistime <- function(data){
                  textposition = "center",
                  showlegend=F,
                  text=toAdd$label,
-                 hoverinfo="none") %>%
-        layout(hovermode = 'closest',
-               margin = list(l=100),
-               # Axis options:
-               # 1. Remove gridlines
-               # 2. Customize y-axis tick labels and show Group names instead of numbers
-               xaxis = list(showgrid = F, title = ''), 
-               yaxis = list(showgrid = F, title = '',
-                            tickmode = "array", tickvals = 1:maxY,
-                            ticktext = c(rep("", (maxY-1)/2), # Leerzeilen
-                                         toAdd$Group, # Group name in the center
-                                         rep("", (maxY+1)/2)) # Leerzeilen
-               ))
+                 hoverinfo="none") 
     }
     
-    return(p)
+    return(p %>% layout(hovermode = 'closest',
+                    margin = list(l=100),
+                    # Axis options:
+                    # 1. Remove gridlines
+                    # 2. Customize y-axis tick labels and show Group names instead of numbers
+                    xaxis = list(showgrid = F, title = ''), 
+                    yaxis = list(showgrid = F, title = '',
+                                 tickmode = "array", tickvals = 1:maxY,
+                                 ticktext = c(rep("", (maxY-1)/2), # Leerzeilen
+                                              as.character(toAdd$Group), # Group name in the center
+                                              rep("", (maxY+1)/2)) # Leerzeilen
+                    )))
   })
   
   
-  # #######################################################################
-  # #  7. Plots for the events                                       ######
-  # #  
-  # #######################################################################
+  #######################################################################
+  #  5. Plots for the events                                       ######
+  #
+  #######################################################################
   
   eventNumbers <- unique(subset(data, StartDate == EndDate)$subplot)
   nPlot <- 1
@@ -195,24 +201,24 @@ vistime <- function(data){
   
     nPlot <<- nPlot+1
     # subset data for this Category
-    thisData <- subset(data, subplot == sp)
+    thisData <- subset(data, StartDate == EndDate & subplot == sp)
     maxY <- max(thisData$y) + 1
   
     # add vertical lines to plot
     p <- plot_ly(thisData, type="scatter", mode="markers")
-    for(day in seq(min(data$StartDate), max(data$EndDate), 365)){
-      p <- add_lines(p, x = as.Date(day, origin="1970-01-01"), y= c(0, maxY),
+    for(day in seq(min(data$StartDate), max(data$EndDate), interval)){
+      p <- add_lines(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY),
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }
   
     # add all the markers for this Category
-    p <- add_markers(p, x=~x, y=~y,
+    p <- add_markers(p, x=~StartDate, y=~y,
                         marker = list(color = ~col, size=15,
                                       line = list(color = 'black', width = 1)),
                         showlegend = F, hoverinfo="text", text=~Tooltip)
   
     # add annotations
-    p <- add_text(p, x=~x, y=~y, textfont = list(family = "sans serif", size = 14, color = toRGB("black")),
+    p <- add_text(p, x=~StartDate, y=~y, textfont = list(family = "sans serif", size = 14, color = toRGB("black")),
                   textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
   
     # fix layout
@@ -229,7 +235,7 @@ vistime <- function(data){
   
   
   #######################################################################
-  #  8. plot everything                                            ######
+  #  6. plot everything                                            ######
   #  
   #######################################################################
   
