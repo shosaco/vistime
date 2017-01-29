@@ -14,9 +14,11 @@ To install the package from CRAN:
 
     install.packages("vistime")
 
-To install the development version (most recent fixes and improvements, but not released on CRAN yet), you will first have to install [devtools][] and then install this package from GitHub:
-
-    devtools::install_github("shosaco/vistime")
+To install the development version (most recent fixes and improvements, but not released on CRAN yet), run the following code in an R console:
+```{r}
+install.package("devtools")
+devtools::install_github("shosaco/vistime")
+```
     
 
 ### Use
