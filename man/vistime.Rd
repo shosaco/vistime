@@ -29,7 +29,7 @@ Create an interactive timeline using the \code{plotly.js} framework.
 There are two types of events: those that define a range (i.e. have a start and end date) and points-in-time (where end date is NA or equal to start date). The data is distributed in a non-overlapping matter and coloured. It can then be edited via \code{plotly_build()} and e.g. be used in Shiny apps
 }
 \examples{
-data(example)
+data(school)
 \donttest{vistime(school, events = "Language", groups = "Room")}
 }
 \author{
