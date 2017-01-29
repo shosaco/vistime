@@ -1,9 +1,9 @@
 # vistime
-an R package for pretty timeline creation
+####an R package for pretty timeline creation
 
-The first R package to create _fully interactive_ timelines or gantt charts using `plotly.js`. The charts can be included in Shiny apps and manipulated via `plotly_build()`.
+Create _fully interactive_ timelines or Gantt charts using `plotly.js`. The charts can be included in Shiny apps and manipulated via `plotly_build()`.
 
-Given a data frame containing Event Names and Dates (can be `String`, `Date` or `POSIXct` in standard notation) and optionally Groups, EndDates for ranges and colors, it creates a charming diagram of the given Dates and Events. It distinguishes between single events (having StartDate == EndDate) and ranges (given EndDate). Colors can be handed over as the `color`-argument, if none are given, they are chosen from `RColorBrewer`.
+Given a data frame containing event names and dates (can be `String`, `Date` or `POSIXct` in standard notation) and optionally groups, end dates for ranges and/or colors, it creates a charming diagram of the given dates and events. It distinguishes between single events (having StartDate == EndDate) and ranges (given EndDate). Color column name can be handed over with the `color`-argument, if none are given, they are chosen from `RColorBrewer`.
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 

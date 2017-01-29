@@ -25,11 +25,12 @@ vistime(data, start = "start", end = "end", groups = "group",
 \description{
 Package to create interactive timelines
 
-This function will create a timeline using the \code{plotly.js} framework.
-There are two types of events, those that have a range (i.e. a start and end date) and
-and points-in-time (where end date is NA or equal to start date).
-The latter can be grouped in separate rows to prevent. The data is distributes in a
-non-overlapping matter and coloured.
+Create an interactive timeline using the \code{plotly.js} framework.
+There are two types of events: those that define a range (i.e. have a start and end date) and points-in-time (where end date is NA or equal to start date). The data is distributed in a non-overlapping matter and coloured. It can then be edited via \code{plotly_build()} and e.g. be used in Shiny apps
+}
+\examples{
+data(example)
+\donttest{vistime(school, events = "Language", groups = "Room")}
 }
 \author{
 Sandro Raabe \email{shosaco_nospam@hotmail.com}

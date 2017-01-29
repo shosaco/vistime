@@ -1,10 +1,5 @@
-#' Creates an interactive timeline plot.
-#'
-#' This function will create a timeline using the \code{plotly.js} framework.
-#' There are two types of events, those that have a range (i.e. a start and end date) and
-#' and points-in-time (where end date is NA or equal to start date).
-#' The latter can be grouped in separate rows to prevent. The data is distributes in a
-#' non-overlapping matter and coloured.
+#' Create an interactive timeline using the \code{plotly.js} framework.
+#' There are two types of events: those that define a range (i.e. have a start and end date) and points-in-time (where end date is NA or equal to start date). The data is distributed in a non-overlapping matter and coloured. It can then be edited via \code{plotly_build()} and e.g. be used in Shiny apps
 #'
 #' @param data data for time periods and events (data frame)
 #' @param start (optional) the column name in \code{data} that contains start dates
@@ -13,7 +8,9 @@
 #' @param events (optional) the column name in \code{data} that contains event names
 #' @param colors (optional) the column name in \code{data} that contains colors for events
 #' @import plotly
-
+#' @examples
+#' data(example)
+#' \donttest{vistime(school, events = "Language", groups = "Room")}
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
 
   # error checking
@@ -116,7 +113,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   #############################################################################
 
   total_range <- difftime(max(data$end), min(data$start), units="secs")
-  if(total_range <= 60*60){ # max 1 hour
+  if(total_range <= 60*60*3){ # max 3 hours
     interval <- 60*10 # 10-min-intervals
   }else if(total_range < 60*60*24){ # max 1 day
     interval <- 60*60*2 # 2-hour-intervals
