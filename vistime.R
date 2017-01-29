@@ -5,14 +5,14 @@ library(RColorBrewer)
 
 #########################
 #ex1:
-# dat <- data.frame(Room=c("Room 1","Room 2","Room 3"),
-#                   Language=c("English", "German", "French"),
-#                   start=as.POSIXct(c("2014-03-14 14:00",
-#                                      "2014-03-14 15:00",
-#                                      "2014-03-14 14:30")),
-#                   end=as.POSIXct(c("2014-03-14 15:00",
-#                                    "2014-03-14 16:00",
-#                                    "2014-03-14 15:30")))
+dat <- data.frame(Room=c("Room 1","Room 2","Room 3"),
+                  Language=c("English", "German", "French"),
+                  start=as.POSIXct(c("2014-03-14 14:00",
+                                     "2014-03-14 15:00",
+                                     "2014-03-14 14:30")),
+                  end=as.POSIXct(c("2014-03-14 15:00",
+                                   "2014-03-14 16:00",
+                                   "2014-03-14 15:30")))
 # vistime(dat, start="start", end="end", groups="Room", events="Language")
 
 #################################################
@@ -50,7 +50,9 @@ library(RColorBrewer)
 
 
 vistime <- function(data, start="StartDate", end="EndDate", groups="Group", events="Event", colors=NULL){
-    
+  
+  if(! groups %in% names(data)) data$Group <- ""
+  if(! end %in% names(data)) data$EndDate <- data[, start]
   names(data)[names(data)==start] <- "StartDate"
   names(data)[names(data)==end] <- "EndDate"
   names(data)[names(data)==groups] <- "Group"
@@ -133,7 +135,7 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
   #############################################################################  
   
   total_range <- difftime(max(data$EndDate), min(data$StartDate), units="secs")
-  if(total_range < 60*60){ # max 1 hour
+  if(total_range <= 60*60){ # max 1 hour
     interval <- 60*10 # 10-min-intervals
   }else if(total_range < 60*60*24){ # max 1 day
     interval <- 60*60*2 # 2-hour-intervals
@@ -143,9 +145,8 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
     interval <- 60*60*24 *30*12 # 1-year-intervals
   }
   
- 
   #############################################################################
-  #  4. Plots for the ranges  #####
+  #  5. Plots for the ranges  #####
   #  
   #############################################################################
   
@@ -202,7 +203,7 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
   
   
   #######################################################################
-  #  5. Plots for the events                                       ######
+  #  6. Plots for the events                                       ######
   #
   #######################################################################
   
@@ -246,7 +247,7 @@ vistime <- function(data, start="StartDate", end="EndDate", groups="Group", even
   
   
   #######################################################################
-  #  6. plot everything                                            ######
+  #  7. plot everything                                            ######
   #  
   #######################################################################
   

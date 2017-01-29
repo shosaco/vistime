@@ -1,6 +1,11 @@
 # vistime
 an R package for pretty timeline creation
 
+Given a data frame containing Events, Groups (optional), StartDates, EndDates (optional) and colors (optional), this creates a `plotly` object with the events arranged nicely. It distinguishes between single events (having StartDate == EndDate) and ranges (otherwise). The `plotly` object can be modified further using `plotly_build`. It can be used in a Shiny App via `plotlyOutput` and `renderPlotly`. Date Format can be `String`, `Date` or `POSIXct` in standard notation.
+
+**Feedback welcome:** shosaco_nospam@hotmail.com  
+
+******
 ## example 1:
 ```{r}
 dat <- data.frame(Room=c("Room 1","Room 2","Room 3"),
@@ -13,8 +18,9 @@ dat <- data.frame(Room=c("Room 1","Room 2","Room 3"),
                                    "2014-03-14 15:30")))
 vistime(dat, start="start", end="end", groups="Room", events="Language")
 ```
-![example 1](examples/ex1.png)
-
+![](examples/ex1.png)
+ 
+   
 ## example 2:
 ```{r}
 dataGroups <- data.frame(
@@ -36,7 +42,8 @@ dataGroups <- data.frame(
 
 vistime(dataGroups, start="start", end="end", groups="group", events="content")
 ```
-![example 2](examples/ex2.png)
+![](examples/ex2.png)
+
 
 ## example 3:
 ```{r}
@@ -48,4 +55,5 @@ names(ww2.events)<-c("Person", "Date", "Group", "EndDate", "StartDate")
 ww2.events<- ww2.events[,names(ww2)]
 vistime(rbind(ww2, ww2.events), events="Person")
 ```
-![example 3](examples/ex3.png)
+![](examples/ex3.png)
+
