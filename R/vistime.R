@@ -17,10 +17,10 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)))
   if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
   if(class(try(as.POSIXct(data$start), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
-  if(! events %in% names(dat)) stop("Please provide the name of the events column in parameter 'events'")
-  if(! start %in% names(dat)) stop("Please provide the name of the start date column in parameter 'start'")
-  if(! groups %in% names(dat)) data$group <- ""
-  if(! end %in% names(dat)) data$end <- data[, start]
+  if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
+  if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
+  if(! groups %in% names(data)) data$group <- ""
+  if(! end %in% names(data)) data$end <- data[, start]
 
   # set column names
   if(events == groups){
@@ -122,8 +122,10 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
     interval <- 60*60*2 # 2-hour-intervals
   }else if(total_range < 60*60*24*365){ # max 1 year
     interval <- 60*60*24*7 # 1-week-intervals
-  }else{
+  }else if(total_range < 60*60*24*365*10){ # max 20 years
     interval <- 60*60*24 *30*12 # 1-year-intervals
+  }else{
+    interval <- 60*60*24 *30*12*10 # 5-year-intervals
   }
 
   #############################################################################
@@ -168,7 +170,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
     }
 
     return(p %>% layout(hovermode = 'closest',
-                        margin = list(l=max(nchar(data$event)) * 10),
+                        margin = list(l=max(nchar(data$group)) * 10),
                         # Axis options:
                         # 1. Remove gridlines
                         # 2. Customize y-axis tick labels and show group names instead of numbers
@@ -215,7 +217,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
 
     # fix layout
     p <-  layout(p, hovermode = 'closest',
-                 margin = list(l=max(nchar(data$event)) * 10),
+                 margin = list(l=max(nchar(data$group)) * 10),
                  xaxis = list(showgrid = F, title=''),
                  yaxis = list(showgrid = F, title = '',
                               tickmode = "array", tickvals = 1:maxY,
