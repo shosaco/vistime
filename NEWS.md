@@ -1,8 +1,8 @@
 # 0.3.0 [not on CRAN yet]
 
-- new parameters: title and tooltips
+- new parameters: title, tooltips, fontcolor
 
-# 0.2.0
+# 0.2.0 [not on CRAN yet]
 
 - major bugfix: function `vistime(...)` was not available after package loading
 - improved error checking

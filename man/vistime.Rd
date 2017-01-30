@@ -7,8 +7,8 @@
 \title{vistime}
 \usage{
 vistime(data, start = "start", end = "end", groups = "group",
-  events = "event", colors = "color", tooltips = "tooltip",
-  title = NULL)
+  events = "event", colors = "color", fontcolors = "fontcolor",
+  tooltips = "tooltip", title = NULL)
 }
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
@@ -22,6 +22,8 @@ vistime(data, start = "start", end = "end", groups = "group",
 \item{events}{(optional) the column name in \code{data} that contains event names. Default: \code{event}.}
 
 \item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \code{color}, if not present, colors are chosen via \code{RColorBrewer}.}
+
+\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: \code{fontcolor}, if not present, color will be \code{black}.}
 
 \item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{tooltip}, if not present, then tooltips are build from event name and date.}
 
@@ -45,7 +47,8 @@ dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
-                  color = c('#cbb69d', '#603913', '#c69c6e'))
+                  color = c('#cbb69d', '#603913', '#c69c6e'),
+                  fontcolor = rep("white", 6))
 
 vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 }

@@ -6,6 +6,7 @@
 #' @param end (optional) the column name in \code{data} that contains end dates. Default: \code{end}.
 #' @param groups (optional) the column name in \code{data} to be used for grouping. Default: \code{group}.
 #' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \code{color}, if not present, colors are chosen via \code{RColorBrewer}.
+#' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: \code{fontcolor}, if not present, color will be \code{black}.
 #' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{tooltip}, if not present, then tooltips are build from event name and date.
 #' @param title (optional) the title to be shown on top of the timeline
 #' @import plotly
@@ -21,10 +22,11 @@
 #'                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
 #'                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
 #'                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
-#'                   color = c('#cbb69d', '#603913', '#c69c6e'))
+#'                   color = c('#cbb69d', '#603913', '#c69c6e'),
+#'                   fontcolor = rep("white", 6))
 #'
 #' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
-vistime <- function(data, start="start", end="end", groups="group", events="event", colors="color", tooltips="tooltip", title=NULL){
+vistime <- function(data, start="start", end="end", groups="group", events="event", colors="color", fontcolors="fontcolor", tooltips="tooltip", title=NULL){
 
   data <- data.frame(data)
 
@@ -72,6 +74,11 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   }else{
     palette <- "Set3"
     data$col <- rep(RColorBrewer::brewer.pal(min(12, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
+  }
+  if(fontcolors %in% names(data)){
+    names(data)[names(data)==fontcolors] <- "fontcol"
+  }else{
+    data$fontcol <- "black"
   }
 
   ########################################################################
@@ -183,7 +190,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
                      text=toAdd$tooltip) %>%
         add_text(x = toAdd$start + (toAdd$end-toAdd$start)/2,  # in der Mitte
                  y = toAdd$y,
-                 textfont = list(family = "sans serif", size = 14, color = toRGB("black")),
+                 textfont = list(family = "sans serif", size = 14, color = toRGB(toAdd$fontcol)),
                  textposition = "center",
                  showlegend=F,
                  text=toAdd$label,
@@ -233,7 +240,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
                      showlegend = F, hoverinfo="text", text=~tooltip)
 
     # add annotations
-    p <- add_text(p, x=~start, y=~y, textfont = list(family = "sans serif", size = 14, color = toRGB("black")),
+    p <- add_text(p, x=~start, y=~y, textfont = list(family = "sans serif", size = 14, color = toRGB(toAdd$fontcol)),
                   textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
 
     # fix layout
