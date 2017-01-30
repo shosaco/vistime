@@ -7,7 +7,7 @@
 \title{vistime}
 \usage{
 vistime(data, start = "start", end = "end", groups = "group",
-  events = "event", colors = NULL)
+  events = "event", colors = NULL, title = NULL)
 }
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
@@ -21,6 +21,8 @@ vistime(data, start = "start", end = "end", groups = "group",
 \item{events}{(optional) the column name in \code{data} that contains event names}
 
 \item{colors}{(optional) the column name in \code{data} that contains colors for events}
+
+\item{title}{(optional) the title to be shown on top of the timeline}
 }
 \value{
 \code{vistime} returns an object of class "\code{plotly}" and "\code{htmlwidget}".
@@ -40,9 +42,10 @@ dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
-                  colors = c('#cbb69d', '#603913', '#c69c6e'))
+                  colors = c('#cbb69d', '#603913', '#c69c6e'),
+                  title = "Presidents of the USA")
 
-vistime(dat, events="Position", groups="Name")
+vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 }
 \author{
 Sandro Raabe \email{shosaco_nospam@hotmail.com}

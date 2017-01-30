@@ -20,8 +20,7 @@
 #'                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
 #'                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
 #'                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
-#'                   colors = c('#cbb69d', '#603913', '#c69c6e'),
-#'                   title = "Presidents of the USA")
+#'                   colors = c('#cbb69d', '#603913', '#c69c6e'))
 #'
 #' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL, title=NULL){
