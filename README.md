@@ -26,7 +26,7 @@ To install the development version (most recent fixes and improvements, but not 
 
 ### Use
 
-To create a timeline, your data needs to have a name for the **event** and a starting date **start**. If your column names differ, just hand them over as arguments in `events="myEventNames"` or `start="myStartDates"` respectively. For data ranges, you need to provide the ending date for each range (otherwise they are assumed to be single events). You can provide a `colors` column if you have colouring preferences and if you provide a `group` column (names group or by parameter `group="MyGroups"`), the chart is grouped into the given group levels.
+To create a timeline, data needs at least 2 columns: `event` and `start`. If `end`, `group` or `color` are present, they will be used as well. If the names differ, the parameters `events="myEventNames"`, `start="myStart"`, `end="myEnd"` or `groups="myGroups"` have to be handed over to `vistime`.
 
 ```{r}
 library(vistime)
