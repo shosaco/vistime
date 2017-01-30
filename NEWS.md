@@ -1,3 +1,6 @@
+# 0.3.0
+
+- new parameter: title
 
 # 0.2.0
 

@@ -6,6 +6,7 @@
 #' @param groups (optional) the column name in \code{data} to be used for grouping
 #' @param events (optional) the column name in \code{data} that contains event names
 #' @param colors (optional) the column name in \code{data} that contains colors for events
+#' @param title (optional) the title to be shown on top of the timeline
 #' @import plotly
 #' @export vistime
 #' @return \code{vistime} returns an object of class "\code{plotly}" and "\code{htmlwidget}".
@@ -19,10 +20,11 @@
 #'                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
 #'                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
 #'                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
-#'                   colors = c('#cbb69d', '#603913', '#c69c6e'))
+#'                   colors = c('#cbb69d', '#603913', '#c69c6e'),
+#'                   title = "Presidents of the USA")
 #'
-#' vistime(dat, events="Position", groups="Name")
-vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL){
+#' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
+vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL, title=NULL){
 
   data <- data.frame(data)
 
@@ -34,6 +36,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
   if(! groups %in% names(data)) data$group <- ""
   if(! end %in% names(data)) data$end <- data[, start]
+  if(! (is.null(title) || class(title) %in% c("character", "numeric"))) stop("Title must be a String")
 
   # set column names
   if(events == groups){
@@ -253,7 +256,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   # gather all plots in a plotList
   plotList <- append(ranges, events)
 
-  total <- subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative)
+  total <- subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative) %>% layout(title = title)
 
   return(total)
 
