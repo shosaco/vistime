@@ -40,36 +40,36 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
 </colgroup>
 <tbody>
 <tr>
-<td>`data`</td>
+<td>data</td>
 <td>data.frame that contains the data to be visualised</td>
 </tr>
 <tr>
-<td>`start`</td>
+<td>start</td>
 <td>(optional) the column name in data that contains start dates. Default: start.</td>
 </tr>
 <tr>
-<td>`end`</td>
+<td>end</td>
 <td>(optional) the column name in data that contains end dates. Default: end.</td>
 </tr>
 <tr>
-<td>`groups`</td>
+<td>groups</td>
 <td>(optional) the column name in data to be used for grouping. Default: group.</td>
 </tr>
 <tr>
-<td>`events`</td>
+<td>events</td>
 <td>(optional) the column name in data that contains event names. Default: event.</td>
 </tr>
 <tr>
-<td>`colors`</td>
+<td>colors</td>
 <td>(optional) the column name in data that contains colors for events. Default: color, if not present, colors are chosen via RColorBrewer.</td></tr>
 <tr>
-<td>`fontcolors`</td>
+<td>fontcolors</td>
 <td>(optional) the column name in data that contains the font color for event labels. Default: fontcolor, if not present, color will be black.</td></tr>
 <tr>
-<td>`tooltips`</td>
+<td>tooltips</td>
 <td>(optional) the column name in data that contains the mouseover tooltips for the events. Default: tooltip, if not present, then tooltips are build from event name and date.</td></tr>
 <tr>
-<td>`title`</td>
+<td>title</td>
 <td>(optional) the title to be shown on top of the timeline</td>
 </tr>
 </tbody>
