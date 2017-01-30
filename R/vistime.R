@@ -1,11 +1,12 @@
 #' Time data that is provided is distributed and grouped in a non-overlapping matter. It can then be edited via \code{plotly_build()} and e.g. be used in Shiny apps. The process works offline.
 #'
 #' @param data data.frame that contains the data to be visualised
-#' @param start (optional) the column name in \code{data} that contains start dates
-#' @param end (optional) the column name in \code{data} that contains end dates
-#' @param groups (optional) the column name in \code{data} to be used for grouping
-#' @param events (optional) the column name in \code{data} that contains event names
-#' @param colors (optional) the column name in \code{data} that contains colors for events
+#' @param events (optional) the column name in \code{data} that contains event names. Default: \code{event}.
+#' @param start (optional) the column name in \code{data} that contains start dates. Default: \code{start}.
+#' @param end (optional) the column name in \code{data} that contains end dates. Default: \code{end}.
+#' @param groups (optional) the column name in \code{data} to be used for grouping. Default: \code{group}.
+#' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \code{NULL} and colors are chosen via \code{RColorBrewer}.
+#' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{NULL} and tooltips are build from event name and date.
 #' @param title (optional) the title to be shown on top of the timeline
 #' @import plotly
 #' @export vistime
@@ -23,7 +24,7 @@
 #'                   colors = c('#cbb69d', '#603913', '#c69c6e'))
 #'
 #' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
-vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL, title=NULL){
+vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL, tooltips=NULL, title=NULL){
 
   data <- data.frame(data)
 
@@ -56,9 +57,13 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
 
   # set the tooltips
-  data$tooltip <- ifelse(data$start == data$end,
-                         paste0("<b>",data$event,": ",data$start,"</b>"),
-                         paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
+  if(is.null(tooltips)){
+    data$tooltip <- ifelse(data$start == data$end,
+                           paste0("<b>",data$event,": ",data$start,"</b>"),
+                           paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
+  }else{
+    names(data)[names(data) == tooltips] <- "tooltip"
+  }
 
   # set the colors
   if(is.null(colors)){

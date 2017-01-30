@@ -7,20 +7,22 @@
 \title{vistime}
 \usage{
 vistime(data, start = "start", end = "end", groups = "group",
-  events = "event", colors = NULL, title = NULL)
+  events = "event", colors = NULL, tooltips = NULL, title = NULL)
 }
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
 
-\item{start}{(optional) the column name in \code{data} that contains start dates}
+\item{start}{(optional) the column name in \code{data} that contains start dates. Default: \code{start}.}
 
-\item{end}{(optional) the column name in \code{data} that contains end dates}
+\item{end}{(optional) the column name in \code{data} that contains end dates. Default: \code{end}.}
 
-\item{groups}{(optional) the column name in \code{data} to be used for grouping}
+\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: \code{group}.}
 
-\item{events}{(optional) the column name in \code{data} that contains event names}
+\item{events}{(optional) the column name in \code{data} that contains event names. Default: \code{event}.}
 
-\item{colors}{(optional) the column name in \code{data} that contains colors for events}
+\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \code{NULL} and colors are chosen via \code{RColorBrewer}.}
+
+\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{NULL} and tooltips are build from event name and date.}
 
 \item{title}{(optional) the title to be shown on top of the timeline}
 }
@@ -42,8 +44,7 @@ dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
-                  colors = c('#cbb69d', '#603913', '#c69c6e'),
-                  title = "Presidents of the USA")
+                  colors = c('#cbb69d', '#603913', '#c69c6e'))
 
 vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 }
