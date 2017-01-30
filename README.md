@@ -11,7 +11,7 @@ Given a data frame containing event names and dates (can be `String`, `Date` or 
 
 ### Installation
 
-To install the package from CRAN (not recommended at the moment, as the devtools-version contains a lot more fixes and features):
+To install the package from CRAN:
 
 ```{r}
   install.packages("vistime")

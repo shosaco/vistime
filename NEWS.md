@@ -1,13 +1,14 @@
 # 0.3.0 [not on CRAN yet]
 
-- new parameters: title, tooltips, fontcolor
+* new parameters: 
+    + `title` (gives a title for the timeline)
+    + `tooltips` (column name of data that contains individual tooltips)
+    + `fontcolors` (column name of data that contains color of the events)
 
-# 0.2.0 [being reviewed by CRAN atm]
-
-- major bugfix: function `vistime(...)` was not available after package loading
+# 0.2.0
 - improved error checking
-- improved README
+- various bugfixes
 
 # 0.1.0
 
-First public release on 29.01.2017
+First public release on 29/01/2017
