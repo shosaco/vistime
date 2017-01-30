@@ -31,7 +31,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   data <- data.frame(data)
 
   # error checking
-  if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)))
+  if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)[1]))
   if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
   if(class(try(as.POSIXct(data[, start]), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
   if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
