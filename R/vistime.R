@@ -26,7 +26,7 @@
 #'                   fontcolor = rep("white", 6))
 #'
 #' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
-vistime <- function(data, start="start", end="end", groups="group", events="event", colors="color", fontcolors="fontcolor", tooltips="tooltip", title=NULL){
+vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", title=NULL){
 
   data <- data.frame(data)
 

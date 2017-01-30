@@ -6,20 +6,20 @@
 \alias{vistime-package}
 \title{vistime}
 \usage{
-vistime(data, start = "start", end = "end", groups = "group",
-  events = "event", colors = "color", fontcolors = "fontcolor",
+vistime(data, events = "event", start = "start", end = "end",
+  groups = "group", colors = "color", fontcolors = "fontcolor",
   tooltips = "tooltip", title = NULL)
 }
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
+
+\item{events}{(optional) the column name in \code{data} that contains event names. Default: \code{event}.}
 
 \item{start}{(optional) the column name in \code{data} that contains start dates. Default: \code{start}.}
 
 \item{end}{(optional) the column name in \code{data} that contains end dates. Default: \code{end}.}
 
 \item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: \code{group}.}
-
-\item{events}{(optional) the column name in \code{data} that contains event names. Default: \code{event}.}
 
 \item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \code{color}, if not present, colors are chosen via \code{RColorBrewer}.}
 
