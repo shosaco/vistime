@@ -3,7 +3,7 @@
 
 Create _fully interactive_ timelines or Gantt charts using `plotly.js`. The charts can be included in Shiny apps and manipulated via `plotly_build()`.
 
-Given a data frame containing event names and dates (can be `String`, `Date` or `POSIXct` in standard notation) and optionally groups, end dates for ranges and/or colors, it creates a charming diagram of the given dates and events. It distinguishes between single events (having StartDate == EndDate) and ranges (given EndDate). Color column name can be handed over with the `color`-argument, if none are given, they are chosen from `RColorBrewer`.
+Given a data frame containing event names and dates (can be `String`, `Date` or `POSIXct` in standard notation) and optionally groups, end dates for ranges, colors, tooltips or title, it creates a charming diagram of the given dates and events. It distinguishes between single events (having StartDate == EndDate) and ranges (given EndDate). Color column name can be handed over with the `color`-argument, if none are given, they are chosen from `RColorBrewer`.
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
@@ -26,7 +26,7 @@ To install the development version (most recent fixes and improvements, but not 
 
 ### Use
 
-To create a timeline, data needs at least 2 columns: `event` and `start`. If `end`, `group` or `color` are present, they will be used as well. If the names differ, the parameters `events="yourEventNames"`, `start="yourStart"`, `end="yourEnd"` or `groups="yourGroups"` have to be handed over to `vistime`.
+To create a timeline, data needs at least 2 columns: `event` and `start`. If `end`, `group`, `color`  are present, they will be used as well. If the names differ, the parameters `events="yourEventNames"`, `start="yourStart"`, `end="yourEnd"` or `groups="yourGroups"` have to be handed over to `vistime`.
 
 ### Example
 ```{r}

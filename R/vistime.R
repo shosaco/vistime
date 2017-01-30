@@ -5,8 +5,8 @@
 #' @param start (optional) the column name in \code{data} that contains start dates. Default: \code{start}.
 #' @param end (optional) the column name in \code{data} that contains end dates. Default: \code{end}.
 #' @param groups (optional) the column name in \code{data} to be used for grouping. Default: \code{group}.
-#' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \code{NULL} and colors are chosen via \code{RColorBrewer}.
-#' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{NULL} and tooltips are build from event name and date.
+#' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \code{color}, if not present, colors are chosen via \code{RColorBrewer}.
+#' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{tooltip}, if not present, then tooltips are build from event name and date.
 #' @param title (optional) the title to be shown on top of the timeline
 #' @import plotly
 #' @export vistime
@@ -21,10 +21,10 @@
 #'                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
 #'                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
 #'                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
-#'                   colors = c('#cbb69d', '#603913', '#c69c6e'))
+#'                   color = c('#cbb69d', '#603913', '#c69c6e'))
 #'
 #' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
-vistime <- function(data, start="start", end="end", groups="group", events="event", colors=NULL, tooltips=NULL, title=NULL){
+vistime <- function(data, start="start", end="end", groups="group", events="event", colors="color", tooltips="tooltip", title=NULL){
 
   data <- data.frame(data)
 
@@ -47,6 +47,7 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   names(data)[names(data)==start] <- "start"
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
+  names(data)[names(data)==events] <- "event"
 
   # sort out the classes
   data <- as.data.frame(sapply(data, as.character), stringsAsFactors=F)
@@ -57,20 +58,20 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
 
   # set the tooltips
-  if(is.null(tooltips)){
+  if(tooltips %in% names(data)){
+    names(data)[names(data) == tooltips] <- "tooltip"
+  }else{
     data$tooltip <- ifelse(data$start == data$end,
                            paste0("<b>",data$event,": ",data$start,"</b>"),
                            paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
-  }else{
-    names(data)[names(data) == tooltips] <- "tooltip"
   }
 
   # set the colors
-  if(is.null(colors)){
+  if(colors %in% names(data)){
+    names(data)[names(data)==colors] <- "col"
+  }else{
     palette <- "Set3"
     data$col <- rep(RColorBrewer::brewer.pal(min(12, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
-  }else{
-    names(data)[names(data)==colors] <- "col"
   }
 
   ########################################################################
