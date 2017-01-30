@@ -1,6 +1,6 @@
-# 0.3.0
+# 0.3.0 [not on CRAN yet]
 
-- new parameter: title
+- new parameters: title and tooltips
 
 # 0.2.0
 
