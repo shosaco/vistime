@@ -78,13 +78,13 @@ vistime <- function(data, start="start", end="end", groups="group", events="even
   #  1. Determine the correct subplot for each event                ######
   ########################################################################
 
-  data$subplot <- as.numeric(as.factor(data$group))
+  data$subplot <- as.numeric(factor(data$group, levels=unique(data$group)))
 
 
   ########################################################################
   #  2. set y values                                                ######
   ########################################################################
-  data <- data[with(data, order(group, start)),]
+  data <- data[with(data, order(subplot, start)),]
   row.names(data) <- 1:nrow(data)
 
   for(sp in unique(data$subplot)){
