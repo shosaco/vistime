@@ -26,7 +26,7 @@ To install the development version (most recent fixes and improvements, but not 
 
 ### Use
 
-To create a timeline, data needs at least 2 columns: `event` and `start`. If `end`, `group`, `color`  are present, they will be used as well. If the names differ, the parameters `events="yourEventNames"`, `start="yourStart"`, `end="yourEnd"` or `groups="yourGroups"` have to be handed over to `vistime`.
+To create a timeline, data needs at least 2 columns: `event` and `start`. If `end`, `group`, `color` or `tooltip` are present, they will be used as well. If the names differ, the parameters `events="yourEventNames"`, `start="yourStart"`, `end="yourEnd"`, `groups="yourGroups"`, `colors="yourColors"` or `tooltips="yourTooltips"` have to be handed over to `vistime`. Optionally, a `title` argument can be specified.
 
 ### Example
 ```{r}
