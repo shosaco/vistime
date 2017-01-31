@@ -1,7 +1,6 @@
 # 0.3.0 [not on CRAN yet]
 
-- fixed typo in documentation example (`colors` <-> `color`)
-- ordering of groups now according to order of "groups" column
+- ordering of groups in plot is now the same as the order of "groups" column in data
 - changed `colors` argument default to "color" (i.e. if a column `color` is present in your data, it will be used for coloring the events)
 - new parameters: 
     + `title` (gives a title for the timeline)
