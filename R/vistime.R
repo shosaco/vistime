@@ -28,7 +28,7 @@
 #' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", title=NULL){
 
-  data <- data.frame(data)
+  data <- data.frame(data, stringsAsFactors = F)
 
   # error checking
   if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)[1]))
@@ -52,7 +52,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   names(data)[names(data)==events] <- "event"
 
   # sort out the classes
-  data <- as.data.frame(sapply(data, as.character), stringsAsFactors=F)
+  if(nrow(data) > 1){ data <- as.data.frame(sapply(data, as.character), stringsAsFactors=F) }
   data$start <- as.POSIXct(data$start)
   data$end <- as.POSIXct(data$end)
 
@@ -148,6 +148,8 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     interval <- 60*10 # 10-min-intervals
   }else if(total_range < 60*60*24){ # max 1 day
     interval <- 60*60*2 # 2-hour-intervals
+  }else if(total_range < 60*60*24*365/2){ # max 0.5 years
+    interval <- 60*60*24 # 1-day-intervals
   }else if(total_range < 60*60*24*365){ # max 1 year
     interval <- 60*60*24*7 # 1-week-intervals
   }else if(total_range < 60*60*24*365*10){ # max 20 years
