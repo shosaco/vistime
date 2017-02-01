@@ -114,4 +114,7 @@ vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 ![](inst/img/ex2.png)
 
 
+[![](http://cranlogs.r-pkg.org/badges/vistime)](http://cran.rstudio.com/web/packages/vistime/index.html)
+
+
 
