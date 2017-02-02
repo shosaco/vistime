@@ -13,11 +13,7 @@
 #' @export vistime
 #' @return \code{vistime} returns an object of class "\code{plotly}" and "\code{htmlwidget}".
 #' @examples
-#' # basic example
-#' data(school)
-#' vistime(school, events = "Language", groups = "Room")
-#'
-#' # choose your own colors
+#' # presidents and vice presidents
 #' dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
 #'                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
 #'                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
@@ -26,16 +22,49 @@
 #'                   fontcolor = rep("white", 6))
 #'
 #' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
+#'
+#' # more complex and colorful example
+#' data <- read.csv(text="event,group,start,end,color
+#' Phase 1,Project,2016-12-22,2016-12-23,#c8e6c9
+#' Phase 2,Project,2016-12-23,2016-12-29,#a5d6a7
+#' Phase 3,Project,2016-12-29,2017-01-06,#fb8c00
+#' Phase 4,Project,2017-01-06,2017-02-02,#DD4B39
+#' Start,Start/today,2016-12-22,2016-12-23,#000000
+#' today (after 32 days),Start/today,2017-01-23,2017-01-24,#DD4B39
+#' 1-217.0,category 2,2016-12-27,2016-12-27,#90caf9
+#' 3-200,category 1,2016-12-25,2016-12-25,#1565c0
+#' 3-330,category 1,2016-12-25,2016-12-25,#1565c0
+#' 3-223,category 1,2016-12-28,2016-12-28,#1565c0
+#' 3-225,category 1,2016-12-28,2016-12-28,#1565c0
+#' 3-226,category 1,2016-12-28,2016-12-28,#1565c0
+#' 3-226,category 1,2017-01-19,2017-01-19,#1565c0
+#' 3-330,category 1,2017-01-19,2017-01-19,#1565c0
+#' 3-399.7,moon rising,2017-01-13,2017-01-13,#f44336
+#' 8-831.0,sundowner drink,2017-01-17,2017-01-17,#8d6e63
+#' 9-984.1,birthday party,2016-12-22,2016-12-22,#90a4ae
+#' F01.9,Meetings,2016-12-26,2016-12-26,#e8a735
+#' E43,Meetings,2017-01-12,2017-01-12,#e8a735
+#' R63.3,Meetings,2017-01-12,2017-01-12,#e8a735
+#' Z71,Meetings,2017-01-12,2017-01-12,#e8a735
+#' B95.7,Meetings,2017-01-15,2017-01-15,#e8a735
+#' T82.7,Meetings,2017-01-15,2017-01-15,#e8a735
+#' Room 334,Team 1,2016-12-22,2016-12-28,#DEEBF7
+#' Room 335,Team 1,2016-12-28,2017-01-05,#C6DBEF
+#' Room 335,Team 1,2017-01-05,2017-01-23,#9ECAE1
+#' Group 1,Team 2,2016-12-22,2016-12-28,#E5F5E0
+#' Group 2,Team 2,2016-12-28,2017-01-23,#C7E9C0")
+#'
+#' vistime(data)
 vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", title=NULL){
 
   data <- data.frame(data, stringsAsFactors = F)
 
   # error checking
   if(!is.data.frame(data)) stop(paste("Expected an input data frame, but encountered a", class(data)[1]))
+  if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
   if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
   if(class(try(as.POSIXct(data[, start]), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
   if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
-  if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
   if(! groups %in% names(data)) data$group <- "" else if(any(is.na(data[, groups]))) stop("if using groups argument, all groups must be set to a non-NA value")
   if(! end %in% names(data)) data$end <- data[, start]
   if(! (is.null(title) || class(title) %in% c("character", "numeric"))) stop("Title must be a String")
@@ -195,7 +224,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                      text=toAdd$tooltip) %>%
         add_text(x = toAdd$start + (toAdd$end-toAdd$start)/2,  # in der Mitte
                  y = toAdd$y,
-                 textfont = list(family = "sans serif", size = 14, color = toRGB(toAdd$fontcol)),
+                 textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
                  textposition = "center",
                  showlegend=F,
                  text=toAdd$label,
@@ -203,7 +232,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     }
 
     return(p %>% layout(hovermode = 'closest',
-                        margin = list(l=max(nchar(data$group)) * 10),
+                        margin = list(l=max(nchar(data$group)) * 7),
                         # Axis options:
                         # 1. Remove gridlines
                         # 2. Customize y-axis tick labels and show group names instead of numbers
@@ -246,12 +275,12 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                      showlegend = F, hoverinfo="text", text=~tooltip)
 
     # add annotations
-    p <- add_text(p, x=~start, y=~y, textfont = list(family = "sans serif", size = 14, color = toRGB(toAdd$fontcol)),
+    p <- add_text(p, x=~start, y=~y, textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
                   textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
 
     # fix layout
     p <-  layout(p, hovermode = 'closest',
-                 margin = list(l=max(nchar(data$group)) * 10),
+                 margin = list(l=max(nchar(data$group)) * 7),
                  xaxis = list(showgrid = F, title=''),
                  yaxis = list(showgrid = F, title = '',
                               tickmode = "array", tickvals = 1:maxY,
