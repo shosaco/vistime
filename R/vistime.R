@@ -36,7 +36,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   if(class(try(as.POSIXct(data[, start]), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
   if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
   if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
-  if(! groups %in% names(data)) data$group <- ""
+  if(! groups %in% names(data)) data$group <- "" else if(any(is.na(data[, groups]))) stop("if using groups argument, all groups must be set to a non-NA value")
   if(! end %in% names(data)) data$end <- data[, start]
   if(! (is.null(title) || class(title) %in% c("character", "numeric"))) stop("Title must be a String")
 
@@ -82,11 +82,15 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   }
 
   ########################################################################
-  #  1. Determine the correct subplot for each event                ######
+  #  1. Determine the correct subplots                              ######
+  #  subplot = groups, but events and ranges separate
   ########################################################################
 
-  data$subplot <- as.numeric(factor(data$group, levels=unique(data$group)))
+  events <- data$start == data$end
+  ranges <- !events
 
+  data$subplot[events] <- as.numeric(factor(data$group[events], levels=unique(data$group[events])))
+  data$subplot[!events] <- length(unique(data$subplot[events])) + as.numeric(factor(data$group[!events], levels=unique(data$group[!events])))
 
   ########################################################################
   #  2. set y values                                                ######
@@ -124,7 +128,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
       data[data$subplot == sp, "y"][row] <- next.y
     }
   }
-
+  data$y <- as.numeric(data$y) # to ensure plotting goes smoothly
 
   ###########################################################################
   #  3. Set "intelligent" labels for events                           #######
@@ -170,7 +174,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     thisData <- subset(data, start != end & subplot == sp)
     maxY <- max(thisData$y) + 1
 
-    p <- plot_ly(type = "scatter", mode="lines")
+    p <- plot_ly(data, type = "scatter", mode="lines")
 
     # 1. add vertical line for each year/day
     for(day in seq(min(data$start), max(data$end), interval)){
@@ -183,7 +187,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
       toAdd <- thisData[i,]
 
       p <- add_trace(p,
-                     mode="lines",
                      x = c(toAdd$start, toAdd$end),  # von, bis
                      y = toAdd$y,
                      line = list(color = toAdd$col, width = 20),
@@ -220,6 +223,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   #######################################################################
 
   eventNumbers <- unique(subset(data, start == end)$subplot)
+
   events <- lapply(eventNumbers, function(sp) {
     # subset data for this Category
     thisData <- subset(data, start == end & subplot == sp)
