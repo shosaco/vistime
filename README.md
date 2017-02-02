@@ -67,7 +67,7 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
 <td>(optional) the column name in data that contains the font color for event labels. Default: fontcolor, if not present, color will be black.</td></tr>
 <tr>
 <td>tooltips</td>
-<td>(optional) the column name in data that contains the mouseover tooltips for the events. Default: tooltip, if not present, then tooltips are build from event name and date. Consult <a href="http://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials">this page</a> as to which HTML elements are allowed.</td></tr>
+<td>(optional) the column name in data that contains the mouseover tooltips for the events. Default: tooltip, if not present, then tooltips are build from event name and date. <a href="http://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials">Basic HTML</a> is allowed.</td></tr>
 <tr>
 <td>title</td>
 <td>(optional) the title to be shown on top of the timeline</td>
