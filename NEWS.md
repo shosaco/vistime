@@ -11,6 +11,7 @@
     + `fontcolors` (column name of data that contains color of the event font)
 - bugfixes of levels of ranges (_-_-)
 - bugfix where events where not correctly categorized into their respective groups
+- added more complex example and removed school data/example
 
 # 0.2.0
 - improved error checking
