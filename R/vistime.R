@@ -127,37 +127,41 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   data <- data[with(data, order(subplot, start)),]
   row.names(data) <- 1:nrow(data)
 
+  # check if date is between start and end of other range
+  is_in_range <- function(date, start, end){
+    return(date >= start & date < end)
+  }
+
   for(sp in unique(data$subplot)){
-    next.y <- 1
 
     # subset data for this group
     thisData <- subset(data, subplot == sp)
-    thisData$y <- 1:nrow(thisData) # base case
+    thisData$y <- 0
 
+    # for each event and for each y, check if any range already drawn on y cuts this range -> if yes, check next y
     for(row in (1:nrow(thisData))){
-      toAdd <- thisData[row,]
+      toAdd <- thisData[row, c("start", "end", "y")]
 
-      # for events: set on new level if it occurs on the same day as previous
-      if(toAdd$start == toAdd$end){
-        if(row>1 && toAdd$start == thisData[row-1, "start"]){
-          next.y <- next.y + 1
+      for(y in 1:nrow(thisData)){
+        thisData[row, "y"] <- y # naive guess
+        # Events
+        if(toAdd$start == toAdd$end){
+          # set on new level if this y is occupied
+          if(any(thisData[-row,"start"][thisData[-row,"y"] == y] == toAdd$start)) next; # this y is occupied
+          break;
         }else{
-          next.y <- 1
+          # Ranges
+          if(any(is_in_range(toAdd$start, thisData[-row,"start"][thisData[-row,"y"] == y], thisData[-row,"end"][thisData[-row,"y"] == y]))) next;  # this y is bad, check next y
+          if(any(is_in_range(toAdd$end,   thisData[-row,"start"][thisData[-row,"y"] == y], thisData[-row,"end"][thisData[-row,"y"] == y]))) next; # this y is bad, check next y
+          break; # all conditions false, naive y was ok
         }
-        # for ranges: if this event starts before previous ends, set on new y level (up or below)
-      }else if(row>1 && toAdd$start < thisData[row-1, "end"]){
-        if(next.y == 2){
-          if(toAdd$start >= thisData[thisData$y==1, "end"]){
-            next.y <- next.y-1
-          }else next.y <- next.y + 1
-        }else next.y <- next.y + 1
-      }else{
-        next.y <- 1
       }
-      data[data$subplot == sp, "y"][row] <- next.y
     }
+    data[data$subplot == sp, "y"] <- thisData$y
   }
+
   data$y <- as.numeric(data$y) # to ensure plotting goes smoothly
+  data$y[is.na(data$y)] <- max(data$y[!is.na(data$y)]) + 1 # just in case
 
   ###########################################################################
   #  3. Set "intelligent" labels for events                           #######

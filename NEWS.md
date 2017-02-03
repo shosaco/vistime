@@ -9,9 +9,9 @@
     + `title` (gives a title for the timeline)
     + `tooltips` (column name of data that contains individual tooltips)
     + `fontcolors` (column name of data that contains color of the event font)
-- bugfixes of levels of ranges (_-_-)
 - bugfix where events where not correctly categorized into their respective groups
 - added more complex example and removed school data/example
+- major improvement of intelligent levelling of ranges ("_-_--__"")
 
 # 0.2.0
 - improved error checking
