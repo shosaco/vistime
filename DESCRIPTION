@@ -13,8 +13,7 @@ License: GPL-3 | file LICENSE
 URL: https://github.com/shosaco/vistime
 BugReports: https://github.com/shosaco/vistime/issues
 Depends:
-    R (>= 3.0.2)
-    plotly (>= 4.0.0)
+    R (>= 3.0.2), plotly (>= 4.0.0)
 Imports:
     RColorBrewer (>= 1.1.2)
 Encoding: UTF-8

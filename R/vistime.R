@@ -124,13 +124,8 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   ########################################################################
   #  2. set y values                                                ######
   ########################################################################
-  data <- data[with(data, order(subplot, start)),]
+  data <- data[with(data, order(subplot, start)),] # order by "start"
   row.names(data) <- 1:nrow(data)
-
-  # check if date is between start and end of other range
-  is_in_range <- function(date, start, end){
-    return(date >= start & date < end)
-  }
 
   for(sp in unique(data$subplot)){
 
@@ -147,13 +142,10 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
         # Events
         if(toAdd$start == toAdd$end){
           # set on new level if this y is occupied
-          if(any(thisData[-row,"start"][thisData[-row,"y"] == y] == toAdd$start)) next; # this y is occupied
-          break;
+          if(all(toAdd$start != thisData[-row,"start"][thisData[-row,"y"] == y])) break; # this y is free, end of search
         }else{
-          # Ranges
-          if(any(is_in_range(toAdd$start, thisData[-row,"start"][thisData[-row,"y"] == y], thisData[-row,"end"][thisData[-row,"y"] == y]))) next;  # this y is bad, check next y
-          if(any(is_in_range(toAdd$end,   thisData[-row,"start"][thisData[-row,"y"] == y], thisData[-row,"end"][thisData[-row,"y"] == y]))) next; # this y is bad, check next y
-          break; # all conditions false, naive y was ok
+          # Ranges, use that already sorted
+          if(all(toAdd$start >= thisData[-row,"end"][thisData[-row,"y"] == y])) break; # new start >= all other starts on this level, end search
         }
       }
     }

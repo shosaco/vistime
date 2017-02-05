@@ -11,12 +11,11 @@
     + `fontcolors` (column name of data that contains color of the event font)
 - bugfix where events where not correctly categorized into their respective groups
 - added more complex example and removed school data/example
-- major improvement of intelligent levelling of ranges ("_-_--__"")
+- major improvement of intelligent levelling of ranges ("_-_--_´_")
 
 # 0.2.0
 - improved error checking
 - various bugfixes
 
 # 0.1.0
-
 First public release on 29/01/2017
