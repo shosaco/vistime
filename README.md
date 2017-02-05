@@ -1,3 +1,6 @@
+[![CRAN](http://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
+[![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
+
 # vistime
 ####an R package for pretty timeline creation
 
@@ -131,8 +134,4 @@ vistime(data)
 ````
 
 ![](inst/img/ex3.png)
-
-[![](http://cranlogs.r-pkg.org/badges/grand-total/vistime)]()
-
-
 
