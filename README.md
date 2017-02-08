@@ -1,5 +1,7 @@
 [![CRAN](http://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.3.0-yellow.svg?style=flat-square)](commits/master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
+
 
 # vistime
 ####an R package for pretty timeline creation
