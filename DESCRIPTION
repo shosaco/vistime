@@ -1,5 +1,5 @@
 Package: vistime
-Title: Interactive Timelines or Gantt Charts via 'plotly.js'
+Title: An R Package for Pretty Timeline Creation
 Version: 0.3.0
 Date: 2017-03-01
 Authors@R: person(
