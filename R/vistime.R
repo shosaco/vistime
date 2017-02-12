@@ -102,7 +102,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     names(data)[names(data)==colors] <- "col"
   }else{
     palette <- "Set3"
-    data$col <- rep(RColorBrewer::brewer.pal(min(12, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
+    data$col <- rep(RColorBrewer::brewer.pal(min(11, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
   }
   if(fontcolors %in% names(data)){
     names(data)[names(data)==fontcolors] <- "fontcol"
