@@ -1,5 +1,5 @@
 Package: vistime
-Title: An R Package for Pretty Timeline Creation
+Title: Pretty Timeline Creation
 Version: 0.3.0
 Date: 2017-03-01
 Authors@R: person(
