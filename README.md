@@ -12,7 +12,6 @@ Given a data frame containing event names and dates (can be `String`, `Date` or 
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
-    
 
 ### Installation
 
@@ -21,13 +20,13 @@ To install the package from CRAN:
 ```{r}
   install.packages("vistime")
 ```
-
+<!--
 To install the development version (most recent fixes and improvements, but not released on CRAN yet), run the following code in an R console:
 ```{r}
   install.packages("devtools")
-  devtools::install_github("shosaco/vistime")
+  devtools::install_github("shosaco/vistime") 
 ```
-     
+     -->
 
 ### Usage
 

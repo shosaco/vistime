@@ -35,7 +35,7 @@ vistime(data, events = "event", start = "start", end = "end",
 \description{
 Create interactive and offline timelines using the \code{plotly.js} framework.
 
-Time data that is provided is distributed and grouped in a non-overlapping matter. It can then be edited via \code{plotly_build()} and e.g. be used in Shiny apps. The process works offline.
+Time data that is provided is distributed and grouped in a non-overlapping matter. It can then be edited via \code{plotly_build()} and used in Shiny apps or Rmarkdown documents. The process works offline.
 }
 \examples{
 # presidents and vice presidents
