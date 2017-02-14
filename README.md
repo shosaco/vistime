@@ -6,9 +6,7 @@
 # vistime
 ####an R package for pretty timeline creation
 
-Create timelines or Gantt charts - offline and interactive. The charts can be included and in Shiny apps and/or manipulated using package `plotly`.
-
-Given a data frame containing event names and dates (can be `String`, `Date` or `POSIXct` in standard notation) and optionally groups, end dates for ranges, colors, tooltips or title, it creates a charming diagram of the given dates and events. It distinguishes between single events (having StartDate == EndDate) and ranges (given EndDate). Color column name can be handed over with the `color`-argument, if none are given, they are chosen from `RColorBrewer`.
+Create timelines or Gantt charts, offline and interactive, that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps using 'plotly.js', a high-level, declarative charting library. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines (and the data behind them) can be manipulated using 'plotly_build()' or, once uploaded to a 'plotly' account, viewed and modified in a web browser.
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
@@ -18,13 +16,13 @@ Given a data frame containing event names and dates (can be `String`, `Date` or 
 To install the package from CRAN:
 
 ```{r}
-  install.packages("vistime")
+install.packages("vistime")
 ```
 <!--
 To install the development version (most recent fixes and improvements, but not released on CRAN yet), run the following code in an R console:
 ```{r}
-  install.packages("devtools")
-  devtools::install_github("shosaco/vistime") 
+install.packages("devtools")
+devtools::install_github("shosaco/vistime") 
 ```
      -->
 
@@ -87,7 +85,7 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
 ### Examples  
 
 #### Ex. 1: Presidents
-````
+```{r}
 dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
@@ -100,7 +98,7 @@ vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 ![](inst/img/ex2.png)
 
 #### Ex. 2: Project Planning
-````
+````{r}
 data <- read.csv(text="event,group,start,end,color
                        Phase 1,Project,2016-12-22,2016-12-23,#c8e6c9
                        Phase 2,Project,2016-12-23,2016-12-29,#a5d6a7
