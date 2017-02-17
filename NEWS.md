@@ -1,5 +1,5 @@
 # 0.4.0 (not on CRAN yet)
-- line width improved (boarder lines if less events happening)
+- line width improved (thicker lines if less events happening)
 
 # 0.3.0
 - new parameters: 

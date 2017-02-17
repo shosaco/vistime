@@ -231,7 +231,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     }
 
     return(p %>% layout(hovermode = 'closest',
-                        margin = list(l=max(nchar(data$group)) * 7),
                         # Axis options:
                         # 1. Remove gridlines
                         # 2. Customize y-axis tick labels and show group names instead of numbers
@@ -279,7 +278,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
 
     # fix layout
     p <-  layout(p, hovermode = 'closest',
-                 margin = list(l=max(nchar(data$group)) * 7),
                  xaxis = list(showgrid = F, title=''),
                  yaxis = list(showgrid = F, title = '',
                               tickmode = "array", tickvals = 1:maxY,
@@ -302,7 +300,9 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   # gather all plots in a plotList
   plotList <- append(ranges, events)
 
-  total <- subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative) %>% layout(title = title)
+  total <- subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative) %>%
+              layout(title = title,
+                     margin = list(l = max(nchar(data$group)) * 8))
 
   return(total)
 
