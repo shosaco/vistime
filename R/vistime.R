@@ -192,6 +192,8 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   #
   #############################################################################
   rangeNumbers <- unique(subset(data, start != end)$subplot)
+  linewidth <- max(-3*(max(data$subplot) + max(data$y))+60, 20)
+
   ranges <- lapply(rangeNumbers, function(sp) {
     next.y <- 1
 
@@ -207,6 +209,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }
 
+
     # draw ranges piecewise
     for(i in (1:nrow(thisData))){
       toAdd <- thisData[i,]
@@ -214,7 +217,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
       p <- add_trace(p,
                      x = c(toAdd$start, toAdd$end),  # von, bis
                      y = toAdd$y,
-                     line = list(color = toAdd$col, width = 20),
+                     line = list(color = toAdd$col, width = linewidth),
                      showlegend = F,
                      hoverinfo="text",
                      text=toAdd$tooltip) %>%
