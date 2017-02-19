@@ -1,6 +1,8 @@
 # 0.4.0 (not on CRAN yet)
-- line width improved (thicker lines if less events happening)
+- line width of ranges improved (thicker lines if less events happening simultaneously)
 - left margin enlarged
+- simplified example
+- improved error checking
 
 # 0.3.0
 - new parameters: 
