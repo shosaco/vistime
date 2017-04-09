@@ -58,14 +58,14 @@
 vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", title=NULL){
 
   # error checking
-  if(class(try(as.data.frame(data), silent=T))[1] == "try-error") stop(paste("Expected an input data frame, but encountered", class(data)[1]))
-  else data <- data.frame(data, stringsAsFactors = F)
+  if(class(try(as.data.frame(data), silent=T))[1] == "try-error"){ stop(paste("Expected an input data frame, but encountered", class(data)[1]))
+  }else data <- data.frame(data, stringsAsFactors = F)
   if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
   if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
   if(class(try(as.POSIXct(data[, start]), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
   if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
   if(! groups %in% names(data)) data$group <- "" else if(any(is.na(data[, groups]))) stop("if using groups argument, all groups must be set to a non-NA value")
-  if(! end %in% names(data)) data$end <- data[, start]
+  if(! end %in% names(data) | end==start) data$end <- data[, start]
   if(! (is.null(title) || class(title) %in% c("character", "numeric", "integer"))) stop("Title must be a String")
 
   # set column names
