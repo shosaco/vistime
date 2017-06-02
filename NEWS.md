@@ -1,12 +1,13 @@
-# 0.4.0 (not on CRAN yet)
-- line width of ranges improved (thicker lines if less events happening simultaneously)
-- left margin enlarged
-- simplified example
+# 0.4.0
+- line width calculation for ranges improved (thicker lines if less events happening simultaneously)
+- new parameter: `linewidth` to override the calculated line width for events
+- layout and labelling improvements
+- simplified examples
 - improved error checking
 
 # 0.3.0
 - new parameters: 
-    + `title` (gives a title for the timeline)
+    + `title` (a title for the timeline)
     + `tooltips` (column name of data that contains individual tooltips)
     + `fontcolors` (column name of data that contains color of the event font)
 - ordering of groups in plot is now the same as the order of "groups" column in data

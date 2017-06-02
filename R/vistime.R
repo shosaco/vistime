@@ -1,13 +1,14 @@
 #' Time data that is provided is distributed and grouped in a non-overlapping matter. It can then be edited via \code{plotly_build()} and used in Shiny apps or Rmarkdown documents. The process works offline.
 #'
 #' @param data data.frame that contains the data to be visualised
-#' @param events (optional) the column name in \code{data} that contains event names. Default: \code{event}.
-#' @param start (optional) the column name in \code{data} that contains start dates. Default: \code{start}.
-#' @param end (optional) the column name in \code{data} that contains end dates. Default: \code{end}.
-#' @param groups (optional) the column name in \code{data} to be used for grouping. Default: \code{group}.
-#' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \code{color}, if not present, colors are chosen via \code{RColorBrewer}.
-#' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: \code{fontcolor}, if not present, color will be \code{black}.
-#' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{tooltip}, if not present, then tooltips are build from event name and date.
+#' @param events (optional) the column name in \code{data} that contains event names. Default: \code{"event"}.
+#' @param start (optional) the column name in \code{data} that contains start dates. Default: \code{"start"}.
+#' @param end (optional) the column name in \code{data} that contains end dates. Default: \code{"end"}.
+#' @param groups (optional) the column name in \code{data} to be used for grouping. Default: \code{"group"}.
+#' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \code{"color"}, if not present, colors are chosen via \code{RColorBrewer}.
+#' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: \code("fontcolor"), if not present, color will be \code{black}.
+#' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{"tooltip"}, if not present, then tooltips are build from event name and date.
+#' @param linewidth (optional) the linewidth for the events (typically used for large amount of parallel events). If not specified, then determined automatically.
 #' @param title (optional) the title to be shown on top of the timeline
 #' @import plotly
 #' @export vistime
@@ -29,8 +30,6 @@
 #' Phase 2,Project,2016-12-23,2016-12-29,#a5d6a7
 #' Phase 3,Project,2016-12-29,2017-01-06,#fb8c00
 #' Phase 4,Project,2017-01-06,2017-02-02,#DD4B39
-#' Start,Start/today,2016-12-22,2016-12-23,#000000
-#' today (after 32 days),Start/today,2017-01-23,2017-01-24,#DD4B39
 #' 1-217.0,category 2,2016-12-27,2016-12-27,#90caf9
 #' 3-200,category 1,2016-12-25,2016-12-25,#1565c0
 #' 3-330,category 1,2016-12-25,2016-12-25,#1565c0
@@ -43,8 +42,6 @@
 #' 8-831.0,sundowner drink,2017-01-17,2017-01-17,#8d6e63
 #' 9-984.1,birthday party,2016-12-22,2016-12-22,#90a4ae
 #' F01.9,Meetings,2016-12-26,2016-12-26,#e8a735
-#' E43,Meetings,2017-01-12,2017-01-12,#e8a735
-#' R63.3,Meetings,2017-01-12,2017-01-12,#e8a735
 #' Z71,Meetings,2017-01-12,2017-01-12,#e8a735
 #' B95.7,Meetings,2017-01-15,2017-01-15,#e8a735
 #' T82.7,Meetings,2017-01-15,2017-01-15,#e8a735
@@ -55,7 +52,7 @@
 #' Group 2,Team 2,2016-12-28,2017-01-23,#C7E9C0")
 #'
 #' vistime(data)
-vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", title=NULL){
+vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL){
 
   # error checking
   if(class(try(as.data.frame(data), silent=T))[1] == "try-error"){ stop(paste("Expected an input data frame, but encountered", class(data)[1]))
@@ -66,7 +63,8 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
   if(! groups %in% names(data)) data$group <- "" else if(any(is.na(data[, groups]))) stop("if using groups argument, all groups must be set to a non-NA value")
   if(! end %in% names(data) | end==start) data$end <- data[, start]
-  if(! (is.null(title) || class(title) %in% c("character", "numeric", "integer"))) stop("Title must be a String")
+  if(!is.null(linewidth) & !class(linewidth) %in% c("integer", "numeric")) stop("linewidth must be a number")
+  if(!is.null(title) & !class(title) %in% c("character", "numeric", "integer")) stop("Title must be a String")
 
   # set column names
   if(events == groups){
@@ -103,6 +101,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     palette <- "Set3"
     data$col <- rep(RColorBrewer::brewer.pal(min(11, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
   }
+
   if(fontcolors %in% names(data)){
     names(data)[names(data)==fontcolors] <- "fontcol"
   }else{
@@ -164,7 +163,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   data$labelPos <- "center"
 
   data$label <- ifelse(data$start == data$end,
-                       ifelse(nchar(data$event) > 10, paste0(substr(data$event, 1, 8), "..."), data$event),
+                       ifelse(nchar(data$event) > 10, paste0(substr(data$event, 1, 13), "..."), data$event),
                        data$event)
 
   #############################################################################
@@ -191,7 +190,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   #
   #############################################################################
   rangeNumbers <- unique(subset(data, start != end)$subplot)
-  linewidth <- max(-3*(max(data$subplot) + max(data$y))+60, 20)
+  linewidth <- ifelse(is.null(linewidth), max(-3*(max(data$subplot) + max(data$y))+60, 20), linewidth)
 
   ranges <- lapply(rangeNumbers, function(sp) {
     next.y <- 1
@@ -255,11 +254,13 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     thisData <- subset(data, start == end & subplot == sp)
     maxY <- max(thisData$y) + 1
 
+    # alternate y positions for event labels
+    thisData$labelY <- thisData$y + 0.5 * rep(c(-1, 1), ceiling(nrow(thisData)/2))[1:nrow(thisData)]
+
     # add vertical lines to plot
     p <- plot_ly(thisData, type="scatter", mode="markers")
 
     # 1. add vertical line for each year/day
-
     for(day in seq(min(data$start), max(data$end), interval)){
       p <- add_lines(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY),
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
@@ -267,12 +268,12 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
 
     # add all the markers for this Category
     p <- add_markers(p, x=~start, y=~y,
-                     marker = list(color = ~col, size=15,
+                     marker = list(color = ~col, size=15, symbol="square",
                                    line = list(color = 'black', width = 1)),
                      showlegend = F, hoverinfo="text", text=~tooltip)
 
     # add annotations
-    p <- add_text(p, x=~start, y=~y, textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
+    p <- add_text(p, x=~start, y=~labelY, textfont = list(family = "Arial", size = 14, color = ~toRGB(fontcol)),
                   textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
 
     # fix layout
