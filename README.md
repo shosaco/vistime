@@ -36,6 +36,8 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
 
 ### Arguments
 
+parameter | explanation
+------- |--------- |
 data | data.frame that contains the data to be visualised
 start | (optional) the column name in data that contains start dates. Default: start.
 
