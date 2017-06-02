@@ -29,14 +29,14 @@ devtools::install_github("shosaco/vistime")
 
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-              fontcolors = "fontcolor", tooltips = "tooltip", linewidth=NULL, title = NULL)
+              fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, title = NULL)
 ````
 
 
 ### Arguments
 
 parameter | optional? | data type | explanation 
---------- |----------- | ----------- 
+--------- |----------- | -------- | ----------- 
 data | mandatory | data.frame | data.frame that contains the data to be visualised
 start | optional | character | the column name in data that contains start dates. Default: *"start"*
 end | optional | character | the column name in data that contains end dates. Default: *"end"*
