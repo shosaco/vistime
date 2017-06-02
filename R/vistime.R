@@ -255,7 +255,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     maxY <- max(thisData$y) + 1
 
     # alternate y positions for event labels
-    thisData$labelY <- thisData$y + 0.5 * rep(c(-1, 1), ceiling(nrow(thisData)/2))[1:nrow(thisData)]
+    thisData$labelY <- thisData$y + 0.5 * rep_len(c(-1, 1), nrow(thisData))
 
     # add vertical lines to plot
     p <- plot_ly(thisData, type="scatter", mode="markers")
