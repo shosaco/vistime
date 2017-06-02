@@ -2,7 +2,6 @@
 [![packageversion](https://img.shields.io/badge/packageversion-0.4.0-orange.svg)](commits/master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 
-
 # vistime
 #### an R package for pretty timeline creation
 
@@ -36,56 +35,21 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
 
 ### Arguments
 
-parameter | explanation
-------- |--------- |
-data | data.frame that contains the data to be visualised
-start | (optional) the column name in data that contains start dates. Default: start.
-
-<table>
-<colgroup>
-<col width="2%" />
-<col width="38%" />
-</colgroup>
-<tbody>
-<tr>
-<td>data</td>
-<td>data.frame that contains the data to be visualised</td>
-</tr>
-<tr>
-<td>start</td>
-<td>(optional) the column name in data that contains start dates. Default: start.</td>
-</tr>
-<tr>
-<td>end</td>
-<td>(optional) the column name in data that contains end dates. Default: end.</td>
-</tr>
-<tr>
-<td>groups</td>
-<td>(optional) the column name in data to be used for grouping. Default: group.</td>
-</tr>
-<tr>
-<td>events</td>
-<td>(optional) the column name in data that contains event names. Default: event.</td>
-</tr>
-<tr>
-<td>colors</td>
-<td>(optional) the column name in data that contains colors for events. Default: color, if not present, colors are chosen via RColorBrewer.</td></tr>
-<tr>
-<td>fontcolors</td>
-<td>(optional) the column name in data that contains the font color for event labels. Default: fontcolor, if not present, color will be black.</td></tr>
-<tr>
-<td>tooltips</td>
-<td>(optional) the column name in data that contains the mouseover tooltips for the events. Default: tooltip, if not present, then tooltips are build from event name and date. <a href="http://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials">Basic HTML</a> is allowed.</td></tr>
-<tr>
-<td>title</td>
-<td>(optional) the title to be shown on top of the timeline</td>
-</tr>
-</tbody>
-</table>
+parameter | optional? | explanation 
+--------- |----------- | ----------- 
+data | mandatory | data.frame that contains the data to be visualised
+start | optional | the column name in data that contains start dates. Default: *"start"*
+end | optional | the column name in data that contains end dates. Default: *"end"*
+groups | optional | the column name in data to be used for grouping. Default: *"group"*
+events | optional | the column name in data that contains event names. Default: *"event"*
+colors | optional | the column name in data that contains colors for events. Default: *"color"*, if not present, colors are chosen via RColorBrewer
+fontcolors | optional | the column name in data that contains the font color for event labels. Default: "*fontcolor*", if not present, color will be black
+tooltips | optional | the column name in data that contains the mouseover tooltips for the events. Default: "*tooltip*", if not present, then tooltips are build from event name and date. <a href="http://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials">Basic HTML</a> is allowed
+title | optional | the title to be shown on top of the timeline
 
 ### Value
 
-`vistime` returns an object of class "`plotly`" and "`htmlwidget`".
+`vistime` returns an object of class `plotly` and `htmlwidget`.
 
 
 ### Examples  
