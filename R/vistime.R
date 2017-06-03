@@ -6,13 +6,13 @@
 #' @param end (optional) the column name in \code{data} that contains end dates. Default: \code{"end"}.
 #' @param groups (optional) the column name in \code{data} to be used for grouping. Default: \code{"group"}.
 #' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \code{"color"}, if not present, colors are chosen via \code{RColorBrewer}.
-#' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: \code("fontcolor"), if not present, color will be \code{black}.
+#' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: \code{"fontcolor"}, if not present, color will be \code{black}.
 #' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{"tooltip"}, if not present, then tooltips are build from event name and date.
 #' @param linewidth (optional) the linewidth for the events (typically used for large amount of parallel events). If not specified, then determined automatically.
 #' @param title (optional) the title to be shown on top of the timeline
 #' @import plotly
 #' @export vistime
-#' @return \code{vistime} returns an object of class "\code{plotly}" and "\code{htmlwidget}".
+#' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 #' @examples
 #' # presidents and vice presidents
 #' dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),

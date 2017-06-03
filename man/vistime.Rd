@@ -8,29 +8,31 @@
 \usage{
 vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
-  tooltips = "tooltip", title = NULL)
+  tooltips = "tooltip", linewidth = NULL, title = NULL)
 }
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
 
-\item{events}{(optional) the column name in \code{data} that contains event names. Default: \code{event}.}
+\item{events}{(optional) the column name in \code{data} that contains event names. Default: \code{"event"}.}
 
-\item{start}{(optional) the column name in \code{data} that contains start dates. Default: \code{start}.}
+\item{start}{(optional) the column name in \code{data} that contains start dates. Default: \code{"start"}.}
 
-\item{end}{(optional) the column name in \code{data} that contains end dates. Default: \code{end}.}
+\item{end}{(optional) the column name in \code{data} that contains end dates. Default: \code{"end"}.}
 
-\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: \code{group}.}
+\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: \code{"group"}.}
 
-\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \code{color}, if not present, colors are chosen via \code{RColorBrewer}.}
+\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \code{"color"}, if not present, colors are chosen via \code{RColorBrewer}.}
 
-\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: \code{fontcolor}, if not present, color will be \code{black}.}
+\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: \code{"fontcolor"}, if not present, color will be \code{black}.}
 
-\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{tooltip}, if not present, then tooltips are build from event name and date.}
+\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{"tooltip"}, if not present, then tooltips are build from event name and date.}
+
+\item{linewidth}{(optional) the linewidth for the events (typically used for large amount of parallel events). If not specified, then determined automatically.}
 
 \item{title}{(optional) the title to be shown on top of the timeline}
 }
 \value{
-\code{vistime} returns an object of class "\code{plotly}" and "\code{htmlwidget}".
+\code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 }
 \description{
 Create interactive and offline timelines using the \code{plotly.js} framework.
@@ -44,7 +46,7 @@ dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
-                  fontcolor = rep("white", 6))
+                  rep(c("black", "white", "black"), 2))
 
 vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
 
@@ -54,8 +56,6 @@ Phase 1,Project,2016-12-22,2016-12-23,#c8e6c9
 Phase 2,Project,2016-12-23,2016-12-29,#a5d6a7
 Phase 3,Project,2016-12-29,2017-01-06,#fb8c00
 Phase 4,Project,2017-01-06,2017-02-02,#DD4B39
-Start,Start/today,2016-12-22,2016-12-23,#000000
-today (after 32 days),Start/today,2017-01-23,2017-01-24,#DD4B39
 1-217.0,category 2,2016-12-27,2016-12-27,#90caf9
 3-200,category 1,2016-12-25,2016-12-25,#1565c0
 3-330,category 1,2016-12-25,2016-12-25,#1565c0
@@ -68,8 +68,6 @@ today (after 32 days),Start/today,2017-01-23,2017-01-24,#DD4B39
 8-831.0,sundowner drink,2017-01-17,2017-01-17,#8d6e63
 9-984.1,birthday party,2016-12-22,2016-12-22,#90a4ae
 F01.9,Meetings,2016-12-26,2016-12-26,#e8a735
-E43,Meetings,2017-01-12,2017-01-12,#e8a735
-R63.3,Meetings,2017-01-12,2017-01-12,#e8a735
 Z71,Meetings,2017-01-12,2017-01-12,#e8a735
 B95.7,Meetings,2017-01-15,2017-01-15,#e8a735
 T82.7,Meetings,2017-01-15,2017-01-15,#e8a735
