@@ -12,17 +12,17 @@ Create timelines or Gantt charts, offline and interactive, that are usable in th
 
 ### Installation
 
-To install the package from CRAN (v0.3.0):
+To install the package from CRAN (v0.4.0):
 
 ```{r}
 install.packages("vistime")
 ```
-
-To install the development version (v0.4.0, most recent fixes and improvements, but not released on CRAN yet, see NEWS), run the following code in an R console:
-```{r}
-require("devtools")
-devtools::install_github("shosaco/vistime") 
-```
+# 
+# To install the development version (v0.4.0, most recent fixes and improvements, but not released on CRAN yet, see NEWS), run the following code in an R console:
+# ```{r}
+# require("devtools")
+# devtools::install_github("shosaco/vistime") 
+# ```
 
 
 ### Usage
