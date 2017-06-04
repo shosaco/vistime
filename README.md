@@ -1,5 +1,5 @@
 [![CRAN](http://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![packageversion](https://img.shields.io/badge/packageversion-0.4.0-orange.svg)](commits/master)
+[![packageversion](https://img.shields.io/badge/packageversion-0.4.0-green.svg)](commits/master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 
 # vistime
