@@ -75,7 +75,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   names(data)[names(data)==start] <- "start"
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
-  names(data)[names(data)==events] <- "event"
 
   # sort out the classes
   if(nrow(data) > 1){ data <- as.data.frame(sapply(data, as.character), stringsAsFactors=F) }
@@ -179,8 +178,10 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     interval <- 60*60*24 # 1-day-intervals
   }else if(total_range < 60*60*24*365){ # max 1 year
     interval <- 60*60*24*7 # 1-week-intervals
-  }else if(total_range < 60*60*24*365*10){ # max 20 years
+  }else if(total_range < 60*60*24*365*10){ # max 10 years
     interval <- 60*60*24 *30*6 # 6-months-intervals
+  }else if(total_range < 60*60*24*365*20){ # max 20 years
+    interval <- 60*60*24 *30*6 # 12-months-intervals
   }else{
     interval <- 60*60*24 *30*12*10 # 5-year-intervals
   }

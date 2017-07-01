@@ -1,3 +1,6 @@
+# 0.4.1
+- improved vertical line drawing for time ranges 10 to 20 years (one line every year)
+
 # 0.4.0
 - line width calculation for ranges improved (thicker lines if less events happening simultaneously)
 - new parameter: `linewidth` to override the calculated line width for events
