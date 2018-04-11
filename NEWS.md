@@ -1,5 +1,6 @@
 # 0.4.1
 - improved vertical line drawing for time ranges 10 to 20 years (one line every year)
+- corrected font colors of Presidents example on help page
 
 # 0.4.0
 - line width calculation for ranges improved (thicker lines if less events happening simultaneously)
