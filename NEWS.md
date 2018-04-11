@@ -1,8 +1,8 @@
-# 0.4.1
+# 0.4.1 (dev)
 - improved vertical line drawing for time ranges 10 to 20 years (one line every year)
 - corrected font colors of Presidents example on help page
 
-# 0.4.0
+# 0.4.0 (CRAN)
 - line width calculation for ranges improved (thicker lines if less events happening simultaneously)
 - new parameter: `linewidth` to override the calculated line width for events
 - layout and labelling improvements
