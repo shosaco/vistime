@@ -46,9 +46,9 @@ dat <- data.frame(Position=rep(c("President", "Vice"), each = 3),
                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
-                  fontcolor = c("black", "white", "black"))				  
+                  fontcolor = c("black", "white", "black"))
 
-vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
+vistime(dat, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
 
 # more complex and colorful example
 data <- read.csv(text="event,group,start,end,color

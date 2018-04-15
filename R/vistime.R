@@ -10,19 +10,21 @@
 #' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{"tooltip"}, if not present, then tooltips are build from event name and date.
 #' @param linewidth (optional) the linewidth for the events (typically used for large amount of parallel events). If not specified, then determined automatically.
 #' @param title (optional) the title to be shown on top of the timeline
+#' @param showLabels (optional) choose whether or not event labels shall be visible
+#' @param lineInterval (optional) the distance of vertical lines (in SECONDS) to demonstrate structure (default: heuristic, depending on total range)
 #' @import plotly
 #' @export vistime
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 #' @examples
 #' # presidents and vice presidents
-#' dat <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
+#' pres <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
 #'                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
 #'                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
 #'                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
 #'                   color = c('#cbb69d', '#603913', '#c69c6e'),
 #'                   rep(c("black", "white", "black"), 2))
 #'
-#' vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
+#' vistime(pres, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
 #'
 #' # more complex and colorful example
 #' data <- read.csv(text="event,group,start,end,color
@@ -52,8 +54,7 @@
 #' Group 2,Team 2,2016-12-28,2017-01-23,#C7E9C0")
 #'
 #' vistime(data)
-vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL){
-
+vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL, showLabels = TRUE, lineInterval=NULL){
   # error checking
   if(class(try(as.data.frame(data), silent=T))[1] == "try-error"){ stop(paste("Expected an input data frame, but encountered", class(data)[1]))
   }else data <- data.frame(data, stringsAsFactors = F)
@@ -65,6 +66,8 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   if(! end %in% names(data) | end==start) data$end <- data[, start]
   if(!is.null(linewidth) & !class(linewidth) %in% c("integer", "numeric")) stop("linewidth must be a number")
   if(!is.null(title) & !class(title) %in% c("character", "numeric", "integer")) stop("Title must be a String")
+  if(is.null(showLabels) || !(showLabels %in% c(TRUE, FALSE))) stop("showLabels must be a logical value.")
+  if(!is.null(lineInterval) & !class(lineInterval) %in% c("integer", "numeric")) stop("lineInterval must be an integer (seconds).")
 
   # set column names
   if(events == groups){
@@ -166,24 +169,30 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                        data$event)
 
   #############################################################################
-  #  4. set interval for vertical lines                                   #####
+  #  4. set lineInterval for vertical lines                                   #####
   #############################################################################
-
   total_range <- difftime(max(data$end), min(data$start), units="secs")
-  if(total_range <= 60*60*3){ # max 3 hours
-    interval <- 60*10 # 10-min-intervals
-  }else if(total_range < 60*60*24){ # max 1 day
-    interval <- 60*60*2 # 2-hour-intervals
-  }else if(total_range < 60*60*24*365/2){ # max 0.5 years
-    interval <- 60*60*24 # 1-day-intervals
-  }else if(total_range < 60*60*24*365){ # max 1 year
-    interval <- 60*60*24*7 # 1-week-intervals
-  }else if(total_range < 60*60*24*365*10){ # max 10 years
-    interval <- 60*60*24 *30*6 # 6-months-intervals
-  }else if(total_range < 60*60*24*365*20){ # max 20 years
-    interval <- 60*60*24 *30*6 # 12-months-intervals
+
+  if(is.null(lineInterval)){
+    if(total_range <= 60*60*3){ # max 3 hours
+      lineInterval <- 60*10 # 10-min-lineIntervals
+    }else if(total_range < 60*60*24){ # max 1 day
+      lineInterval <- 60*60*2 # 2-hour-lineIntervals
+    }else if(total_range < 60*60*24*30){ # max 30 days
+      lineInterval <- 60*60*24*2 # 2-day-lineIntervals
+    }else if(total_range < 60*60*24*365/2){ # max 0.5 years
+      lineInterval <- 60*60*24*7 # 7-day-lineIntervals
+    }else if(total_range < 60*60*24*365){ # max 1 year
+      lineInterval <- 60*60*24*7*2 # 2-week-lineIntervals
+    }else if(total_range < 60*60*24*365*10){ # max 10 years
+      lineInterval <- 60*60*24 *30*6 # 6-months-lineIntervals
+    }else if(total_range < 60*60*24*365*20){ # max 20 years
+      lineInterval <- 60*60*24*30*24 # 24-months-lineIntervals
+    }else{
+      lineInterval <- 60*60*24 *30*12*10 # 10-year-lineIntervals
+    }
   }else{
-    interval <- 60*60*24 *30*12*10 # 5-year-intervals
+    if(total_range > lineInterval * 1000) message("Warning: lineInterval is small while total range of events is large - yields a very big plot in terms of memory.")
   }
 
   #############################################################################
@@ -203,7 +212,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     p <- plot_ly(data, type = "scatter", mode="lines")
 
     # 1. add vertical line for each year/day
-    for(day in seq(min(data$start), max(data$end), interval)){
+    for(day in seq(min(data$start), max(data$end), lineInterval)){
       p <- add_trace(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines",
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }
@@ -219,14 +228,17 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                      line = list(color = toAdd$col, width = linewidth),
                      showlegend = F,
                      hoverinfo="text",
-                     text=toAdd$tooltip) %>%
-        add_text(x = toAdd$start + (toAdd$end-toAdd$start)/2,  # in der Mitte
-                 y = toAdd$y,
-                 textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
-                 textposition = "center",
-                 showlegend=F,
-                 text=toAdd$label,
-                 hoverinfo="none")
+                     text=toAdd$tooltip)
+      # add annotations or not
+      if(showLabels){
+        p <- add_text(p, x = toAdd$start + (toAdd$end-toAdd$start)/2,  # in der Mitte
+                  y = toAdd$y,
+                  textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
+                  textposition = "center",
+                  showlegend=F,
+                  text=toAdd$label,
+                  hoverinfo="none")
+      }
     }
 
     return(p %>% layout(hovermode = 'closest',
@@ -262,7 +274,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     p <- plot_ly(thisData, type="scatter", mode="markers")
 
     # 1. add vertical line for each year/day
-    for(day in seq(min(data$start), max(data$end), interval)){
+    for(day in seq(min(data$start), max(data$end), lineInterval)){
       p <- add_lines(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY),
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }
@@ -273,9 +285,12 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                                    line = list(color = 'black', width = 1)),
                      showlegend = F, hoverinfo="text", text=~tooltip)
 
-    # add annotations
-    p <- add_text(p, x=~start, y=~labelY, textfont = list(family = "Arial", size = 14, color = ~toRGB(fontcol)),
-                  textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
+    # add annotations or not
+    # add labels or not
+    if(showLabels){
+      p <- add_text(p, x=~start, y=~labelY, textfont = list(family = "Arial", size = 14, color = ~toRGB(fontcol)),
+                    textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
+    }
 
     # fix layout
     p <-  layout(p, hovermode = 'closest',

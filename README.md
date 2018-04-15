@@ -12,7 +12,7 @@ Create timelines or Gantt charts, offline and interactive, that are usable in th
 
 ### Installation
 
-To install the package from CRAN (v0.4.0):
+To install the package from CRAN (v0.4.1):
 
 ```{r}
 install.packages("vistime")
@@ -29,7 +29,8 @@ devtools::install_github("shosaco/vistime")
 
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-              fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, title = NULL)
+              fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, 
+              title = NULL, showLabels = TRUE, lineInterval = NULL)
 ````
 
 
@@ -47,6 +48,8 @@ fontcolors | optional | character | the column name in data that contains the fo
 tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: "*tooltip*", if not present, then tooltips are build from event name and date. <a href="http://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials", target="_blank">Basic HTML</a> is allowed
 linewidth | optional | numeric | override the calculated linewidth for events
 title | optional | character | the title to be shown on top of the timeline
+showLabels | optional | logical | choose whether or not event labels shall be visible
+lineInterval | optional | integer| the distance of vertical lines (in **seconds**) to demonstrate structure (default: heuristic, depending on total data range)
 
 ### Value
 
@@ -57,14 +60,14 @@ title | optional | character | the title to be shown on top of the timeline
 
 #### Ex. 1: Presidents
 ```{r}
-dat <- data.frame(Position=rep(c("President", "Vice"), each = 3),
+pres <- data.frame(Position=rep(c("President", "Vice"), each = 3),
                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
                   fontcolor = c("black", "white", "black"))
                   
-vistime(dat, events="Position", groups="Name", title="Presidents of the USA")
+vistime(pres, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
 ````
 ![](inst/img/ex2.png)
 
