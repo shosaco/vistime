@@ -1,7 +1,7 @@
-# 0.4.1 (dev)
+# 0.5.0 (dev)
 - added a new argument `showLabels` to choose whether or not the event labels shall be drawn - improves layout of dense timelines
 - new argument `lineInterval`: the distance in seconds that vertical lines shall be drawn (to reduce plot size and increase performance). When omitted, a heuristic is used (as before) is used.
-- improved heuristic of vertical line drawing for time ranges 10 to 20 years (one line every year)
+- improved heuristic of vertical line drawing
 - corrected font colors of Presidents example on help page
 
 # 0.4.0 (CRAN)

@@ -4,11 +4,13 @@
 \name{vistime}
 \alias{vistime}
 \alias{vistime-package}
+\alias{vistime}
 \title{vistime}
 \usage{
 vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
-  tooltips = "tooltip", linewidth = NULL, title = NULL)
+  tooltips = "tooltip", linewidth = NULL, title = NULL,
+  showLabels = TRUE, lineInterval = NULL)
 }
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
@@ -30,6 +32,10 @@ vistime(data, events = "event", start = "start", end = "end",
 \item{linewidth}{(optional) the linewidth for the events (typically used for large amount of parallel events). If not specified, then determined automatically.}
 
 \item{title}{(optional) the title to be shown on top of the timeline}
+
+\item{showLabels}{(optional) choose whether or not event labels shall be visible}
+
+\item{lineInterval}{(optional) the distance of vertical lines (in SECONDS) to demonstrate structure (default: heuristic, depending on total range)}
 }
 \value{
 \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
@@ -41,14 +47,14 @@ Time data that is provided is distributed and grouped in a non-overlapping matte
 }
 \examples{
 # presidents and vice presidents
-dat <- data.frame(Position=rep(c("President", "Vice"), each = 3),
-                  Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
-                  start = c("1789-03-29", "1797-02-03", "1801-02-03"),
-                  end = c("1797-02-03", "1801-02-03", "1809-02-03"),
+pres <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
+                  Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
+                  start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
+                  end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
-                  fontcolor = c("black", "white", "black"))
+                  rep(c("black", "white", "black"), 2))
 
-vistime(dat, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
+vistime(pres, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
 
 # more complex and colorful example
 data <- read.csv(text="event,group,start,end,color
