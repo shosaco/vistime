@@ -52,7 +52,7 @@ pres <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
-                  rep(c("black", "white", "black"), 2))
+                  fontcolor = c("black", "white", "black"))
 
 vistime(pres, events="Position", groups="Name", title="Presidents of the USA",
               lineInterval = 60*60*24*365*5)
