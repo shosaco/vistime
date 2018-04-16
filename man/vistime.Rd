@@ -54,7 +54,8 @@ pres <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
                   rep(c("black", "white", "black"), 2))
 
-vistime(pres, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
+vistime(pres, events="Position", groups="Name", title="Presidents of the USA",
+              lineInterval = 60*60*24*365*5)
 
 # more complex and colorful example
 data <- read.csv(text="event,group,start,end,color
