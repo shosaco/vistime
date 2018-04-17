@@ -15,27 +15,27 @@ vistime(data, events = "event", start = "start", end = "end",
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
 
-\item{events}{(optional) the column name in \code{data} that contains event names. Default: \code{"event"}.}
+\item{events}{(optional) the column name in \code{data} that contains event names. Default: "event".}
 
-\item{start}{(optional) the column name in \code{data} that contains start dates. Default: \code{"start"}.}
+\item{start}{(optional) the column name in \code{data} that contains start dates. Default: "start.}
 
-\item{end}{(optional) the column name in \code{data} that contains end dates. Default: \code{"end"}.}
+\item{end}{(optional) the column name in \code{data} that contains end dates. Default: "end".}
 
-\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: \code{"group"}.}
+\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: "group".}
 
-\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \code{"color"}, if not present, colors are chosen via \code{RColorBrewer}.}
+\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: "color", if not present, colors are chosen via \code{RColorBrewer}.}
 
-\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: \code{"fontcolor"}, if not present, color will be \code{black}.}
+\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: "fontcolor", if not present, color will be black.}
 
-\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \code{"tooltip"}, if not present, then tooltips are build from event name and date.}
+\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: "tooltip", if not present, then tooltips are build from event name and date.}
 
-\item{linewidth}{(optional) the linewidth for the events (typically used for large amount of parallel events). If not specified, then determined automatically.}
+\item{linewidth}{(optional) the linewidth for the events (typically used for large amount of parallel events). Default: heuristic value.}
 
-\item{title}{(optional) the title to be shown on top of the timeline}
+\item{title}{(optional) the title to be shown on top of the timeline. Default: empty.}
 
-\item{showLabels}{(optional) choose whether or not event labels shall be visible}
+\item{showLabels}{(optional) choose whether or not event labels shall be visible. Default: \code{TRUE}.}
 
-\item{lineInterval}{(optional) the distance of vertical lines (in SECONDS) to demonstrate structure (default: heuristic, depending on total range)}
+\item{lineInterval}{(optional) the distance of vertical lines (in SECONDS) to demonstrate structure (default: heuristic, depending on total range). Default: heuristic value.}
 }
 \value{
 \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
