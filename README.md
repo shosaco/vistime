@@ -45,7 +45,7 @@ groups | optional | character | the column name in data to be used for grouping.
 events | optional | character | the column name in data that contains event names. Default: *event*
 colors | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
 fontcolors | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
-tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. <a href="http://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials", target="_blank">Basic HTML</a> is allowed
+tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](http://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials") is allowed.
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
 showLabels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
