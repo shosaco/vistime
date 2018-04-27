@@ -9,7 +9,7 @@
 #' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: \emph{fontcolor}, if not present, color will be black.
 #' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \emph{tooltip}, if not present, then tooltips are build from event name and date.
 #' @param linewidth (optional) the linewidth for the events (typically used for large amount of parallel events). Default: heuristic value.
-#' @param title (optional) the title to be shown on top of the timeline. Default: empty.
+#' @param title (optional) the title to be shown on top of the timeline. Default: \code{NULL}.
 #' @param showLabels (optional) choose whether or not event labels shall be visible. Default: \code{TRUE}.
 #' @param lineInterval (optional) the distance of vertical lines (in \emph{seconds}) to demonstrate structure (default: heuristic, depending on total range). Default: heuristic value.
 #' @import plotly
@@ -17,10 +17,10 @@
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 #' @examples
 #' # presidents and vice presidents
-#' pres <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
-#'                   Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
-#'                   start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
-#'                   end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
+#' pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
+#'                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
+#'                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+#'                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
 #'                   color = c('#cbb69d', '#603913', '#c69c6e'),
 #'                   fontcolor = c("black", "white", "black"))
 #'

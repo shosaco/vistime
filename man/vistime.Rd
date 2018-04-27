@@ -47,10 +47,10 @@ Time data that is provided is distributed and grouped in a non-overlapping matte
 }
 \examples{
 # presidents and vice presidents
-pres <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
-                  Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
-                  start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
-                  end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
+pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
+                  Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
+                  start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+                  end = c("1797-02-03", "1801-02-03", "1809-02-03"),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
                   fontcolor = c("black", "white", "black"))
 

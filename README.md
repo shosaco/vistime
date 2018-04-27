@@ -71,7 +71,7 @@ lineInterval | optional | integer| the distance of vertical lines (in **seconds*
 
 ### Ex. 1: Presidents
 ```{r}
-pres <- data.frame(Position=rep(c("President", "Vice"), each = 3),
+pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
@@ -124,7 +124,7 @@ library(shiny)
 library(plotly)
 library(vistime)
 
-pres <- data.frame(Position=rep(c("President", "Vice"), each = 3),
+pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
                    start = c("1789-03-29", "1797-02-03", "1801-02-03"),
                    end = c("1797-02-03", "1801-02-03", "1809-02-03"),
