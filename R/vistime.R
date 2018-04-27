@@ -1,17 +1,17 @@
 #' Time data that is provided is distributed and grouped in a non-overlapping matter. It can then be edited via \code{plotly_build()} and used in Shiny apps or Rmarkdown documents. The process works offline.
 #'
 #' @param data data.frame that contains the data to be visualised
-#' @param events (optional) the column name in \code{data} that contains event names. Default: "event".
-#' @param start (optional) the column name in \code{data} that contains start dates. Default: "start.
-#' @param end (optional) the column name in \code{data} that contains end dates. Default: "end".
-#' @param groups (optional) the column name in \code{data} to be used for grouping. Default: "group".
-#' @param colors (optional) the column name in \code{data} that contains colors for events. Default: "color", if not present, colors are chosen via \code{RColorBrewer}.
-#' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: "fontcolor", if not present, color will be black.
-#' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: "tooltip", if not present, then tooltips are build from event name and date.
+#' @param events (optional) the column name in \code{data} that contains event names. Default: \emph{event}.
+#' @param start (optional) the column name in \code{data} that contains start dates. Default: \emph{start}.
+#' @param end (optional) the column name in \code{data} that contains end dates. Default: \emph{end}.
+#' @param groups (optional) the column name in \code{data} to be used for grouping. Default: \emph{group}.
+#' @param colors (optional) the column name in \code{data} that contains colors for events. Default: \emph{color}, if not present, colors are chosen via \code{RColorBrewer}.
+#' @param fontcolors (optional) the column name in \code{data} that contains the font color for event labels. Default: \emph{fontcolor}, if not present, color will be black.
+#' @param tooltips (optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \emph{tooltip}, if not present, then tooltips are build from event name and date.
 #' @param linewidth (optional) the linewidth for the events (typically used for large amount of parallel events). Default: heuristic value.
 #' @param title (optional) the title to be shown on top of the timeline. Default: empty.
 #' @param showLabels (optional) choose whether or not event labels shall be visible. Default: \code{TRUE}.
-#' @param lineInterval (optional) the distance of vertical lines (in SECONDS) to demonstrate structure (default: heuristic, depending on total range). Default: heuristic value.
+#' @param lineInterval (optional) the distance of vertical lines (in \emph{seconds}) to demonstrate structure (default: heuristic, depending on total range). Default: heuristic value.
 #' @import plotly
 #' @export vistime
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.

@@ -15,27 +15,27 @@ vistime(data, events = "event", start = "start", end = "end",
 \arguments{
 \item{data}{data.frame that contains the data to be visualised}
 
-\item{events}{(optional) the column name in \code{data} that contains event names. Default: "event".}
+\item{events}{(optional) the column name in \code{data} that contains event names. Default: \emph{event}.}
 
-\item{start}{(optional) the column name in \code{data} that contains start dates. Default: "start.}
+\item{start}{(optional) the column name in \code{data} that contains start dates. Default: \emph{start}.}
 
-\item{end}{(optional) the column name in \code{data} that contains end dates. Default: "end".}
+\item{end}{(optional) the column name in \code{data} that contains end dates. Default: \emph{end}.}
 
-\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: "group".}
+\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: \emph{group}.}
 
-\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: "color", if not present, colors are chosen via \code{RColorBrewer}.}
+\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \emph{color}, if not present, colors are chosen via \code{RColorBrewer}.}
 
-\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: "fontcolor", if not present, color will be black.}
+\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: \emph{fontcolor}, if not present, color will be black.}
 
-\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: "tooltip", if not present, then tooltips are build from event name and date.}
+\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \emph{tooltip}, if not present, then tooltips are build from event name and date.}
 
 \item{linewidth}{(optional) the linewidth for the events (typically used for large amount of parallel events). Default: heuristic value.}
 
-\item{title}{(optional) the title to be shown on top of the timeline. Default: empty.}
+\item{title}{(optional) the title to be shown on top of the timeline. Default: \code{NULL}.}
 
 \item{showLabels}{(optional) choose whether or not event labels shall be visible. Default: \code{TRUE}.}
 
-\item{lineInterval}{(optional) the distance of vertical lines (in SECONDS) to demonstrate structure (default: heuristic, depending on total range). Default: heuristic value.}
+\item{lineInterval}{(optional) the distance of vertical lines (in \emph{seconds}) to demonstrate structure (default: heuristic, depending on total range). Default: heuristic value.}
 }
 \value{
 \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.

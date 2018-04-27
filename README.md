@@ -2,15 +2,26 @@
 [![dev](https://img.shields.io/badge/dev-0.5.0-brightgreen.svg)](commits/master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 
-# vistime
-#### an R package for pretty timeline creation
+vistime - an R package for pretty timeline creation
+=========
 
 Create timelines or Gantt charts, offline and interactive, that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps using 'plotly.js', a high-level, declarative charting library. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines (and the data behind them) can be manipulated using 'plotly_build()' or, once uploaded to a 'plotly' account, viewed and modified in a web browser.
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
+## Table of Contents
 
-### Installation
+* [Installation](#installation)
+* [Usage](#usage)
+* [Arguments](#arguments)
+* [Value](#value)
+* [Examples](#examples)
+   * [Ex. 1: Presidents](#ex-1-presidents)
+   * [Ex. 2: Project Planning](#ex-2-project-planning)
+* [Usage in Shiny apps](#usage-in-shiny-apps)
+
+
+## Installation
 
 To install the package from CRAN (v0.5.0):
 
@@ -25,7 +36,7 @@ devtools::install_github("shosaco/vistime")
 ```
 -->
 
-### Usage
+## Usage
 
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
@@ -34,7 +45,7 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
 ````
 
 
-### Arguments
+## Arguments
 
 parameter | optional? | data type | explanation 
 --------- |----------- | -------- | ----------- 
@@ -51,14 +62,14 @@ title | optional | character | the title to be shown on top of the timeline. Def
 showLabels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
 lineInterval | optional | integer| the distance of vertical lines (in **seconds**) to improve layout. Default: heuristic value, depending on total data range.
 
-### Value
+## Value
 
 `vistime` returns an object of class `plotly` and `htmlwidget`.
 
 
-### Examples  
+## Examples  
 
-#### Ex. 1: Presidents
+### Ex. 1: Presidents
 ```{r}
 pres <- data.frame(Position=rep(c("President", "Vice"), each = 3),
                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
@@ -71,7 +82,7 @@ vistime(pres, events="Position", groups="Name", title="Presidents of the USA", l
 ````
 ![](inst/img/ex2.png)
 
-#### Ex. 2: Project Planning
+### Ex. 2: Project Planning
 ````{r}
 data <- read.csv(text="event,group,start,end,color
                        Phase 1,Project,2016-12-22,2016-12-23,#c8e6c9
@@ -103,4 +114,30 @@ vistime(data)
 ````
 
 ![](inst/img/ex3.png)
+
+## Usage in Shiny apps
+
+Since the result of any call to `vistime(...)` is a `Plotly` object, you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart:
+
+```{r}
+library(shiny)
+library(plotly)
+library(vistime)
+
+pres <- data.frame(Position=rep(c("President", "Vice"), each = 3),
+                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
+                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
+                   color = c('#cbb69d', '#603913', '#c69c6e'),
+                   fontcolor = c("black", "white", "black"))
+
+shinyApp(
+  ui = plotlyOutput("myVistime"),
+  server = function(input, output) {
+    output$myVistime <- renderPlotly({
+      vistime(pres, events="Position", groups="Name")
+    })
+  }
+)
+```
 
