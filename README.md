@@ -11,15 +11,15 @@ Create timelines or Gantt charts, offline and interactive, that are usable in th
 
 ## Table of Contents
 
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Arguments](#arguments)
-4. [Value](#value)
-5. [Examples](#examples)
+1. [Installation](#1-installation)
+2. [Usage](#2-usage)
+3. [Arguments](#3-arguments)
+4. [Value](#4-value)
+5. [Examples](#5-examples)
    * [Ex. 1: Presidents](#ex-1--presidents)
    * [Ex. 2: Project Planning](#ex-2--project-planning)
-6. [Usage in Shiny apps](#usage-in-shiny-apps)
-7. [Customization](#customization)
+6. [Usage in Shiny apps](#6-usage-in-shiny-apps)
+7. [Customization](#7-customization)
    * [Ex1: Changing x-axis tick font size](#ex1-changing-x-axis-tick-font-size)
    * [Ex2: Changing events font size](#ex2-changing-events-font-size)
 
