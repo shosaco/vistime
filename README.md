@@ -11,20 +11,20 @@ Create timelines or Gantt charts, offline and interactive, that are usable in th
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Arguments](#arguments)
-- [Value](#value)
-- [Examples](#examples)
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Arguments](#arguments)
+4. [Value](#value)
+5. [Examples](#examples)
    * [Ex. 1: Presidents](#ex-1--presidents)
    * [Ex. 2: Project Planning](#ex-2--project-planning)
-- [Usage in Shiny apps](#usage-in-shiny-apps)
-- [Customization using `plotly_build`](#customization-using--plotly-build-)
-   * [Ex1: Changing x-axis tick font size](#ex1--changing-x-axis-tick-font-size)
-   * [Ex2: Changing events font size](#ex2--changing-events-font-size)
+6. [Usage in Shiny apps](#usage-in-shiny-apps)
+7. [Customization](#customization)
+   * [Ex1: Changing x-axis tick font size](#ex1-changing-x-axis-tick-font-size)
+   * [Ex2: Changing events font size](#ex2-changing-events-font-size)
 
 
-## Installation
+## 1. Installation
 
 To install the package from CRAN (v0.5.0):
 
@@ -39,7 +39,7 @@ devtools::install_github("shosaco/vistime")
 ```
 -->
 
-## Usage
+## 2. Usage
 
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
@@ -48,7 +48,7 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
 ````
 
 
-## Arguments
+## 3. Arguments
 
 parameter | optional? | data type | explanation 
 --------- |----------- | -------- | ----------- 
@@ -65,12 +65,12 @@ title | optional | character | the title to be shown on top of the timeline. Def
 showLabels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
 lineInterval | optional | integer| the distance of vertical lines (in **seconds**) to improve layout. Default: heuristic value, depending on total data range.
 
-## Value
+## 4. Value
 
 `vistime` returns an object of class `plotly` and `htmlwidget`.
 
 
-## Examples  
+## 5. Examples  
 
 ### Ex. 1: Presidents
 ```{r}
@@ -118,7 +118,7 @@ vistime(data)
 
 ![](inst/img/ex3.png)
 
-## Usage in Shiny apps
+## 6. Usage in Shiny apps
 
 Since the result of any call to `vistime(...)` is a `Plotly` object, you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart:
 
@@ -144,7 +144,7 @@ shinyApp(
 )
 ```
 
-## Customization using `plotly_build`
+## 7. Customization
 The function `plotly_build` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
 **The secret is to first create a simple Plotly example yourself, turning it into a list (using `plotly_build`) and exploring the resulting list regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly.**
