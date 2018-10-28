@@ -24,8 +24,7 @@ Create timelines or Gantt charts, offline and interactive, that are usable in th
    * [Ex2: Changing events font size](#ex2-changing-events-font-size)
 
 ## 0. Note
-
-There are problems displaying vistime charts if you use the most recent version of the plotly package. Please, <font color = "red">if no vistime charts are displayed, downgrade to Plotly 4.7.1</font>, we are working on that in the meantime.
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) There are problems displaying vistime charts if you use the most recent version of the plotly package. Please, <font color = "red">if no vistime charts are displayed, downgrade to Plotly 4.7.1</font>, we are working on that in the meantime. ![#f03c15](https://placehold.it/15/f03c15/000000?text=+)
 
 ```{r}
 install.packages("https://cran.r-project.org/src/contrib/Archive/plotly/plotly_4.7.1.tar.gz", type = "source", repos = NULL)
