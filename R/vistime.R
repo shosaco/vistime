@@ -248,11 +248,10 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                         # 2. Customize y-axis tick labels and show group names instead of numbers
                         xaxis = list(showgrid = F, title = ''),
                         yaxis = list(showgrid = F, title = '',
-                                     tickmode = "array", tickvals = 1:maxY,
-                                     ticktext = c(rep("", (maxY-1)/2), # Leerzeilen
-                                                  as.character(toAdd$group), # group name in the center
-                                                  rep("", (maxY+1)/2)) # Leerzeilen
-                        )))
+                                     tickmode = "array",
+                                     tickvals = maxY/2, # the only tick shall be in the center of the axis
+                                     ticktext = as.character(toAdd$group[1])) # text for the tick (group name)
+                        ))
   })
 
 
@@ -297,11 +296,10 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     p <-  layout(p, hovermode = 'closest',
                  xaxis = list(showgrid = F, title=''),
                  yaxis = list(showgrid = F, title = '',
-                              tickmode = "array", tickvals = 1:maxY,
-                              ticktext = c(rep("", (maxY-1)/2), # Leerzeilen
-                                           thisData$group[1], # group name in the center
-                                           rep("", (maxY+1)/2)) # Leerzeilen
-                 ))
+                              tickmode = "array",
+                              tickvals = maxY/2, # the only tick shall be in the center of the axis
+                              ticktext = as.character(thisData$group[1])) # text for the tick (group name)
+                 )
   })
 
 
