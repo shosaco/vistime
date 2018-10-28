@@ -282,7 +282,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
 
     # add all the markers for this Category
     p <- add_markers(p, x=~start, y=~y,
-                     marker = list(color = ~col, size=15, symbol="square",
+                     marker = list(color = ~col, size=15, symbol="circle",
                                    line = list(color = 'black', width = 1)),
                      showlegend = F, hoverinfo="text", text=~tooltip)
 
