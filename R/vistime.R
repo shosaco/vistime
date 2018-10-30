@@ -115,7 +115,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                            paste0("<b>",data$event,": ",data$start,"</b>"),
                            paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
   }
-
   # set the colors
   if(colors %in% names(data)){
     names(data)[names(data)==colors] <- "col"
