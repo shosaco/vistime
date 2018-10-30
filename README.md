@@ -1,5 +1,5 @@
 [![CRAN](http://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![dev](https://img.shields.io/badge/dev-0.5.0-brightgreen.svg)](commits/master)
+[![dev](https://img.shields.io/badge/dev-0.6.0-brightgreen.svg)](commits/master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 
 vistime - Pretty Timeline Creation
@@ -23,27 +23,19 @@ Create timelines or Gantt charts, offline and interactive, that are usable in th
    * [Ex1: Changing x-axis tick font size](#ex1-changing-x-axis-tick-font-size)
    * [Ex2: Changing events font size](#ex2-changing-events-font-size)
 
-## 0. Note
-![#f03c15](https://placehold.it/15/f03c15/000000?text=+) There are problems displaying vistime charts if you use the most recent version of the plotly package. Please, <font color = "red">if no vistime charts are displayed, downgrade to Plotly 4.7.1</font>, we are working on that in the meantime. ![#f03c15](https://placehold.it/15/f03c15/000000?text=+)
-
-```{r}
-install.packages("https://cran.r-project.org/src/contrib/Archive/plotly/plotly_4.7.1.tar.gz", type = "source", repos = NULL)
-```
-
 ## 1. Installation
 
-To install the package from CRAN (v0.5.0):
+To install the package from CRAN (v0.6.0):
 
 ```{r}
 install.packages("vistime")
 ```
-
-To install the development version (v0.6.0, most recent fixes and improvements, but not released on CRAN yet, see NEWS), run the following code in an R console:
+<!-- To install the development version (v0.6.0, most recent fixes and improvements, but not released on CRAN yet, see NEWS), run the following code in an R console:
 ```{r}
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("shosaco/vistime")
 ```
-
+-->
 
 ## 2. Usage
 
