@@ -4,7 +4,7 @@
 \name{vistime}
 \alias{vistime}
 \alias{vistime-package}
-\title{vistime}
+\title{Create a Timeline}
 \usage{
 vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
@@ -12,35 +12,54 @@ vistime(data, events = "event", start = "start", end = "end",
   showLabels = TRUE, lineInterval = NULL)
 }
 \arguments{
-\item{data}{data.frame that contains the data to be visualised}
+\item{data}{(required) data.frame that contains the data to be visualised}
 
-\item{events}{(optional) the column name in \code{data} that contains event names. Default: \emph{event}.}
+\item{events}{(optional) the column name in \code{data} that contains event
+names. Default: \emph{event}.}
 
-\item{start}{(optional) the column name in \code{data} that contains start dates. Default: \emph{start}.}
+\item{start}{(optional, character) the column name in \code{data} that contains start
+dates. Default: \emph{start}.}
 
-\item{end}{(optional) the column name in \code{data} that contains end dates. Default: \emph{end}.}
+\item{end}{(optional, character) the column name in \code{data} that contains end dates.
+Default: \emph{end}.}
 
-\item{groups}{(optional) the column name in \code{data} to be used for grouping. Default: \emph{group}.}
+\item{groups}{(optional, character) the column name in \code{data} to be used for
+grouping. Default: \emph{group}.}
 
-\item{colors}{(optional) the column name in \code{data} that contains colors for events. Default: \emph{color}, if not present, colors are chosen via \code{RColorBrewer}.}
+\item{colors}{(optional, character) the column name in \code{data} that contains colors
+for events. Default: \emph{color}, if not present, colors are chosen via
+\code{RColorBrewer}.}
 
-\item{fontcolors}{(optional) the column name in \code{data} that contains the font color for event labels. Default: \emph{fontcolor}, if not present, color will be black.}
+\item{fontcolors}{(optional, character) the column name in \code{data} that contains the
+font color for event labels. Default: \emph{fontcolor}, if not present,
+color will be black.}
 
-\item{tooltips}{(optional) the column name in \code{data} that contains the mouseover tooltips for the events. Default: \emph{tooltip}, if not present, then tooltips are build from event name and date.}
+\item{tooltips}{(optional, character) the column name in \code{data} that contains the
+mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
+then tooltips are build from event name and date.}
 
-\item{linewidth}{(optional) the linewidth for the events (typically used for large amount of parallel events). Default: heuristic value.}
+\item{linewidth}{(optional, numeric) the linewidth (in pixel) for the events (typically used for
+large amount of parallel events). Default: heuristic value.}
 
-\item{title}{(optional) the title to be shown on top of the timeline. Default: \code{NULL}.}
+\item{title}{(optional, character) the title to be shown on top of the timeline.
+Default: \code{NULL}.}
 
-\item{showLabels}{(optional) choose whether or not event labels shall be visible. Default: \code{TRUE}.}
+\item{showLabels}{(optional, boolean) choose whether or not event labels shall be
+visible. Default: \code{TRUE}.}
 
-\item{lineInterval}{(optional) the distance of vertical lines (in \emph{seconds}) to demonstrate structure (default: heuristic, depending on total range). Default: heuristic value.}
+\item{lineInterval}{(optional, integer) the distance of vertical lines (in
+\emph{seconds}) to demonstrate structure (default: heuristic value, depending on
+total data range).}
 }
 \value{
-\code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
+\code{vistime} returns an object of class \code{plotly} and
+  \code{htmlwidget}.
 }
 \description{
 Create interactive and offline timelines using the \code{plotly.js} framework.
+
+Provide a data frame with event data to create a visual timeline plot.
+Simplest dataframe can have columns `event`, `start`, `end`.
 }
 \examples{
 # presidents and vice presidents

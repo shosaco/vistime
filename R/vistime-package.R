@@ -2,7 +2,7 @@
 #'
 #' @name vistime
 #' @docType package
-#' @title vistime
+#' @title Create a Timeline
 #' @author Sandro Raabe \email{shosaco_nospam@hotmail.com}
 #' @keywords timeline plotly gantt vistime
 NULL
