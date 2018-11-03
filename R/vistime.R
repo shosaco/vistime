@@ -107,6 +107,10 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   # fix missing ends for events
   if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
 
+  # remove leading and trailing whitespaces
+  data$event <- gsub("^\\s+|\\s+$", "", data$event)
+  data$group <- gsub("^\\s+|\\s+$", "", data$group)
+
   # set the tooltips
   if(tooltips %in% names(data)){
     names(data)[names(data) == tooltips] <- "tooltip"
@@ -139,6 +143,9 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
 
   data$subplot[events] <- as.numeric(factor(data$group[events], levels=unique(data$group[events])))
   data$subplot[!events] <- length(unique(data$subplot[events])) + as.numeric(factor(data$group[!events], levels=unique(data$group[!events])))
+
+  # reorder subplots such that identical groups stand next to each other
+  data <- data %>% arrange(group) %>% mutate(subplot = as.integer(factor(subplot, levels = unique(subplot))))
 
   ########################################################################
   #  2. set y values                                                ######
@@ -178,9 +185,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   #  3. Set "intelligent" labels for events                           #######
   ###########################################################################
 
-  # data$labelPos <- ifelse(data$start == data$end,
-  #                         rep(c("top", "bottom"), ceiling(nrow(data[data$start == data$end,])/2)),
-  #                         "center")
   data$labelPos <- "center"
 
   data$label <- ifelse(data$start == data$end,
@@ -271,6 +275,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                                      ticktext = as.character(toAdd$group[1])) # text for the tick (group name)
                         ))
   })
+  names(ranges) <- rangeNumbers # preserve order of subplots
 
 
   #######################################################################
@@ -304,7 +309,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                      showlegend = F, hoverinfo="text", text=~tooltip)
 
     # add annotations or not
-    # add labels or not
     if(showLabels){
       p <- add_text(p, x=~start, y=~labelY, textfont = list(family = "Arial", size = 14, color = ~toRGB(fontcol)),
                     textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
@@ -319,7 +323,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                               ticktext = as.character(thisData$group[1])) # text for the tick (group name)
                  )
   })
-
+  names(events) <- eventNumbers # preserve order of subplots
 
   #######################################################################
   #  7. plot everything                                            ######
@@ -332,6 +336,9 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
 
   # gather all plots in a plotList
   plotList <- append(ranges, events)
+
+  # sort plotList according to subplots, such that ranges and events stand together
+  plotList <- plotList[order(names(plotList))]
 
   total <- subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative) %>%
               layout(title = title,

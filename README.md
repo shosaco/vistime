@@ -5,7 +5,7 @@
 vistime - Pretty Timeline Creation
 =========
 
-Create timelines or Gantt charts, offline and interactive, that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps using 'plotly.js', a high-level, declarative charting library. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines (and the data behind them) can be manipulated using 'plotly_build()' or, once uploaded to a 'plotly' account, viewed and modified in a web browser.
+Create interactive timelines or Gantt charts that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using 'plotly_build()', which transforms the plot into a mutable list.
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
@@ -22,6 +22,7 @@ Create timelines or Gantt charts, offline and interactive, that are usable in th
 7. [Customization](#7-customization)
    * [Ex1: Changing x-axis tick font size](#ex1-changing-x-axis-tick-font-size)
    * [Ex2: Changing events font size](#ex2-changing-events-font-size)
+   * [Ex3: Changing marker size](#ex3-changing-marker-size)
 
 ## 1. Installation
 
@@ -30,12 +31,12 @@ To install the package from CRAN (v0.6.0):
 ```{r}
 install.packages("vistime")
 ```
-<!-- To install the development version (v0.6.0, most recent fixes and improvements, but not released on CRAN yet, see NEWS), run the following code in an R console:
+To install the development version (v0.7.0, most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 ```{r}
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("shosaco/vistime")
 ```
--->
+
 
 ## 2. Usage
 
@@ -189,15 +190,34 @@ pp <- plotly_build(p)
 
 # step 2: loop over pp$x$data, and change the font size of all text elements to 28
 pp$x$data <- lapply(pp$x$data, function(x){
- if(x$mode == "text"){
-       x$textfont$size <- 28
-       return(x)
-  }else{
-       return(x)
-  }})
+ if(x$mode == "text") x$textfont$size <- 28
+ return(x)
+})
 
 pp
 ```
 ![](inst/img/ex2-eventfontsize.png)
 
+### Ex3: Changing marker size
+The following example a simple example using markers and manipulates the size of the markers:
+
+
+```{r}
+dat <- data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10))
+ 
+p <- vistime(dat)
+
+# step 1: transform into a list
+pp <- plotly_build(p)
+
+# step 2: loop over pp$x$data, and change the marker size of all text elements to 50px
+pp$x$data <- lapply(pp$x$data, function(x){
+    if(x$mode == "markers") x$marker$size <- 50
+    return(x)
+})
+
+pp
+```
+
+![](inst/img/ex3-markersize.png)
 
