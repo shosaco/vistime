@@ -74,11 +74,11 @@ lineInterval | optional | integer| the distance of vertical lines (in **seconds*
 ### Ex. 1: Presidents
 ```{r}
 pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
-                  Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
-                  start = c("1789-03-29", "1797-02-03", "1801-02-03"),
-                  end = c("1797-02-03", "1801-02-03", "1809-02-03"),
-                  color = c('#cbb69d', '#603913', '#c69c6e'),
-                  fontcolor = c("black", "white", "black"))
+                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
+                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
+                   color = c('#cbb69d', '#603913', '#c69c6e'),
+                   fontcolor = c("black", "white", "black"))
                   
 vistime(pres, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
 ````
@@ -146,7 +146,7 @@ shinyApp(
 ## 7. Customization
 The function `plotly_build` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
-**The secret is to first create a simple Plotly example yourself, turning it into a list (using `plotly_build`) and exploring the resulting list regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly.**
+The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
 
 ### Ex1: Changing x-axis tick font size
 The following example creates the presidents example and manipulates the font size of the x axis ticks:
