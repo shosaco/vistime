@@ -1,4 +1,4 @@
-# 0.7.0 (dev)
+# 0.6.0.9000 (Github)
 - events and ranges that are in the same group are now plotted directly below each other (in the past, all ranges were plottet first, followed by all events). Groups are sorted in order of first appearance but all items of one group are plotted together.
 - remove leading and trailing whitespaces of events and groups before drawing
 

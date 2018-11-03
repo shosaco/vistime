@@ -1,6 +1,6 @@
 Package: vistime
 Title: Pretty Timeline Creation
-Version: 0.6.0
+Version: 0.6.0.9000
 Date: 2018-10-28
 Authors@R: person(
             "Sandro", "Raabe"
