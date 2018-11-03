@@ -1,15 +1,14 @@
+[![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 [![CRAN](http://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
 [![dev](https://img.shields.io/badge/dev-0.6.0.9000-yellow.svg)](commits/master)
 [![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
-
-<a href="https://www.paypal.me/shosaco/">
-  <img  style="float: right;" alt="Support via PayPal" src="https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg"/>
-</a>
 
 vistime - Pretty Timeline Creation
 =========
 
 Create interactive timelines or Gantt charts that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using 'plotly_build()', which transforms the plot into a mutable list.
+
+If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
