@@ -34,7 +34,7 @@ To install the package from CRAN (v0.6.0):
 ```{r}
 install.packages("vistime")
 ```
-To install the development version (v0.7.0, most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
+To install the development version (v0.6.0.9000, most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 ```{r}
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("shosaco/vistime")
