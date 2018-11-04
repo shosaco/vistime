@@ -21,7 +21,7 @@ If you find vistime useful, please consider supporting its development: <a href=
 5. [Examples](#5-examples)
    * [Ex. 1: Presidents](#ex-1-presidents)
    * [Ex. 2: Project Planning](#ex-2-project-planning)
-6. [Exporting](#6-exporting)
+6. [Exporting](#6-export-of-vistime-as-pdf-or-png)
 7. [Usage in Shiny apps](#7-usage-in-shiny-apps)
 8. [Customization](#8-customization)
    * [Ex1: Changing x-axis tick font size](#ex1-changing-x-axis-tick-font-size)
@@ -89,7 +89,7 @@ vistime(pres, events="Position", groups="Name", title="Presidents of the USA", l
 ![](inst/img/ex2.png)
 
 ### Ex. 2: Project Planning
-````{r}
+```{r}
 data <- read.csv(text="event,group,start,end,color
                        Phase 1,Project,2016-12-22,2016-12-23,#c8e6c9
                        Phase 2,Project,2016-12-23,2016-12-29,#a5d6a7
