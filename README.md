@@ -21,8 +21,9 @@ If you find vistime useful, please consider supporting its development: <a href=
 5. [Examples](#5-examples)
    * [Ex. 1: Presidents](#ex-1-presidents)
    * [Ex. 2: Project Planning](#ex-2-project-planning)
-6. [Usage in Shiny apps](#6-usage-in-shiny-apps)
-7. [Customization](#7-customization)
+6. [Exporting](#6-exporting)
+7. [Usage in Shiny apps](#7-usage-in-shiny-apps)
+8. [Customization](#8-customization)
    * [Ex1: Changing x-axis tick font size](#ex1-changing-x-axis-tick-font-size)
    * [Ex2: Changing events font size](#ex2-changing-events-font-size)
    * [Ex3: Changing marker size](#ex3-changing-marker-size)
@@ -47,7 +48,7 @@ devtools::install_github("shosaco/vistime")
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
               fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, 
               title = NULL, showLabels = TRUE, lineInterval = NULL)
-````
+```
 
 
 ## 3. Arguments
@@ -84,7 +85,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    fontcolor = c("black", "white", "black"))
                   
 vistime(pres, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
-````
+```
 ![](inst/img/ex2.png)
 
 ### Ex. 2: Project Planning
@@ -116,11 +117,22 @@ data <- read.csv(text="event,group,start,end,color
                        Group 2,Team 2,2016-12-28,2017-01-23,#C7E9C0")
                            
 vistime(data)
-````
+```
 
 ![](inst/img/ex3.png)
 
-## 6. Usage in Shiny apps
+## 6. Export of vistime as PDF or PNG
+
+Once created, you can use `plotly::export()` for saving your vistime chart as PDF, PNG or JPEG:
+
+```{r}
+chart <- vistime(pres, events="Position")
+export(chart, file = "presidents.pdf")
+```
+
+Note that export requires the `webshot` package and additional arguments like width or height can be used (`?webshot` for the details). `export` is slowly being deprecated and `orca` can be used instead (see `?orca` for more details).
+
+## 7. Usage in Shiny apps
 
 Since the result of any call to `vistime(...)` is a `Plotly` object, you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart:
 
@@ -146,7 +158,7 @@ shinyApp(
 )
 ```
 
-## 7. Customization
+## 8. Customization
 The function `plotly_build` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
 The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
