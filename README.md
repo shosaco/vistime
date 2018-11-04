@@ -130,7 +130,7 @@ chart <- vistime(pres, events="Position")
 export(chart, file = "presidents.pdf")
 ```
 
-Note that export requires the `webshot` package and additional arguments like width or height can be used (`?webshot` for the details). `export` is slowly being deprecated and `orca` can be used instead (see `?orca` for more details).
+Note that export requires the `webshot` package and additional arguments like width or height can be used (`?webshot` for the details).
 
 ## 7. Usage in Shiny apps
 
