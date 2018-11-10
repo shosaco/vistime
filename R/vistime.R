@@ -99,13 +99,13 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
 
-  # convert columns to character (except date columns)
-  if(nrow(data) > 1) data[,-which(names(data) %in% c("start", "end"))] <- as.data.frame(sapply(data[,-which(names(data) %in% c("start", "end"))] , as.character), stringsAsFactors=F)
-  data$start <- as.POSIXct(data$start);
-  data$end <- as.POSIXct(data$end)
-
   # fix missing ends for events
   if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
+
+  # convert columns to character (except date columns)
+  data$start <- as.POSIXct(data$start)
+  data$end <- as.POSIXct(data$end)
+  for(col in names(data)[!names(data) %in% c("start", "end")]) data[, col] <- as.character(data[, col])
 
   # remove leading and trailing whitespaces
   data$event <- gsub("^\\s+|\\s+$", "", data$event)
