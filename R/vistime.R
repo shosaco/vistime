@@ -99,9 +99,9 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
 
-  # sort out the classes
-  if(nrow(data) > 1){ data <- as.data.frame(sapply(data, as.character), stringsAsFactors=F) }
-  data$start <- as.POSIXct(data$start)
+  # convert columns to character (except date columns)
+  if(nrow(data) > 1) data[,-which(names(data) %in% c("start", "end"))] <- as.data.frame(sapply(data[,-which(names(data) %in% c("start", "end"))] , as.character), stringsAsFactors=F)
+  data$start <- as.POSIXct(data$start);
   data$end <- as.POSIXct(data$end)
 
   # fix missing ends for events

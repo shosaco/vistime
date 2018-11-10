@@ -1,6 +1,6 @@
 [![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 [![CRAN](http://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![dev](https://img.shields.io/badge/dev-0.6.0.9000-yellow.svg)](commits/master)
+[![dev](https://img.shields.io/badge/dev-0.6.0.9000-yellow.svg)]()
 [![Downloads](http://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 
 vistime - Pretty Timeline Creation
