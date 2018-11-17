@@ -204,10 +204,9 @@ p <- vistime(pres, events="Position", groups="Name", title="Presidents of the US
 pp <- plotly_build(p)
 
 # step 2: loop over pp$x$data, and change the font size of all text elements to 28
-pp$x$data <- lapply(pp$x$data, function(x){
- if(x$mode == "text") x$textfont$size <- 28
- return(x)
-})
+for(i in 1:length(pp$x$data)){
+    if(pp$x$data[[i]]$mode == "text") pp$x$data[[i]]$textfont$size <- 28
+}
 
 pp
 ```
@@ -226,10 +225,9 @@ p <- vistime(dat)
 pp <- plotly_build(p)
 
 # step 2: loop over pp$x$data, and change the marker size of all text elements to 50px
-pp$x$data <- lapply(pp$x$data, function(x){
-    if(x$mode == "markers") x$marker$size <- 50
-    return(x)
-})
+for(i in 1:length(pp$x$data)){
+    if(pp$x$data[[i]]$mode == "markers") pp$x$data[[i]]$marker$size <- 10
+}
 
 pp
 ```

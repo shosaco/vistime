@@ -35,11 +35,11 @@
 #' @examples
 #' # presidents and vice presidents
 #' pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
-#'                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
-#'                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
-#'                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
-#'                   color = c('#cbb69d', '#603913', '#c69c6e'),
-#'                   fontcolor = c("black", "white", "black"))
+#'                    Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
+#'                    start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+#'                    end = c("1797-02-03", "1801-02-03", "1809-02-03"),
+#'                    color = c('#cbb69d', '#603913', '#c69c6e'),
+#'                    fontcolor = c("black", "white", "black"))
 #'
 #' vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 #'
@@ -71,6 +71,30 @@
 #'                        T82.7,Meetings,2019-01-15,2019-01-15,#e8a735")
 #'
 #' vistime(data)
+#'
+#' \dontrun{
+#' # ------ It is possible to change all attributes of the timeline using plotly_build(), which generates a list which can be inspected using str ------
+#' p <- vistime(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10)))
+#' pp <- plotly_build(p) # transform into a list
+#'
+#' # Example 1: change axis font size:
+#' pp$x$layout$xaxis$tickfont <- list(size = 28)
+#' pp
+#'
+#' # Example 2:Changing events font size
+#' for(i in 1:length(pp$x$data)){
+#'   if(pp$x$data[[i]]$mode == "text") pp$x$data[[i]]$textfont$size <- 28
+#' }
+#' pp
+#'
+#' # Example 3: change marker size
+#' # loop over pp$x$data, and change the marker size of all text elements to 50px
+#' for(i in 1:length(pp$x$data)){
+#'   if(pp$x$data[[i]]$mode == "markers") pp$x$data[[i]]$marker$size <- 40
+#' }
+#' pp
+#' }
+
 vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL, showLabels = TRUE, lineInterval=NULL, background_lines = 11){
   # error checking
   if(class(try(as.data.frame(data), silent=T))[1] == "try-error"){ stop(paste("Expected an input data frame, but encountered", class(data)[1]))

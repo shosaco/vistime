@@ -98,6 +98,29 @@ data <- read.csv(text="event,group,start,end,color
                        T82.7,Meetings,2019-01-15,2019-01-15,#e8a735")
 
 vistime(data)
+
+\dontrun{
+# ------ It is possible to change all attributes of the timeline using `plotly_build()`, which generates a list which can be inspected using `str` ------
+p <- vistime(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10)))
+pp <- plotly_build(p) # transform into a list
+
+# Example 1: change axis font size:
+pp$x$layout$xaxis$tickfont <- list(size = 28)
+pp
+
+# Example 2:Changing events font size
+for(i in 1:length(pp$x$data)){
+  if(pp$x$data[[i]]$mode == "text") pp$x$data[[i]]$textfont$size <- 28
+}
+pp
+
+# Example 3: change marker size
+# loop over pp$x$data, and change the marker size of all text elements to 50px
+for(i in 1:length(pp$x$data)){
+  if(pp$x$data[[i]]$mode == "markers") pp$x$data[[i]]$marker$size <- 10
+}
+pp
+}
 }
 \author{
 Sandro Raabe \email{shosaco_nospam@hotmail.com}
