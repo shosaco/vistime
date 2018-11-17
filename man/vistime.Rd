@@ -12,7 +12,7 @@ vistime(data, events = "event", start = "start", end = "end",
   showLabels = TRUE, lineInterval = NULL)
 }
 \arguments{
-\item{data}{(required) data.frame that contains the data to be visualised}
+\item{data}{(required) \code{data.frame} that contains the data to be visualised}
 
 \item{events}{(optional) the column name in \code{data} that contains event
 names. Default: \emph{event}.}
@@ -52,8 +52,7 @@ visible. Default: \code{TRUE}.}
 total data range).}
 }
 \value{
-\code{vistime} returns an object of class \code{plotly} and
-  \code{htmlwidget}.
+\code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 }
 \description{
 Create interactive and offline timelines using the \code{plotly.js} framework.
