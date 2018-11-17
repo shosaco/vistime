@@ -47,6 +47,8 @@ Default: \code{NULL}.}
 \item{showLabels}{(optional, boolean) choose whether or not event labels shall be
 visible. Default: \code{TRUE}.}
 
+\item{lineInterval}{deprecated, use argument background_lines instead.}
+
 \item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10).
 total data range).}
 }
@@ -62,11 +64,11 @@ Simplest dataframe can have columns `event`, `start`, `end`.
 \examples{
 # presidents and vice presidents
 pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
-                  Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
-                  start = c("1789-03-29", "1797-02-03", "1801-02-03"),
-                  end = c("1797-02-03", "1801-02-03", "1809-02-03"),
-                  color = c('#cbb69d', '#603913', '#c69c6e'),
-                  fontcolor = c("black", "white", "black"))
+                   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
+                   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+                   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
+                   color = c('#cbb69d', '#603913', '#c69c6e'),
+                   fontcolor = c("black", "white", "black"))
 
 vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 
@@ -100,7 +102,8 @@ data <- read.csv(text="event,group,start,end,color
 vistime(data)
 
 \dontrun{
-# ------ It is possible to change all attributes of the timeline using `plotly_build()`, which generates a list which can be inspected using `str` ------
+# ------ It is possible to change all attributes of the timeline using plotly_build(),
+# ------ which generates a list which can be inspected using str
 p <- vistime(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10)))
 pp <- plotly_build(p) # transform into a list
 
@@ -117,7 +120,7 @@ pp
 # Example 3: change marker size
 # loop over pp$x$data, and change the marker size of all text elements to 50px
 for(i in 1:length(pp$x$data)){
-  if(pp$x$data[[i]]$mode == "markers") pp$x$data[[i]]$marker$size <- 10
+  if(pp$x$data[[i]]$mode == "markers") pp$x$data[[i]]$marker$size <- 40
 }
 pp
 }

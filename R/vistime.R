@@ -27,6 +27,7 @@
 #'   Default: \code{NULL}.
 #' @param showLabels (optional, boolean) choose whether or not event labels shall be
 #'   visible. Default: \code{TRUE}.
+#' @param lineInterval deprecated, use argument background_lines instead.
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10).
 #'   total data range).
 #' @import plotly
@@ -73,7 +74,8 @@
 #' vistime(data)
 #'
 #' \dontrun{
-#' # ------ It is possible to change all attributes of the timeline using plotly_build(), which generates a list which can be inspected using str ------
+#' # ------ It is possible to change all attributes of the timeline using plotly_build(),
+#' # ------ which generates a list which can be inspected using str
 #' p <- vistime(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10)))
 #' pp <- plotly_build(p) # transform into a list
 #'
@@ -96,39 +98,27 @@
 #' }
 
 vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL, showLabels = TRUE, lineInterval=NULL, background_lines = 11){
-  # error checking
-  if(class(try(as.data.frame(data), silent=T))[1] == "try-error"){ stop(paste("Expected an input data frame, but encountered", class(data)[1]))
-  }else data <- data.frame(data, stringsAsFactors = F)
-  if(! start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
-  if(sum(!is.na(data[, start])) < 1) stop(paste("error in start column: Please provide at least one point in time"))
-  if(class(try(as.POSIXct(data[, start]), silent=T))[1] == "try-error") stop(paste("date format error: please provide full dates"))
-  if(! events %in% names(data)) stop("Please provide the name of the events column in parameter 'events'")
-  if(! groups %in% names(data)) data$group <- "" else if(any(is.na(data[, groups]))) stop("if using groups argument, all groups must be set to a non-NA value")
-  if(! end %in% names(data) | end==start) data$end <- data[, start]
-  if(!is.null(linewidth) & !class(linewidth) %in% c("integer", "numeric")) stop("linewidth must be a number")
-  if(!is.null(title) & !class(title) %in% c("character", "numeric", "integer")) stop("Title must be a String")
-  if(is.null(showLabels) || !(showLabels %in% c(TRUE, FALSE))) stop("showLabels must be a logical value.")
-  # if(!is.null(lineInterval) & !class(lineInterval) %in% c("integer", "numeric")) stop("lineInterval must be an integer (seconds).")
-  if(!is.null(lineInterval)) warning("lineInterval is deprecated. Use background_lines instead for number of background sections to draw. Will divide timeline into 10 sections by default.")
-  if(!class(background_lines) %in% c("integer", "numeric")) stop("background_lines must be an integer.")
+
+  data <- check_for_errors(data, start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines)
 
   # set column names
   if(events == groups){
     data$group <- data[, groups]
   }else{
-    names(data)[names(data)==groups] <- "group"
+    names(data)[names(data) == groups] <- "group"
   }
   names(data)[names(data)==start] <- "start"
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
 
+  # fix missing ends for events
+  if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
+
   # convert columns to character (except date columns)
   data$start <- as.POSIXct(data$start)
   data$end <- as.POSIXct(data$end)
-  for(col in names(data)[!names(data) %in% c("start", "end")]) data[, col] <- as.character(data[, col])
 
-  # fix missing ends for events
-  if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
+  for(col in names(data)[!names(data) %in% c("start", "end")]) data[, col] <- as.character(data[, col])
 
   # remove leading and trailing whitespaces
   data$event <- gsub("^\\s+|\\s+$", "", data$event)
@@ -142,67 +132,12 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                            paste0("<b>",data$event,": ",data$start,"</b>"),
                            paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
   }
-  # set the colors
-  if(colors %in% names(data)){
-    names(data)[names(data)==colors] <- "col"
-  }else{
-    palette <- "Set3"
-    data$col <- rep(RColorBrewer::brewer.pal(min(11, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
-  }
 
-  if(fontcolors %in% names(data)){
-    names(data)[names(data)==fontcolors] <- "fontcol"
-  }else{
-    data$fontcol <- "black"
-  }
+  data <- set_colors(data, colors, fontcolors)
 
-  ########################################################################
-  #  1. Distribute groups into subplots (top to bottom)                ###
-  #  for technical reasons, events and ranges need different subplots  ###
-  ########################################################################
+  data <- determine_subplots(data)
 
-  events <- data$start == data$end
-  ranges <- !events
-
-  # gather groups together, in order of appearance
-  data <- data[order(as.integer(factor(paste0(data$group, "zijheui"), levels = unique(paste0(data$group, "zijheui"))))),] # zijheui workaround in case groups are integers
-
-  data$subplot <- paste0(data$group, ifelse(data$start == data$end, "EVENT", "RANGE"))
-  data$subplot <- as.integer(factor(data$subplot, levels = unique(data$subplot)))
-
-  ########################################################################
-  #  2. set y values                                                ######
-  ########################################################################
-  data <- data[with(data, order(subplot, start)),] # order by "start"
-  row.names(data) <- 1:nrow(data)
-
-  for(sp in unique(data$subplot)){
-
-    # subset data for this group
-    thisData <- subset(data, subplot == sp)
-    thisData$y <- 0
-
-    # for each event and for each y, check if any range already drawn on y cuts this range -> if yes, check next y
-    for(row in (1:nrow(thisData))){
-      toAdd <- thisData[row, c("start", "end", "y")]
-
-      for(y in 1:nrow(thisData)){
-        thisData[row, "y"] <- y # naive guess
-        # Events
-        if(toAdd$start == toAdd$end){
-          # set on new level if this y is occupied
-          if(all(toAdd$start != thisData[-row,"start"][thisData[-row,"y"] == y])) break; # this y is free, end of search
-        }else{
-          # Ranges, use that already sorted
-          if(all(toAdd$start >= thisData[-row,"end"][thisData[-row,"y"] == y])) break; # new start >= all other starts on this level, end search
-        }
-      }
-    }
-    data[data$subplot == sp, "y"] <- thisData$y
-  }
-
-  data$y <- as.numeric(data$y) # to ensure plotting goes smoothly
-  data$y[is.na(data$y)] <- max(data$y[!is.na(data$y)]) + 1 # just in case
+  data <- set_y_values(data)
 
   ###########################################################################
   #  3. cut long event names                                          #######
