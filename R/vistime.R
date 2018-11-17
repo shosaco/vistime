@@ -111,14 +111,14 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
 
-  # fix missing ends for events
-  if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
-
-  # convert columns to character (except date columns)
   data$start <- as.POSIXct(data$start)
   data$end <- as.POSIXct(data$end)
 
+  # convert to character if factor
   for(col in names(data)[!names(data) %in% c("start", "end")]) data[, col] <- as.character(data[, col])
+
+  # sort out missing end dates
+  if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
 
   # remove leading and trailing whitespaces
   data$event <- gsub("^\\s+|\\s+$", "", data$event)
@@ -149,10 +149,6 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
                        ifelse(nchar(data$event) > 10, paste0(substr(data$event, 1, 13), "..."), data$event),
                        data$event)
 
-  #############################################################################
-  #  4. set lineInterval for vertical lines                               #####
-  #############################################################################
-  # lineInterval <- heuristic_lineInterval(data, lineInterval)
 
   #############################################################################
   #  5. Plots for the ranges  #####
