@@ -9,7 +9,7 @@
 vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
   tooltips = "tooltip", linewidth = NULL, title = NULL,
-  showLabels = TRUE, lineInterval = NULL)
+  showLabels = TRUE, lineInterval = NULL, background_lines = 11)
 }
 \arguments{
 \item{data}{(required) \code{data.frame} that contains the data to be visualised}
@@ -47,8 +47,7 @@ Default: \code{NULL}.}
 \item{showLabels}{(optional, boolean) choose whether or not event labels shall be
 visible. Default: \code{TRUE}.}
 
-\item{lineInterval}{(optional, integer) the distance of vertical lines (in
-\emph{seconds}) to demonstrate structure (default: heuristic value, depending on
+\item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10).
 total data range).}
 }
 \value{
@@ -69,8 +68,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                   color = c('#cbb69d', '#603913', '#c69c6e'),
                   fontcolor = c("black", "white", "black"))
 
-vistime(pres, events="Position", groups="Name", title="Presidents of the USA",
-              lineInterval = 60*60*24*365*5)
+vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 
 # more complex and colorful example
 data <- read.csv(text="event,group,start,end,color

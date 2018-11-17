@@ -27,8 +27,7 @@
 #'   Default: \code{NULL}.
 #' @param showLabels (optional, boolean) choose whether or not event labels shall be
 #'   visible. Default: \code{TRUE}.
-#' @param lineInterval (optional, integer) the distance of vertical lines (in
-#'   \emph{seconds}) to demonstrate structure (default: heuristic value, depending on
+#' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10).
 #'   total data range).
 #' @import plotly
 #' @export
@@ -42,8 +41,7 @@
 #'                   color = c('#cbb69d', '#603913', '#c69c6e'),
 #'                   fontcolor = c("black", "white", "black"))
 #'
-#' vistime(pres, events="Position", groups="Name", title="Presidents of the USA",
-#'               lineInterval = 60*60*24*365*5)
+#' vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 #'
 #' # more complex and colorful example
 #' data <- read.csv(text="event,group,start,end,color
@@ -73,7 +71,7 @@
 #'                        T82.7,Meetings,2019-01-15,2019-01-15,#e8a735")
 #'
 #' vistime(data)
-vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL, showLabels = TRUE, lineInterval=NULL){
+vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL, showLabels = TRUE, lineInterval=NULL, background_lines = 11){
   # error checking
   if(class(try(as.data.frame(data), silent=T))[1] == "try-error"){ stop(paste("Expected an input data frame, but encountered", class(data)[1]))
   }else data <- data.frame(data, stringsAsFactors = F)
@@ -86,7 +84,9 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   if(!is.null(linewidth) & !class(linewidth) %in% c("integer", "numeric")) stop("linewidth must be a number")
   if(!is.null(title) & !class(title) %in% c("character", "numeric", "integer")) stop("Title must be a String")
   if(is.null(showLabels) || !(showLabels %in% c(TRUE, FALSE))) stop("showLabels must be a logical value.")
-  if(!is.null(lineInterval) & !class(lineInterval) %in% c("integer", "numeric")) stop("lineInterval must be an integer (seconds).")
+  # if(!is.null(lineInterval) & !class(lineInterval) %in% c("integer", "numeric")) stop("lineInterval must be an integer (seconds).")
+  if(!is.null(lineInterval)) warning("lineInterval is deprecated. Use background_lines instead for number of background sections to draw. Will divide timeline into 10 sections by default.")
+  if(!class(background_lines) %in% c("integer", "numeric")) stop("background_lines must be an integer.")
 
   # set column names
   if(events == groups){
@@ -98,13 +98,13 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
 
-  # fix missing ends for events
-  if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
-
   # convert columns to character (except date columns)
   data$start <- as.POSIXct(data$start)
   data$end <- as.POSIXct(data$end)
   for(col in names(data)[!names(data) %in% c("start", "end")]) data[, col] <- as.character(data[, col])
+
+  # fix missing ends for events
+  if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
 
   # remove leading and trailing whitespaces
   data$event <- gsub("^\\s+|\\s+$", "", data$event)
@@ -193,7 +193,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
   #############################################################################
   #  4. set lineInterval for vertical lines                               #####
   #############################################################################
-  lineInterval <- heuristic_lineInterval(data, lineInterval)
+  # lineInterval <- heuristic_lineInterval(data, lineInterval)
 
   #############################################################################
   #  5. Plots for the ranges  #####
@@ -212,7 +212,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     p <- plot_ly(data, type = "scatter", mode="lines")
 
     # 1. add vertical line for each year/day
-    for(day in seq(min(data$start), max(data$end), lineInterval)){
+    for(day in seq(min(data$start), max(data$end), length.out = background_lines + 1)){
       p <- add_trace(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines",
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }
@@ -274,7 +274,7 @@ vistime <- function(data, events="event", start="start", end="end", groups="grou
     p <- plot_ly(thisData, type="scatter", mode="markers")
 
     # 1. add vertical line for each year/day
-    for(day in seq(min(data$start), max(data$end), lineInterval)){
+    for(day in seq(min(data$start), max(data$end),length.out = background_lines + 1)){
       p <- add_lines(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY),
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }

@@ -66,7 +66,7 @@ tooltips | optional | character | the column name in data that contains the mous
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
 showLabels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
-lineInterval | optional | integer| the distance of vertical lines (in **seconds**) to improve layout. Default: heuristic value, depending on total data range.
+background_lines | optional | integer | the number of vertical lines to draw in the background to demonstrate structure. Default: 10.
 
 ## 4. Value
 
@@ -84,7 +84,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
                   
-vistime(pres, events="Position", groups="Name", title="Presidents of the USA", lineInterval = 60*60*24*365*5)
+vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 ```
 ![](inst/img/ex2.png)
 
