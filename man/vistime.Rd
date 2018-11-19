@@ -49,8 +49,7 @@ visible. Default: \code{TRUE}.}
 
 \item{lineInterval}{deprecated, use argument background_lines instead.}
 
-\item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10).
-total data range).}
+\item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.}
 }
 \value{
 \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.

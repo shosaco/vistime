@@ -28,8 +28,7 @@
 #' @param showLabels (optional, boolean) choose whether or not event labels shall be
 #'   visible. Default: \code{TRUE}.
 #' @param lineInterval deprecated, use argument background_lines instead.
-#' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10).
-#'   total data range).
+#' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.
 #' @import plotly
 #' @export
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
