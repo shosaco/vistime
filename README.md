@@ -193,9 +193,7 @@ We have several y-axes, that's why we need to change the font size in all of the
 ```{r}
 # loop through the yaxes and change the font size for each element:
 for(i in grep("yaxis*", names(pp$x$layout))){
-     yax <- pp$x$layout[[i]]
-     yax$tickfont <- list(size = 28)
-     pp$x$layout[[i]] <- yax
+     pp$x$layout[[i]]$tickfont <- list(size = 28)
 }
 
 pp
