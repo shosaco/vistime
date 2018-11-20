@@ -24,9 +24,10 @@ If you find vistime useful, please consider supporting its development: <a href=
 6. [Exporting](#6-export-of-vistime-as-pdf-or-png)
 7. [Usage in Shiny apps](#7-usage-in-shiny-apps)
 8. [Customization](#8-customization)
-   * [Ex1: Changing x-axis tick font size](#ex1-changing-x-axis-tick-font-size)
-   * [Ex2: Changing events font size](#ex2-changing-events-font-size)
-   * [Ex3: Changing marker size](#ex3-changing-marker-size)
+   * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
+   * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
+   * [Changing events font size](#changing-events-font-size)
+   * [Changing marker size](#changing-marker-size)
 
 ## 1. Installation
 
@@ -163,7 +164,7 @@ The function `plotly_build` turns your plot into a list. You can then use the fu
 
 The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
 
-### Ex1: Changing x-axis tick font size
+### Changing x-axis tick font size
 The following example creates the presidents example and manipulates the font size of the x axis ticks:
 
 ```{r}
@@ -186,7 +187,22 @@ pp
 ```
 ![](inst/img/ex2-tickfontsize.png)
 
-### Ex2: Changing events font size
+### Changing y-axis tick font size
+We have several y-axes, that's why we need to change the font size in all of them:
+
+```{r}
+# loop through the yaxes and change the font size for each element:
+for(i in grep("yaxis*", names(pp$x$layout))){
+     yax <- pp$x$layout[[i]]
+     yax$tickfont <- list(size = 28)
+     pp$x$layout[[i]] <- yax
+}
+
+pp
+```
+![](inst/img/ex2-yfontsize.png)
+
+### Changing events font size
 The following example creates the presidents example and manipulates the font size of the events:
 
 
@@ -212,7 +228,7 @@ pp
 ```
 ![](inst/img/ex2-eventfontsize.png)
 
-### Ex3: Changing marker size
+### Changing marker size
 The following example a simple example using markers and manipulates the size of the markers:
 
 
