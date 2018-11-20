@@ -111,11 +111,7 @@ pp$x$layout$xaxis$tickfont <- list(size = 28)
 pp
 
 # Example 2: change y axis font size (several y-axes, therefore we need a loop):
-for(i in grep("yaxis*", names(pp$x$layout))){
-     yax <- pp$x$layout[[i]]
-     yax$tickfont <- list(size = 28)
-     pp$x$layout[[i]] <- yax
-}
+for(i in grep("yaxis*", names(pp$x$layout))) pp$x$layout[[i]]$tickfont <- list(size = 28)
 pp
 
 # Example 3: Changing events font size
