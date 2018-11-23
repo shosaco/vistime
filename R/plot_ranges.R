@@ -1,6 +1,6 @@
 #' Plot the ranges of a data frame
 #'
-#' @param data the data frame to be plotted
+#' @param data_orig the data frame to be plotted (ranges + events)
 #' @param linewidth the width in pixel for the range lines
 #' @param showLabels boolean, show labels on events or not
 #' @param background_lines number of grey background lines to draw
@@ -15,9 +15,9 @@
 #'                        subplot = 1, y = 1:2, labelPos = "center", label = 1:2),
 #'             linewidth = 10, showLabels = TRUE, background_lines = 11)
 #' }
-plot_ranges <- function(data, linewidth, showLabels, background_lines) {
+plot_ranges <- function(data_orig, linewidth, showLabels, background_lines) {
 
-  data <- data[data$start != data$end, ]
+  data <- data_orig[data_orig$start != data_orig$end, ]
   rangeNumbers <-  unique(data$subplot)
 
   linewidth <- ifelse(is.null(linewidth), max(-3*(max(data$subplot) + max(data$y))+60, 20), linewidth)
@@ -32,7 +32,7 @@ plot_ranges <- function(data, linewidth, showLabels, background_lines) {
     p <- plot_ly(data, type = "scatter", mode="lines")
 
     # 1. add vertical line for each year/day
-    for(day in seq(min(data$start), max(data$end), length.out = background_lines + 1)){
+    for(day in seq(min(data_orig$start), max(data_orig$end), length.out = background_lines + 1)){
       p <- add_trace(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines",
                      line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
     }
