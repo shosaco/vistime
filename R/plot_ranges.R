@@ -1,0 +1,78 @@
+#' Plot the ranges of a data frame
+#'
+#' @param data the data frame to be plotted
+#' @param linewidth the width in pixel for the range lines
+#' @param showLabels boolean, show labels on events or not
+#' @param background_lines number of grey background lines to draw
+#'
+#' @return a list containing the plots for the groups in data
+#'
+#' @examples
+#' \dontrun{
+#' plot_ranges(data.frame(event = 1:2, start = as.POSIXct(c(Sys.Date(), Sys.Date() + 10)),
+#'                        end = as.POSIXct(c(Sys.Date()+10, Sys.Date() + 15)),
+#'                        group = "", tooltip = "", col = "green", fontcol = "black",
+#'                        subplot = 1, y = 1:2, labelPos = "center", label = 1:2),
+#'             linewidth = 10, showLabels = TRUE, background_lines = 11)
+#' }
+plot_ranges <- function(data, linewidth, showLabels, background_lines) {
+
+  data <- data[data$start != data$end, ]
+  rangeNumbers <-  unique(data$subplot)
+
+  linewidth <- ifelse(is.null(linewidth), max(-3*(max(data$subplot) + max(data$y))+60, 20), linewidth)
+
+  ranges <- lapply(rangeNumbers, function(sp) {
+    next.y <- 1
+
+    # subset data for this group
+    thisData <- data[data$subplot == sp,]
+    maxY <- max(thisData$y) + 1
+
+    p <- plot_ly(data, type = "scatter", mode="lines")
+
+    # 1. add vertical line for each year/day
+    for(day in seq(min(data$start), max(data$end), length.out = background_lines + 1)){
+      p <- add_trace(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines",
+                     line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
+    }
+
+
+    # draw ranges piecewise
+    for(i in (1:nrow(thisData))){
+      toAdd <- thisData[i,]
+
+      p <- add_trace(p,
+                     x = c(toAdd$start, toAdd$end),  # von, bis
+                     y = toAdd$y,
+                     line = list(color = toAdd$col, width = linewidth),
+                     showlegend = F,
+                     hoverinfo="text",
+                     text=toAdd$tooltip)
+      # add annotations or not
+      if(showLabels){
+        p <- add_text(p, x = toAdd$start + (toAdd$end-toAdd$start)/2,  # in der Mitte
+                      y = toAdd$y,
+                      textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
+                      textposition = "center",
+                      showlegend=F,
+                      text=toAdd$label,
+                      hoverinfo="none")
+      }
+    }
+
+    return(p %>% layout(hovermode = 'closest',
+                        # Axis options:
+                        # 1. Remove gridlines
+                        # 2. Customize y-axis tick labels and show group names instead of numbers
+                        xaxis = list(showgrid = F, title = ''),
+                        yaxis = list(showgrid = F, title = '',
+                                     tickmode = "array",
+                                     tickvals = maxY/2, # the only tick shall be in the center of the axis
+                                     ticktext = as.character(toAdd$group[1])) # text for the tick (group name)
+    ))
+  })
+  names(ranges) <- rangeNumbers # preserve order of subplots
+
+  return(ranges)
+}

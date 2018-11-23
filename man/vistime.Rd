@@ -55,10 +55,10 @@ visible. Default: \code{TRUE}.}
 \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 }
 \description{
-Create interactive and offline timelines using the \code{plotly.js} framework.
+Visualize interactive timelines offline.
 
 Provide a data frame with event data to create a visual timeline plot.
-Simplest dataframe can have columns `event`, `start`, `end`.
+Simplest drawable dataframe can have columns `event` and `start`.
 }
 \examples{
 # presidents and vice presidents

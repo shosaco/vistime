@@ -8,15 +8,15 @@
 #' @return data with additional numeric column "subplot", reordered by subplot column.
 #' @examples
 #' \dontrun{
-#' determine_subplots(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10),
+#' set_subplots(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10),
 #'                    end = c(Sys.Date(), Sys.Date() + 10), group = ""))
-#' determine_subplots(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10),
+#' set_subplots(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10),
 #'                    end = c(Sys.Date(), Sys.Date() + 10), group = 1:2))
-#' determine_subplots(data.frame(event = 1:3, start = c(Sys.Date(), Sys.Date() + 20,
+#' set_subplots(data.frame(event = 1:3, start = c(Sys.Date(), Sys.Date() + 20,
 #'                    Sys.Date()), end = c(Sys.Date()+10, Sys.Date()+20, Sys.Date()),
 #'                    group = c(1,2,1)))
 #' }
-determine_subplots <- function(data){
+set_subplots <- function(data){
 
   # gather groups together, in order of appearance
   data <- data[order(as.integer(factor(paste0(data$group, "zijheui"), levels = unique(paste0(data$group, "zijheui"))))),] # zijheui workaround in case groups are integers

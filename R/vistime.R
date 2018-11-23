@@ -1,7 +1,7 @@
 #' Create a Timeline
 #'
 #' Provide a data frame with event data to create a visual timeline plot.
-#' Simplest dataframe can have columns `event`, `start`, `end`.
+#' Simplest drawable dataframe can have columns `event` and `start`.
 #'
 #' @param data (required) \code{data.frame} that contains the data to be visualised
 #' @param events (optional) the column name in \code{data} that contains event
@@ -102,184 +102,26 @@
 
 vistime <- function(data, events="event", start="start", end="end", groups="group", colors="color", fontcolors="fontcolor", tooltips="tooltip", linewidth=NULL, title=NULL, showLabels = TRUE, lineInterval=NULL, background_lines = 11){
 
-  data <- check_for_errors(data, start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines)
-
-  # set column names
-  if(events == groups){
-    data$group <- data[, groups]
-  }else{
-    names(data)[names(data) == groups] <- "group"
-  }
-  names(data)[names(data)==start] <- "start"
-  names(data)[names(data)==end] <- "end"
-  names(data)[names(data)==events] <- "event"
-
-  data$start <- as.POSIXct(data$start)
-  data$end <- as.POSIXct(data$end)
-
-  # convert to character if factor
-  for(col in names(data)[!names(data) %in% c("start", "end")]) data[, col] <- as.character(data[, col])
-
-  # sort out missing end dates
-  if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
-
-  # remove leading and trailing whitespaces
-  data$event <- gsub("^\\s+|\\s+$", "", data$event)
-  data$group <- gsub("^\\s+|\\s+$", "", data$group)
-
-  # set the tooltips
-  if(tooltips %in% names(data)){
-    names(data)[names(data) == tooltips] <- "tooltip"
-  }else{
-    data$tooltip <- ifelse(data$start == data$end,
-                           paste0("<b>",data$event,": ",data$start,"</b>"),
-                           paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
-  }
-
+  data <- validate_input(data, start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines)
+  data <- fix_columns(data, events, start, end, groups, tooltips)
   data <- set_colors(data, colors, fontcolors)
-
-  data <- determine_subplots(data)
-
+  data <- set_subplots(data)
   data <- set_y_values(data)
 
-  ###########################################################################
-  #  3. cut long event names                                          #######
-  ###########################################################################
-
-  data$labelPos <- "center"
-
-  data$label <- ifelse(data$start == data$end,
-                       ifelse(nchar(data$event) > 10, paste0(substr(data$event, 1, 13), "..."), data$event),
-                       data$event)
-
-
-  #############################################################################
-  #  5. Plots for the ranges  #####
-  #
-  #############################################################################
-  rangeNumbers <- unique(subset(data, start != end)$subplot)
-  linewidth <- ifelse(is.null(linewidth), max(-3*(max(data$subplot) + max(data$y))+60, 20), linewidth)
-
-  ranges <- lapply(rangeNumbers, function(sp) {
-    next.y <- 1
-
-    # subset data for this group
-    thisData <- subset(data, start != end & subplot == sp)
-    maxY <- max(thisData$y) + 1
-
-    p <- plot_ly(data, type = "scatter", mode="lines")
-
-    # 1. add vertical line for each year/day
-    for(day in seq(min(data$start), max(data$end), length.out = background_lines + 1)){
-      p <- add_trace(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY), mode = "lines",
-                     line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
-    }
-
-
-    # draw ranges piecewise
-    for(i in (1:nrow(thisData))){
-      toAdd <- thisData[i,]
-
-      p <- add_trace(p,
-                     x = c(toAdd$start, toAdd$end),  # von, bis
-                     y = toAdd$y,
-                     line = list(color = toAdd$col, width = linewidth),
-                     showlegend = F,
-                     hoverinfo="text",
-                     text=toAdd$tooltip)
-      # add annotations or not
-      if(showLabels){
-        p <- add_text(p, x = toAdd$start + (toAdd$end-toAdd$start)/2,  # in der Mitte
-                  y = toAdd$y,
-                  textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
-                  textposition = "center",
-                  showlegend=F,
-                  text=toAdd$label,
-                  hoverinfo="none")
-      }
-    }
-
-    return(p %>% layout(hovermode = 'closest',
-                        # Axis options:
-                        # 1. Remove gridlines
-                        # 2. Customize y-axis tick labels and show group names instead of numbers
-                        xaxis = list(showgrid = F, title = ''),
-                        yaxis = list(showgrid = F, title = '',
-                                     tickmode = "array",
-                                     tickvals = maxY/2, # the only tick shall be in the center of the axis
-                                     ticktext = as.character(toAdd$group[1])) # text for the tick (group name)
-                        ))
-  })
-  names(ranges) <- rangeNumbers # preserve order of subplots
-
-
-  #######################################################################
-  #  6. Plots for the events                                       ######
-  #
-  #######################################################################
-
-  eventNumbers <- unique(subset(data, start == end)$subplot)
-
-  events <- lapply(eventNumbers, function(sp) {
-    # subset data for this Category
-    thisData <- subset(data, start == end & subplot == sp)
-    maxY <- max(thisData$y) + 1
-
-    # alternate y positions for event labels
-    thisData$labelY <- thisData$y + 0.5 * rep_len(c(-1, 1), nrow(thisData))
-
-    # add vertical lines to plot
-    p <- plot_ly(thisData, type="scatter", mode="markers")
-
-    # 1. add vertical line for each year/day
-    for(day in seq(min(data$start), max(data$end),length.out = background_lines + 1)){
-      p <- add_lines(p, x = as.POSIXct(day, origin="1970-01-01"), y= c(0, maxY),
-                     line=list(color = toRGB("grey90")), showlegend=F, hoverinfo="none")
-    }
-
-    # add all the markers for this Category
-    p <- add_markers(p, x=~start, y=~y,
-                     marker = list(color = ~col, size=15, symbol="circle",
-                                   line = list(color = 'black', width = 1)),
-                     showlegend = F, hoverinfo="text", text=~tooltip)
-
-    # add annotations or not
-    if(showLabels){
-      p <- add_text(p, x=~start, y=~labelY, textfont = list(family = "Arial", size = 14, color = ~toRGB(fontcol)),
-                    textposition = ~labelPos, showlegend=F, text = ~label, hoverinfo="none")
-    }
-
-    # fix layout
-    p <-  layout(p, hovermode = 'closest',
-                 xaxis = list(showgrid = F, title=''),
-                 yaxis = list(showgrid = F, title = '',
-                              tickmode = "array",
-                              tickvals = maxY/2, # the only tick shall be in the center of the axis
-                              ticktext = as.character(thisData$group[1])) # text for the tick (group name)
-                 )
-  })
-  names(events) <- eventNumbers # preserve order of subplots
-
-  #######################################################################
-  #  7. plot everything                                            ######
-  #
-  #######################################################################
-
-  # determine heights of the subplots
-  heightsAbsolute <- sapply(c(rangeNumbers, eventNumbers), function(sp){ max(data$y[data$subplot == sp])} )
-  heightsRelative <- heightsAbsolute/sum(heightsAbsolute)
-
-  # gather all plots in a plotList
+  ranges <- plot_ranges(data, linewidth, showLabels, background_lines)
+  events <- plot_events(data, showLabels, background_lines)
   plotList <- append(ranges, events)
 
   # sort plotList according to subplots, such that ranges and events stand together
   plotList <- plotList[order(names(plotList))]
 
-  total <- subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative) %>%
-              layout(title = title,
-                     margin = list(l = max(nchar(data$group)) * 8))
+  # determine heights of the subplots
+  heightsAbsolute <- sapply(as.integer(c(names(ranges), names(events))),
+                            function(sp){ max(data$y[data$subplot == sp])} )
+  heightsRelative <- heightsAbsolute/sum(heightsAbsolute)
+
+  # glue everything together into one plot
+  total <- plot_glued(data, plotList, title, heightsRelative)
 
   return(total)
-
-
 }

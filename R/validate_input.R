@@ -1,4 +1,26 @@
-check_for_errors <- function(data, start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines){
+#' Validate input data
+#'
+#' @param data the data
+#' @param start start dates
+#' @param end end dates
+#' @param events event column name
+#' @param groups group column name
+#' @param linewidth width of range lines
+#' @param title plot title
+#' @param showLabels boolean
+#' @param lineInterval deprecated, replaced by background_lines
+#' @param background_lines interval of grey background lines
+#'
+#' @return the data frame with possibly new or renamed columns, or an error
+#'
+#' @examples
+#' \dontrun{
+#' validate_input(data.frame(event = 1:2, start = c(Sys.Date(), Sys.Date() + 1)),
+#'                events="event", start="start", end="end", groups="group",
+#'                linewidth=NULL, title=NULL, showLabels = TRUE,
+#'                lineInterval=NULL, background_lines = 11)
+#' }
+validate_input <- function(data, start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines){
   if (class(try(as.data.frame(data), silent = T))[1] == "try-error") stop(paste("Expected an input data frame, but encountered", class(data)[1]))
   data <- as.data.frame(data, stringsAsFactors = F)
   if (!start %in% names(data)) stop("Please provide the name of the start date column in parameter 'start'")
@@ -10,14 +32,6 @@ check_for_errors <- function(data, start, end, events, groups, linewidth, title,
   if (is.null(showLabels) || !(showLabels %in% c(TRUE, FALSE))) stop("showLabels must be a logical value.")
   if (!is.null(lineInterval)) warning("lineInterval is deprecated. Use background_lines instead for number of background sections to draw. Will divide timeline into 10 sections by default.")
   if (!class(background_lines) %in% c("integer", "numeric")) stop("background_lines must be an integer.")
-
-  # add additional columns
-  if (!groups %in% names(data)) {
-    data$group <- ""
-  }  else{
-    if (any(is.na(data[, groups]))) stop("if using groups argument, all groups must be set to a non-NA value")
-  }
-  if (!end %in% names(data) | end == start) data$end <- data[, start]
 
   return(data)
 }
