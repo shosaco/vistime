@@ -4,10 +4,10 @@
 \alias{plot_ranges}
 \title{Plot the ranges of a data frame}
 \usage{
-plot_ranges(data, linewidth, showLabels, background_lines)
+plot_ranges(data_orig, linewidth, showLabels, background_lines)
 }
 \arguments{
-\item{data}{the data frame to be plotted}
+\item{data_orig}{the data frame to be plotted (ranges + events)}
 
 \item{linewidth}{the width in pixel for the range lines}
 

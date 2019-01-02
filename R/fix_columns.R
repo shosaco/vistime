@@ -6,7 +6,7 @@
 #' @param end name of end column
 #' @param groups name of group column
 #' @param tooltips column name of tooltips
-#'
+#' @export
 #' @return the data frame prepared for plotting
 #'
 #' @examples

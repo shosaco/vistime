@@ -10,7 +10,7 @@
 #' @param showLabels boolean
 #' @param lineInterval deprecated, replaced by background_lines
 #' @param background_lines interval of grey background lines
-#'
+#' @export
 #' @return the data frame with possibly new or renamed columns, or an error
 #'
 #' @examples

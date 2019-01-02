@@ -6,3 +6,4 @@
 .Rbuildignore
 .gitignore
 working
+inst/doc

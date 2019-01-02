@@ -4,10 +4,10 @@
 \alias{plot_events}
 \title{Plot the events of a data frame}
 \usage{
-plot_events(data, showLabels, background_lines)
+plot_events(data_orig, showLabels, background_lines)
 }
 \arguments{
-\item{data}{the data frame to be plotted}
+\item{data_orig}{the data frame to be plotted (ranges + events)}
 
 \item{showLabels}{boolean, show labels on events or not}
 

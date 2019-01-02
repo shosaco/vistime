@@ -1,39 +1,36 @@
-[![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
+---
+title: "vistime - Pretty Timeline Creation"
+author: "Sandro Raabe"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{vistime - Pretty Timeline Creation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![dev](https://img.shields.io/badge/dev-0.7.0-green.svg)]()
-[![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
+[![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 
-vistime - Pretty Timeline Creation
-=========
-
-Create interactive timelines or Gantt charts that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using 'plotly_build()', which transforms the plot into a mutable list.
+With this package, your can use tabular data to create interactive timelines or Gantt charts that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps. You can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using 'plotly_build()', which transforms the plot into a mutable list.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
 **Feedback welcome:** shosaco_nospam@hotmail.com  
 
-## Table of Contents
-
-1. [Installation](#1-installation)
-2. [Usage](#2-usage)
-3. [Arguments](#3-arguments)
-4. [Value](#4-value)
-5. [Examples](#5-examples)
-   * [Ex. 1: Presidents](#ex-1-presidents)
-   * [Ex. 2: Project Planning](#ex-2-project-planning)
-6. [Exporting](#6-export-of-vistime-as-pdf-or-png)
-7. [Usage in Shiny apps](#7-usage-in-shiny-apps)
-8. [Customization](#8-customization)
-   * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
-   * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
-   * [Changing events font size](#changing-events-font-size)
-   * [Changing marker size](#changing-marker-size)
-
 ## 1. Installation
 
 To install the package from CRAN (v0.7.0):
 
-```{r}
+```{r eval=FALSE}
 install.packages("vistime")
 ```
 <!-- To install the development version (v0.6.0.9000, most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
@@ -43,20 +40,28 @@ devtools::install_github("shosaco/vistime")
 ```
 -->
 
-## 2. Usage and standard arguments
+## 2. Usage
 
-```{r}
+First, we need to load `vistime`:
+
+```{r eval=FALSE}
+library(vistime)
+```
+
+The basic syntax and all possible arguments are:
+
+```{r eval=FALSE}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
               fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, 
               title = NULL, showLabels = TRUE, background_lines = 11)
 ```
 
 
-## 3. Arguments
+## 3. Argument details
 
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(
-dplyr::tribble(~parameter,  ~`optional?`, ~`data type`, ~explanation,
+tibble::tribble(~parameter,  ~`optional?`, ~`data type`, ~explanation,
 "data", "mandatory", "data.frame", "data.frame that contains the data to be visualised",
 "start", "optional", "character", "the column name in data that contains start dates. Default: *start*",
 "end", "optional", "character", "the column name in data that contains end dates. Default: *end*",
@@ -79,7 +84,7 @@ dplyr::tribble(~parameter,  ~`optional?`, ~`data type`, ~explanation,
 ## 5. Examples  
 
 ### Ex. 1: Presidents
-```{r}
+```{r eval=FALSE}
 pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
                    start = c("1789-03-29", "1797-02-03", "1801-02-03"),
@@ -89,10 +94,15 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                   
 vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 ```
-![](inst/img/ex2.png)
+
+```{r echo=FALSE, out.width = "100%"}
+knitr::include_graphics("../inst/img/ex2.png")
+```
+
+
 
 ### Ex. 2: Project Planning
-```{r}
+```{r eval=FALSE}
 data <- read.csv(text="event,group,start,end,color
                        Phase 1,Project,2016-12-22,2016-12-23,#c8e6c9
                        Phase 2,Project,2016-12-23,2016-12-29,#a5d6a7
@@ -122,13 +132,15 @@ data <- read.csv(text="event,group,start,end,color
 vistime(data)
 ```
 
-![](inst/img/ex3.png)
+```{r echo=FALSE, out.width = "100%"}
+knitr::include_graphics("../inst/img/ex3.png")
+```
 
 ## 6. Export of vistime as PDF or PNG
 
 Once created, you can use `plotly::export()` for saving your vistime chart as PDF, PNG or JPEG:
 
-```{r}
+```{r eval=FALSE}
 chart <- vistime(pres, events="Position")
 export(chart, file = "presidents.pdf")
 ```
@@ -139,7 +151,7 @@ Note that export requires the `webshot` package and additional arguments like wi
 
 Since the result of any call to `vistime(...)` is a `Plotly` object, you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart:
 
-```{r}
+```{r eval=FALSE}
 library(shiny)
 library(plotly)
 library(vistime)
@@ -169,7 +181,7 @@ The key is to first create a **simple Plotly example** yourself, turning it into
 ### Changing x-axis tick font size
 The following example creates the presidents example and manipulates the font size of the x axis ticks:
 
-```{r}
+```{r eval=FALSE}
 pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
                    start = c("1789-03-29", "1797-02-03", "1801-02-03"),
@@ -187,12 +199,15 @@ pp$x$layout$xaxis$tickfont <- list(size = 28)
 
 pp
 ```
-![](inst/img/ex2-tickfontsize.png)
+
+```{r echo=FALSE, out.width = "50%"}
+knitr::include_graphics("../inst//img/ex2-tickfontsize.png")
+```
 
 ### Changing y-axis tick font size
 We have several y-axes, that's why we need to change the font size in all of them:
 
-```{r}
+```{r eval=FALSE}
 # loop through the yaxes and change the font size for each element:
 for(i in grep("yaxis*", names(pp$x$layout))){
      pp$x$layout[[i]]$tickfont <- list(size = 28)
@@ -200,13 +215,16 @@ for(i in grep("yaxis*", names(pp$x$layout))){
 
 pp
 ```
-![](inst/img/ex2-yfontsize.png)
+
+```{r echo=FALSE, out.width = "50%"}
+knitr::include_graphics("../inst//img/ex2-yfontsize.png")
+```
 
 ### Changing events font size
 The following example creates the presidents example and manipulates the font size of the events:
 
 
-```{r}
+```{r eval=FALSE}
 pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                     Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
                     start = c("1789-03-29", "1797-02-03", "1801-02-03"),
@@ -226,13 +244,17 @@ for(i in 1:length(pp$x$data)){
 
 pp
 ```
-![](inst/img/ex2-eventfontsize.png)
+
+```{r echo=FALSE, out.width = "50%"}
+knitr::include_graphics("../inst//img/ex2-eventfontsize.png")
+```
+
 
 ### Changing marker size
 The following example a simple example using markers and manipulates the size of the markers:
 
 
-```{r}
+```{r eval=FALSE}
 dat <- data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10))
  
 p <- vistime(dat)
@@ -248,5 +270,6 @@ for(i in 1:length(pp$x$data)){
 pp
 ```
 
-![](inst/img/ex3-markersize.png)
-
+```{r echo=FALSE, out.width = "50%"}
+knitr::include_graphics("../inst//img/ex3-markersize.png")
+```
