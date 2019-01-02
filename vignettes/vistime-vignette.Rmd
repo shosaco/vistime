@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-[![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
+
 [![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 
 With this package, your can use tabular data to create interactive timelines or Gantt charts that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps. You can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using 'plotly_build()', which transforms the plot into a mutable list.
