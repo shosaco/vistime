@@ -4,7 +4,7 @@
 #' We determine the subplot as follows: Groups appear in order of appearance in the data, events and ranges in the same group are plotted directly below each other
 #'
 #' @param data the data frame with ranges and events
-#' @export
+#'
 #' @return data with additional numeric column "subplot", reordered by subplot column.
 #' @examples
 #' \dontrun{

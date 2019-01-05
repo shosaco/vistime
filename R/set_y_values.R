@@ -3,7 +3,7 @@
 #' Instead of naive "always increment by 1" approach, we are using a more sophisticated method to use plot space efficiently
 #'
 #' @param data the data frame with data to be distributed, has to have \code{start}, \code{end} and \code{subplot} column
-#' @export
+#'
 #' @return the data frame enriched with numeric \code{y} column
 #'
 #' @examples

@@ -4,7 +4,7 @@
 #' @param linewidth the width in pixel for the range lines
 #' @param showLabels boolean, show labels on events or not
 #' @param background_lines number of grey background lines to draw
-#' @export
+#'
 #' @return a list containing the plots for the groups in data
 #'
 #' @examples

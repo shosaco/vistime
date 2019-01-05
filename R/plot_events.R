@@ -5,7 +5,7 @@
 #' @param background_lines number of grey background lines to draw
 #'
 #' @return a list containing the plots for the groups in data
-#' @export
+#'
 #' @examples
 #' \dontrun{
 #' plot_events(data.frame(event = 1:2, start = as.POSIXct(c(Sys.Date(), Sys.Date() + 10)),
