@@ -71,6 +71,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
 
 vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 
+\dontrun{
 # more complex and colorful example
 data <- read.csv(text="event,group,start,end,color
                        Phase 1,Project,2018-12-22,2018-12-23,#c8e6c9
@@ -100,7 +101,6 @@ data <- read.csv(text="event,group,start,end,color
 
 vistime(data)
 
-\dontrun{
 # ------ It is possible to change all attributes of the timeline using plotly_build(),
 # ------ which generates a list which can be inspected using str
 p <- vistime(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10)))
