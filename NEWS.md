@@ -1,5 +1,5 @@
 # 0.7.0.9000 (Github)
-- internals (no exporting of helper functions)
+- internals (no exporting of helper functions, some unit tests using testthat package)
 
 # 0.7.0 (CRAN)
 - we have a vignette now
