@@ -27,5 +27,6 @@ Suggests: knitr,
     rmarkdown,
     tibble,
     devtools,
-    testthat
+    testthat,
+    covr
 VignetteBuilder: knitr

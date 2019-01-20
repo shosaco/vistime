@@ -1,5 +1,10 @@
 language: r
 
+r:
+  - oldrel
+  - release
+  - devel
+
 repos:
   CRAN: https://cloud.r-project.org
   ropensci: http://packages.ropensci.org
@@ -8,4 +13,4 @@ r_packages:
   - covr
 
 after_success:
-  - Rscript -e 'library(covr); codecov()'
+  - Rscript -e 'covr::codecov()'

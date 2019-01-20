@@ -7,6 +7,7 @@
 #'
 #' @return plotly plot
 plot_glued <- function(data, plotList, title, heightsRelative){
+
   subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative) %>%
     layout(title = title,
            margin = list(l = max(nchar(data$group)) * 8))
