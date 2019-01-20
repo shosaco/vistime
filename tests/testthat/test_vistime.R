@@ -9,9 +9,9 @@ test_that("vistime main tests", {
   expected <- readRDS("test_plot_glued.rds")
 
   expect_equivalent(generated$x$attrs,
-                    expected$x$attrs)
+                    expected$x$attrs, tolerance = 3600)
 
   expect_equivalent(generated$x$layout,
-                    expected$x$layout)
+                    expected$x$layout, tolerance = 3600)
 
 })
