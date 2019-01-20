@@ -25,9 +25,9 @@ test_that("Plot glued main test", {
 
   expect_equal(sum(heightsRelative), 1)
   expect_equivalent(generated$x$attrs,
-                    expected$x$attrs)
+                    expected$x$attrs, tolerance = 3601)
 
   expect_equivalent(generated$x$layout,
-                    expected$x$layout)
+                    expected$x$layout, tolerance = 3601)
 
 })
