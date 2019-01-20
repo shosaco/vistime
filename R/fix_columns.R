@@ -36,6 +36,9 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
 
+  data$startOrig <- data$start
+  data$endOrig <- data$end
+
   data$start <- as.POSIXct(data$start)
   data$end <- as.POSIXct(data$end)
 
@@ -54,8 +57,8 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
     names(data)[names(data) == tooltips] <- "tooltip"
   }else{
     data$tooltip <- ifelse(data$start == data$end,
-                           paste0("<b>",data$event,": ",data$start,"</b>"),
-                           paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
+                           paste0("<b>",data$event,": ",data$startOrig,"</b>"),
+                           paste0("<b>",data$event,":</b> from <b>",data$startOrig,"</b> to <b>",data$endOrig,"</b>"))
   }
 
   # shorten long labels
