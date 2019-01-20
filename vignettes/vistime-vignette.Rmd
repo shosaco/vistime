@@ -255,7 +255,7 @@ The following example a simple example using markers and manipulates the size of
 
 
 ```{r eval=FALSE}
-dat <- data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10))
+dat <- data.frame(event = 1:4, start = c("2019-01-01", "2019-01-10"))
  
 p <- vistime(dat)
 

@@ -2,7 +2,7 @@
 context("validate_input")
 
 # example data frame
-dat <- data.frame(event = 1:2, start = c(Sys.Date(), Sys.Date() + 1))
+dat <- data.frame(event = 1:2, start = c("2019-01-01", "2019-01-02"))
 
 # standard arguments forwarded from main vistime call
 events="event"; start = "start"; end="end"; groups="group"; colors="color"; fontcolors="fontcolor"; tooltips="tooltip"; linewidth=NULL; title=NULL; showLabels = TRUE; lineInterval=NULL; background_lines = 11

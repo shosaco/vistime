@@ -8,8 +8,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' plot_events(data.frame(event = 1:2, start = as.POSIXct(c(Sys.Date(), Sys.Date() + 10)),
-#'                        end = as.POSIXct(c(Sys.Date(), Sys.Date() + 10)),
+#' plot_events(data.frame(event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
+#'                        end = as.POSIXct(c("2019-01-01", "2019-01-10")),
 #'                        group = "", tooltip = "", col = "green", fontcol = "black",
 #'                        subplot = 1, y = 1:2, labelPos = "center", label = 1:2),
 #'             showLabels = TRUE, background_lines = 11)
@@ -17,6 +17,9 @@
 plot_events <- function(data_orig, showLabels, background_lines) {
 
   data <- data_orig[data_orig$start == data_orig$end, ]
+
+  if(nrow(data) == 0) return(list())
+
   eventNumbers <-  unique(data$subplot)
 
   events <- lapply(eventNumbers, function(sp) {

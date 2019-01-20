@@ -17,7 +17,7 @@ Instead of naive "always increment by 1" approach, we are using a more sophistic
 }
 \examples{
 \dontrun{
-set_y_values(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10),
-             end = c(Sys.Date(), Sys.Date() + 10), subplot = 1))
+set_y_values(data.frame(event = 1:4, start = c("2019-01-01", "2019-01-10"),
+             end =  c("2019-01-01", "2019-01-10"), subplot = 1), stringsAsFactors = F))
 }
 }

@@ -28,8 +28,8 @@ Standardize column names
 \examples{
 \dontrun{
 fix_columns(data.frame(event = 1:4,
-                       start = c(Sys.Date(), Sys.Date() + 10),
-                       end = c(Sys.Date(), Sys.Date() + 10)),
+                       start = c("2019-01-01", "2019-01-10"),
+                       end = c("2019-01-01", "2019-01-10"),
                        events = "event", start = "start", end = "end",
                        groups = "group", tooltips = "tooltip")
 }

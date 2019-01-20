@@ -12,8 +12,8 @@
 #' @examples
 #' \dontrun{
 #' fix_columns(data.frame(event = 1:4,
-#'                        start = c(Sys.Date(), Sys.Date() + 10),
-#'                        end = c(Sys.Date(), Sys.Date() + 10)),
+#'                        start = c("2019-01-01", "2019-01-10"),
+#'                        end = c("2019-01-01", "2019-01-10"),
 #'                        events = "event", start = "start", end = "end",
 #'                        groups = "group", tooltips = "tooltip")
 #' }
@@ -36,9 +36,6 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
   names(data)[names(data)==end] <- "end"
   names(data)[names(data)==events] <- "event"
 
-  data$startOrig <- data$start
-  data$endOrig <- data$end
-
   data$start <- as.POSIXct(data$start)
   data$end <- as.POSIXct(data$end)
 
@@ -57,15 +54,15 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
     names(data)[names(data) == tooltips] <- "tooltip"
   }else{
     data$tooltip <- ifelse(data$start == data$end,
-                           paste0("<b>",data$event,": ",data$startOrig,"</b>"),
-                           paste0("<b>",data$event,":</b> from <b>",data$startOrig,"</b> to <b>",data$endOrig,"</b>"))
+                           paste0("<b>",data$event,": ",data$start,"</b>"),
+                           paste0("<b>",data$event,":</b> from <b>",data$start,"</b> to <b>",data$end,"</b>"))
   }
 
-  # shorten long labels
+    # shorten long labels
   data$labelPos <- "center" # TODO: apply AI here
   data$label <- ifelse(data$start == data$end,
                        ifelse(nchar(data$event) > 10, paste0(substr(data$event, 1, 13), "..."), data$event),
                        data$event)
 
-  return(data)
+  return(data[, c("event", "start", "end", "group", "tooltip", "labelPos", "label")])
 }

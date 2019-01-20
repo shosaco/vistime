@@ -23,8 +23,8 @@ Plot the ranges of a data frame
 }
 \examples{
 \dontrun{
-plot_ranges(data.frame(event = 1:2, start = as.POSIXct(c(Sys.Date(), Sys.Date() + 10)),
-                       end = as.POSIXct(c(Sys.Date()+10, Sys.Date() + 15)),
+plot_ranges(data.frame(event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
+                       end = as.POSIXct(c("2019-01-10", "2019-01-25")),
                        group = "", tooltip = "", col = "green", fontcol = "black",
                        subplot = 1, y = 1:2, labelPos = "center", label = 1:2),
             linewidth = 10, showLabels = TRUE, background_lines = 11)

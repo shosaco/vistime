@@ -2,7 +2,7 @@ context("Plot glued")
 
 test_that("Plot glued main test", {
 
-  data <- data.frame(start = Sys.Date(), end = Sys.Date() + 1, event = 1)
+  data <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
 
   # copied vistime main code
   events="event"; start="start"; end="end"; groups="group"; colors="color"; fontcolors="fontcolor"; tooltips="tooltip"; linewidth=NULL; title=NULL; showLabels = TRUE; lineInterval=NULL; background_lines = 11

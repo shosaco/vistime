@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' validate_input(data.frame(event = 1:2, start = c(Sys.Date(), Sys.Date() + 1)),
+#' validate_input(data.frame(event = 1:2, start =  c("2019-01-01", "2019-01-10")),
 #'                events="event", start="start", end="end", groups="group",
 #'                linewidth=NULL, title=NULL, showLabels = TRUE,
 #'                lineInterval=NULL, background_lines = 11)

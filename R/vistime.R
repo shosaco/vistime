@@ -75,7 +75,7 @@
 #'
 #' # ------ It is possible to change all attributes of the timeline using plotly_build(),
 #' # ------ which generates a list which can be inspected using str
-#' p <- vistime(data.frame(event = 1:4, start = c(Sys.Date(), Sys.Date() + 10)))
+#' p <- vistime(data.frame(event = 1:4, start =  c("2019-01-01", "2019-01-10")))
 #' pp <- plotly_build(p) # transform into a list
 #'
 #' # Example 1: change x axis font size:
