@@ -6,3 +6,6 @@ library(vistime)
 test_check("vistime")
 
 
+# using covr:
+# covr::package_coverage(type = "tests")
+
