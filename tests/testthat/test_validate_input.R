@@ -31,6 +31,9 @@ test_that("Deprecated warnings", {
 
 test_that("data formats", {
 
+  expect_error(vistime:::validate_input(plot_ly(), start, end, events, groups, linewidth, title, showLabelsL, lineInterval, background_lines),
+              'Expected an input data frame, but encountered plotly')
+
   expect_error(vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels= NULL, lineInterval, background_lines),
                "showLabels must be a logical value")
 
@@ -59,6 +62,12 @@ test_that("data formats", {
 test_that("return value", {
   expect_is(vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines),
             "data.frame")
+
+  expect_is(vistime:::validate_input(as.matrix(dat), start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines),
+            "data.frame")
+
+  expect_equal(vistime:::validate_input(dat[1,], start, end, events, groups, linewidth, title, showLabels, lineInterval, background_lines),
+               dat[1,])
 })
 
 

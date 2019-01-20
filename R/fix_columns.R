@@ -46,8 +46,8 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
   if(any(is.na(data$end))) data$end[is.na(data$end)] <- data$start[is.na(data$end)]
 
   # remove leading and trailing whitespaces
-  data$event <- gsub("^\\s+|\\s+$", "", data$event)
-  data$group <- gsub("^\\s+|\\s+$", "", data$group)
+  data$event <- trimws(data$event)
+  data$group <- trimws(data$group)
 
   # set tooltips
   if(tooltips %in% names(data)){
