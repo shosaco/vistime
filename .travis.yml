@@ -1,5 +1,7 @@
 language: r
 
+warnings_are_errors: false
+
 r:
   - oldrel
   - release
@@ -14,3 +16,10 @@ r_packages:
 
 after_success:
   - Rscript -e 'covr::codecov()'
+
+notifications:
+  email:
+    recipients:
+      - shosaco_nospam@hotmail.com
+    on_success: always # default: change
+    on_failure: always # default: always
