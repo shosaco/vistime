@@ -2,7 +2,7 @@ context("Plot glued")
 
 test_that("Plot glued main test", {
 
-  data <- data.frame(start = Sys.Date(), end = Sys.Date() + 1, event = 1)
+  data <- data.frame(start = Sys.Date(), end = Sys.Date() + 1, event = 1, tooltip = "jau")
 
   # copied vistime main code
   events="event"; start="start"; end="end"; groups="group"; colors="color"; fontcolors="fontcolor"; tooltips="tooltip"; linewidth=NULL; title=NULL; showLabels = TRUE; lineInterval=NULL; background_lines = 11
@@ -24,10 +24,10 @@ test_that("Plot glued main test", {
   expected <- readRDS("test_plot_glued.rds")
 
   expect_equal(sum(heightsRelative), 1)
-  # expect_equivalent(generated$x$attrs,
-  #                   expected$x$attrs)
+  expect_equivalent(generated$x$attrs),
+                    expected$x$attrs)
 
-  # expect_equivalent(generated$x$layout,
-  #                   expected$x$layout)
+  expect_equivalent(generated$x$layout),
+                    expected$x$layout)
 
 })
