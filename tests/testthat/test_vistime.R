@@ -1,6 +1,6 @@
 context("vistime.R")
 
-test_that("Relative Heights", {
+test_that("vistime main tests", {
 
   data <- data.frame(start = Sys.Date(), end = Sys.Date() + 1, event = 1)
 

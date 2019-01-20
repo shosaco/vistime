@@ -3,7 +3,6 @@
 .RData
 .Ruserdata
 *.Rproj
-.Rbuildignore
 .gitignore
 working
 inst/doc

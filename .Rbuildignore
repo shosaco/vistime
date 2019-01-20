@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+.gitignore
+.Rhistory
+vistime.Rproj
+working
+.travis.yml

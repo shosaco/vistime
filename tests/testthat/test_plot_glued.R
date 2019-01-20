@@ -1,6 +1,6 @@
 context("Plot glued")
 
-test_that("Main test", {
+test_that("Plot glued main test", {
 
   data <- data.frame(start = Sys.Date(), end = Sys.Date() + 1, event = 1)
 
