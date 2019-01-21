@@ -1,5 +1,7 @@
 language: r
 
+sudo: true
+
 warnings_are_errors: false
 
 r:
