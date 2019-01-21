@@ -1,5 +1,7 @@
 language: r
 
+cache: packages
+
 sudo: true
 
 warnings_are_errors: true
@@ -9,23 +11,13 @@ r:
   - release
   - devel
 
-#install:
-#  - R -e "0" --args --bootstrap-packrat
-#  - R -e "packrat::restore(restart = FALSE)"
-
-#cache:
-#  directories:
-#    - $TRAVIS_BUILD_DIR/packrat/src
-#    - $TRAVIS_BUILD_DIR/packrat/lib
-#  packages: true
-
 repos:
   CRAN: https://cloud.r-project.org
   ropensci: http://packages.ropensci.org
 
 # to speed up building:
 # pkg <- unlist(tools::package_dependencies(c("devtools", "vistime"), db = available.packages(), which = c("Depends", "Imports"), recursive = TRUE))
-# pkg2 <- pkg[!pkg %in% c("tools", "methods", "utils", "grid", "stats", "graphics", "grdevices")]
+# pkg2 <- pkg[!pkg %in% c("tools", "methods", "utils", "grid", "stats", "graphics", "grdevices", "grDevices")]
 # pkg3 <- unique(c("devtools", "evaluate", "highr", "knitr", "markdown", "praise", "rmarkdown", "testthat", "tinytex", "xfun"), pkg2)
 # cat("   -", paste(pkg2, collapse = "\n  - "))
 r_binary_packages:
@@ -107,7 +99,6 @@ r_binary_packages:
   - reshape2
   - withr
   - lattice
-  - grDevices
   - yaml
   - curl
   - mime
