@@ -23,23 +23,19 @@ repos:
   CRAN: https://cloud.r-project.org
   ropensci: http://packages.ropensci.org
 
-# to speed up building: cat("   -", paste(unlist(tools::package_dependencies("vistime", db = available.packages(), which = c("Depends", "Imports"), recursive = TRUE)), collapse = "\n   - "))
+# to speed up building:
+# pkg <- unlist(tools::package_dependencies(c("devtools", "vistime"), db = available.packages(), which = c("Depends", "Imports"), recursive = TRUE))
+# pkg2 <- pkg[!pkg %in% c("tools", "methods", "utils", "grid", "stats", "graphics", "grdevices")]
+# pkg3 <- unique(c("devtools", "evaluate", "highr", "knitr", "markdown", "praise", "rmarkdown", "testthat", "tinytex", "xfun"), pkg2)
+# cat("   -", paste(pkg2, collapse = "\n  - "))
 r_binary_packages:
-  - ps
-  - backports
-  - ini
-  - processx
-  - desc
-  - prettyunits
-  - rprojroot
-  - xopen
-  - clipr
-  - clisymbols
-  - fs
-  - gh
-  - whisker
+  - devtools
   - callr
+  - cli
+  - digest
   - git2r
+  - httr
+  - jsonlite
   - memoise
   - pkgbuild
   - pkgload
@@ -48,7 +44,32 @@ r_binary_packages:
   - rstudioapi
   - sessioninfo
   - usethis
-  - covr
+  - withr
+  - processx
+  - R6
+  - assertthat
+  - crayon
+  - curl
+  - mime
+  - openssl
+  - desc
+  - prettyunits
+  - rprojroot
+  - rlang
+  - xopen
+  - clipr
+  - clisymbols
+  - fs
+  - gh
+  - glue
+  - whisker
+  - Rcpp
+  - ini
+  - askpass
+  - magrittr
+  - ps
+  - backports
+  - sys
   - plotly
   - RColorBrewer
   - ggplot2
@@ -86,6 +107,7 @@ r_binary_packages:
   - reshape2
   - withr
   - lattice
+  - grDevices
   - yaml
   - curl
   - mime
