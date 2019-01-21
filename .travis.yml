@@ -7,12 +7,90 @@ r:
   - release
   - devel
 
+#install:
+#  - R -e "0" --args --bootstrap-packrat
+#  - R -e "packrat::restore(restart = FALSE)"
+
+#cache:
+#  directories:
+#    - $TRAVIS_BUILD_DIR/packrat/src
+#    - $TRAVIS_BUILD_DIR/packrat/lib
+#  packages: true
+
 repos:
   CRAN: https://cloud.r-project.org
   ropensci: http://packages.ropensci.org
 
 r_packages:
   - covr
+
+r_binary_packages:
+  - plotly
+  - RColorBrewer
+  - ggplot2
+  - tools
+  - scales
+  - httr
+  - jsonlite
+  - magrittr
+  - digest
+  - viridisLite
+  - base64enc
+  - htmltools
+  - htmlwidgets
+  - tidyr
+  - hexbin
+  - dplyr
+  - tibble
+  - lazyeval
+  - rlang
+  - crosstalk
+  - purrr
+  - data.table
+  - promises
+  - R6
+  - shiny
+  - methods
+  - assertthat
+  - bindrcpp
+  - glue
+  - pkgconfig
+  - Rcpp
+  - tidyselect
+  - utils
+  - grid
+  - gtable
+  - MASS
+  - mgcv
+  - plyr
+  - reshape2
+  - stats
+  - withr
+  - lattice
+  - graphics
+  - grDevices
+  - yaml
+  - curl
+  - mime
+  - openssl
+  - later
+  - labeling
+  - munsell
+  - cli
+  - crayon
+  - fansi
+  - pillar
+  - stringi
+  - bindr
+  - nlme
+  - Matrix
+  - colorspaceaskpass
+  - utf8
+  - stringr
+  - httpuv
+  - xtable
+  - sourcetools
+  - sys
 
 after_success:
   - Rscript -e 'covr::codecov()'
