@@ -2,7 +2,7 @@ language: r
 
 sudo: true
 
-warnings_are_errors: false
+warnings_are_errors: true
 
 r:
   - oldrel
@@ -23,7 +23,31 @@ repos:
   CRAN: https://cloud.r-project.org
   ropensci: http://packages.ropensci.org
 
+# to speed up building: cat("   -", paste(unlist(tools::package_dependencies("vistime", db = available.packages(), which = c("Depends", "Imports"), recursive = TRUE)), collapse = "\n   - "))
 r_binary_packages:
+  - ps
+  - backports
+  - ini
+  - processx
+  - desc
+  - prettyunits
+  - rprojroot
+  - xopen
+  - clipr
+  - clisymbols
+  - fs
+  - gh
+  - whisker
+  - callr
+  - git2r
+  - memoise
+  - pkgbuild
+  - pkgload
+  - rcmdcheck
+  - remotes
+  - rstudioapi
+  - sessioninfo
+  - usethis
   - covr
   - plotly
   - RColorBrewer
