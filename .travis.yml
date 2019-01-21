@@ -19,9 +19,18 @@ repos:
 # pkg <- unlist(tools::package_dependencies(c("devtools", "vistime"), db = available.packages(), which = c("Depends", "Imports"), recursive = TRUE))
 # pkg2 <- pkg[!pkg %in% c("tools", "methods", "utils", "grid", "stats", "graphics", "grdevices", "grDevices")]
 # pkg3 <- unique(c("devtools", "evaluate", "highr", "knitr", "markdown", "praise", "rmarkdown", "testthat", "tinytex", "xfun"), pkg2)
-# cat("   -", paste(pkg2, collapse = "\n  - "))
+# cat("  -", paste(pkg3, collapse = "\n  - "))
 r_binary_packages:
   - devtools
+  - evaluate
+  - highr
+  - knitr
+  - markdown
+  - praise
+  - rmarkdown
+  - testthat
+  - tinytex
+  - xfun
   - callr
   - cli
   - digest
