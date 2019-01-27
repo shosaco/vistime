@@ -6,7 +6,7 @@
 - we have a vignette now
 - events and ranges that are in the same group are now plotted directly below each other (in the past, all ranges were plotted first, followed by all events). Groups are sorted in order of first appearance but all items of one group are plotted together.
 - argument `lineInterval` is now deprecated. It was replaced by the new, more intuitive argument `background_lines` - the number of lines to draw in the background.
-- remove leading and trailing whitespaces of events and groups before drawing
+- remove leading and trailing whitespaces of events and groups before drawing 
 
 # 0.6.0
 - Hotfix for broken y-axis labelling (introduced through new plotly package 4.8.0.)
