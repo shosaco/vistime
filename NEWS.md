@@ -1,6 +1,6 @@
 # 0.7.0.9000 (Github)
 - internals (no exporting of helper functions, unit tests using testthat package, continuous integration using travis, test code coverage using covr)
-- activated Github Page: https://shosaco.github.io/vistime/
+- activated Github Page: https://shosaco.github.io/vistime/ 
 
 # 0.7.0 (CRAN)
 - we have a vignette now
