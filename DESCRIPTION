@@ -12,7 +12,7 @@ Description: Create interactive timelines or Gantt charts that
   are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' 
   apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. 
   Timelines and their components can afterwards be manipulated using 'plotly_build()', which 
-  transforms the plot into a mutable list.
+  transforms the plot into a mutable list. 
 License: GPL-3 | file LICENSE
 URL: https://github.com/shosaco/vistime
 BugReports: https://github.com/shosaco/vistime/issues
