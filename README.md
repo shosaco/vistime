@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime) 
 
-vistime - Pretty Timeline Creation 
+vistime - Pretty Timeline Creation
 =========
 
 Create interactive timelines or Gantt charts that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using 'plotly_build()', which transforms the plot into a mutable list.
