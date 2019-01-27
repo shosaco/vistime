@@ -8,7 +8,7 @@
 - argument `lineInterval` is now deprecated. It was replaced by the new, more intuitive argument `background_lines` - the number of lines to draw in the background.
 - remove leading and trailing whitespaces of events and groups before drawing
 
-# 0.6.0 
+# 0.6.0
 - Hotfix for broken y-axis labelling (introduced through new plotly package 4.8.0.)
 - events are now shown as circles (was: squares)
 - corrected font colors of Presidents example on help page
