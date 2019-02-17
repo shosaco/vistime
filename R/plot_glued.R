@@ -6,9 +6,11 @@
 #' @param heightsRelative relative heights of the subplots (sum up to 1)
 #'
 #' @return plotly plot
-plot_glued <- function(data, plotList, title, heightsRelative){
-
-  subplot(plotList, nrows=length(plotList), shareX=T, margin=0, heights=heightsRelative) %>%
-    layout(title = title,
-           margin = list(l = max(nchar(data$group)) * 8))
+plot_glued <- function(data, plotList, title, heightsRelative) {
+  subplot(plotList, nrows = length(plotList), shareX = T, margin = 0,
+          heights = heightsRelative) %>%
+    layout(
+      title = title,
+      margin = list(l = max(nchar(data$group)) * 8)
+    )
 }

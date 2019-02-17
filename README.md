@@ -51,7 +51,7 @@ devtools::install_github("shosaco/vistime")
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
               fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, 
-              title = NULL, showLabels = TRUE, background_lines = 11)
+              title = NULL, show_labels = TRUE, background_lines = 11)
 ```
 
 
@@ -69,7 +69,7 @@ fontcolors | optional | character | the column name in data that contains the fo
 tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
-showLabels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
+show_labels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
 background_lines | optional | integer | the number of vertical lines to draw in the background to demonstrate structure. Default: 10.
 
 ## 4. Value

@@ -5,7 +5,7 @@
 \title{Validate input data}
 \usage{
 validate_input(data, start, end, events, groups, linewidth, title,
-  showLabels, lineInterval, background_lines)
+  showLabels, show_labels, lineInterval, background_lines)
 }
 \arguments{
 \item{data}{the data}
@@ -22,7 +22,9 @@ validate_input(data, start, end, events, groups, linewidth, title,
 
 \item{title}{plot title}
 
-\item{showLabels}{boolean}
+\item{showLabels}{deprecated, replaced by show_labels}
+
+\item{show_labels}{boolean}
 
 \item{lineInterval}{deprecated, replaced by background_lines}
 
@@ -36,9 +38,10 @@ Validate input data
 }
 \examples{
 \dontrun{
-validate_input(data.frame(event = 1:2, start =  c("2019-01-01", "2019-01-10")),
-               events="event", start="start", end="end", groups="group",
-               linewidth=NULL, title=NULL, showLabels = TRUE,
-               lineInterval=NULL, background_lines = 11)
+validate_input(data.frame(event = 1:2, start = c("2019-01-01", "2019-01-10")),
+  events = "event", start = "start", end = "end", groups = "group",
+  linewidth = NULL, title = NULL, showLabels = NULL, show_labels = TRUE,
+  lineInterval = NULL, background_lines = 11
+)
 }
 }

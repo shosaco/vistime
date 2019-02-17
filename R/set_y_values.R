@@ -8,32 +8,36 @@
 #'
 #' @examples
 #' \dontrun{
-#' set_y_values(data.frame(event = 1:4, start = c("2019-01-01", "2019-01-10"),
-#'              end =  c("2019-01-01", "2019-01-10"), subplot = 1), stringsAsFactors = F))
+#' set_y_values(data.frame(
+#'   event = 1:4, start = c("2019-01-01", "2019-01-10"),
+#'   end = c("2019-01-01", "2019-01-10"), subplot = 1
+#' ), stringsAsFactors = F)
 #' }
 set_y_values <- function(data) {
-  data <- data[with(data, order(subplot, start)),] # order by "start"
+  data <- data[with(data, order(subplot, start)), ] # order by "start"
   row.names(data) <- 1:nrow(data)
 
-  for(sp in unique(data$subplot)){
+  for (sp in unique(data$subplot)) {
 
     # subset data for this group
     thisData <- subset(data, subplot == sp)
     thisData$y <- 0
 
     # for each event and for each y, check if any range already drawn on y cuts this range -> if yes, check next y
-    for(row in (1:nrow(thisData))){
+    for (row in (1:nrow(thisData))) {
       toAdd <- thisData[row, c("start", "end", "y")]
 
-      for(y in 1:nrow(thisData)){
+      for (y in 1:nrow(thisData)) {
         thisData[row, "y"] <- y # naive guess
         # Events
-        if(toAdd$start == toAdd$end){
+        if (toAdd$start == toAdd$end) {
           # set on new level if this y is occupied
-          if(all(toAdd$start != thisData[-row,"start"][thisData[-row,"y"] == y])) break; # this y is free, end of search
-        }else{
+          if (all(toAdd$start != thisData[-row, "start"][thisData[-row, "y"] == y]))
+            break # this y is free, end of search
+        } else {
           # Ranges, use that already sorted
-          if(all(toAdd$start >= thisData[-row,"end"][thisData[-row,"y"] == y])) break; # new start >= all other starts on this level, end search
+          if (all(toAdd$start >= thisData[-row, "end"][thisData[-row, "y"] == y]))
+            break # new start >= all other starts on this level, end search
         }
       }
     }

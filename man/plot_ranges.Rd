@@ -4,14 +4,14 @@
 \alias{plot_ranges}
 \title{Plot the ranges of a data frame}
 \usage{
-plot_ranges(data_orig, linewidth, showLabels, background_lines)
+plot_ranges(data_orig, linewidth, show_labels, background_lines)
 }
 \arguments{
 \item{data_orig}{the data frame to be plotted (ranges + events)}
 
 \item{linewidth}{the width in pixel for the range lines}
 
-\item{showLabels}{boolean, show labels on events or not}
+\item{show_labels}{boolean, show labels on events or not}
 
 \item{background_lines}{number of grey background lines to draw}
 }
@@ -23,10 +23,13 @@ Plot the ranges of a data frame
 }
 \examples{
 \dontrun{
-plot_ranges(data.frame(event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
-                       end = as.POSIXct(c("2019-01-10", "2019-01-25")),
-                       group = "", tooltip = "", col = "green", fontcol = "black",
-                       subplot = 1, y = 1:2, labelPos = "center", label = 1:2),
-            linewidth = 10, showLabels = TRUE, background_lines = 11)
+plot_ranges(data.frame(
+  event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
+  end = as.POSIXct(c("2019-01-10", "2019-01-25")),
+  group = "", tooltip = "", col = "green", fontcol = "black",
+  subplot = 1, y = 1:2, labelPos = "center", label = 1:2
+),
+linewidth = 10, show_labels = TRUE, background_lines = 11
+)
 }
 }

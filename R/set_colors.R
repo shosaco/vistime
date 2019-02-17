@@ -7,16 +7,16 @@
 #' @return same data frame as input, but with columns \code{col} and \code{fontcol} filled with color codes or names.
 
 set_colors <- function(data, eventcolor_column, fontcolor_column) {
-  if(eventcolor_column %in% names(data)){
+  if (eventcolor_column %in% names(data)) {
     names(data)[names(data) == eventcolor_column] <- "col"
-  }else{
+  } else {
     palette <- "Set3"
     data$col <- rep(RColorBrewer::brewer.pal(min(11, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
   }
 
-  if(fontcolor_column %in% names(data)){
+  if (fontcolor_column %in% names(data)) {
     names(data)[names(data) == fontcolor_column] <- "fontcol"
-  }else{
+  } else {
     data$fontcol <- "black"
   }
 
