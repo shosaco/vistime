@@ -94,11 +94,21 @@
 #' }
 #' pp
 #'
+#' # or, using purrr:
+#' marker_idx <- which(purrr::map_chr(pp$x$data, "mode") == "text")
+#' for(i in marker_idx) pp$x$data[[i]]$textfont$size <- 28
+#' pp
+#'
 #' # Example 4: change marker size
 #' # loop over pp$x$data, and change the marker size of all text elements to 50px
 #' for (i in 1:length(pp$x$data)) {
 #'   if (pp$x$data[[i]]$mode == "markers") pp$x$data[[i]]$marker$size <- 40
 #' }
+#' pp
+#'
+#' # or, using purrr:
+#' marker_idx <- which(purrr::map_chr(pp$x$data, "mode") == "markers")
+#' for(i in marker_idx) pp$x$data[[i]]$marker$size <- 40
 #' pp
 #' }
 #'
