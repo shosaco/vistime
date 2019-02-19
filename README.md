@@ -226,6 +226,11 @@ for(i in 1:length(pp$x$data)){
 }
 
 pp
+
+# or, using purrr:
+# text_idx <- which(purrr::map_chr(pp$x$data, "mode") == "text")
+# for(i in text_idx) pp$x$data[[i]]$textfont$size <- 28
+# pp
 ```
 ![](inst/img/ex2-eventfontsize.png)
 
@@ -247,6 +252,11 @@ for(i in 1:length(pp$x$data)){
 }
 
 pp
+
+# or, using purrr:
+# marker_idx <- which(purrr::map_chr(pp$x$data, "mode") == "markers")
+# for(i in marker_idx) pp$x$data[[i]]$marker$size <- 10
+# pp
 ```
 
 ![](inst/img/ex3-markersize.png)

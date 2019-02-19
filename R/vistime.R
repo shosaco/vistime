@@ -95,8 +95,8 @@
 #' pp
 #'
 #' # or, using purrr:
-#' marker_idx <- which(purrr::map_chr(pp$x$data, "mode") == "text")
-#' for(i in marker_idx) pp$x$data[[i]]$textfont$size <- 28
+#' text_idx <- which(purrr::map_chr(pp$x$data, "mode") == "text")
+#' for(i in text_idx) pp$x$data[[i]]$textfont$size <- 28
 #' pp
 #'
 #' # Example 4: change marker size
