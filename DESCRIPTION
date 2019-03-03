@@ -1,12 +1,11 @@
 Package: vistime
 Title: Pretty Timeline Creation
-Version: 0.7.0.9000
-Date: 2019-01-27
+Version: 0.8.0
+Date: 2019-03-01
 Authors@R: person(
             "Sandro", "Raabe"
             , role = c("aut", "cre")
-            , email = "shosaco_nospam@hotmail.com"
-            )
+            , email = "shosaco_nospam@hotmail.com")
 Maintainer: Sandro Raabe <shosaco_nospam@hotmail.com>
 Description: Create interactive timelines or Gantt charts that
   are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' 
@@ -26,7 +25,6 @@ RoxygenNote: 6.1.1
 Suggests: ggplot2,
     knitr,
     rmarkdown,
-    tibble,
     devtools,
     testthat,
     covr,
