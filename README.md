@@ -40,13 +40,12 @@ install.packages("vistime")
 ```
 
 <!--
-To install the development version (v0.7.0.9000, most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
+To install the development version (v0.7.0.9000, most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console: -->
 
-```{r eval  = FALSE}
+```{r eval = FALSE, echo = FALSE}
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("shosaco/vistime")
 ```
--->
 
 ## 2. Usage and standard arguments
 
