@@ -1,22 +1,29 @@
 context("vistime.R")
 
-test_that("vistime main tests", {
-  data <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
+dat <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
 
-  generated <- vistime(data, events = "event", start = "start", end = "end",
-                       groups = "group", colors = "color", fontcolors = "fontcolor",
-                       tooltips = "tooltip", linewidth = NULL, title = NULL,
-                       show_labels = TRUE, lineInterval = NULL, background_lines = 11)
+generated <- vistime(dat, events = "event", start = "start", end = "end",
+                     groups = "group", colors = "color", fontcolors = "fontcolor",
+                     tooltips = "tooltip", linewidth = NULL, title = NULL,
+                     show_labels = TRUE, lineInterval = NULL, background_lines = 11)
 
-  expected <- readRDS("test_plot_glued.rds")
+test_that("class is htmlwidget", expect_is(generated, "htmlwidget"))
 
-  expect_equivalent(generated$x$attrs,
-    expected$x$attrs,
-    tolerance = 3601
-  )
+relevant_dat <- generated$x$attrs
 
-  expect_equivalent(generated$x$layout,
-    expected$x$layout,
-    tolerance = 3601
-  )
-})
+test_that("color is same as in df",
+          expect_equivalent("#8DD3C7",
+                            keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("line") %>% map("color") %>% as_vector))
+
+test_that("start and end",
+          expect_equivalent(dat[, c("start", "end")] %>% as.list() %>% map(as.POSIXct) %>% transpose,
+                            keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("x") %>% map(as.integer)))
+
+test_that("y values",
+          expect_equivalent(1,
+                            keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector))
+
+test_that("background_lines",
+          expect_equal(12,
+                       keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 2) %>% length))
+

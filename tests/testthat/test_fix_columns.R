@@ -1,6 +1,8 @@
 # unit tests for fix_columns.R
 context("fix_columns")
 
+library(purrr) # for all test files
+
 # example data frame
 dat <- data.frame(event = 1:2, start = c("2019-01-05", "2019-01-06"), stringsAsFactors = F)
 

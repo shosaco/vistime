@@ -1,9 +1,9 @@
-# 0.7.0.9000 (Github)
+# 0.8.0
 - internals (no exporting of helper functions, unit tests using testthat package, continuous integration using travis, test code coverage using covr)
 - activated Github Page: https://shosaco.github.io/vistime/
 - argument `showLabels` has been renamed to `show_labels` for consistency. A warning message is shown.
 
-# 0.7.0 (CRAN)
+# 0.7.0
 - we have a vignette now
 - events and ranges that are in the same group are now plotted directly below each other (in the past, all ranges were plotted first, followed by all events). Groups are sorted in order of first appearance but all items of one group are plotted together.
 - argument `lineInterval` is now deprecated. It was replaced by the new, more intuitive argument `background_lines` - the number of lines to draw in the background.

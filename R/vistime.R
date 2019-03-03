@@ -121,22 +121,7 @@ vistime <- function(data, events = "event", start = "start", end = "end", groups
 
   ranges <- plot_ranges(data, linewidth, show_labels, background_lines)
   events <- plot_events(data, show_labels, background_lines)
-  plotList <- append(ranges, events)
-
-  # sort plotList according to subplots, such that ranges and events stand together
-  plotList <- plotList[order(names(plotList))]
-
-  # determine heights of the subplots
-  heightsAbsolute <- sapply(
-    as.integer(c(names(ranges), names(events))),
-    function(sp) {
-      max(data$y[data$subplot == sp])
-    }
-  )
-  heightsRelative <- heightsAbsolute / sum(heightsAbsolute)
-
-  # glue everything together into one plot
-  total <- plot_glued(data, plotList, title, heightsRelative)
+  total <- plot_glued(data, title, ranges, events)
 
   return(total)
 }

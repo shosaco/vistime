@@ -29,5 +29,6 @@ Suggests: ggplot2,
     tibble,
     devtools,
     testthat,
-    covr
+    covr,
+    purrr
 VignetteBuilder: knitr

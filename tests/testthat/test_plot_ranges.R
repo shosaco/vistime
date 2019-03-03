@@ -5,40 +5,40 @@ linewidth <- 10
 show_labels <- TRUE
 background_lines <- 11
 
-test_that("data having ranges returns empty list", {
+dat <- data.frame(
+  event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
+  end = as.POSIXct(c("2019-01-10", "2019-01-15")),
+  group = "", tooltip = "", col = "green", fontcol = "black",
+  subplot = 1, y = 1:2, labelPos = "center", label = 1:2
+)
+
+test_that("data having no ranges returns empty list", {
   expect_equal(
-    plot_ranges(
-      data.frame(
-        event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
-        end = as.POSIXct(c("2019-01-01", "2019-01-10")),
-        group = "", tooltip = "", col = "green", fontcol = "black",
-        subplot = 1, y = 1:2, labelPos = "center", label = 1:2
-      ),
-      linewidth, show_labels, background_lines
-    ),
+    vistime:::plot_ranges(dat[,-3], linewidth, show_labels, background_lines),
     list()
   )
 })
 
-test_that("Main test", {
-  generated <- vistime:::plot_ranges(
-    data.frame(
-      event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
-      end = as.POSIXct(c("2019-01-10", "2019-01-15")),
-      group = "", tooltip = "", col = "green", fontcol = "black",
-      subplot = 1, y = 1:2, labelPos = "center", label = 1:2
-    ),
-    linewidth, show_labels, background_lines
-  )
-  expected <- readRDS("plot_ranges.rds")
+library(purrr)
+generated <- vistime:::plot_ranges(dat, linewidth, show_labels, background_lines)
 
-  expect_equivalent(
-    generated$x$attrs,
-    expected$x$attrs
-  )
+test_that("class is list", expect_is(generated, "list"))
 
-  expect_equivalent(
-    generated[[1]]$x$layout,
-    expected[[1]]$x$layout
-  )
-})
+relevant_dat <- generated[[1]]$x$attrs
+
+test_that("color is same as in df",
+          expect_equivalent(dat$col,
+                            keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("line") %>% map("color") %>% as_vector))
+
+test_that("start and end",
+          expect_equivalent(dat[, c("start", "end")] %>% as.list() %>% transpose,
+                            keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("x") %>% map(as.integer)))
+
+test_that("y values",
+          expect_equivalent(dat$y,
+                            keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector))
+
+test_that("background_lines",
+          expect_equal(background_lines + 1,
+                       keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 2) %>% length))
+
