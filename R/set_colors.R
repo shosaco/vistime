@@ -5,6 +5,8 @@
 #' @param fontcolor_column name of the lable color column
 #'
 #' @return same data frame as input, but with columns \code{col} and \code{fontcol} filled with color codes or names.
+#' @keywords internal
+#' @noRd
 
 set_colors <- function(data, eventcolor_column, fontcolor_column) {
   if (eventcolor_column %in% names(data)) {

@@ -9,6 +9,9 @@
 #'
 #' @return the data frame prepared for plotting
 #'
+#' @keywords internal
+#' @noRd
+#'
 #' @examples
 #' \dontrun{
 #' fix_columns(data.frame(

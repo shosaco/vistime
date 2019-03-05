@@ -6,6 +6,8 @@
 #'
 #' @return a list containing the plots for the groups in data
 #'
+#' @keywords internal
+#' @noRd
 #' @examples
 #' \dontrun{
 #' plot_events(data.frame(
@@ -76,3 +78,4 @@ plot_events <- function(data_orig, show_labels, background_lines) {
   names(events) <- eventNumbers # preserve order of subplots
   return(events)
 }
+#' @noRd

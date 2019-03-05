@@ -13,7 +13,8 @@
 #' @param background_lines interval of grey background lines
 #'
 #' @return the data frame with possibly new or renamed columns, or an error
-#'
+#' @keywords internal
+#' @noRd
 #' @examples
 #' \dontrun{
 #' validate_input(data.frame(event = 1:2, start = c("2019-01-01", "2019-01-10")),

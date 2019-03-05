@@ -6,6 +6,8 @@
 #' @param data the data frame with ranges and events
 #'
 #' @return data with additional numeric column "subplot", reordered by subplot column.
+#' @keywords internal
+#' @noRd
 #' @examples
 #' \dontrun{
 #' set_subplots(data.frame(

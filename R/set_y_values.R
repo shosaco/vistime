@@ -5,7 +5,8 @@
 #' @param data the data frame with data to be distributed, has to have \code{start}, \code{end} and \code{subplot} column
 #'
 #' @return the data frame enriched with numeric \code{y} column
-#'
+#' @keywords internal
+#' @noRd
 #' @examples
 #' \dontrun{
 #' set_y_values(data.frame(
