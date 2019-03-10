@@ -10,7 +10,7 @@ vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
   tooltips = "tooltip", linewidth = NULL, title = NULL,
   showLabels = NULL, show_labels = TRUE, lineInterval = NULL,
-  background_lines = 11)
+  background_lines = 10)
 }
 \arguments{
 \item{data}{(required) \code{data.frame} that contains the data to be visualised}
@@ -75,6 +75,8 @@ pres <- data.frame(
 )
 
 vistime(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
+
+
 \dontrun{
 # more complex and colorful example
 data <- read.csv(text = "event,group,start,end,color

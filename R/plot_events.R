@@ -16,7 +16,7 @@
 #'   group = "", tooltip = "", col = "green", fontcol = "black",
 #'   subplot = 1, y = 1:2, labelPos = "center", label = 1:2
 #' ),
-#' show_labels = TRUE, background_lines = 11
+#' show_labels = TRUE, background_lines = 10
 #' )
 #' }
 plot_events <- function(data_orig, show_labels, background_lines) {

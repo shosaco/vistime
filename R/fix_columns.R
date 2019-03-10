@@ -1,6 +1,6 @@
 #' Standardize column names
 #'
-#' @param data input data frmae
+#' @param data input data frame
 #' @param events event column name
 #' @param start name of start column
 #' @param end name of end column
@@ -77,5 +77,5 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
     data$event
   )
 
-  return(data[, c("event", "start", "end", "group", "tooltip", "labelPos", "label")])
+  return(data[, c("event", "start", "end", "group", "tooltip", "labelPos", "label", "col", "fontcol")])
 }

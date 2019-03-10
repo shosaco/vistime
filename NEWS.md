@@ -1,3 +1,6 @@
+# 0.8.0.9000
+- hotfix: colors and fontcolors handling was broken.
+
 # 0.8.0
 - internals (no exporting of helper functions, unit tests using testthat package, continuous integration using travis, test code coverage using covr)
 - activated Github Page: https://shosaco.github.io/vistime/

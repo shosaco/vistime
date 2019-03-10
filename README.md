@@ -44,7 +44,7 @@ install.packages("vistime")
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
               fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, 
-              title = NULL, show_labels = TRUE, background_lines = 11)
+              title = NULL, show_labels = TRUE, background_lines = 10)
 ```
 
 ## 3. Arguments

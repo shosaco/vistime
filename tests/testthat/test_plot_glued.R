@@ -17,10 +17,10 @@ title <- NULL
 showLabels <- NULL
 show_labels <- TRUE
 lineInterval <- NULL
-background_lines <- 11
+background_lines <- 10
 data <- vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
-data <- vistime:::fix_columns(data, events, start, end, groups, tooltips)
 data <- vistime:::set_colors(data, colors, fontcolors)
+data <- vistime:::fix_columns(data, events, start, end, groups, tooltips)
 data <- vistime:::set_subplots(data)
 data <- vistime:::set_y_values(data)
 ranges <- vistime:::plot_ranges(data, linewidth, show_labels, background_lines)
@@ -45,15 +45,15 @@ test_that("y of ranges",
                             (ranges[[1]]$x$attrs %>% map("y"))[1:12]))
 
 test_that("x of events",
-          expect_equivalent((keep(relevant_dat, ~.x$yaxis == "y2") %>% map("x") %>% map(unique) %>% compact)[1:12],
-                            events[[1]]$x$attrs %>% map("x") %>% keep(~ "POSIXct" %in% class(.x))))
+          expect_equivalent((keep(relevant_dat, ~.x$yaxis == "y2") %>% map("x") %>% map(unique) %>% compact)[1:11],
+                            (events[[1]]$x$attrs %>% map("x"))[2:12]))# %>% keep(~ "POSIXct" %in% class(.x))))
 
 test_that("y of events",
-          expect_equivalent((keep(relevant_dat, ~.x$yaxis == "y2") %>% map("y") %>% map(unique) %>% compact)[1:12],
-                            events[[1]]$x$attrs %>% keep(~is.numeric(.x$y)) %>% map("y")))
+          expect_equivalent((keep(relevant_dat, ~.x$yaxis == "y2") %>% map("y") %>% map(unique) %>% compact)[1:11],
+                            (events[[1]]$x$attrs %>% keep(~is.numeric(.x$y)) %>% map("y"))))
 
 test_that("background_lines",
-          expect_equal(2 * (background_lines + 1),
+          expect_equal(2 * background_lines + 2,
                        keep(relevant_dat, ~.x$y[1] == 0 && .x$y[2] == 2) %>% length))
 
 

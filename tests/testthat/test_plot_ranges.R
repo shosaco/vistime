@@ -1,25 +1,41 @@
 context("Plot ranges")
 
-# standard arguments
-linewidth <- 10
+
+# preparations
+events <- "event"
+start <- "start"
+end <- "end"
+groups <- "group"
+colors <- "color"
+fontcolors <- "fontcolor"
+tooltips <- "tooltip"
+linewidth <- NULL
+title <- NULL
+showLabels <- NULL
 show_labels <- TRUE
-background_lines <- 11
+lineInterval <- NULL
+background_lines <- 10
 
 dat <- data.frame(
-  event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
-  end = as.POSIXct(c("2019-01-10", "2019-01-15")),
-  group = "", tooltip = "", col = "green", fontcol = "black",
-  subplot = 1, y = 1:2, labelPos = "center", label = 1:2
+  event = 1:2, start = c("2019-01-01", "2019-01-10"),
+  end = c("2019-01-10", "2019-01-15"),
+  col = "green", fontcol = "black"
 )
 
+dat <- vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+dat <- vistime:::set_colors(dat, colors, fontcolors)
+dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
+dat <- vistime:::set_subplots(dat)
+dat <- vistime:::set_y_values(dat)
+
 test_that("data having no ranges returns empty list", {
+  dat$end <- dat$start
   expect_equal(
-    vistime:::plot_ranges(dat[,-3], linewidth, show_labels, background_lines),
+    vistime:::plot_ranges(dat, linewidth, show_labels, background_lines),
     list()
   )
 })
 
-library(purrr)
 generated <- vistime:::plot_ranges(dat, linewidth, show_labels, background_lines)
 
 test_that("class is list", expect_is(generated, "list"))
