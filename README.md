@@ -33,19 +33,18 @@ If you find vistime useful, please consider supporting its development: <a href=
 
 ## 1. Installation
 
-To install the package from CRAN (v0.8.1):
+To install the package from CRAN (v0.8.1), type the following in your R console:
 ```{r}
 install.packages("vistime")
 ```
 
-<!--
-To install the package (version 0.8.1), type the following in your R console:
+To install the development version (v0.8.1.9000, containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 
 ```{r}
 if(!require("devtools")) install.packages("devtools")
 devtools::install_github("shosaco/vistime")
 ```
--->
+
 
 ## 2. Usage and standard arguments
 
