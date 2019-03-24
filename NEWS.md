@@ -1,4 +1,4 @@
-# 0.8.0.9000
+# 0.8.1
 - hotfix: colors and fontcolors handling was broken.
 
 # 0.8.0
