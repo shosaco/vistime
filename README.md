@@ -12,7 +12,7 @@ Create interactive timelines or Gantt charts that are usable in the 'RStudio' vi
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
-**Feedback welcome:** shosaco_nospam@hotmail.com  
+**Feedback welcome:** shosaco_nospam@hotmail.com   
 
 ## Table of Contents
 
