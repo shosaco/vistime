@@ -1,4 +1,4 @@
-# 0.8.1.9000
+# 0.8.1.9000 
 - fixed bug for plots having more than 9 groups - in these cases the order was not the same as in the input data frame
 
 # 0.8.1
