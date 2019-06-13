@@ -53,7 +53,7 @@ The basic syntax and all possible arguments are:
 
 ```{r eval=FALSE}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-              fontcolors = "fontcolor", tooltips = "tooltip", linewidth = NULL, 
+              fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
               title = NULL, show_labels = TRUE, background_lines = 10)
 ```
 
@@ -71,6 +71,7 @@ events | optional | character | the column name in data that contains event name
 colors | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
 fontcolors | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
 tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
+optimize_y | optional | logical | distribute events on y-axis by smart heuristic (default) or use order of input data.
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
 show_labels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
