@@ -4,5 +4,4 @@
 .Ruserdata
 *.Rproj
 .gitignore
-working
 inst/doc
