@@ -8,6 +8,7 @@ groups <- "group"
 colors <- "color"
 fontcolors <- "fontcolor"
 tooltips <- "tooltip"
+optimize_y <- TRUE
 linewidth <- NULL
 title <- NULL
 showLabels <- NULL
@@ -25,4 +26,4 @@ dat <- vistime:::set_colors(dat, colors, fontcolors)
 dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
 dat <- vistime:::set_subplots(dat)
 
-test_that("Main test", expect_equal(vistime:::set_y_values(dat)$y, rep(1:2, 2)))
+test_that("Main test", expect_equal(vistime:::set_y_values(dat, optimize_y)$y, rep(1:2, 2)))

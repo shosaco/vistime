@@ -9,6 +9,7 @@ groups <- "group"
 colors <- "color"
 fontcolors <- "fontcolor"
 tooltips <- "tooltip"
+optimize_y <- TRUE
 linewidth <- NULL
 title <- NULL
 showLabels <- NULL
@@ -26,7 +27,7 @@ dat <- vistime:::validate_input(dat, start, end, events, groups, linewidth, titl
 dat <- vistime:::set_colors(dat, colors, fontcolors)
 dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
 dat <- vistime:::set_subplots(dat)
-dat <- vistime:::set_y_values(dat)
+dat <- vistime:::set_y_values(dat,optimize_y)
 
 test_that("data having no ranges returns empty list", {
   dat$end <- dat$start

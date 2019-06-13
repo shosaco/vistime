@@ -12,6 +12,7 @@ groups <- "group"
 colors <- "color"
 fontcolors <- "fontcolor"
 tooltips <- "tooltip"
+optimize_y <- TRUE
 linewidth <- NULL
 title <- NULL
 showLabels <- NULL
@@ -22,7 +23,7 @@ data <- vistime:::validate_input(dat, start, end, events, groups, linewidth, tit
 data <- vistime:::set_colors(data, colors, fontcolors)
 data <- vistime:::fix_columns(data, events, start, end, groups, tooltips)
 data <- vistime:::set_subplots(data)
-data <- vistime:::set_y_values(data)
+data <- vistime:::set_y_values(data, optimize_y)
 ranges <- vistime:::plot_ranges(data, linewidth, show_labels, background_lines)
 events <- vistime:::plot_events(data, show_labels, background_lines)
 generated <- vistime:::plot_glued(data, title, ranges, events)
