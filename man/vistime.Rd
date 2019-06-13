@@ -8,9 +8,9 @@
 \usage{
 vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
-  tooltips = "tooltip", linewidth = NULL, title = NULL,
-  showLabels = NULL, show_labels = TRUE, lineInterval = NULL,
-  background_lines = 10)
+  tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL,
+  title = NULL, showLabels = NULL, show_labels = TRUE,
+  lineInterval = NULL, background_lines = 10)
 }
 \arguments{
 \item{data}{(required) \code{data.frame} that contains the data to be visualised}
@@ -38,6 +38,8 @@ color will be black.}
 \item{tooltips}{(optional, character) the column name in \code{data} that contains the
 mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
 then tooltips are build from event name and date.}
+
+\item{optimize_y}{(optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.}
 
 \item{linewidth}{(optional, numeric) the linewidth (in pixel) for the events (typically used for
 large amount of parallel events). Default: heuristic value.}
