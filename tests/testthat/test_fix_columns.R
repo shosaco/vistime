@@ -14,13 +14,14 @@ groups <- "group"
 colors <- "color"
 fontcolors <- "fontcolor"
 tooltips <- "tooltip"
+optimize_y <- TRUE
 linewidth <- NULL
 title <- NULL
 showLabels <- NULL
 show_labels <- TRUE
 lineInterval <- NULL
 background_lines <- 10
-dat <- vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+dat <- vistime:::validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
 dat <- vistime:::set_colors(dat, colors, fontcolors)
 
 test_that("new columns", {

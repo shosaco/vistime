@@ -18,37 +18,54 @@
 #' @examples
 #' \dontrun{
 #' validate_input(data.frame(event = 1:2, start = c("2019-01-01", "2019-01-10")),
-#'   events = "event", start = "start", end = "end", groups = "group",
-#'   linewidth = NULL, title = NULL, showLabels = NULL, show_labels = TRUE,
+#'   events = "event", start = "start", end = "end", groups = "group", tooltips = NULL,
+#'   optimize_y = TRUE, linewidth = NULL, title = NULL, showLabels = NULL, show_labels = TRUE,
 #'   lineInterval = NULL, background_lines = 10
 #' )
 #' }
-validate_input <- function(data, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines) {
+validate_input <- function(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines) {
+
+  assertive::assert_is_character(start)
+  assertive::assert_is_character(end)
+  assertive::assert_is_character(events)
+  assertive::assert_is_character(groups)
+  assertive::assert_is_character(tooltips)
+  assertive::assert_is_logical(optimize_y)
+  if(!is.null(linewidth)) assertive::assert_is_numeric(linewidth)
+  if(!is.null(title)) assertive::assert_is_character(title)
+  assertive::assert_is_numeric(background_lines)
+  assertive::assert_is_logical(show_labels)
+
   if (class(try(as.data.frame(data), silent = T))[1] == "try-error")
     stop(paste("Expected an input data frame, but encountered", class(data)[1]))
+
   data <- as.data.frame(data, stringsAsFactors = F)
+
   if (!start %in% names(data))
     stop("Please provide the name of the start date column in parameter 'start'")
+
   if (sum(!is.na(data[, start])) < 1)
     stop(paste("error in start column: Please provide at least one point in time"))
+
   if (class(try(as.POSIXct(data[, start]), silent = T))[1] == "try-error")
     stop(paste("date format error: please make sure columns", start, "and", end, "can be converted to POSIXct type"))
+
   if (!events %in% names(data))
     stop("Please provide the name of the events column in parameter 'events'")
-  if (!is.null(linewidth) & !class(linewidth) %in% c("integer", "numeric"))
-    stop("linewidth must be a number")
-  if (!is.null(title) & !class(title) %in% c("character", "numeric", "integer"))
-    stop("Title must be a String")
+
   if (!is.null(showLabels)){
     .Deprecated(msg = "showLabels is deprecated. Use show_labels instead.")
     show_labels = showLabels
   }
-  if (is.null(show_labels) || !(show_labels %in% c(TRUE, FALSE)))
-    stop("show_labels must be a logical value.")
+
   if (!is.null(lineInterval))
     .Deprecated(msg = "lineInterval is deprecated. Use background_lines instead for number of background sections to draw. Will divide timeline into 10 sections by default.")
-  if (!class(background_lines) == "numeric")
-    stop("background_lines must be numeric.")
+
+  if(round(background_lines) != background_lines){
+    background_lines <- round(background_lines)
+    warning("background_lines was not integer. Rounded to ", background_lines)
+  }
+
 
   return(data)
 }

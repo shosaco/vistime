@@ -19,7 +19,7 @@ showLabels <- NULL
 show_labels <- TRUE
 lineInterval <- NULL
 background_lines <- 10
-data <- vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+data <- vistime:::validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
 data <- vistime:::set_colors(data, colors, fontcolors)
 data <- vistime:::fix_columns(data, events, start, end, groups, tooltips)
 data <- vistime:::set_subplots(data)

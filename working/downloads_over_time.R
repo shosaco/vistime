@@ -52,7 +52,8 @@ ui <- fluidPage(
                   multiple = TRUE),
       radioButtons("transformation",
                    "Data Transformation:",
-                   c("Daily" = "daily", "Weekly" = "weekly", "Cumulative" = "cumulative")),
+                   c("Monthly" = "monthly", "Weekly" = "weekly", "Cumulative" = "cumulative")),
+      sliderInput("mav_n", "Windows for moving average", min = 1, max = 50, step = 5, value = 7),
       HTML("Created using the <a href='https://github.com/metacran/cranlogs'>cranlogs</a> package.",
            "This app is not affiliated with RStudio or CRAN.",
            "You can find the code for the app <a href='https://github.com/dgrtwo/cranview'>here</a>,",
@@ -73,21 +74,27 @@ server <- function(input, output) {
       # cran_downloads0 <- purrr::possibly(cran_downloads, otherwise = NULL)
       cran_downloads(packages = packages,
                       from    = get_initial_release_date(packages),
-                      to      = Sys.Date()-1)
+                      to      = Sys.Date()-2)
     })
 
     output$downloadsPlot <- renderPlotly({
       d <- downloads()
 
-      if (input$transformation=="weekly") {
-        d <- d %>% mutate(count = rollapply(count, 7, sum, fill=0))
+      if (input$transformation=="monthly") {
+        d <- d %>%
+          group_by(package) %>% mutate(count = rollsum(count, 30, fill=0)) %>% ungroup()
+      } else if (input$transformation=="weekly") {
+        d <- d %>%
+          group_by(package) %>% mutate(count = rollsum(count, 7, fill=0)) %>% ungroup()
       } else if (input$transformation=="cumulative") {
         d = d %>%
           group_by(package) %>%
           transmute(count=cumsum(count), date=date)
       }
 
-      p <- plot_ly(d, type="bar", x=~date, y=~count, color=~package) %>%
+      d <- d %>% group_by(package) %>% mutate(mav = rollmean(count, input$mav_n, fill = 0, align = "right")) %>% ungroup()
+
+      p <- plot_ly(d, type="scatter", x=~date, y=~mav, color=~package) %>%
         layout(xaxis=list(title="Date"),
                yaxis=list(title="Number of downloads"))
 
@@ -96,8 +103,9 @@ server <- function(input, output) {
         releases <- content(GET(paste0("http://crandb.r-pkg.org/vistime/all")))$timeline
 
         for(version in names(releases)){
-         # browser()
-          p <- p %>% add_segments(x = as.POSIXct(releases[[version]]), xend = as.POSIXct(releases[[version]]),
+
+          p <- p %>%
+            add_segments(x = as.POSIXct(releases[[version]]), xend = as.POSIXct(releases[[version]]),
                                  y = 0, yend = max(d$count), color = I("grey"), showlegend = FALSE) %>%
             add_text(x = as.POSIXct(releases[[version]]),
                      y = max(d$count)*1.01,

@@ -18,15 +18,15 @@
 #' ), optimize_y = TRUE, stringsAsFactors = F)
 #' }
 set_y_values <- function(data, optimize_y) {
-  if(optimize_y) data <- data[with(data, order(subplot, start)), ] # order by "start"
-  if(!optimize_y) data <- data[with(data, order(subplot)), ]
+  if(optimize_y) data <- data[order(data$subplot, data$start), ] # order by "start"
+  if(!optimize_y) data <- data[order(data$subplot), ]
 
   row.names(data) <- 1:nrow(data)
 
   for (sp in unique(data$subplot)) {
 
     # subset data for this group
-    thisData <- subset(data, subplot == sp)
+    thisData <- data[data$subplot == sp, ]
     thisData$y <- 0
 
     if(optimize_y){

@@ -33,13 +33,13 @@ plot_ranges <- function(data_orig, linewidth, show_labels, background_lines) {
     thisData <- data[data$subplot == sp, ]
     maxY <- max(thisData$y) + 1
 
-    p <- plot_ly(data, type = "scatter", mode = "lines")
+    p <- plotly::plot_ly(data, type = "scatter", mode = "lines")
 
     # 1. add vertical line for each year/day
     for (day in seq(min(data_orig$start), max(data_orig$end), length.out = background_lines + 1)) {
-      p <- add_trace(p,
+      p <- plotly::add_trace(p,
         x = as.POSIXct(day, origin = "1970-01-01"), y = c(0, maxY), mode = "lines",
-        line = list(color = toRGB("grey90")), showlegend = F, hoverinfo = "none"
+        line = list(color = plotly::toRGB("grey90")), showlegend = F, hoverinfo = "none"
       )
     }
 
@@ -48,7 +48,7 @@ plot_ranges <- function(data_orig, linewidth, show_labels, background_lines) {
     for (i in (1:nrow(thisData))) {
       toAdd <- thisData[i, ]
 
-      p <- add_trace(p,
+      p <- plotly::add_trace(p,
         x = c(toAdd$start, toAdd$end), # von, bis
         y = toAdd$y,
         line = list(color = toAdd$col, width = linewidth),
@@ -58,10 +58,10 @@ plot_ranges <- function(data_orig, linewidth, show_labels, background_lines) {
       )
       # add annotations or not
       if (show_labels) {
-        p <- add_text(p,
+        p <- plotly::add_text(p,
           x = toAdd$start + (toAdd$end - toAdd$start) / 2, # in der Mitte
           y = toAdd$y,
-          textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
+          textfont = list(family = "Arial", size = 14, color = plotly::toRGB(toAdd$fontcol)),
           textposition = "center",
           showlegend = F,
           text = toAdd$label,
@@ -70,7 +70,7 @@ plot_ranges <- function(data_orig, linewidth, show_labels, background_lines) {
       }
     }
 
-    return(p %>% layout(
+    return(plotly::layout(p,
       hovermode = "closest",
       # Axis options:
       # 1. Remove gridlines

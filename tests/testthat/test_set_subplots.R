@@ -8,6 +8,7 @@ groups <- "group"
 colors <- "color"
 fontcolors <- "fontcolor"
 tooltips <- "tooltip"
+optimize_y <- TRUE
 linewidth <- NULL
 title <- NULL
 showLabels <- NULL
@@ -20,7 +21,7 @@ dat <- data.frame(
   end = c("2019-01-10", "2019-01-20", "2019-01-01")
 )
 
-dat <- vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+dat <- vistime:::validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
 dat <- vistime:::set_colors(dat, colors, fontcolors)
 dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
 

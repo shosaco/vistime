@@ -1,4 +1,5 @@
 context("vistime.R")
+library(purrr)
 
 dat <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
 
@@ -58,8 +59,8 @@ test_that("colors are same as in dataframe", {
 })
 
 test_that("x values are same as in dataframe", {
-  expect_equivalent(pres[,c("start", "end")] %>% arrange(start) ,
-                    keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("x") %>% as.data.frame() %>% t %>% as.data.frame %>% arrange(V1) )
+  expect_equivalent(pres[,c("start", "end")] %>% dplyr::arrange(start) ,
+                    keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("x") %>% as.data.frame() %>% t %>% as.data.frame %>% dplyr::arrange(V1) )
 })
 
 test_that("y values are distributed", {

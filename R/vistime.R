@@ -31,7 +31,6 @@
 #'   visible. Default: \code{TRUE}.
 #' @param lineInterval deprecated, use argument background_lines instead.
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.
-#' @import plotly
 #' @export
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 #' @examples
@@ -119,7 +118,7 @@ vistime <- function(data, events = "event", start = "start", end = "end", groups
                     colors = "color", fontcolors = "fontcolor", tooltips = "tooltip",
                     optimize_y = TRUE, linewidth = NULL, title = NULL, showLabels = NULL,
                     show_labels = TRUE, lineInterval = NULL, background_lines = 10) {
-  data <- validate_input(data, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+  data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
   data <- set_colors(data, colors, fontcolors)
   data <- fix_columns(data, events, start, end, groups, tooltips)
   data <- set_subplots(data)

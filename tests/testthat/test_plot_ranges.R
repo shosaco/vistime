@@ -23,7 +23,7 @@ dat <- data.frame(
   col = "green", fontcol = "black"
 )
 
-dat <- vistime:::validate_input(dat, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+dat <- vistime:::validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
 dat <- vistime:::set_colors(dat, colors, fontcolors)
 dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
 dat <- vistime:::set_subplots(dat)

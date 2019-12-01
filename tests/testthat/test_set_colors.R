@@ -8,6 +8,7 @@ groups <- "group"
 colors <- "color"
 fontcolors <- "fontcolor"
 tooltips <- "tooltip"
+optimize_y <- TRUE
 linewidth <- NULL
 title <- NULL
 showLabels <- NULL
@@ -20,7 +21,7 @@ data <- data.frame(
   FARBE = c("red", "green"),
   stringsAsFactors = FALSE
 )
-data <- vistime:::validate_input(data, start, end, events, groups, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+data <- vistime:::validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
 
 
 test_that("color columns not existing", {

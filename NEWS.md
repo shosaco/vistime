@@ -1,8 +1,9 @@
-# 0.8.1.9000 
+# 0.8.1.9000
 - fixed bug for plots having more than 9 groups - in these cases the order was not the same as in the input data frame
 - new argument `optimize_y` (default: `TRUE`)
   * if `optimize_y = TRUE`, use heuristic to optimally distribute events on y axis
   * if `optimize_y = FALSE`, use fixed order from input data
+- changed package dependencies: (e.g. plotly only Imported, not Depends)
 
 # 0.8.1
 - hotfix: colors and fontcolors handling was broken.

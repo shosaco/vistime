@@ -23,10 +23,9 @@ plot_glued <- function(data, title, ranges, events) {
   )
   heightsRelative <- heightsAbsolute / sum(heightsAbsolute)
 
-  subplot(plotList, nrows = length(plotList), shareX = T, margin = 0,
-          heights = heightsRelative) %>%
-    layout(
-      title = title,
-      margin = list(l = max(nchar(data$group)) * 8)
-    )
+  plotly::layout(plotly::subplot(plotList, nrows = length(plotList), shareX = T, margin = 0,
+                                 heights = heightsRelative),
+                 title = title,
+                 margin = list(l = max(nchar(data$group)) * 8)
+  )
 }
