@@ -1,17 +1,17 @@
-# 0.8.1.9000
+# 0.9.0
 - fixed bug for plots having more than 9 groups - in these cases the order was not the same as in the input data frame
 - new argument `optimize_y` (default: `TRUE`)
   * if `optimize_y = TRUE`, use heuristic to optimally distribute events on y axis
-  * if `optimize_y = FALSE`, use fixed order from input data
-- changed package dependencies: (e.g. plotly only Imported, not Depends)
+  * if `optimize_y = FALSE`, use fixed order on y axis according to input data
+- changed package dependencies: (e.g. plotly only Imports, not Depends)
 
 # 0.8.1
 - hotfix: colors and fontcolors handling was broken.
 
 # 0.8.0
-- internals (no exporting of helper functions, unit tests using testthat package, continuous integration using travis, test code coverage using covr)
+- internals (no exporting of helper functions, unit tests using `testthat` package, continuous integration using `travis`, test code coverage using `covr`)
 - activated Github Page: https://shosaco.github.io/vistime/
-- argument `showLabels` has been renamed to `show_labels` for consistency. A warning message is shown.
+- argument `showLabels` has been renamed to `show_labels` for consistency. A deprecation message is shown.
 
 # 0.7.0
 - we have a vignette now

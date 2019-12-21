@@ -124,3 +124,5 @@ Vitabell<-data.frame(event= c("acceptering", "validering", "1a_kompletering", "u
 vistime(Vitabell, events="event", start= "st", end="sl",groups = "projekt", title="Evaluation times")
 
 
+
+vistime(Vitabell, events="event", start= "st", end="sl",groups = "projekt", title="Evaluation times", optimize_y = F, linewidth = 5)
