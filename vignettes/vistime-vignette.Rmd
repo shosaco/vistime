@@ -24,7 +24,7 @@ With this package, your can use tabular data to create interactive timelines or 
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
-**Feedback welcome:** shosaco_nospam@hotmail.com  
+**Feedback welcome:** sa.ra.online@posteo.de  
 
 ## 1. Installation
 

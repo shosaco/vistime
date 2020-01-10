@@ -1,6 +1,6 @@
 [![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![dev](https://img.shields.io/badge/dev-0.8.1.9000-green.svg)]()
+<!-- [![dev](https://img.shields.io/badge/dev-0.8.1.9000-green.svg)]() -->
 [![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime) 
@@ -8,11 +8,11 @@
 vistime - Pretty Timeline Creation
 =========
 
-Create interactive timelines or Gantt charts that are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using 'plotly_build()', which transforms the plot into a mutable list.
+Create interactive timelines or Gantt charts that are usable in the RStudio viewer pane, in R Markdown documents and in Shiny apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
-**Feedback welcome:** shosaco_nospam@hotmail.com 
+**Feedback welcome:** [sa.ra.online@posteo.de](mailto:sa.ra.online@posteo.de)
 
 ## Table of Contents
 
@@ -90,7 +90,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                   
 vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 ```
-![](inst/img/ex2.png)
+<img src="inst/img/ex2.png" />
 
 ### Ex. 2: Project Planning
 ```{r}
@@ -123,7 +123,7 @@ data <- read.csv(text="event,group,start,end,color
 vistime(data)
 ```
 
-![](inst/img/ex3.png)
+<img src="inst/img/ex3.png" />
 
 ## 6. Export of vistime as PDF or PNG
 
@@ -188,7 +188,7 @@ pp$x$layout$xaxis$tickfont <- list(size = 28)
 
 pp
 ```
-![](inst/img/ex2-tickfontsize.png)
+<img src="inst/img/ex2-tickfontsize.png" />
 
 ### Changing y-axis tick font size
 We have several y-axes, that's why we need to change the font size in all of them:
@@ -201,7 +201,7 @@ for(i in grep("yaxis*", names(pp$x$layout))){
 
 pp
 ```
-![](inst/img/ex2-yfontsize.png)
+<img src="inst/img/ex2-yfontsize.png" />
 
 ### Changing events font size
 The following example creates the presidents example and manipulates the font size of the events:
@@ -232,7 +232,7 @@ pp
 # for(i in text_idx) pp$x$data[[i]]$textfont$size <- 28
 # pp
 ```
-![](inst/img/ex2-eventfontsize.png)
+<img src="inst/img/ex2-eventfontsize.png" />
 
 ### Changing marker size
 The following example a simple example using markers and manipulates the size of the markers:
@@ -259,5 +259,5 @@ pp
 # pp
 ```
 
-![](inst/img/ex3-markersize.png)
+<img src="inst/img/ex3-markersize.png" />
 

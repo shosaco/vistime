@@ -148,7 +148,7 @@ pp
 
 }
 \author{
-Sandro Raabe \email{shosaco_nospam@hotmail.com}
+Sandro Raabe \email{sa.ra.online@posteo.de}
 }
 \keyword{gantt}
 \keyword{plotly}
