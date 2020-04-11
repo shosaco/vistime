@@ -27,19 +27,19 @@ dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
 
 test_that("ranges: no groups yield 1 subplot", {
   dat <- dat[dat$start != dat$end]
-  expect_equal(1, unique(vistime:::set_subplots(dat)$subplot))
+  expect_equal(1, unique(vistime:::set_order(dat)$subplot))
 })
 
 test_that("one subplot per group", {
   dat$group <- c(1,1,2)
-  result <- vistime:::set_subplots(dat)
+  result <- vistime:::set_order(dat)
   expect_equal(result$group, result$subplot)
 })
 
 test_that("if range and event in same group, different subplots", {
   dat$group <- c(1, 2, 1)
-  result <- vistime:::set_subplots(dat)
+  result <- vistime:::set_order(dat)
 
   expect_gt(length(result[result$group == 1, "subplot"]), 1) # Group 1 must have more than 1 subplot
-  expect_equal(diff(result$subplot[result$group == 1]), 1) # Group 1 must have subplot x and x + 1
+  expect_equal(unique(result$subplot[result$group == 1]), 1) # Group 1 must have a single subplot
 })

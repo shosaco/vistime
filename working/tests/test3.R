@@ -1,5 +1,5 @@
 # 1. data
-origData <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
+data <- data.frame(Position=c(rep("President", 3), rep("Vice", 3)),
 Name = c("Washington", "Adams", "Jefferson", "Adams", "Jefferson", "Burr"),
 start = rep(c("1789-03-29", "1797-02-03", "1801-02-03"), 2),
 end = rep(c("1797-02-03", "1801-02-03", "1809-02-03"), 2),
@@ -21,4 +21,4 @@ title=NULL
 events="Position"
 title="Presidents of the USA"
 
-vistime(origData, events="Position", title="Presidents of the USA")
+vistime(data, events="Position", title="Presidents of the USA")

@@ -24,7 +24,7 @@ dat <- data.frame(
 dat <- vistime:::validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
 dat <- vistime:::set_colors(dat, colors, fontcolors)
 dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
-dat <- vistime:::set_subplots(dat)
+dat <- vistime:::set_order(dat)
 
 test_that("Main test", expect_equal(vistime:::set_y_values(dat, optimize_y)$y, rep(1:2, 2)))
-test_that("optimize_y", expect_equal(vistime:::set_y_values(dat, FALSE)$y, as.integer(factor(dat$event))))
+test_that("optimize_y", expect_equal(vistime:::set_y_values(dat, FALSE)$y, rev(as.integer(factor(dat$event)))))

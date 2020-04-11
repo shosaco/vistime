@@ -1,3 +1,6 @@
+# 0.9.0.9000
+- major rework: no subplotting anymore -> now everything is in a single plot and can be zoomed seamlessly
+
 # 0.9.0
 - fixed bug for plots having more than 9 groups - in these cases the order was not the same as in the input data frame
 - new argument `optimize_y` (default: `TRUE`)

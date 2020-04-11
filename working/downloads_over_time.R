@@ -82,10 +82,10 @@ server <- function(input, output) {
 
       if (input$transformation=="monthly") {
         d <- d %>%
-          group_by(package) %>% mutate(count = rollsum(count, 30, fill=0)) %>% ungroup()
+          group_by(package) %>% mutate(count = rollsum(count, 30, fill=NA)) %>% ungroup() %>% filter(!is.na(count))
       } else if (input$transformation=="weekly") {
         d <- d %>%
-          group_by(package) %>% mutate(count = rollsum(count, 7, fill=0)) %>% ungroup()
+          group_by(package) %>% mutate(count = rollsum(count, 7, fill=NA)) %>% ungroup() %>% filter(!is.na(count))
       } else if (input$transformation=="cumulative") {
         d = d %>%
           group_by(package) %>%

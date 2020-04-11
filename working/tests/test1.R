@@ -17,7 +17,7 @@ crono <- sapply(crono, as.character)
 events$end_year <- NA
 events$Group<-c(1,2,1,2,1,2)
 events <- sapply(events, as.character)
-origData<-as.data.frame(rbind(crono, events[, c(1,4,2,3)]))
+data <- as.data.frame(rbind(crono, events[, c(1,4,2,3)]))
 
 # 3. function call
-vistime(origData,events="Name", start="start_year", end="end_year", groups="Group", linewidth=70)
+vistime(data, events="Name", start="start_year", end="end_year", groups="Group", linewidth=70)

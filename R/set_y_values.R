@@ -18,44 +18,64 @@
 #' ), optimize_y = TRUE, stringsAsFactors = F)
 #' }
 set_y_values <- function(data, optimize_y) {
-  if(optimize_y) data <- data[order(data$subplot, data$start), ] # order by "start"
-  if(!optimize_y) data <- data[order(data$subplot), ]
+   if(optimize_y) data <- data[order(data$subplot, -rank(data$start), -as.integer(factor(data$event, levels = unique(data$event)))), ] # order by group and start (and event if tie, as in order of data)
+  #if(!optimize_y) data <- data[order(rev(as.integer(factor(data$group)))), ]
 
   row.names(data) <- 1:nrow(data)
 
-  for (sp in unique(data$subplot)) {
+  # decide y-position for each group, then elevate them at the end
+  for (i in unique(data$subplot)) {
 
     # subset data for this group
-    thisData <- data[data$subplot == sp, ]
-    thisData$y <- 0
+    thisGroup <- data[data$subplot == i, ]
+    thisGroup$y <- 0
 
     if(optimize_y){
-      # for each event and for each y, check if any range already drawn on y cuts this range -> if yes, check next y
-      for (row in (1:nrow(thisData))) {
-        toAdd <- thisData[row, c("start", "end", "y")]
 
-        for (y in 1:nrow(thisData)) {
-          thisData[row, "y"] <- y # naive guess
-          # Events
-          if (toAdd$start == toAdd$end) {
-            # set on new level if this y is occupied
-            if (all(toAdd$start != thisData[-row, "start"][thisData[-row, "y"] == y]))
-              break # this y is free, end of search
-          } else {
-            # Ranges, use that already sorted
-            if (all(toAdd$start >= thisData[-row, "end"][thisData[-row, "y"] == y]))
-              break # new start >= all other starts on this level, end search
+      for (row in seq_len(nrow(thisGroup))) {
+        toAdd <- thisGroup[row, ]
+
+        # Algorithm: for each y, check for conflicts. If none on this y has conflicts, take it. Increase it otherwise
+        for (candidate_y in 0:nrow(thisGroup) + 1){
+
+          all_on_current_y <- thisGroup[thisGroup$y == candidate_y, ][-row,]
+          conflict_seen <- FALSE
+          for(j in seq_len(nrow(all_on_current_y))){
+
+            # conflict if starts or ends are equal or one start is between other start-end or end between other start-end
+            conflict_seen <- conflict_seen |
+              # case 1: both are events or begin/end is equal
+              toAdd$start == all_on_current_y[j,"start"] | toAdd$end == all_on_current_y[j,"end"] |
+              # case 2: toAdd = event, j = range
+              toAdd$start == toAdd$end & toAdd$start >= all_on_current_y[j,"start"] & toAdd$start <= all_on_current_y[j,"end"] |
+              # case 3: toAdd = range, j = event
+              all_on_current_y[j,"start"] == all_on_current_y[j,"end"] & toAdd$start <= all_on_current_y[j,"start"] & toAdd$end >= all_on_current_y[j,"end"] |
+              # case 4: both are ranges
+              all_on_current_y[j,"start"] != all_on_current_y[j,"end"] & toAdd$start != toAdd$end &
+              (toAdd$start <= all_on_current_y[j,"start"] & toAdd$end > all_on_current_y[j,"start"] |
+                 toAdd$start <= all_on_current_y[j,"end"] & toAdd$end > all_on_current_y[j,"end"])
+          }
+          if (!conflict_seen){
+            thisGroup$y[row] <- candidate_y
+            break
+          }else{
+            next
           }
         }
       }
     }else{
-      thisData$y <- seq_len(nrow(thisData))
+      thisGroup$y <- rev(seq_len(nrow(thisGroup)))
     }
-    data[data$subplot == sp, "y"] <- thisData$y
+    data[data$subplot == i, "y"] <- thisGroup$y
   }
 
   data$y <- as.numeric(data$y) # to ensure plotting goes smoothly
   data$y[is.na(data$y)] <- max(data$y[!is.na(data$y)]) + 1 # just in case
+
+  adds <- cumsum(rev(unname(by(data, data$subplot, function(subplot) max(subplot$y)))))
+  adds <- c(0, adds[-length(adds)] + seq_len(length(adds)-1))
+  y_add <- rev(rep(adds, times = rev(table(data$subplot))))
+  data$y <- data$y + y_add
 
   return(data)
 }

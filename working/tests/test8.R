@@ -1,20 +1,19 @@
 # 1. data
-origData <- read.csv(text=
+data <- read.csv(text=
 "event,start,end
 1,2,9
-2,3,8")
+2,3,8
+3,5,5")
 
-origData<-sapply(origData, function(x) paste0("2017-01-0", x))
+data$start <- paste0("2017-01-0", data$start)
+data$end   <- paste0("2017-01-0", data$end)
+data$group <- paste("Group", c(1,2,1))
 
 #2. standard parameters
-events="event"
-start="start"
-end="end"
-groups="group"
-colors="color"
-fontcolors="fontcolor"
-tooltips="tooltip"
-title=NULL
+events = "event"; start = "start"; end = "end"; groups = "group";
+colors = "color"; fontcolors = "fontcolor"; tooltips = "tooltip";
+optimize_y = TRUE; linewidth = NULL; title = NULL; showLabels = NULL;
+show_labels = TRUE; lineInterval = NULL; background_lines = 10
 
 # 3. function call
-vistime(origData)
+vistime(data)

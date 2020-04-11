@@ -121,12 +121,10 @@ vistime <- function(data, events = "event", start = "start", end = "end", groups
   data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
   data <- set_colors(data, colors, fontcolors)
   data <- fix_columns(data, events, start, end, groups, tooltips)
-  data <- set_subplots(data)
+  data <- set_order(data)
   data <- set_y_values(data, optimize_y)
 
-  ranges <- plot_ranges(data, linewidth, show_labels, background_lines)
-  events <- plot_events(data, show_labels, background_lines)
-  total <- plot_glued(data, title, ranges, events)
+  total <- plot_all(data, linewidth, title, show_labels, background_lines)
 
   return(total)
 }

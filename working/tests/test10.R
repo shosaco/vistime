@@ -16,6 +16,7 @@ return zones,7,3,policy analysis
 BikeHub-Ofo interaction,7,2,policy analysis
 write-up and comparison with other projects,4,6,write-up")
 
+library(lubridate)
 start_date = as_date(lubridate::ymd("2018-05-01", tz = "GMT"))
 d$start = start_date + d$start * 7
 d$end = d$start + d$duration * 7
