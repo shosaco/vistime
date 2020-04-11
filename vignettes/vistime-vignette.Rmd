@@ -114,7 +114,6 @@ data <- read.csv(text="event,group,start,end,color
                        Room 335,Team 1,2017-01-05,2017-01-23,#9ECAE1
                        Group 1,Team 2,2016-12-22,2016-12-28,#E5F5E0
                        Group 2,Team 2,2016-12-28,2017-01-23,#C7E9C0
-                       1-217.0,category 2,2016-12-27,2016-12-27,#90caf9
                        3-200,category 1,2016-12-25,2016-12-25,#1565c0
                        3-330,category 1,2016-12-25,2016-12-25,#1565c0
                        3-223,category 1,2016-12-28,2016-12-28,#1565c0
@@ -122,6 +121,7 @@ data <- read.csv(text="event,group,start,end,color
                        3-226,category 1,2016-12-28,2016-12-28,#1565c0
                        3-226,category 1,2017-01-19,2017-01-19,#1565c0
                        3-330,category 1,2017-01-19,2017-01-19,#1565c0
+                       1-217.0,category 2,2016-12-27,2016-12-27,#90caf9
                        4-399.7,moon rising,2017-01-13,2017-01-13,#f44336
                        8-831.0,sundowner drink,2017-01-17,2017-01-17,#8d6e63
                        9-984.1,birthday party,2016-12-22,2016-12-22,#90a4ae
@@ -175,7 +175,7 @@ shinyApp(
 ```
 
 ## 8. Customization
-The function `plotly_build` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
+The function `plotly_build` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
 The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
 
@@ -193,6 +193,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
 p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 
 # step 1: transform into a list
+library(plotly)
 pp <- plotly_build(p)
 
 # step 2: change the font size
@@ -236,6 +237,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
 p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
 
 # step 1: transform into a list
+library(plotly)
 pp <- plotly_build(p)
 
 # step 2: loop over pp$x$data, and change the font size of all text elements to 28
@@ -266,6 +268,7 @@ dat <- data.frame(event = 1:4, start = c("2019-01-01", "2019-01-10"))
 p <- vistime(dat)
 
 # step 1: transform into a list
+library(plotly)
 pp <- plotly_build(p)
 
 # step 2: loop over pp$x$data, and change the marker size of all text elements to 50px

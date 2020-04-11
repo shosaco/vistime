@@ -47,88 +47,83 @@ plot_all <- function(data, linewidth, title, show_labels, background_lines) {
   # 1. plot ranges
   ranges <- data[data$start != data$end, ]
 
-  # rangeNumbers <- unique(data$subplot)
 
   linewidth <- ifelse(is.null(linewidth), max(-3 * max(data$subplot) + max(data$y) + 60, 20), linewidth)
 
-  # ranges <- lapply(rangeNumbers, function(sp) {
-    # subset data for this subplot
-    # thisData <- data[data$subplot == sp, ]
+  if(nrow(ranges) > 0){
+    # draw ranges piecewise
+    for (i in seq_len(nrow(ranges))) {
+      toAdd <- ranges[i, ]
 
-    if(nrow(ranges) > 0){
-      # draw ranges piecewise
-      for (i in seq_len(nrow(ranges))) {
-        toAdd <- ranges[i, ]
-
-        p <- plotly::add_trace(p,
-                               x = c(toAdd$start, toAdd$end), # von, bis
-                               y = toAdd$y,
-                               line = list(color = toAdd$col, width = linewidth),
-                               showlegend = F,
-                               hoverinfo = "text",
-                               text = toAdd$tooltip
-        )
-        # add annotations or not
-        if (show_labels) {
-          p <- plotly::add_text(p,
-                                x = toAdd$start + (toAdd$end - toAdd$start) / 2, # in der Mitte
-                                y = toAdd$y,
-                                textfont = list(family = "Arial", size = 14, color = plotly::toRGB(toAdd$fontcol)),
-                                textposition = "center",
-                                showlegend = F,
-                                text = toAdd$label,
-                                hoverinfo = "none"
-          )
-        }
-      }
-    }
-
-    # 2. plot events
-    events <- data[data$start == data$end, ]
-    if(nrow(events) > 0){
-      # alternate y positions for event labels
-      events$labelY <- events$y + 0.5 * rep_len(c(-1, 1), nrow(events))
-
-      # add all the markers for this Category
-      p <- plotly::add_markers(p,
-                               x = events$start, y = events$y,
-                               marker = list(
-                                 color = data$col, size = 15, symbol = "circle",
-                                 line = list(color = "black", width = 1)
-                               ),
-                               showlegend = F, hoverinfo = "text", text = events$tooltip
+      p <- plotly::add_trace(p,
+                             x = c(toAdd$start, toAdd$end), # von, bis
+                             y = toAdd$y,
+                             line = list(color = toAdd$col, width = linewidth),
+                             showlegend = F,
+                             hoverinfo = "text",
+                             text = toAdd$tooltip
       )
-
       # add annotations or not
       if (show_labels) {
         p <- plotly::add_text(p,
-                              x = events$start, y = events$labelY, textfont = list(family = "Arial", size = 14,
-                                                                                   color = plotly::toRGB(events$fontcol)),
-                              textposition = events$labelPos, showlegend = F, text = events$label, hoverinfo = "none"
+                              x = toAdd$start + (toAdd$end - toAdd$start) / 2, # in der Mitte
+                              y = toAdd$y,
+                              textfont = list(family = "Arial", size = 14, color = plotly::toRGB(toAdd$fontcol)),
+                              textposition = "center",
+                              showlegend = F,
+                              text = toAdd$label,
+                              hoverinfo = "none"
         )
       }
-
     }
+  }
 
-    y_ticks <- by(data, data$subplot, function(subplot) mean(subplot$y))
+  # 2. plot events
+  events <- data[data$start == data$end, ]
+  if(nrow(events) > 0){
+    # alternate y positions for event labels
+    events$labelY <- events$y + 0.5 * rep_len(c(-1, 1), nrow(events))
 
-    p <- plotly::layout(p,
-                        hovermode = "closest",
-                        title = title,
-                        margin = list(l = max(nchar(data$group)) * 8),
-                        # Axis options:
-                        # 1. Remove gridlines
-                        # 2. Customize y-axis tick labels and show group names instead of numbers
-                        xaxis = list(showgrid = F, title = ""),
-                        yaxis = list(
-                          showgrid = F, title = "",
-                          tickmode = "array",
-                          tickvals = y_ticks,
-                          ticktext = as.character(unique(data$group))
-                        )
+    # add all the markers for this Category
+    p <- plotly::add_markers(p,
+                             x = events$start, y = events$y,
+                             marker = list(
+                               color = events$col, size = 15, symbol = "circle",
+                               line = list(color = "black", width = 1)
+                             ),
+                             showlegend = F, hoverinfo = "text", text = events$tooltip
     )
 
-    return(p)
+    # add annotations or not
+    if (show_labels) {
+      p <- plotly::add_text(p,
+                            x = events$start, y = events$labelY, textfont = list(family = "Arial", size = 14,
+                                                                                 color = plotly::toRGB(events$fontcol)),
+                            textposition = events$labelPos, showlegend = F, text = events$label, hoverinfo = "none"
+      )
+    }
+
+  }
+
+  y_ticks <- sapply(split(data, data$subplot), function(subplot) mean(subplot$y))
+
+  p <- plotly::layout(p,
+                      hovermode = "closest",
+                      title = title,
+                      margin = list(l = max(nchar(data$group)) * 8),
+                      # Axis options:
+                      # 1. Remove gridlines
+                      # 2. Customize y-axis tick labels and show group names instead of numbers
+                      xaxis = list(showgrid = F, title = ""),
+                      yaxis = list(
+                        showgrid = F, title = "",
+                        tickmode = "array",
+                        tickvals = y_ticks,
+                        ticktext = as.character(unique(data$group))
+                      )
+  )
+
+  return(p)
 }
 
 
