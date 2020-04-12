@@ -46,6 +46,20 @@
 #'
 #'
 #' \dontrun{
+#' # Argument`optimize_y` can be used to change the look of the timeline. `TRUE` (the default)
+#' # will find a nice heuristic to save `y`-space, distributing the events:
+#' data <- read.csv(text="event,start,end
+#'                        Phase 1,2020-12-15,2020-12-24
+#'                        Phase 2,2020-12-23,2020-12-29
+#'                        Phase 3,2020-12-28,2021-01-06
+#'                        Phase 4,2021-01-06,2021-02-02")
+#'
+#' vistime(data, optimize_y = TRUE)
+#'
+#' # `FALSE` will plot events as-is, not saving any space:
+#' vistime(data, optimize_y = FALSE)
+#'
+#'
 #' # more complex and colorful example
 #' data <- read.csv(text = "event,group,start,end,color
 #' Phase 1,Project,2018-12-22,2018-12-23,#c8e6c9
