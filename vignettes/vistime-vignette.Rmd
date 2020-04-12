@@ -101,7 +101,6 @@ knitr::include_graphics("../inst/img/ex2.png")
 ```
 
 
-
 ### Ex. 2: Project Planning
 ```{r eval=FALSE}
 data <- read.csv(text="event,group,start,end,color
@@ -136,6 +135,36 @@ vistime(data)
 ```{r echo=FALSE, out.width = "100%"}
 knitr::include_graphics("../inst/img/ex3.png")
 ```
+
+
+### Ex. 3: Gantt Charts
+
+The argument `optimize_y` can be used to change the look of the timeline. `TRUE` (the default) will find a nice heuristic to save `y`-space, distributing the events:
+
+```{r eval=FALSE}
+data <- read.csv(text="event,start,end
+                       Phase 1,2020-12-15,2020-12-24
+                       Phase 2,2020-12-23,2020-12-29
+                       Phase 3,2020-12-28,2021-01-06
+                       Phase 4,2021-01-06,2021-02-02")
+        
+vistime(data, optimize_y = TRUE)
+```
+
+```{r echo=FALSE, out.width = "100%"}
+knitr::include_graphics("../inst/img/optimize_y_T.png")
+```
+
+`FALSE` will plot events as-is, not saving any space:
+
+```{r eval=FALSE}
+vistime(data, optimize_y = FALSE)
+```
+
+```{r echo=FALSE, out.width = "100%"}
+knitr::include_graphics("../inst/img/optimize_y_F.png")
+```
+
 
 ## 6. Export of vistime as PDF or PNG
 

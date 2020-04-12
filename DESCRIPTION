@@ -1,6 +1,6 @@
 Package: vistime
 Title: Pretty Timeline Creation
-Version: 0.9.0.9000
+Version: 0.9.0.9001
 Date: 2020-04-12
 Author: Sandro Raabe [aut, cre]
 Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
@@ -27,6 +27,5 @@ Suggests: ggplot2,
     devtools,
     testthat,
     covr,
-    purrr,
-    dplyr
+    purrr
 VignetteBuilder: knitr

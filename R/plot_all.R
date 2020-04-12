@@ -1,8 +1,8 @@
-#' Plot the ranges of a data frame
+#' Plot the prepared data into Plotly plot
 #'
 #' @param data_orig the data frame to be plotted (ranges + events)
 #' @param linewidth the width in pixel for the range lines
-#' @param linewidth the title for the plot
+#' @param title the title for the plot
 #' @param show_labels boolean, show labels on events or not
 #' @param background_lines number of grey background lines to draw
 #'
@@ -11,23 +11,21 @@
 #' @noRd
 #' @examples
 #' \dontrun{
-#' plot_ranges(data.frame(
-#'   event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
-#'   end = as.POSIXct(c("2019-01-10", "2019-01-25")),
-#'   group = "", tooltip = "", col = "green", fontcol = "black",
-#'   subplot = 1, y = 1:2, labelPos = "center", label = 1:2
-#' ),
-#' linewidth = 10, show_labels = TRUE, background_lines = 10
+#' plot_all(data.frame(
+#'     event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
+#'     end = as.POSIXct(c("2019-01-10", "2019-01-25")),
+#'     group = "", tooltip = "", col = "green", fontcol = "black",
+#'     subplot = 1, y = 1:2, labelPos = "center", label = 1:2
+#'   ), linewidth = 10, title = "A title", show_labels = TRUE, background_lines = 10
 #' )
 #' }
 plot_all <- function(data, linewidth, title, show_labels, background_lines) {
 
   # 1. Prepare basic plot
-
   p <- plotly::plot_ly(type = "scatter", mode = "lines")
   maxY <- max(data$y) + 1
 
-  # 1. add vertical linen
+  # 1. add vertical lines
   for (day in seq(min(data$start), max(data$end), length.out = background_lines + 1)) {
     p <- plotly::add_trace(p,
                            x = as.POSIXct(day, origin = "1970-01-01"), y = c(0, maxY), mode = "lines",
@@ -110,7 +108,7 @@ plot_all <- function(data, linewidth, title, show_labels, background_lines) {
   p <- plotly::layout(p,
                       hovermode = "closest",
                       title = title,
-                      margin = list(l = max(nchar(data$group)) * 8),
+                      margin = list(l = max(nchar(as.character(data$group))) * 8),
                       # Axis options:
                       # 1. Remove gridlines
                       # 2. Customize y-axis tick labels and show group names instead of numbers

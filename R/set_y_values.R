@@ -1,8 +1,8 @@
 #' Function to distribute events in y-space
 #' if optimize_y flag is TRUE, then heuristic to distribute events and ranges in y space is used
-#' if optimize_y flag is FALSE, then events are distributed according to start column
+#' if optimize_y flag is FALSE, then events are distributed according to start column, each incremented by 1 on y-axis (= gantt chart)
 #'
-#' Instead of naive "always increment by 1" approach, we are using a more sophisticated method to use plot space efficiently
+#' Instead of naive "always increment by 1" approach, we are using a more sophisticated method to use plot space efficiently if optimize_y = TRUE
 #'
 #' @param data the data frame with data to be distributed, has to have \code{start}, \code{end} and \code{subplot} column
 #' @param optimize_y flag whether to distribute events optimally or naively
@@ -12,14 +12,13 @@
 #' @noRd
 #' @examples
 #' \dontrun{
-#' set_y_values(data.frame(
-#'   event = 1:4, start = c("2019-01-01", "2019-01-10"),
-#'   end = c("2019-01-01", "2019-01-10"), subplot = 1
-#' ), optimize_y = TRUE, stringsAsFactors = F)
+# set_y_values(data.frame(
+#   event = 1:4, start = c("2019-01-01", "2019-01-10"),
+#   end = c("2019-01-01", "2019-01-10"), subplot = 1, stringsAsFactors = F),
+#   optimize_y = TRUE)
 #' }
 set_y_values <- function(data, optimize_y) {
    if(optimize_y) data <- data[order(data$subplot, -rank(data$start), -as.integer(factor(data$event, levels = unique(data$event)))), ] # order by group and start (and event if tie, as in order of data)
-  #if(!optimize_y) data <- data[order(rev(as.integer(factor(data$group)))), ]
 
   row.names(data) <- 1:nrow(data)
 

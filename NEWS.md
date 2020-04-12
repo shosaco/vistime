@@ -1,5 +1,7 @@
-# 0.9.0.9000
+# 0.9.0.9001
 - major rework: no subplotting anymore -> now everything is in a single plot and can be zoomed seamlessly
+- furthermore, events are drawn sorted by start and from top to bottom as given in input data frame. This renders the result more intuitive 
+- arguments `showLabels` and `background_lines` have long been deprecated and have now been removed
 
 # 0.9.0
 - fixed bug for plots having more than 9 groups - in these cases the order was not the same as in the input data frame

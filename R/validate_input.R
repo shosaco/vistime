@@ -19,11 +19,11 @@
 #' \dontrun{
 #' validate_input(data.frame(event = 1:2, start = c("2019-01-01", "2019-01-10")),
 #'   events = "event", start = "start", end = "end", groups = "group", tooltips = NULL,
-#'   optimize_y = TRUE, linewidth = NULL, title = NULL, showLabels = NULL, show_labels = TRUE,
-#'   lineInterval = NULL, background_lines = 10
+#'   optimize_y = TRUE, linewidth = NULL, title = NULL, show_labels = TRUE,
+#'   background_lines = 10
 #' )
 #' }
-validate_input <- function(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines) {
+validate_input <- function(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines) {
 
   assertive::assert_is_character(start)
   assertive::assert_is_character(end)
@@ -53,19 +53,10 @@ validate_input <- function(data, start, end, events, groups, tooltips, optimize_
   if (!events %in% names(data))
     stop("Please provide the name of the events column in parameter 'events'")
 
-  if (!is.null(showLabels)){
-    .Deprecated(msg = "showLabels is deprecated. Use show_labels instead.")
-    show_labels = showLabels
-  }
-
-  if (!is.null(lineInterval))
-    .Deprecated(msg = "lineInterval is deprecated. Use background_lines instead for number of background sections to draw. Will divide timeline into 10 sections by default.")
-
   if(round(background_lines) != background_lines){
     background_lines <- round(background_lines)
     warning("background_lines was not integer. Rounded to ", background_lines)
   }
-
 
   return(data)
 }

@@ -26,10 +26,8 @@
 #'   large amount of parallel events). Default: heuristic value.
 #' @param title (optional, character) the title to be shown on top of the timeline.
 #'   Default: \code{NULL}.
-#' @param showLabels deprecated and replaced by argument show_labels.
 #' @param show_labels (optional, boolean) choose whether or not event labels shall be
 #'   visible. Default: \code{TRUE}.
-#' @param lineInterval deprecated, use argument background_lines instead.
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.
 #' @export
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
@@ -116,9 +114,9 @@
 #'
 vistime <- function(data, events = "event", start = "start", end = "end", groups = "group",
                     colors = "color", fontcolors = "fontcolor", tooltips = "tooltip",
-                    optimize_y = TRUE, linewidth = NULL, title = NULL, showLabels = NULL,
-                    show_labels = TRUE, lineInterval = NULL, background_lines = 10) {
-  data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, showLabels, show_labels, lineInterval, background_lines)
+                    optimize_y = TRUE, linewidth = NULL, title = NULL,
+                    show_labels = TRUE, background_lines = 10) {
+  data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
   data <- set_colors(data, colors, fontcolors)
   data <- fix_columns(data, events, start, end, groups, tooltips)
   data <- set_order(data)

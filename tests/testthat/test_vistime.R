@@ -1,4 +1,3 @@
-context("vistime.R")
 library(purrr)
 
 dat <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
@@ -6,7 +5,7 @@ dat <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
 generated <- vistime(dat, events = "event", start = "start", end = "end",
                      groups = "group", colors = "color", fontcolors = "fontcolor",
                      tooltips = "tooltip", linewidth = NULL, title = NULL,
-                     show_labels = TRUE, lineInterval = NULL, background_lines = 10)
+                     show_labels = TRUE, background_lines = 10)
 
 test_that("class is htmlwidget", expect_is(generated, "htmlwidget"))
 
@@ -41,10 +40,10 @@ pres <- data.frame(
 result <- vistime(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
 relevant_dat <- result$x$attrs
 test_that("colors are same as in dataframe", {
-  skip("To be corrected")
   # line colors
-  expect_equivalent(map(as.character(pres$color), col2rgb) %>% unique ,
-                    keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("line") %>% map("color" ) %>% map(col2rgb) %>% unique)
+  expect_setequal(as.character(pres$color),
+                  keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1 && !is.null(.x$line$width)) %>%
+                    map("line") %>% map("color"))
 
   # Fontcolors
   all_texts <- keep(relevant_dat, ~.x$mode == "text" && length(.x$y) == 1) %>% map(~.x[c("text", "textfont")])
@@ -55,20 +54,19 @@ test_that("colors are same as in dataframe", {
   expected$fontcolor <- map(expected$fontcolor, col2rgb) %>% map(paste, collapse = ",") %>% map(~paste0("rgba(", .x, ",1)")) %>% as_vector
   expected$Position <- as.character(expected$Position)
 
-  expect_equivalent(actual[order(actual$all_cols, actual$all_titles),],
-                    expected[order(expected$fontcolor, expected$Position),])
+  names(actual) <- names(expected)
+  actual <- actual[order(actual$fontcolor, actual$Position),]
+  expected <- expected[order(expected$fontcolor, expected$Position),]
+  rownames(actual) <- NULL
+  rownames(expected) <- NULL
+
+  expect_equal(actual, expected)
 })
 
-test_that("x values are same as in dataframe", {
-  skip("To be corrected")
-  expect_equivalent(pres[,c("start", "end")] %>% dplyr::arrange(start) ,
-                    keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("x") %>% as.data.frame() %>% t %>% as.data.frame %>% dplyr::arrange(V1) )
-})
 
 test_that("y values are distributed", {
-  skip("To be corrected")
-  expect_equivalent(1,
-                    keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)
+  expect_setequal(1:7,
+                  keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)
 
   result2 <- vistime(pres, events = "Position")
   relevant_dat2 <- result2$x$attrs

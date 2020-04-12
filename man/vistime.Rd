@@ -9,8 +9,7 @@
 vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
   tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL,
-  title = NULL, showLabels = NULL, show_labels = TRUE,
-  lineInterval = NULL, background_lines = 10)
+  title = NULL, show_labels = TRUE, background_lines = 10)
 }
 \arguments{
 \item{data}{(required) \code{data.frame} that contains the data to be visualised}
@@ -47,12 +46,8 @@ large amount of parallel events). Default: heuristic value.}
 \item{title}{(optional, character) the title to be shown on top of the timeline.
 Default: \code{NULL}.}
 
-\item{showLabels}{deprecated and replaced by argument show_labels.}
-
 \item{show_labels}{(optional, boolean) choose whether or not event labels shall be
 visible. Default: \code{TRUE}.}
-
-\item{lineInterval}{deprecated, use argument background_lines instead.}
 
 \item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.}
 }

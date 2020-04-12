@@ -1,6 +1,6 @@
 [![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-<!-- [![dev](https://img.shields.io/badge/dev-0.8.1.9000-green.svg)]() -->
+[![dev](https://img.shields.io/badge/dev-0.9.0.9001-green.svg)]()
 [![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime) 
@@ -124,6 +124,33 @@ vistime(data)
 ```
 
 <img src="inst/img/ex3.png" />
+
+
+### Ex. 3: Gantt Charts
+
+The argument `optimize_y` can be used to change the look of the timeline. `TRUE` (the default) will find a nice heuristic to save `y`-space, distributing the events:
+
+```{r}
+data <- read.csv(text="event,start,end
+                       Phase 1,2020-12-15,2020-12-24
+                       Phase 2,2020-12-23,2020-12-29
+                       Phase 3,2020-12-28,2021-01-06
+                       Phase 4,2021-01-06,2021-02-02")
+        
+vistime(data, optimize_y = TRUE)
+```
+
+<img src="inst/img/optimize_y_T.png" />
+
+
+`FALSE` will plot events as-is, not saving any space:
+
+```{r}
+vistime(data, optimize_y = FALSE)
+```
+
+<img src="inst/img/optimize_y_F.png" />
+
 
 ## 6. Export of vistime as PDF or PNG
 
