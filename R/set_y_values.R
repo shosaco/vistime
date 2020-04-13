@@ -18,7 +18,7 @@
 #   optimize_y = TRUE)
 #' }
 set_y_values <- function(data, optimize_y) {
-  if(optimize_y) data <- data[order(data$subplot, -rank(data$start), -as.integer(factor(data$event, levels = unique(data$event)))), ] # order by group and start (and event if tie, as in order of data)
+  if(optimize_y) data <- data[order(data$subplot, data$start, as.integer(factor(data$event, levels = unique(data$event)))), ] # order by group and start (and event if tie, as in order of data)
 
   row.names(data) <- 1:nrow(data)
 
@@ -51,8 +51,8 @@ set_y_values <- function(data, optimize_y) {
               all_on_current_y[j,"start"] == all_on_current_y[j,"end"] & toAdd$start <= all_on_current_y[j,"start"] & toAdd$end >= all_on_current_y[j,"end"] |
               # case 4: both are ranges
               all_on_current_y[j,"start"] != all_on_current_y[j,"end"] & toAdd$start != toAdd$end &
-              (toAdd$start <= all_on_current_y[j,"start"] & toAdd$end > all_on_current_y[j,"start"] |
-                 toAdd$start <= all_on_current_y[j,"end"] & toAdd$end > all_on_current_y[j,"end"])
+              (toAdd$start < all_on_current_y[j,"start"] & toAdd$end > all_on_current_y[j,"start"] |
+                 toAdd$start < all_on_current_y[j,"end"] & toAdd$end > all_on_current_y[j,"end"])
           }
           if (!conflict_seen){
             thisGroup$y[row] <- candidate_y
@@ -63,7 +63,7 @@ set_y_values <- function(data, optimize_y) {
         }
       }
     }else{
-      thisGroup$y <- rev(seq_len(nrow(thisGroup)))
+      thisGroup$y <- seq_len(nrow(thisGroup))
     }
     data[data$subplot == i, "y"] <- max(thisGroup$y) - thisGroup$y + 1 # ensure events from top to bottom
   }

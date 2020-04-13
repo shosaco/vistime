@@ -30,7 +30,7 @@ test_that("Basic test", {
   )
 
   dat <- prepare_data(dat)
-  expect_equal(vistime:::set_y_values(dat, TRUE)$y, rep(1:2, 2))
+  expect_equal(vistime:::set_y_values(dat, TRUE)$y, rep(2:1, 2))
   expect_equal(vistime:::set_y_values(dat, FALSE)$y, rev(as.integer(factor(dat$event))))
 })
 
@@ -45,10 +45,19 @@ route networks,2,2,visualisation")
   start_date = as.Date("2018-05-01")
   d$start = start_date + d$start * 7
   d$end = d$start + d$duration * 7
-  d$target_y <- c(5,4,1,2,1)
 
+  # y-optimized
+  d$target_y <- c(5,4,2,1,2)
   dat <- prepare_data(d)
   actual <- vistime:::set_y_values(dat, TRUE)[,c("event", "y")]
+  expected <- d[,c("event", "target_y")]
+  result <- merge(actual,expected)
+  expect_equal(result$y, result$target_y)
+
+  # non-y-optimized
+  d$target_y <- c(6,5,3,2,1)
+  dat <- prepare_data(d)
+  actual <- vistime:::set_y_values(dat, F)[,c("event", "y")]
   expected <- d[,c("event", "target_y")]
   result <- merge(actual,expected)
   expect_equal(result$y, result$target_y)

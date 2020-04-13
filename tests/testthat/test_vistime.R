@@ -70,7 +70,7 @@ test_that("y values are distributed", {
 
   result2 <- vistime(pres, events = "Position")
   relevant_dat2 <- result2$x$attrs
-  expect_equivalent(1:2,
+  expect_equivalent(2:1,
                     keep(relevant_dat2, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)
 
 })
