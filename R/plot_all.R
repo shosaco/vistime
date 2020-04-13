@@ -26,7 +26,7 @@ plot_all <- function(data, linewidth, title, show_labels, background_lines) {
   maxY <- max(data$y) + 1
 
   # 1. add vertical lines
-  for (day in seq(min(data$start), max(data$end), length.out = background_lines + 1)) {
+  for (day in seq(min(c(data$start, data$end)), max(c(data$start, data$end)), length.out = background_lines + 1)) {
     p <- plotly::add_trace(p,
                            x = as.POSIXct(day, origin = "1970-01-01"), y = c(0, maxY), mode = "lines",
                            line = list(color = plotly::toRGB("grey90")), showlegend = F, hoverinfo = "none"
@@ -44,7 +44,6 @@ plot_all <- function(data, linewidth, title, show_labels, background_lines) {
 
   # 1. plot ranges
   ranges <- data[data$start != data$end, ]
-
 
   linewidth <- ifelse(is.null(linewidth), max(-3 * max(data$subplot) + max(data$y) + 60, 20), linewidth)
 
@@ -80,7 +79,7 @@ plot_all <- function(data, linewidth, title, show_labels, background_lines) {
   events <- data[data$start == data$end, ]
   if(nrow(events) > 0){
     # alternate y positions for event labels
-    events$labelY <- events$y + 0.5 * rep_len(c(-1, 1), nrow(events))
+    events$labelY <- events$y + 0.5 * rep_len(c(1, -1), nrow(events))
 
     # add all the markers for this Category
     p <- plotly::add_markers(p,

@@ -157,11 +157,12 @@ vistime(data, optimize_y = FALSE)
 Once created, you can use `plotly::export()` for saving your vistime chart as PDF, PNG or JPEG:
 
 ```{r
+# webshot::install_phantomjs()
 chart <- vistime(pres, events="Position")
-export(chart, file = "presidents.pdf")
+plotly::export(chart, file = "presidents.pdf")
 ```
 
-Note that export requires the `webshot` package and additional arguments like width or height can be used (`?webshot` for the details).
+Note that export requires the `webshot` package and additional arguments like width or height can be used (`?webshot` for the details). You can also download the plot as PNG by using the toolbar on the upper right side of the generated plot.
 
 ## 7. Usage in Shiny apps
 

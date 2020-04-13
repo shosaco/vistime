@@ -65,3 +65,11 @@ test_that("Subsequent Events are on same y level when optimize_y = TRUE and on d
   expect_equal(vistime:::set_y_values(dat, TRUE)$y, d$target_y)
   expect_equal(vistime:::set_y_values(dat, FALSE)$y, c(2,1))
 })
+
+test_that("Events start from top not from bottom of chart", {
+  d <- data.frame(
+    event = 1:3, start = c("2019-01-01", "2019-01-09", "2019-01-11"),
+    end = c("2019-01-10", "2019-01-12", "2019-01-14"), subplot = 1, stringsAsFactors = F)
+
+  expect_equal(vistime:::set_y_values(d, TRUE)$y, c(2,1,2))
+})

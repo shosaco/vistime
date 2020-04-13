@@ -18,7 +18,7 @@
 #   optimize_y = TRUE)
 #' }
 set_y_values <- function(data, optimize_y) {
-   if(optimize_y) data <- data[order(data$subplot, -rank(data$start), -as.integer(factor(data$event, levels = unique(data$event)))), ] # order by group and start (and event if tie, as in order of data)
+  if(optimize_y) data <- data[order(data$subplot, -rank(data$start), -as.integer(factor(data$event, levels = unique(data$event)))), ] # order by group and start (and event if tie, as in order of data)
 
   row.names(data) <- 1:nrow(data)
 
@@ -65,7 +65,7 @@ set_y_values <- function(data, optimize_y) {
     }else{
       thisGroup$y <- rev(seq_len(nrow(thisGroup)))
     }
-    data[data$subplot == i, "y"] <- thisGroup$y
+    data[data$subplot == i, "y"] <- max(thisGroup$y) - thisGroup$y + 1 # ensure events from top to bottom
   }
 
   data$y <- as.numeric(data$y) # to ensure plotting goes smoothly
