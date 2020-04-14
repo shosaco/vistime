@@ -1,6 +1,6 @@
-#' Create a Timeline
+#' Create a Timeline rendered by Plotly
 #'
-#' Provide a data frame with event data to create a visual timeline plot.
+#' Provide a data frame with event data to create a visual and interactive timeline plot.
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
 #' @param data (required) \code{data.frame} that contains the data to be visualised
@@ -136,7 +136,7 @@ vistime <- function(data, events = "event", start = "start", end = "end", groups
   data <- set_order(data)
   data <- set_y_values(data, optimize_y)
 
-  total <- plot_all(data, linewidth, title, show_labels, background_lines)
+  total <- plot_plotly(data, linewidth, title, show_labels, background_lines)
 
   return(total)
 }

@@ -1,0 +1,64 @@
+#' Plot the prepared data into ggplot2 plot
+#'
+#' @param data_orig the data frame to be plotted (ranges + events)
+#' @param linewidth the width in pixel for the range lines
+#' @param title the title for the plot
+#' @param show_labels boolean, show labels on events or not
+#' @param background_lines number of grey background lines to draw
+#'
+#' @return a list containing the plots for the groups in data
+#' @keywords internal
+#' @noRd
+#' @examples
+#' \dontrun{
+#' plot_ggplot(data.frame(
+#'     event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
+#'     end = as.POSIXct(c("2019-01-10", "2019-01-25")),
+#'     group = "", tooltip = "", col = "green", fontcol = "black",
+#'     subplot = 1, y = 1:2, labelPos = "center", label = 1:2
+#'   ), linewidth = 10, title = "A title", show_labels = TRUE, background_lines = 10
+#' )
+#' }
+
+plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
+
+  # 1. Prepare basic plot
+  y_ticks <- sapply(split(data, data$subplot), function(subplot) mean(subplot$y))
+
+  gg <- ggplot(data, aes(x = start, y = y, xend = end, yend = y, color = I(col))) +
+    ggtitle(title) + labs(x=NULL, y = NULL) +
+    scale_y_continuous(breaks = y_ticks, labels = unique(data$group)) +
+    theme_classic() +
+    theme(axis.ticks.y = element_blank(),
+          axis.text.y  = element_text(hjust = 1),
+          line = element_blank(),
+          panel.background = element_blank()) #element_rect(colour="black", linetype = "solid"))
+
+
+  # 2. add vertical lines
+  vert_lines <- data.frame(x = seq(min(c(data$start, data$end)), max(c(data$start, data$end)), length.out = background_lines + 1),
+                           xend = seq(min(c(data$start, data$end)), max(c(data$start, data$end)), length.out = background_lines + 1),
+                           y = 0,
+                           yend = max(data$y) + 1)
+  gg <- gg + geom_segment(mapping = aes(x = x, xend=x, y = y, yend=yend), data = vert_lines, colour = "grey90")
+
+  # 2. Divide subplots with horizontal lines
+  divide_at_y <- data.frame(x = min(data$start), xend = max(data$end),
+                            y = c(0, setdiff(seq_len(max(data$y)), data$y), max(data$y) + 1))
+  gg <- gg + geom_segment(mapping = aes(x = x, xend=xend, y = y, yend=y), data = divide_at_y, colour = "grey65")
+
+  # Plot ranges and events
+  lw = ifelse(is.null(linewidth), 10, linewidth)
+  gg <- gg + geom_segment(data = data %>% filter(start != end), size = lw)
+  gg <- gg + geom_point(data = data %>% filter(start == end), mapping=aes(fill = I(col)), shape = 21, size = lw, colour = "black", stroke = 0.1)
+
+  # Labels for Ranges in center of range
+
+  ranges <- subset(data, start != end)
+  ranges$labelPos <- ranges$start + (ranges$end - ranges$start)/2
+  if(show_labels) gg <- gg + geom_text(mapping = aes(x = labelPos, colour = I(fontcol), label = label), data = ranges, hjust=0.5)
+  if(show_labels) gg <- gg + geom_text(mapping = aes(colour = I(fontcol), label = label), data = subset(data, start == end), hjust=-0.1)
+
+  return(gg)
+
+}
