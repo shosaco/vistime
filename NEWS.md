@@ -1,7 +1,9 @@
 # 0.9.0.9001
 - major rework: no subplotting anymore -> now everything is in a single plot and can be zoomed seamlessly
 - furthermore, events are drawn sorted by start and from top to bottom as given in input data frame. This renders the result more intuitive 
-- arguments `showLabels` and `background_lines` have long been deprecated and have now been removed
+- arguments `showLabels` and `lineInterval` have long been deprecated and have now been removed (use `show_labels` and `background_lines`)
+- NEW FUNCTION: `gg_vistime` to output the timeline as a static ggplot (in contrast to `vistime`, which outputs an interactive Plotly object)
+- NEW FUNCTION: `vistime_data` to output the cleaned timeline data for your own plotting experiments
 
 # 0.9.0
 - fixed bug for plots having more than 9 groups - in these cases the order was not the same as in the input data frame

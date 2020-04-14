@@ -25,14 +25,14 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   # 1. Prepare basic plot
   y_ticks <- sapply(split(data, data$subplot), function(subplot) mean(subplot$y))
 
-  gg <- ggplot(data, aes(x = start, y = y, xend = end, yend = y, color = I(col))) +
-    ggtitle(title) + labs(x=NULL, y = NULL) +
-    scale_y_continuous(breaks = y_ticks, labels = unique(data$group)) +
-    theme_classic() +
-    theme(axis.ticks.y = element_blank(),
-          axis.text.y  = element_text(hjust = 1),
-          line = element_blank(),
-          panel.background = element_blank()) #element_rect(colour="black", linetype = "solid"))
+  gg <- ggplot2::ggplot(data, ggplot2::aes(x = start, y = y, xend = end, yend = y, color = I(col))) +
+    ggplot2::ggtitle(title) + ggplot2::labs(x=NULL, y = NULL) +
+    ggplot2::scale_y_continuous(breaks = y_ticks, labels = unique(data$group)) +
+    ggplot2::theme_classic() +
+    ggplot2::theme(axis.ticks.y = ggplot2::element_blank(),
+          axis.text.y  = ggplot2::element_text(hjust = 1),
+          line = ggplot2::element_blank(),
+          panel.background = ggplot2::element_blank()) #element_rect(colour="black", linetype = "solid"))
 
 
   # 2. add vertical lines
@@ -40,24 +40,24 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
                            xend = seq(min(c(data$start, data$end)), max(c(data$start, data$end)), length.out = background_lines + 1),
                            y = 0,
                            yend = max(data$y) + 1)
-  gg <- gg + geom_segment(mapping = aes(x = x, xend=x, y = y, yend=yend), data = vert_lines, colour = "grey90")
+  gg <- gg + ggplot2::geom_segment(mapping = ggplot2::aes(x = x, xend=x, y = y, yend=yend), data = vert_lines, colour = "grey90")
 
   # 2. Divide subplots with horizontal lines
   divide_at_y <- data.frame(x = min(data$start), xend = max(data$end),
                             y = c(0, setdiff(seq_len(max(data$y)), data$y), max(data$y) + 1))
-  gg <- gg + geom_segment(mapping = aes(x = x, xend=xend, y = y, yend=y), data = divide_at_y, colour = "grey65")
+  gg <- gg + ggplot2::geom_segment(mapping = ggplot2::aes(x = x, xend=xend, y = y, yend=y), data = divide_at_y, colour = "grey65")
 
   # Plot ranges and events
   lw = ifelse(is.null(linewidth), 10, linewidth)
-  gg <- gg + geom_segment(data = data %>% filter(start != end), size = lw)
-  gg <- gg + geom_point(data = data %>% filter(start == end), mapping=aes(fill = I(col)), shape = 21, size = lw, colour = "black", stroke = 0.1)
+  gg <- gg + ggplot2::geom_segment(data = subset(data, start != end), size = lw)
+  gg <- gg + ggplot2::geom_point(data = subset(data, start == end), mapping = ggplot2::aes(fill = I(col)), shape = 21, size = lw, colour = "black", stroke = 0.1)
 
   # Labels for Ranges in center of range
 
   ranges <- subset(data, start != end)
   ranges$labelPos <- ranges$start + (ranges$end - ranges$start)/2
-  if(show_labels) gg <- gg + geom_text(mapping = aes(x = labelPos, colour = I(fontcol), label = label), data = ranges, hjust=0.5)
-  if(show_labels) gg <- gg + geom_text(mapping = aes(colour = I(fontcol), label = label), data = subset(data, start == end), hjust=-0.1)
+  if(show_labels) gg <- gg + ggplot2::geom_text(mapping = ggplot2::aes(x = labelPos, colour = I(fontcol), label = label), data = ranges, hjust=0.5)
+  if(show_labels) gg <- gg + ggplot2::geom_text(mapping = ggplot2::aes(colour = I(fontcol), label = label), data = subset(data, start == end), hjust=-0.1)
 
   return(gg)
 
