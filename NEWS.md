@@ -1,14 +1,14 @@
-# 0.9.0.9001
+# vistime (development version)
  
-## breaking changes
-- new function: `gg_vistime` to output the timeline as a static ggplot (in contrast to `vistime`, which outputs an interactive Plotly object)
-- new function: `vistime_data` to output the cleaned timeline data for your own plotting experiments
+## New features
+- new function: `gg_vistime()` to output the timeline as a static ggplot (in contrast to `vistime`, which outputs an interactive Plotly object)
+- new function: `vistime_data()` to output the cleaned timeline data for your own plotting experiments
 
-## noteworthy changes
+## Breaking Changes
 - major rework: no subplotting anymore -> now everything is in a single plot and can be zoomed seamlessly when using the plotly option
 - events are drawn from top to bottom (not from bottom to top) as given in input data frame. This renders the result more intuitive (when using `optimize_y = FALSE`).
 
-## minor changes
+## Minor changes
 - arguments `showLabels` and `lineInterval` have long been deprecated and have now been removed (use `show_labels` and `background_lines`)
 
 # 0.9.0
