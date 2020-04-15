@@ -57,7 +57,7 @@ visible. Default: \code{TRUE}.}
 \description{
 Visualize interactive timelines offline.
 
-Provide a data frame with event data to create a visual timeline plot.
+Provide a data frame with event data to create a visual and interactive timeline plot.
 Simplest drawable dataframe can have columns `event` and `start`.
 }
 \examples{

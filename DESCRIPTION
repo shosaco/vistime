@@ -1,14 +1,13 @@
 Package: vistime
 Title: Pretty Timeline Creation
 Version: 0.9.0.9001
-Date: 2020-04-12
+Date: 2020-04-15
 Author: Sandro Raabe [aut, cre]
 Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
-Description: Create interactive timelines or Gantt charts that
-  are usable in the 'RStudio' viewer pane, in 'R Markdown' documents and in 'Shiny' 
-  apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. 
-  Timelines and their components can afterwards be manipulated using plotly_build(), which 
-  transforms the plot into a mutable list. 
+Description: A library for creating time-based charts, like Gantt or timelines. Possible outputs 
+  include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer 
+  pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can 
+  hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. 
 License: GPL-3 | file LICENSE
 URL: https://shosaco.github.io/vistime/
 BugReports: https://github.com/shosaco/vistime/issues
@@ -22,7 +21,7 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: ggplot2,
+Suggests:
     knitr,
     rmarkdown,
     devtools,
