@@ -8,7 +8,7 @@
 vistime - Pretty Timeline Creation
 =========
 
-Create interactive timelines or Gantt charts that are usable in the RStudio viewer pane, in R Markdown documents and in Shiny apps. Hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
@@ -16,29 +16,63 @@ If you find vistime useful, please consider supporting its development: <a href=
 
 ## Table of Contents
 
-1. [Installation](#1-installation)
-2. [Usage](#2-usage)
-3. [Arguments](#3-arguments)
-4. [Value](#4-value)
-5. [Examples](#5-examples)
+2. [Main functionality](#1-main-functionality)
+2. [Installation](#2-installation)
+3. [Usage](#3-usage)
+4. [Arguments](#4-arguments)
+5. [Value](#5-value)
+6. [Examples](#6-examples)
    * [Ex. 1: Presidents](#ex-1-presidents)
    * [Ex. 2: Project Planning](#ex-2-project-planning)
-6. [Exporting](#6-export-of-vistime-as-pdf-or-png)
-7. [Usage in Shiny apps](#7-usage-in-shiny-apps)
-8. [Customization](#8-customization)
+7. [Exporting](#7-export-of-vistime-as-pdf-or-png)
+8. [Usage in Shiny apps](#8-usage-in-shiny-apps)
+9. [Customization](#9-customization)
    * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
    * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
    * [Changing events font size](#changing-events-font-size)
    * [Changing marker size](#changing-marker-size)
 
-## 1. Installation
+## 1. Main functionality
 
-To install the package from CRAN (v0.8.1), type the following in your R console:
+This package `vistime` provides three main functions: 
+
+### `vistime()` to produce interactive `Plotly` charts:
+
+```{r}
+> timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+> vistime(timeline_data)
+```
+<img src="inst/img/basic_plotly.png" />
+
+### `gg_vistime` to produce static `ggplot()` output:
+
+```{r}
+> timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+> gg_vistime(timeline_data)
+```
+<img src="inst/img/basic_ggplot.png" />
+
+### and `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
+
+```{r}
+> timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+> vistime_data(timeline_data)
+
+    event      start        end     group                                      tooltip      col subplot   y
+1 Event 1 2020-06-06 2020-10-01 My Events  from <b>2020-06-06</b> to <b>2020-10-01</b>  #8DD3C7       1   1
+2 Event 2 2020-10-01 2020-12-31 My Events  from <b>2020-10-01</b> to <b>2020-12-31</b>  #FFFFB3       1   1
+```
+
+You want to use this for the intelligent y-axis assignment depending on overlapping of events (this can be disabled with `optimize_y = FALSE`).
+
+## 2. Installation
+
+To install the package from CRAN (v0.9.0), type the following in your R console:
 ```{r}
 install.packages("vistime")
 ```
 
-To install the development version (v0.8.1.9000, containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
+To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 
 ```{r}
 if(!require("devtools")) install.packages("devtools")
@@ -46,15 +80,23 @@ devtools::install_github("shosaco/vistime")
 ```
 
 
-## 2. Usage and standard arguments
+## 3. Usage and standard arguments
 
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
               fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
               title = NULL, show_labels = TRUE, background_lines = 10)
+
+gg_vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
+           fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
+           title = NULL, show_labels = TRUE, background_lines = 10)
+
+vistime_data(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
+             fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
+             title = NULL, show_labels = TRUE, background_lines = 10)
 ```
 
-## 3. Arguments
+## 4. Arguments
 
 parameter | optional? | data type | explanation 
 --------- |----------- | -------- | ----------- 
@@ -72,12 +114,12 @@ title | optional | character | the title to be shown on top of the timeline. Def
 show_labels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
 background_lines | optional | integer | the number of vertical lines to draw in the background to demonstrate structure. Default: 10.
 
-## 4. Value
+## 5. Value
 
 `vistime` returns an object of class `plotly` and `htmlwidget`.
 
 
-## 5. Examples  
+## 6. Examples  
 
 ### Ex. 1: Presidents
 ```{r}
@@ -152,7 +194,7 @@ vistime(data, optimize_y = FALSE)
 <img src="inst/img/optimize_y_F.png" />
 
 
-## 6. Export of vistime as PDF or PNG
+## 7. Export of vistime as PDF or PNG
 
 Once created, you can use `plotly::export()` for saving your vistime chart as PDF, PNG or JPEG:
 
@@ -164,7 +206,7 @@ plotly::export(chart, file = "presidents.pdf")
 
 Note that export requires the `webshot` package and additional arguments like width or height can be used (`?webshot` for the details). You can also download the plot as PNG by using the toolbar on the upper right side of the generated plot.
 
-## 7. Usage in Shiny apps
+## 8. Usage in Shiny apps
 
 Since the result of any call to `vistime(...)` is a `Plotly` object, you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart:
 
@@ -190,7 +232,7 @@ shinyApp(
 )
 ```
 
-## 8. Customization
+## 9. Customization
 The function `plotly_build` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
 The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.

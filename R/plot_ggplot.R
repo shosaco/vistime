@@ -48,7 +48,8 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   gg <- gg + ggplot2::geom_segment(mapping = ggplot2::aes(x = x, xend=xend, y = y, yend=y), data = divide_at_y, colour = "grey65")
 
   # Plot ranges and events
-  lw = ifelse(is.null(linewidth), 10, linewidth)
+  lw <- ifelse(is.null(linewidth), max(-3 * max(data$subplot) + max(data$y) + 60, 20), linewidth)
+
   gg <- gg + ggplot2::geom_segment(data = subset(data, start != end), size = lw)
   gg <- gg + ggplot2::geom_point(data = subset(data, start == end), mapping = ggplot2::aes(fill = I(col)), shape = 21, size = lw, colour = "black", stroke = 0.1)
 

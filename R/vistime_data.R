@@ -35,7 +35,12 @@
 #' vistime_data(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
 
 
-vistime_data <- function(data, events, start, end, groups, colors, fontcolors, tooltips, optimize_y) {
+vistime_data <- function(data, events = "event", start = "start", end = "end", groups = "group",
+                         colors = "color", fontcolors = "fontcolor", tooltips = "tooltip",
+                         optimize_y = TRUE, linewidth = NULL, title = NULL,
+                         show_labels = TRUE, background_lines = 10) {
+
+  data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
 
   data <- set_colors(data, colors, fontcolors)
   data <- fix_columns(data, events, start, end, groups, tooltips)
