@@ -16,7 +16,7 @@ If you find vistime useful, please consider supporting its development: <a href=
 
 ## Table of Contents
 
-2. [Main functionality](#1-main-functionality)
+1. [Main functionality](#1-main-functionality)
 2. [Installation](#2-installation)
 3. [Usage](#3-usage)
 4. [Arguments](#4-arguments)
@@ -36,31 +36,31 @@ If you find vistime useful, please consider supporting its development: <a href=
 
 This package `vistime` provides three main functions: 
 
-### `vistime()` to produce interactive `Plotly` charts:
+### 1) `vistime()` to produce interactive `Plotly` charts:
 
 ```{r}
-> timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
-> vistime(timeline_data)
+timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+vistime(timeline_data)
 ```
 <img src="inst/img/basic_plotly.png" />
 
-### `gg_vistime` to produce static `ggplot()` output:
+### 2) `gg_vistime` to produce static `ggplot()` output:
 
 ```{r}
-> timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
-> gg_vistime(timeline_data)
+timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+gg_vistime(timeline_data)
 ```
 <img src="inst/img/basic_ggplot.png" />
 
-### and `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
+### 3)  `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
 
 ```{r}
-> timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
-> vistime_data(timeline_data)
+timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+vistime_data(timeline_data)
 
-    event      start        end     group                                      tooltip      col subplot   y
-1 Event 1 2020-06-06 2020-10-01 My Events  from <b>2020-06-06</b> to <b>2020-10-01</b>  #8DD3C7       1   1
-2 Event 2 2020-10-01 2020-12-31 My Events  from <b>2020-10-01</b> to <b>2020-12-31</b>  #FFFFB3       1   1
+#>     event      start        end     group                                      tooltip      col subplot   y
+#> 1 Event 1 2020-06-06 2020-10-01 My Events  from <b>2020-06-06</b> to <b>2020-10-01</b>  #8DD3C7       1   1
+#> 2 Event 2 2020-10-01 2020-12-31 My Events  from <b>2020-10-01</b> to <b>2020-12-31</b>  #FFFFB3       1   1
 ```
 
 You want to use this for the intelligent y-axis assignment depending on overlapping of events (this can be disabled with `optimize_y = FALSE`).
@@ -265,10 +265,8 @@ pp
 We have several y-axes, that's why we need to change the font size in all of them:
 
 ```{r}
-# loop through the yaxes and change the font size for each element:
-for(i in grep("yaxis*", names(pp$x$layout))){
-     pp$x$layout[[i]]$tickfont <- list(size = 28)
-}
+# change the font size for y-axis:
+pp$x$layout[["yaxis"]]$tickfont <- list(size = 28)
 
 pp
 ```
