@@ -8,7 +8,7 @@
 - major rework: no subplotting anymore -> now everything is in a single plot and can be zoomed seamlessly when using the plotly option
 - events are drawn from top to bottom (not from bottom to top) as given in input data frame. This renders the result more intuitive.
 
-## Minor changes
+## Removed functionality
 - arguments `showLabels` and `lineInterval` have long been deprecated and have now been removed (use `show_labels` and `background_lines`)
 
 # 0.9.0

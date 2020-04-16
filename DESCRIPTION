@@ -1,5 +1,5 @@
 Package: vistime
-Title: Pretty Timeline Creation
+Title: Pretty Timelines
 Version: 0.9.0.9001
 Date: 2020-04-15
 Author: Sandro Raabe [aut, cre]
@@ -16,7 +16,7 @@ Depends:
 Imports:
     assertive (>= 0.1.4),
     plotly (>= 4.0.0),
-    ggplot2,
+    ggplot2 (>= 2.0.0),
     RColorBrewer (>= 0.2.2)
 Encoding: UTF-8
 LazyData: true

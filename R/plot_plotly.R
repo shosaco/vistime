@@ -43,14 +43,14 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
   }
 
   # 1. plot ranges
-  ranges <- data[data$start != data$end, ]
+  range_dat <- data[data$start != data$end, ]
 
-  linewidth <- ifelse(is.null(linewidth), max(-3 * max(data$subplot) + max(data$y) + 60, 20), linewidth)
+  linewidth <- ifelse(is.null(linewidth), max(-3 * max(data$subplot) + max(data$y) + 20, 15), linewidth)
 
-  if(nrow(ranges) > 0){
+  if(nrow(range_dat) > 0){
     # draw ranges piecewise
-    for (i in seq_len(nrow(ranges))) {
-      toAdd <- ranges[i, ]
+    for (i in seq_len(nrow(range_dat))) {
+      toAdd <- range_dat[i, ]
 
       p <- plotly::add_trace(p,
                              x = c(toAdd$start, toAdd$end), # von, bis
@@ -76,27 +76,27 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
   }
 
   # 2. plot events
-  events <- data[data$start == data$end, ]
-  if(nrow(events) > 0){
+  event_dat <- data[data$start == data$end, ]
+  if(nrow(event_dat) > 0){
     # alternate y positions for event labels
-    events$labelY <- events$y + 0.5 * rep_len(c(1, -1), nrow(events))
+    event_dat$labelY <- event_dat$y + 0.5 * rep_len(c(1, -1), nrow(event_dat))
 
     # add all the markers for this Category
     p <- plotly::add_markers(p,
-                             x = events$start, y = events$y,
+                             x = event_dat$start, y = event_dat$y,
                              marker = list(
-                               color = events$col, size = 15, symbol = "circle",
+                               color = event_dat$col, size = 15, symbol = "circle",
                                line = list(color = "black", width = 1)
                              ),
-                             showlegend = F, hoverinfo = "text", text = events$tooltip
+                             showlegend = F, hoverinfo = "text", text = event_dat$tooltip
     )
 
     # add annotations or not
     if (show_labels) {
       p <- plotly::add_text(p,
-                            x = events$start, y = events$labelY, textfont = list(family = "Arial", size = 14,
-                                                                                 color = plotly::toRGB(events$fontcol)),
-                            textposition = events$labelPos, showlegend = F, text = events$label, hoverinfo = "none"
+                            x = event_dat$start, y = event_dat$labelY, textfont = list(family = "Arial", size = 14,
+                                                                                 color = plotly::toRGB(event_dat$fontcol)),
+                            textposition = event_dat$labelPos, showlegend = F, text = event_dat$label, hoverinfo = "none"
       )
     }
 

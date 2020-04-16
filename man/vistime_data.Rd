@@ -6,8 +6,7 @@
 \usage{
 vistime_data(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
-  tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL,
-  title = NULL, show_labels = TRUE, background_lines = 10)
+  tooltips = "tooltip", optimize_y = TRUE)
 }
 \arguments{
 \item{data}{(required) \code{data.frame} that contains the data to be visualised}
@@ -55,5 +54,5 @@ pres <- data.frame(
   fontcolor = c("black", "white", "black")
 )
 
-vistime_data(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
+vistime_data(pres, events = "Position", groups = "Name")
 }

@@ -82,6 +82,8 @@ devtools::install_github("shosaco/vistime")
 
 ## 3. Usage and standard arguments
 
+The simplest way to create a timeline is by providing a data frame with `event` and `start` columns. If your columns are named otherwise, you need to tell the function. You can also tweak the y positions, linewidth, title, label visibility and number of lines in the background.
+
 ```{r}
 vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
               fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
@@ -92,8 +94,7 @@ gg_vistime(data, start = "start", end = "end", groups = "group", events = "event
            title = NULL, show_labels = TRUE, background_lines = 10)
 
 vistime_data(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-             fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
-             title = NULL, show_labels = TRUE, background_lines = 10)
+             fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE)
 ```
 
 ## 4. Arguments

@@ -23,7 +23,7 @@
 #'   background_lines = 10
 #' )
 #' }
-validate_input <- function(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines) {
+validate_input <- function(data, start, end, events, groups, tooltips, optimize_y, linewidth = 0, title = NULL, show_labels = FALSE, background_lines = 0) {
 
   assertive::assert_is_character(start)
   assertive::assert_is_character(end)
