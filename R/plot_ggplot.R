@@ -29,10 +29,12 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
     ggplot2::ggtitle(title) + ggplot2::labs(x = NULL, y = NULL) +
     ggplot2::scale_y_continuous(breaks = y_ticks, labels = unique(data$group)) +
     ggplot2::theme_classic() +
-    ggplot2::theme(axis.ticks.y = ggplot2::element_blank(),
-          axis.text.y  = ggplot2::element_text(hjust = 1),
-          line = ggplot2::element_blank(),
-          panel.background = ggplot2::element_blank()) #element_rect(colour="black", linetype = "solid"))
+    ggplot2::theme(
+      plot.title = element_text(hjust = 0.5),
+      axis.ticks.y = ggplot2::element_blank(),
+      axis.text.y  = ggplot2::element_text(hjust = 1),
+      line = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank()) #element_rect(colour="black", linetype = "solid"))
 
 
   # 2. add vertical lines
@@ -63,8 +65,8 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   if(show_labels){
     # TODO: up/down alignment of event labels
     gg <- gg +
-      ggplot2::geom_text(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = ranges, hjust=0.5) +
-      ggplot2::geom_text(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat, hjust=-0.1)
+      ggplot2::geom_label(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = ranges) + #, hjust=0.5) +
+      ggplot2::geom_label(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat) #, hjust=-0.1)
   }
 
   return(gg)
