@@ -1,21 +1,21 @@
 
  prepare_data <- function(dat){
-  events <- "event"
-  start <- "start"
-  end <- "end"
-  groups <- "group"
-  colors <- "color"
-  fontcolors <- "fontcolor"
-  tooltips <- "tooltip"
+  col.event <- "event"
+  col.start <- "start"
+  col.end <- "end"
+  col.group <- "group"
+  col.color <- "color"
+  col.fontcolor <- "fontcolor"
+  col.tooltip <- "tooltip"
   optimize_y <- TRUE
   linewidth <- NULL
   title <- NULL
   show_labels <- TRUE
   background_lines <- 11
 
-  dat <- vistime:::validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
-  dat <- vistime:::set_colors(dat, colors, fontcolors)
-  dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
+  dat <- vistime:::validate_input(dat, col.start, col.end, col.event, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
+  dat <- vistime:::set_colors(dat, col.color, col.fontcolor)
+  dat <- vistime:::fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip)
   return(dat)
 }
 

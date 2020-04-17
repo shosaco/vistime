@@ -1,35 +1,34 @@
 #' Validate input data
 #'
 #' @param data the data
-#' @param start start dates
-#' @param end end dates
-#' @param events event column name
-#' @param groups group column name
+#' @param col.event event column name
+#' @param col.start start dates column
+#' @param col.end end dates column
+#' @param col.group group column name
+#' @param col.tooltip tooltip column name
 #' @param linewidth width of range lines
 #' @param title plot title
-#' @param showLabels deprecated, replaced by show_labels
 #' @param show_labels boolean
-#' @param lineInterval deprecated, replaced by background_lines
 #' @param background_lines interval of grey background lines
 #'
-#' @return the data frame with possibly new or renamed columns, or an error
+#' @return the data frame with new or renamed columns, or an error
 #' @keywords internal
 #' @noRd
 #' @examples
 #' \dontrun{
 #' validate_input(data.frame(event = 1:2, start = c("2019-01-01", "2019-01-10")),
-#'   events = "event", start = "start", end = "end", groups = "group", tooltips = NULL,
+#'   col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.tooltip = NULL,
 #'   optimize_y = TRUE, linewidth = NULL, title = NULL, show_labels = TRUE,
 #'   background_lines = 10
 #' )
 #' }
-validate_input <- function(data, start, end, events, groups, tooltips, optimize_y, linewidth = 0, title = NULL, show_labels = FALSE, background_lines = 0) {
+validate_input <- function(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth = 0, title = NULL, show_labels = FALSE, background_lines = 0) {
 
-  assertive::assert_is_character(start)
-  assertive::assert_is_character(end)
-  assertive::assert_is_character(events)
-  assertive::assert_is_character(groups)
-  assertive::assert_is_character(tooltips)
+  assertive::assert_is_character(col.start)
+  assertive::assert_is_character(col.end)
+  assertive::assert_is_character(col.event)
+  assertive::assert_is_character(col.group)
+  if(!is.null(col.tooltip)) assertive::assert_is_character(col.tooltip)
   assertive::assert_is_logical(optimize_y)
   if(!is.null(linewidth)) assertive::assert_is_numeric(linewidth)
   if(!is.null(title)) assertive::assert_is_character(title)
@@ -41,16 +40,16 @@ validate_input <- function(data, start, end, events, groups, tooltips, optimize_
 
   data <- as.data.frame(data, stringsAsFactors = F)
 
-  if (!start %in% names(data))
+  if (!col.start %in% names(data))
     stop("Please provide the name of the start date column in parameter 'start'")
 
-  if (sum(!is.na(data[, start])) < 1)
+  if (sum(!is.na(data[, col.start])) < 1)
     stop(paste("error in start column: Please provide at least one point in time"))
 
-  if (class(try(as.POSIXct(data[, start]), silent = T))[1] == "try-error")
-    stop(paste("date format error: please make sure columns", start, "and", end, "can be converted to POSIXct type"))
+  if (class(try(as.POSIXct(data[, col.start]), silent = T))[1] == "try-error")
+    stop(paste("date format error: please make sure columns", col.start, "and", col.end, "can be converted to POSIXct type"))
 
-  if (!events %in% names(data))
+  if (!col.event %in% names(data))
     stop("Please provide the name of the events column in parameter 'events'")
 
   if(round(background_lines) != background_lines){

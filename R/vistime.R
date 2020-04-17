@@ -4,21 +4,21 @@
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
 #' @param data \code{data.frame} that contains the data to be visualised
-#' @param events (optional, character) the column name in \code{data} that contains event
+#' @param col.event (optional, character) the column name in \code{data} that contains event
 #'   names. Default: \emph{event}.
-#' @param start (optional, character) the column name in \code{data} that contains start
+#' @param col.start (optional, character) the column name in \code{data} that contains start
 #'   dates. Default: \emph{start}.
-#' @param end (optional, character) the column name in \code{data} that contains end dates.
+#' @param col.end (optional, character) the column name in \code{data} that contains end dates.
 #'   Default: \emph{end}.
-#' @param groups (optional, character) the column name in \code{data} to be used for
+#' @param col.group (optional, character) the column name in \code{data} to be used for
 #'   grouping. Default: \emph{group}.
-#' @param colors (optional, character) the column name in \code{data} that contains colors
+#' @param col.color (optional, character) the column name in \code{data} that contains colors
 #'   for events. Default: \emph{color}, if not present, colors are chosen via
 #'   \code{RColorBrewer}.
-#' @param fontcolors (optional, character) the column name in \code{data} that contains the
+#' @param col.fontcolor (optional, character) the column name in \code{data} that contains the
 #'   font color for event labels. Default: \emph{fontcolor}, if not present,
 #'   color will be black.
-#' @param tooltips (optional, character) the column name in \code{data} that contains the
+#' @param col.tooltip (optional, character) the column name in \code{data} that contains the
 #'   mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
 #'   then tooltips are build from event name and date.
 #' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic
@@ -45,7 +45,7 @@
 #'   fontcolor = c("black", "white", "black")
 #' )
 #'
-#' vistime(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
+#' vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 #'
 #'
 #' \dontrun{
@@ -129,14 +129,20 @@
 #' pp
 #' }
 #'
-vistime <- function(data, events = "event", start = "start", end = "end", groups = "group",
-                    colors = "color", fontcolors = "fontcolor", tooltips = "tooltip",
+vistime <- function(data,
+                    col.event = "event",
+                    col.start = "start",
+                    col.end = "end",
+                    col.group = "group",
+                    col.color = "color",
+                    col.fontcolor = "fontcolor",
+                    col.tooltip = "tooltip",
                     optimize_y = TRUE, linewidth = NULL, title = NULL,
                     show_labels = TRUE, background_lines = 10) {
 
 
-  data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
-  cleaned_dat <- vistime_data(data, events, start, end, groups, colors, fontcolors, tooltips, optimize_y)
+  data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
+  cleaned_dat <- vistime_data(data, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip, optimize_y)
   total <- plot_plotly(cleaned_dat, linewidth, title, show_labels, background_lines)
 
   return(total)

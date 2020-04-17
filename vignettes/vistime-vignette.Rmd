@@ -34,7 +34,7 @@ This package `vistime` provides three main functions:
 ### 1) `vistime()` to produce interactive `Plotly` charts:
 
 ```{r, eval = FALSE}
-timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+timeline_data <- data.frame(event = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 vistime(timeline_data)
 ```
 
@@ -42,10 +42,11 @@ vistime(timeline_data)
 knitr::include_graphics("../inst/img/basic_plotly.png")
 ```
 
+
 ### 2) `gg_vistime` to produce static `ggplot()` output:
 
 ```{r, eval = FALSE}
-timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+timeline_data <- data.frame(event = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 gg_vistime(timeline_data)
 ```
 
@@ -53,10 +54,11 @@ gg_vistime(timeline_data)
 knitr::include_graphics("../inst/img/basic_ggplot.png")
 ```
 
+
 ### 3)  `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
 
 ```{r, eval = FALSE}
-timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+timeline_data <- data.frame(event = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 vistime_data(timeline_data)
 
 #>     event      start        end     group                                      tooltip      col subplot   y
@@ -69,19 +71,11 @@ You want to use this for the intelligent y-axis assignment depending on overlapp
 
 ## 2. Installation
 
-To install the package from CRAN (v0.9.0), type the following in your R console:
+To install the package from CRAN (v1.0.0), type the following in your R console:
 
 ```{r eval=FALSE}
 install.packages("vistime")
 ```
-
-To install the development version, most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
-
-```{r eval = FALSE}
-if(!require("devtools")) install.packages("devtools")
-devtools::install_github("shosaco/vistime")
-```
-
 
 ## 3. Usage
 
@@ -94,16 +88,16 @@ library(vistime)
 The simplest way to create a timeline is by providing a data frame with `event` and `start` columns. If your columns are named otherwise, you need to tell the function. You can also tweak the y positions, linewidth, title, label visibility and number of lines in the background.
 
 ```{r eval=FALSE}
-vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-              fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
+vistime(data, col.events = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
+              col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE, linewidth = NULL, 
               title = NULL, show_labels = TRUE, background_lines = 10)
 
-gg_vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color",
-           fontcolors = "fontcolor", optimize_y = TRUE, linewidth = NULL, title = NULL, 
+gg_vistime(data, col.events = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color",
+           col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, title = NULL, 
            show_labels = TRUE, background_lines = 10)
 
-vistime_data(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-             fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE)
+vistime_data(data, col.events = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
+             col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE)
 ```
 
 
@@ -113,13 +107,13 @@ vistime_data(data, start = "start", end = "end", groups = "group", events = "eve
 parameter | optional? | data type | explanation 
 --------- |----------- | -------- | ----------- 
 data | mandatory | data.frame | data.frame that contains the data to be visualised
+col.event | optional | character | the column name in data that contains event names. Default: *event*
 start | optional | character | the column name in data that contains start dates. Default: *start*
-end | optional | character | the column name in data that contains end dates. Default: *end*
-groups | optional | character | the column name in data to be used for grouping. Default: *group*
-events | optional | character | the column name in data that contains event names. Default: *event*
-colors | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
-fontcolors | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
-tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
+col.end | optional | character | the column name in data that contains end dates. Default: *end*
+col.group | optional | character | the column name in data to be used for grouping. Default: *group*
+col.color | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
+col.fontcolor | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
+col.tooltip | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
 optimize_y | optional | logical | distribute events on y-axis by smart heuristic (default) or use order of input data.
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
@@ -142,7 +136,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
                   
-vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 ```
 
 ```{r, echo=FALSE, out.width = "100%"}
@@ -221,7 +215,7 @@ Once created, you can use `plotly::export()` for saving your vistime chart (the 
 
 ```{r eval=FALSE}
 # webshot::install_phantomjs()
-chart <- vistime(pres, events="Position")
+chart <- vistime(pres, col.event = "Position")
 plotly::export(chart, file = "presidents.pdf")
 ```
 
@@ -247,7 +241,7 @@ shinyApp(
   ui = plotlyOutput("myVistime"),
   server = function(input, output) {
     output$myVistime <- renderPlotly({
-      vistime(pres, events="Position", groups="Name")
+      vistime(pres, col.event = "Position", col.group = "Name")
     })
   }
 )
@@ -269,7 +263,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
  
-p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+p <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
 library(plotly)
@@ -308,7 +302,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                     color = c('#cbb69d', '#603913', '#c69c6e'),
                     fontcolor = c("black", "white", "black"))
  
-p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+p <- vistime(pres, col.event = "Position", col.groups = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
 library(plotly)

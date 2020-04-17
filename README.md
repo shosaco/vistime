@@ -85,16 +85,16 @@ devtools::install_github("shosaco/vistime")
 The simplest way to create a timeline is by providing a data frame with `event` and `start` columns. If your columns are named otherwise, you need to tell the function. You can also tweak the y positions, linewidth, title, label visibility and number of lines in the background.
 
 ```{r}
-vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-              fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
-              title = NULL, show_labels = TRUE, background_lines = 10)
+vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
+              col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE, linewidth = NULL, 
+              col.title = NULL, show_labels = TRUE, background_lines = 10)
 
-gg_vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-           fontcolors = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
+gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.color = "color", 
+           col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
            title = NULL, show_labels = TRUE, background_lines = 10)
 
-vistime_data(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-             fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE)
+vistime_data(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.colors = "color", 
+             col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE)
 ```
 
 ## 4. Arguments
@@ -102,13 +102,13 @@ vistime_data(data, start = "start", end = "end", groups = "group", events = "eve
 parameter | optional? | data type | explanation 
 --------- |----------- | -------- | ----------- 
 data | mandatory | data.frame | data.frame that contains the data to be visualised
-start | optional | character | the column name in data that contains start dates. Default: *start*
-end | optional | character | the column name in data that contains end dates. Default: *end*
-groups | optional | character | the column name in data to be used for grouping. Default: *group*
-events | optional | character | the column name in data that contains event names. Default: *event*
-colors | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
-fontcolors | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
-tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
+col.event | optional | character | the column name in data that contains event names. Default: *event*
+col.start | optional | character | the column name in data that contains start dates. Default: *start*
+col.end | optional | character | the column name in data that contains end dates. Default: *end*
+col.group | optional | character | the column name in data to be used for grouping. Default: *group*
+col.color | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
+col.fontcolor | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
+col.tooltip | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
 optimize_y | optional | logical | distribute events on y-axis by smart heuristic (default) or use order of input data.
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
@@ -130,7 +130,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
                   
-vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 ```
 <img src="inst/img/ex2.png" />
 
@@ -226,7 +226,7 @@ shinyApp(
   ui = plotlyOutput("myVistime"),
   server = function(input, output) {
     output$myVistime <- renderPlotly({
-      vistime(pres, events="Position", groups="Name")
+      vistime(pres, col.event = "Position", col.group = "Name")
     })
   }
 )
@@ -248,7 +248,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
  
-p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+p <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
 library(plotly)
@@ -283,7 +283,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                     color = c('#cbb69d', '#603913', '#c69c6e'),
                     fontcolor = c("black", "white", "black"))
  
-p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+p <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
 library(plotly)

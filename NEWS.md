@@ -1,3 +1,21 @@
+# vistime (development version)
+ 
+## Breaking Changes
+- more intuitive argument naming:
+  * `col.event` instead of `event`
+  * `col.start` instead of `start`
+  * `col.end` instead of `start`
+  * `col.start` instead of `start`
+  * `col.end` instead of `end`
+  * `col.group` instead of `group`
+  * `col.color` instead of `color`
+  * `col.fontcolor` instead of `fontcolor`
+  * `col.tooltip` instead of `tooltip`
+
+
+## New features
+<!-- - new function `hc_vistime()`: Create an interactive timeline rendered by the famous `Highcharter.js` library. -->
+
 # vistime 1.0.0
  
 ## Breaking Changes

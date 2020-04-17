@@ -5,9 +5,10 @@ Date: 2020-04-17
 Author: Sandro Raabe [aut, cre]
 Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
 Description: A library for creating time based charts, like Gantt or timelines. Possible outputs 
-  include 'ggplot' diagrams, 'Plotly' graphs and 'data.frame's. Results can be used in the 'RStudio' viewer 
-  pane, in 'RMarkdown' documents or in 'Shiny' apps. In the interactive 'Plotly' output, you can 
-  hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. 
+  include 'ggplot' diagrams, 'Plotly' graphs and 'data.frame's. Results can be used in the 
+  'RStudio' viewer pane, in 'RMarkdown' documents or in 'Shiny' apps. In the interactive 
+  'Plotly' output, you can hover the mouse pointer over a point or task to show details or 
+  drag a rectangle to zoom in. 
 License: GPL-3 | file LICENSE
 URL: https://shosaco.github.io/vistime/
 BugReports: https://github.com/shosaco/vistime/issues

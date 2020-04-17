@@ -1,11 +1,11 @@
 # preparations
-events <- "event"
-start <- "start"
-end <- "end"
-groups <- "group"
-colors <- "color"
-fontcolors <- "fontcolor"
-tooltips <- "tooltip"
+col.event <- "event"
+col.start <- "start"
+col.end <- "end"
+col.group <- "group"
+col.color <- "color"
+col.fontcolor <- "fontcolor"
+col.tooltip <- "tooltip"
 optimize_y <- TRUE
 linewidth <- NULL
 title <- NULL
@@ -17,7 +17,7 @@ data <- data.frame(
   FARBE = c("red", "green"),
   stringsAsFactors = FALSE
 )
-data <- vistime:::validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
+data <- vistime:::validate_input(data, col.start, col.end, col.event, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
 
 
 test_that("color columns not existing", {

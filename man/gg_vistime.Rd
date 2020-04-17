@@ -6,12 +6,12 @@
 \usage{
 gg_vistime(
   data,
-  events = "event",
-  start = "start",
-  end = "end",
-  groups = "group",
-  colors = "color",
-  fontcolors = "fontcolor",
+  col.event = "event",
+  col.start = "start",
+  col.end = "end",
+  col.group = "group",
+  col.color = "color",
+  col.fontcolor = "fontcolor",
   optimize_y = TRUE,
   linewidth = NULL,
   title = NULL,
@@ -22,23 +22,23 @@ gg_vistime(
 \arguments{
 \item{data}{\code{data.frame} that contains the data to be visualised}
 
-\item{events}{(optional, character) the column name in \code{data} that contains event
+\item{col.event}{(optional, character) the column name in \code{data} that contains event
 names. Default: \emph{event}.}
 
-\item{start}{(optional, character) the column name in \code{data} that contains start
+\item{col.start}{(optional, character) the column name in \code{data} that contains start
 dates. Default: \emph{start}.}
 
-\item{end}{(optional, character) the column name in \code{data} that contains end dates.
+\item{col.end}{(optional, character) the column name in \code{data} that contains end dates.
 Default: \emph{end}.}
 
-\item{groups}{(optional, character) the column name in \code{data} to be used for
+\item{col.group}{(optional, character) the column name in \code{data} to be used for
 grouping. Default: \emph{group}.}
 
-\item{colors}{(optional, character) the column name in \code{data} that contains colors
+\item{col.color}{(optional, character) the column name in \code{data} that contains colors
 for events. Default: \emph{color}, if not present, colors are chosen via
 \code{RColorBrewer}.}
 
-\item{fontcolors}{(optional, character) the column name in \code{data} that contains the
+\item{col.fontcolor}{(optional, character) the column name in \code{data} that contains the
 font color for event labels. Default: \emph{fontcolor}, if not present,
 color will be black.}
 
@@ -73,5 +73,5 @@ pres <- data.frame(
   color = c("#cbb69d", "#603913", "#c69c6e")
 )
 
-gg_vistime(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
+gg_vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 }
