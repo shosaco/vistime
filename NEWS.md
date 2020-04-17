@@ -1,4 +1,4 @@
-# vistime (development version)
+# 1.0
  
 ## New features
 - `gg_vistime()` as new function to output the timeline as a static ggplot (in contrast to `vistime`, which outputs an interactive Plotly object).
