@@ -5,8 +5,6 @@
   * `col.event` instead of `event`
   * `col.start` instead of `start`
   * `col.end` instead of `start`
-  * `col.start` instead of `start`
-  * `col.end` instead of `end`
   * `col.group` instead of `group`
   * `col.color` instead of `color`
   * `col.fontcolor` instead of `fontcolor`
