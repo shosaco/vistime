@@ -6,8 +6,8 @@
 \usage{
 gg_vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
-  tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL,
-  title = NULL, show_labels = TRUE, background_lines = 10)
+  optimize_y = TRUE, linewidth = NULL, title = NULL,
+  show_labels = TRUE, background_lines = 10)
 }
 \arguments{
 \item{data}{(required) \code{data.frame} that contains the data to be visualised}
@@ -32,11 +32,8 @@ for events. Default: \emph{color}, if not present, colors are chosen via
 font color for event labels. Default: \emph{fontcolor}, if not present,
 color will be black.}
 
-\item{tooltips}{(optional, character) the column name in \code{data} that contains the
-mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
-then tooltips are build from event name and date.}
-
-\item{optimize_y}{(optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.}
+\item{optimize_y}{(optional, logical) distribute events on y-axis by smart heuristic (default),
+otherwise use order of input data.}
 
 \item{linewidth}{(optional, numeric) the linewidth (in pixel) for the events (typically used for
 large amount of parallel events). Default: heuristic value.}
@@ -50,7 +47,7 @@ visible. Default: \code{TRUE}.}
 \item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.}
 }
 \value{
-\code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
+\code{gg_vistime} returns an object of class \code{gg} and \code{ggplot}.
 }
 \description{
 Provide a data frame with event data to create a static timeline plot.
@@ -63,8 +60,7 @@ pres <- data.frame(
   Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
   start = c("1789-03-29", "1797-02-03", "1801-02-03"),
   end = c("1797-02-03", "1801-02-03", "1809-02-03"),
-  color = c("#cbb69d", "#603913", "#c69c6e"),
-  fontcolor = c("black", "white", "black")
+  color = c("#cbb69d", "#603913", "#c69c6e")
 )
 
 gg_vistime(pres, events = "Position", groups = "Name", title = "Presidents of the USA")

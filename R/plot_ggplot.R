@@ -30,7 +30,7 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
     ggplot2::scale_y_continuous(breaks = y_ticks, labels = unique(data$group)) +
     ggplot2::theme_classic() +
     ggplot2::theme(
-      plot.title = element_text(hjust = 0.5),
+      plot.title = ggplot2::element_text(hjust = 0.5),
       axis.ticks.y = ggplot2::element_blank(),
       axis.text.y  = ggplot2::element_text(hjust = 1),
       line = ggplot2::element_blank(),

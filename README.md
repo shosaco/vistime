@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime) 
 
-vistime - Pretty Timeline Creation
+vistime - Pretty Timelines
 =========
 
 A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
@@ -90,7 +90,7 @@ vistime(data, start = "start", end = "end", groups = "group", events = "event", 
               title = NULL, show_labels = TRUE, background_lines = 10)
 
 gg_vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-           fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
+           fontcolors = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
            title = NULL, show_labels = TRUE, background_lines = 10)
 
 vistime_data(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
@@ -117,8 +117,7 @@ background_lines | optional | integer | the number of vertical lines to draw in 
 
 ## 5. Value
 
-`vistime` returns an object of class `plotly` and `htmlwidget`.
-
+`vistime` returns an object of class `plotly` and `htmlwidget`, `gg_vistime` returns an object of class `gg` and `ggplot` and `vistime_data` returns an object of class `data.frame`.
 
 ## 6. Examples  
 
@@ -197,7 +196,7 @@ vistime(data, optimize_y = FALSE)
 
 ## 7. Export of vistime as PDF or PNG
 
-Once created, you can use `plotly::export()` for saving your vistime chart as PDF, PNG or JPEG:
+Once created, you can use `plotly::export()` for saving your vistime chart (the plotly version) as PDF, PNG or JPEG:
 
 ```{r
 # webshot::install_phantomjs()
@@ -209,7 +208,7 @@ Note that export requires the `webshot` package and additional arguments like wi
 
 ## 8. Usage in Shiny apps
 
-Since the result of any call to `vistime(...)` is a `Plotly` object, you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart:
+The result of any call to `vistime(...)` is a `Plotly` object, so you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart. The same goes for `gg_vistime(...)`, `plotOutput` and `renderPlot()`:
 
 ```{r}
 library(shiny)
@@ -263,10 +262,9 @@ pp
 <img src="inst/img/ex2-tickfontsize.png" />
 
 ### Changing y-axis tick font size
-We have several y-axes, that's why we need to change the font size in all of them:
+We need to change the font size of the y-axis:
 
 ```{r}
-# change the font size for y-axis:
 pp$x$layout[["yaxis"]]$tickfont <- list(size = 28)
 
 pp
