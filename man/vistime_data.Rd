@@ -38,7 +38,7 @@ then tooltips are build from event name and date.}
 \item{optimize_y}{(optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.}
 }
 \value{
-\code{vistime_data} returns a data.frame with the following columns: event, start, end, group, tooltip, labelPos, label, col, fontcol, subplot, y
+\code{vistime_data} returns a data.frame with the following columns: event, start, end, group, tooltip, label, col, fontcol, subplot, y
 }
 \description{
 Standardize data to plot on a timeline plot

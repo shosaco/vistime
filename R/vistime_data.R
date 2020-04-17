@@ -20,7 +20,7 @@
 #'   then tooltips are build from event name and date.
 #' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.
 #' @export
-#' @return \code{vistime_data} returns a data.frame with the following columns: event, start, end, group, tooltip, labelPos, label, col, fontcol, subplot, y
+#' @return \code{vistime_data} returns a data.frame with the following columns: event, start, end, group, tooltip, label, col, fontcol, subplot, y
 #' @examples
 #' # presidents and vice presidents
 #' pres <- data.frame(

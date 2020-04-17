@@ -15,7 +15,7 @@
 #'     event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
 #'     end = as.POSIXct(c("2019-01-10", "2019-01-25")),
 #'     group = "", tooltip = "", col = "green", fontcol = "black",
-#'     subplot = 1, y = 1:2, labelPos = "center", label = 1:2
+#'     subplot = 1, y = 1:2, label = 1:2
 #'   ), linewidth = 10, title = "A title", show_labels = TRUE, background_lines = 10
 #' )
 #' }
@@ -96,7 +96,7 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
       p <- plotly::add_text(p,
                             x = event_dat$start, y = event_dat$labelY, textfont = list(family = "Arial", size = 14,
                                                                                  color = plotly::toRGB(event_dat$fontcol)),
-                            textposition = event_dat$labelPos, showlegend = F, text = event_dat$label, hoverinfo = "none"
+                            textposition ="center", showlegend = F, text = event_dat$label, hoverinfo = "none"
       )
     }
 

@@ -1,5 +1,4 @@
 # unit tests for validate_input.R
-context("validate_input")
 
 # example data frame
 dat <- data.frame(event = 1:2, start = c("2019-01-01", "2019-01-02"))
@@ -16,7 +15,7 @@ optimize_y <- TRUE
 linewidth <- NULL
 title <- "a title"
 show_labels <- TRUE
-background_lines <- 11
+background_lines <- 10
 
 test_that("stuff is actually there", {
   expect_error(
@@ -145,4 +144,3 @@ test_that("return value", {
     dat[1, ]
   )
 })
-

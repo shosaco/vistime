@@ -24,7 +24,7 @@ dat <- vistime:::set_colors(dat, colors, fontcolors)
 
 test_that("new columns", {
   result <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
-  cols_expected <- c("event", "start", "end", "group", "tooltip", "labelPos", "label", "col", "fontcol")
+  cols_expected <- c("event", "start", "end", "group", "tooltip", "label", "col", "fontcol")
 
   expect_equal(names(result), cols_expected)
   expect_equal(result$start, result$end)
@@ -81,10 +81,10 @@ test_that("missing end dates", {
 })
 
 test_that("color columns are untouched", {
- expect_length(names(vistime:::fix_columns(dat, events, start, end, groups, tooltips)), 9)
+ expect_length(names(vistime:::fix_columns(dat, events, start, end, groups, tooltips)), 8)
 
   dat[, c(colors, fontcolors, "unabhaengigeSpalte", "Spalte5")] <- "irgendwas"
-  expect_length(names(vistime:::fix_columns(dat, events, start, end, groups, tooltips)), 9)
+  expect_length(names(vistime:::fix_columns(dat, events, start, end, groups, tooltips)), 8)
 })
 
 test_that("tooltips", {
@@ -94,3 +94,4 @@ test_that("tooltips", {
   dat$MYTOOLTIPS <- 1:2
   expect_equal(vistime:::fix_columns(dat, events, start, end, groups, tooltips = "MYTOOLTIPS")$tooltip, as.character(1:2))
 })
+

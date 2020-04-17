@@ -1,5 +1,3 @@
-context("color tests")
-
 # preparations
 events <- "event"
 start <- "start"
@@ -42,4 +40,11 @@ test_that("fontcolor column existing", {
   expect_equal(result$fontcol, c("red", "green", "red", "green"))
 })
 
+
+test_that("trim whitespaces", {
+  fixed <- vistime:::set_colors(data.frame(event = "Event1", start = "2014-01-01", color = "   #676767"),
+                                        eventcolor_column = "color", fontcolor_column = "NOTHING")[, c("col", "fontcol")]
+
+  expect_equivalent(fixed, lapply(fixed, trimws))
+})
 

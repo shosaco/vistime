@@ -11,6 +11,7 @@
 set_colors <- function(data, eventcolor_column, fontcolor_column) {
   if (eventcolor_column %in% names(data)) {
     names(data)[names(data) == eventcolor_column] <- "col"
+    data[["col"]] <- trimws(data[["col"]])
   } else {
     palette <- "Set3"
     data$col <- rep(RColorBrewer::brewer.pal(min(11, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
@@ -18,6 +19,7 @@ set_colors <- function(data, eventcolor_column, fontcolor_column) {
 
   if (fontcolor_column %in% names(data)) {
     names(data)[names(data) == fontcolor_column] <- "fontcol"
+    data[["fontcol"]] <- trimws(data[["fontcol"]])
   } else {
     data$fontcol <- "black"
   }

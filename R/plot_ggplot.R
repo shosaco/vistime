@@ -15,7 +15,7 @@
 #'     event = 1:2, start = as.POSIXct(c("2019-01-01", "2019-01-10")),
 #'     end = as.POSIXct(c("2019-01-10", "2019-01-25")),
 #'     group = "", tooltip = "", col = "green", fontcol = "black",
-#'     subplot = 1, y = 1:2, labelPos = "center", label = 1:2
+#'     subplot = 1, y = 1:2, label = 1:2
 #'   ), linewidth = 10, title = "A title", show_labels = TRUE, background_lines = 10
 #' )
 #' }
@@ -52,15 +52,20 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
 
   range_dat <- data[data$start != data$end, ]
   event_dat <- data[data$start == data$end, ]
-  gg <- gg + ggplot2::geom_segment(data = range_dat, size = lw)
-  gg <- gg + ggplot2::geom_point(data = event_dat, mapping = ggplot2::aes_(fill = ~I(col)), shape = 21, size = lw, colour = "black", stroke = 0.1)
+  gg <- gg +
+    ggplot2::geom_segment(data = range_dat, size = lw) +
+    ggplot2::geom_point(data = event_dat, mapping = ggplot2::aes_(fill = ~I(col)),
+                        shape = 21, size = lw, colour = "black", stroke = 0.1)
 
   # Labels for Ranges in center of range
-
   ranges <- data[data$start != data$end, ]
-  ranges$labelPos <- ranges$start + (ranges$end - ranges$start)/2
-  if(show_labels) gg <- gg + ggplot2::geom_text(mapping = ggplot2::aes_(x = ~labelPos, colour = ~I(fontcol), label = ~label), data = ranges, hjust=0.5)
-  if(show_labels) gg <- gg + ggplot2::geom_text(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat, hjust=-0.1)
+  ranges$start <- ranges$start + (ranges$end - ranges$start)/2
+  if(show_labels){
+    # TODO: up/down alignment of event labels
+    gg <- gg +
+      ggplot2::geom_text(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = ranges, hjust=0.5) +
+      ggplot2::geom_text(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat, hjust=-0.1)
+  }
 
   return(gg)
 

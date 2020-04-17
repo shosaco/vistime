@@ -69,7 +69,6 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
   }
 
   # shorten long labels
-  data$labelPos <- "center" # TODO: apply AI here
   data$label <- ifelse(data$start == data$end,
     ifelse(nchar(data$event) > 10,
            paste0(substr(data$event, 1, 13), "..."),
@@ -77,5 +76,5 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
     data$event
   )
 
-  return(data[, c("event", "start", "end", "group", "tooltip", "labelPos", "label", "col", "fontcol")])
+  return(data[, c("event", "start", "end", "group", "tooltip", "label", "col", "fontcol")])
 }
