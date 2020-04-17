@@ -63,7 +63,7 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
   } else {
     data$tooltip <- ifelse(data$start == data$end,
       paste0("<b>", data$event, ": ", data$start, "</b>"),
-      paste0("<b>", data$event, ":</b> from <b>",
+      paste0("<b>", data$event, "</b><br>from <b>",
              data$start, "</b> to <b>", data$end, "</b>")
     )
   }
