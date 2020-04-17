@@ -1,10 +1,12 @@
 ## Test environments
 * local R installation, R 3.5.3
 * ubuntu 16.04 (on travis-ci), R 3.5.3
-* win-builder (devel)
+* win-builder (oldrelease, devel, release)
 
-## R CMD check results
+  
+## R CMD check results -------------------------------------- vistime 1.0.0 ----
+Duration: 41s
 
-0 errors | 0 warnings | 1 note
+0 errors v | 0 warnings v | 0 notes v
 
-* This is a new release.
+R CMD check succeeded
