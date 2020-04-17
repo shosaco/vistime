@@ -4,14 +4,22 @@
 \alias{vistime_data}
 \title{Standardize data to plot on a timeline plot}
 \usage{
-vistime_data(data, events = "event", start = "start", end = "end",
-  groups = "group", colors = "color", fontcolors = "fontcolor",
-  tooltips = "tooltip", optimize_y = TRUE)
+vistime_data(
+  data,
+  events = "event",
+  start = "start",
+  end = "end",
+  groups = "group",
+  colors = "color",
+  fontcolors = "fontcolor",
+  tooltips = "tooltip",
+  optimize_y = TRUE
+)
 }
 \arguments{
-\item{data}{(required) \code{data.frame} that contains the data to be visualised}
+\item{data}{\code{data.frame} that contains the data to be visualised}
 
-\item{events}{(optional) the column name in \code{data} that contains event
+\item{events}{(optional, character) the column name in \code{data} that contains event
 names. Default: \emph{event}.}
 
 \item{start}{(optional, character) the column name in \code{data} that contains start

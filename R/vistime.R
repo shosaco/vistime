@@ -3,8 +3,8 @@
 #' Provide a data frame with event data to create a visual and interactive timeline plot.
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
-#' @param data (required) \code{data.frame} that contains the data to be visualised
-#' @param events (optional) the column name in \code{data} that contains event
+#' @param data \code{data.frame} that contains the data to be visualised
+#' @param events (optional, character) the column name in \code{data} that contains event
 #'   names. Default: \emph{event}.
 #' @param start (optional, character) the column name in \code{data} that contains start
 #'   dates. Default: \emph{start}.
@@ -21,16 +21,19 @@
 #' @param tooltips (optional, character) the column name in \code{data} that contains the
 #'   mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
 #'   then tooltips are build from event name and date.
-#' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.
-#' @param linewidth (optional, numeric) the linewidth (in pixel) for the events (typically used for
-#'   large amount of parallel events). Default: heuristic value.
+#' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic
+#'   (default), otherwise use order of input data.
+#' @param linewidth (optional, numeric) the linewidth (in pixel) for the events
+#'   (typically used for large amount of parallel events). Default: heuristic value.
 #' @param title (optional, character) the title to be shown on top of the timeline.
 #'   Default: \code{NULL}.
 #' @param show_labels (optional, boolean) choose whether or not event labels shall be
 #'   visible. Default: \code{TRUE}.
-#' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.
+#' @param background_lines (optional, integer) the number of vertical lines to draw in the
+#'   background to demonstrate structure (default: 10). Less means more memory-efficient plot.
 #' @export
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
+#'  See `gg_vistime` for the static `ggplot` version.
 #' @examples
 #' # presidents and vice presidents
 #' pres <- data.frame(
@@ -98,8 +101,8 @@
 #' pp$x$layout$xaxis$tickfont <- list(size = 28)
 #' pp
 #'
-#' # Example 2: change y axis font size (several y-axes, therefore we need a loop):
-#' for (i in grep("yaxis*", names(pp$x$layout))) pp$x$layout[[i]]$tickfont <- list(size = 28)
+#' # Example 2: change y axis font size:
+#' pp$x$layout[["yaxis"]]$tickfont <- list(size = 28)
 #' pp
 #'
 #' # Example 3: Changing events font size

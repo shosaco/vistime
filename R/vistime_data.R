@@ -1,7 +1,7 @@
 #' Standardize data to plot on a timeline plot
 #'
-#' @param data (required) \code{data.frame} that contains the data to be visualised
-#' @param events (optional) the column name in \code{data} that contains event
+#' @param data \code{data.frame} that contains the data to be visualised
+#' @param events (optional, character) the column name in \code{data} that contains event
 #'   names. Default: \emph{event}.
 #' @param start (optional, character) the column name in \code{data} that contains start
 #'   dates. Default: \emph{start}.

@@ -4,15 +4,25 @@
 \alias{gg_vistime}
 \title{Create a Timeline rendered by ggplot}
 \usage{
-gg_vistime(data, events = "event", start = "start", end = "end",
-  groups = "group", colors = "color", fontcolors = "fontcolor",
-  optimize_y = TRUE, linewidth = NULL, title = NULL,
-  show_labels = TRUE, background_lines = 10)
+gg_vistime(
+  data,
+  events = "event",
+  start = "start",
+  end = "end",
+  groups = "group",
+  colors = "color",
+  fontcolors = "fontcolor",
+  optimize_y = TRUE,
+  linewidth = NULL,
+  title = NULL,
+  show_labels = TRUE,
+  background_lines = 10
+)
 }
 \arguments{
-\item{data}{(required) \code{data.frame} that contains the data to be visualised}
+\item{data}{\code{data.frame} that contains the data to be visualised}
 
-\item{events}{(optional) the column name in \code{data} that contains event
+\item{events}{(optional, character) the column name in \code{data} that contains event
 names. Default: \emph{event}.}
 
 \item{start}{(optional, character) the column name in \code{data} that contains start
