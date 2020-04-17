@@ -3,7 +3,7 @@
 #' Provide a data frame with event data to create a visual and interactive timeline plot.
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
-#' @param data \code{data.frame} that contains the data to be visualised
+#' @param data \code{data.frame} that contains the data to be visualized
 #' @param col.event (optional, character) the column name in \code{data} that contains event
 #'   names. Default: \emph{event}.
 #' @param col.start (optional, character) the column name in \code{data} that contains start

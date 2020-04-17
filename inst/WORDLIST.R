@@ -12,7 +12,7 @@ ggplot
 Github
 hotfix
 Hotfix
-labelling
+labeling
 levelling
 linewidth
 md
@@ -25,5 +25,5 @@ RStudio
 tooltip
 tooltips
 UI
-visualised
-visualising
+visualized
+visualizing

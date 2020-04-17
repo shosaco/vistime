@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 [![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
@@ -106,7 +106,7 @@ vistime_data(data, col.events = "event", col.start = "start", col.end = "end", c
 
 parameter | optional? | data type | explanation 
 --------- |----------- | -------- | ----------- 
-data | mandatory | data.frame | data.frame that contains the data to be visualised
+data | mandatory | data.frame | data.frame that contains the data to be visualized
 col.event | optional | character | the column name in data that contains event names. Default: *event*
 start | optional | character | the column name in data that contains start dates. Default: *start*
 col.end | optional | character | the column name in data that contains end dates. Default: *end*

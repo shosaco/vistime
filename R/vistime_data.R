@@ -1,6 +1,6 @@
 #' Standardize data to plot on a timeline plot
 #'
-#' @param data \code{data.frame} that contains the data to be visualised
+#' @param data \code{data.frame} that contains the data to be normalized
 #' @param col.event (optional, character) the column name in \code{data} that contains event
 #'   names. Default: \emph{event}.
 #' @param col.start (optional, character) the column name in \code{data} that contains start

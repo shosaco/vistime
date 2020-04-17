@@ -51,7 +51,7 @@
 - remove leading and trailing whitespaces of events and groups before drawing 
 
 # vistime 0.6.0
-- Hotfix for broken y-axis labelling (introduced through new plotly package 4.8.0.)
+- Hotfix for broken y-axis labeling (introduced through new plotly package 4.8.0.)
 - events are now shown as circles (was: squares)
 - corrected font colors of Presidents example on help page
 
@@ -63,7 +63,7 @@
 # vistime 0.4.0
 - line width calculation for ranges improved (thicker lines if less events happening simultaneously)
 - new parameter: `linewidth` to override the calculated line width for events
-- layout and labelling improvements
+- layout and labeling improvements
 - simplified examples
 - improved error checking
 

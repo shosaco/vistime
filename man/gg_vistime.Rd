@@ -20,7 +20,7 @@ gg_vistime(
 )
 }
 \arguments{
-\item{data}{\code{data.frame} that contains the data to be visualised}
+\item{data}{\code{data.frame} that contains the data to be visualized}
 
 \item{col.event}{(optional, character) the column name in \code{data} that contains event
 names. Default: \emph{event}.}
