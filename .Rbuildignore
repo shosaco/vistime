@@ -12,3 +12,5 @@ working
 ^revdep
 ^\.github
 ^cran-comments.md
+^CRAN-RELEASE$
+^cran-comments\.md$
