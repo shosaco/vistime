@@ -1,6 +1,6 @@
 [![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![dev](https://img.shields.io/badge/dev-1.0-green.svg)]()
+[![dev](https://img.shields.io/badge/dev-1.0.0-green.svg)](https://github.com/shosaco/vistime/blob/master/NEWS.md)
 [![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime) 
@@ -8,7 +8,7 @@
 vistime - Pretty Timelines
 =========
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
@@ -18,7 +18,7 @@ If you find vistime useful, please consider supporting its development: <a href=
 
 1. [Main functionality](#1-main-functionality)
 2. [Installation](#2-installation)
-3. [Usage](#3-usage)
+3. [Usage](#3-usage-and-default-arguments)
 4. [Arguments](#4-arguments)
 5. [Value](#5-value)
 6. [Examples](#6-examples)
@@ -44,7 +44,7 @@ vistime(timeline_data)
 ```
 <img src="inst/img/basic_plotly.png" />
 
-### 2) `gg_vistime` to produce static `ggplot()` output:
+### 2) `gg_vistime()` to produce static `ggplot` output:
 
 ```{r}
 timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
@@ -80,7 +80,7 @@ devtools::install_github("shosaco/vistime")
 ```
 
 
-## 3. Usage and standard arguments
+## 3. Usage and default arguments
 
 The simplest way to create a timeline is by providing a data frame with `event` and `start` columns. If your columns are named otherwise, you need to tell the function. You can also tweak the y positions, linewidth, title, label visibility and number of lines in the background.
 
@@ -208,7 +208,7 @@ Note that export requires the `webshot` package and additional arguments like wi
 
 ## 8. Usage in Shiny apps
 
-The result of any call to `vistime(...)` is a `Plotly` object, so you can use `plotlyOutput` in the UI and `renderPlotly` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart. The same goes for `gg_vistime(...)`, `plotOutput` and `renderPlot()`:
+The result of any call to `vistime(...)` is a `Plotly` object, so you can use `plotlyOutput()` in the UI and `renderPlotly()` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart. The same goes for `gg_vistime(...)`, `plotOutput()` and `renderPlot()`:
 
 ```{r}
 library(shiny)
@@ -233,9 +233,9 @@ shinyApp(
 ```
 
 ## 9. Customization
-The function `plotly_build` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
+The function `plotly_build()` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
-The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
+The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build()`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
 
 ### Changing x-axis tick font size
 The following example creates the presidents example and manipulates the font size of the x axis ticks:

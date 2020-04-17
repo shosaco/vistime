@@ -1,8 +1,6 @@
-#' Visualize interactive timelines offline.
-#'
 #' @name vistime
 #' @docType package
-#' @title Create a Timeline
+#' @description Pretty Timelines
 #' @author Sandro Raabe \email{sa.ra.online@posteo.de}
-#' @keywords timeline plotly gantt vistime
+#' @keywords timeline plotly posix gantt vistime ggplot
 NULL

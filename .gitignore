@@ -5,3 +5,4 @@
 *.Rproj
 .gitignore
 inst/doc
+revdep/

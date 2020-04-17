@@ -4,7 +4,7 @@
 \name{vistime}
 \alias{vistime}
 \alias{vistime-package}
-\title{Create a Timeline}
+\title{Create a Timeline rendered by Plotly}
 \usage{
 vistime(data, events = "event", start = "start", end = "end",
   groups = "group", colors = "color", fontcolors = "fontcolor",
@@ -55,7 +55,7 @@ visible. Default: \code{TRUE}.}
 \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 }
 \description{
-Visualize interactive timelines offline.
+Pretty Timelines
 
 Provide a data frame with event data to create a visual and interactive timeline plot.
 Simplest drawable dataframe can have columns `event` and `start`.
@@ -160,6 +160,7 @@ pp
 Sandro Raabe \email{sa.ra.online@posteo.de}
 }
 \keyword{gantt}
+\keyword{ggplot}
 \keyword{plotly}
 \keyword{timeline}
 \keyword{vistime}
