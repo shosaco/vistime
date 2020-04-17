@@ -1,20 +1,20 @@
-# vistime (development version)
+# vistime (development version) (branch dev)
  
 ## Breaking Changes
 - more intuitive argument naming:
   * `col.event` instead of `event`
   * `col.start` instead of `start`
-  * `col.end` instead of `start`
-  * `col.group` instead of `group`
-  * `col.color` instead of `color`
-  * `col.fontcolor` instead of `fontcolor`
-  * `col.tooltip` instead of `tooltip`
+  * `col.end` instead of `end`
+  * `col.group` instead of `groups`
+  * `col.color` instead of `colors`
+  * `col.fontcolor` instead of `fontcolors`
+  * `col.tooltip` instead of `tooltips`
 
 
 ## New features
 <!-- - new function `hc_vistime()`: Create an interactive timeline rendered by the famous `Highcharter.js` library. -->
 
-# vistime 1.0.0
+# vistime 1.0.0 (branch master)
  
 ## Breaking Changes
 - `vistime` no longer uses cumbersome Plotly-subplots. Everything renders in the same plot and can be zoomed seamlessly.
