@@ -47,7 +47,7 @@ ui <- fluidPage(
            "You can enter multiple packages to compare them"),
       selectInput("package",
                   label = "Packages:",
-                  selected = "vistime", # initialize the graph with a random package
+                  selected = c("timevis", "timeline", "vistime", "timelineS"), # initialize the graph with a random package
                   choices = package_names,
                   multiple = TRUE),
       radioButtons("transformation",

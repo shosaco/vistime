@@ -35,7 +35,7 @@ test_that("ranges: no groups yield 1 subplot", {
 test_that("one subplot per group", {
   dat$group <- c(1,1,2)
   result <- vistime:::set_order(dat)
-  expect_equal(result$group, result$subplot)
+  expect_equal(as.character(result$group), as.character(result$subplot))
 })
 
 test_that("if range and event in same group, different subplots", {
@@ -57,4 +57,30 @@ test_that("subplot order is same a input order", {
 
   dat <- prepare_data(d)
   expect_equal(vistime:::set_order(dat)$subplot, d$target_subplot)
+})
+
+
+test_that("More than 9 groups are handled nicely", {
+
+  dat <- data.frame(
+    event = 1:15, start = "2019-01-01",
+    end = "2019-01-10",
+    group = c(1:8,11,9,10,12:15)
+  )
+
+  dat <- prepare_data(dat)
+  expect_equal(vistime:::set_order(dat)$group, factor(dat$group, levels = unique(dat$group)))
+  expect_equal(vistime:::set_order(dat)$subplot, 1:15)
+})
+
+test_that("Groups are gathered together", {
+  dat <- data.frame(
+    event = 1:5, start = "2019-01-01",
+    end = "2019-01-10",
+    group = c(2,1,5,2,1)
+  )
+
+  dat <- prepare_data(dat)
+  expect_equal(as.integer(as.character(vistime:::set_order(dat)$group)), c(2,2,1,1,5))
+  expect_equal(vistime:::set_order(dat)$subplot, c(1,1,2,2,3))
 })

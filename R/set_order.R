@@ -22,13 +22,10 @@
 #' }
 set_order <- function(data) {
 
-  # gather groups together, in order of appearance
-  # zijheui workaround in case groups are integers
-  data <- data[order(as.integer(factor(paste0(data$group, "zijheui"),
-                                       levels = unique(paste0(data$group,
-                                                              "zijheui"))))), ]
-
-  data$subplot <- as.integer(factor(data$group, levels = unique(data$group)))
+  # set group order to order of appearance using factor levels
+  data$group <- factor(data$group, levels = unique(data$group))
+  data <- data[order(data$group), ] # bring same groups together
+  data$subplot <- as.integer(data$group)
 
   return(data)
 }
