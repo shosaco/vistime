@@ -77,11 +77,11 @@ prepare_data <- function(dat){
   show_labels <- TRUE
   background_lines <- 11
 
-  dat <- vistime:::validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
-  dat <- vistime:::set_colors(dat, colors, fontcolors)
-  dat <- vistime:::fix_columns(dat, events, start, end, groups, tooltips)
-  dat <- vistime:::set_order(dat)
-  dat <- vistime:::set_y_values(dat, TRUE) %>%
+  dat <- validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
+  dat <- set_colors(dat, colors, fontcolors)
+  dat <- fix_columns(dat, events, start, end, groups, tooltips)
+  dat <- set_order(dat)
+  dat <- set_y_values(dat, TRUE) %>%
     mutate(end = if_else(start != end, end, end + diff(range(c(start, end)))/50)) %>%
     mutate_at(c("start", "end"), ~1000*as.double(.x)) %>% mutate(y = max(y) - y + 1)
   return(dat)

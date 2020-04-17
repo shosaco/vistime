@@ -88,15 +88,15 @@ library(vistime)
 The simplest way to create a timeline is by providing a data frame with `event` and `start` columns. If your columns are named otherwise, you need to tell the function. You can also tweak the y positions, linewidth, title, label visibility and number of lines in the background.
 
 ```{r eval=FALSE}
-vistime(data, col.events = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
+vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
               col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE, linewidth = NULL, 
               title = NULL, show_labels = TRUE, background_lines = 10)
 
-gg_vistime(data, col.events = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color",
+gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color",
            col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, title = NULL, 
            show_labels = TRUE, background_lines = 10)
 
-vistime_data(data, col.events = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
+vistime_data(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
              col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE)
 ```
 

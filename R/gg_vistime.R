@@ -47,7 +47,7 @@ gg_vistime <- function(data, col.event = "event", col.start = "start", col.end =
 
   data$tooltip <- ""
   data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip = NULL, optimize_y, linewidth, title, show_labels, background_lines)
-  cleaned_dat <- vistime_data(data, col.events, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip = "tooltip", optimize_y)
+  cleaned_dat <- vistime_data(data, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip = "tooltip", optimize_y)
 
   total <- plot_ggplot(cleaned_dat, linewidth, title, show_labels, background_lines)
 

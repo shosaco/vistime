@@ -14,10 +14,10 @@ prepare_data <- function(dat){
   show_labels <- TRUE
   background_lines <- 11
 
-  dat <- vistime:::validate_input(dat, col.start, col.end, col.event, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
-  dat <- vistime:::set_colors(dat, col.color, col.fontcolor)
-  dat <- vistime:::fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip)
-  dat <- vistime:::set_order(dat)
+  dat <- validate_input(dat, col.start, col.end, col.event, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
+  dat <- set_colors(dat, col.color, col.fontcolor)
+  dat <- fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip)
+  dat <- set_order(dat)
   return(dat)
 
 }
@@ -30,8 +30,8 @@ test_that("Basic test", {
   )
 
   dat <- prepare_data(dat)
-  expect_equal(vistime:::set_y_values(dat, TRUE)$y, rep(2:1, 2))
-  expect_equal(vistime:::set_y_values(dat, FALSE)$y, rev(as.integer(factor(dat$event))))
+  expect_equal(set_y_values(dat, TRUE)$y, rep(2:1, 2))
+  expect_equal(set_y_values(dat, FALSE)$y, rev(as.integer(factor(dat$event))))
 })
 
 
@@ -49,7 +49,7 @@ route networks,2,2,visualisation")
   # y-optimized
   d$target_y <- c(5,4,2,1,2)
   dat <- prepare_data(d)
-  actual <- vistime:::set_y_values(dat, TRUE)[,c("event", "y")]
+  actual <- set_y_values(dat, TRUE)[,c("event", "y")]
   expected <- d[,c("event", "target_y")]
   result <- merge(actual,expected)
   expect_equal(result$y, result$target_y)
@@ -57,7 +57,7 @@ route networks,2,2,visualisation")
   # non-y-optimized
   d$target_y <- c(6,5,3,2,1)
   dat <- prepare_data(d)
-  actual <- vistime:::set_y_values(dat, F)[,c("event", "y")]
+  actual <- set_y_values(dat, F)[,c("event", "y")]
   expected <- d[,c("event", "target_y")]
   result <- merge(actual,expected)
   expect_equal(result$y, result$target_y)
@@ -71,8 +71,8 @@ test_that("Subsequent Events are on same y level when optimize_y = TRUE and on d
   d$target_y <- c(1,1)
 
   dat <- prepare_data(d)
-  expect_equal(vistime:::set_y_values(dat, TRUE)$y, d$target_y)
-  expect_equal(vistime:::set_y_values(dat, FALSE)$y, c(2,1))
+  expect_equal(set_y_values(dat, TRUE)$y, d$target_y)
+  expect_equal(set_y_values(dat, FALSE)$y, c(2,1))
 })
 
 test_that("Events start from top not from bottom of chart", {
@@ -80,5 +80,5 @@ test_that("Events start from top not from bottom of chart", {
     event = 1:3, start = c("2019-01-01", "2019-01-09", "2019-01-11"),
     end = c("2019-01-10", "2019-01-12", "2019-01-14"), subplot = 1, stringsAsFactors = F)
 
-  expect_equal(vistime:::set_y_values(d, TRUE)$y, c(2,1,2))
+  expect_equal(set_y_values(d, TRUE)$y, c(2,1,2))
 })
