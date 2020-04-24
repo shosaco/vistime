@@ -1,4 +1,4 @@
-[![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
+[![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
 [![dev](https://img.shields.io/badge/dev-1.0.0.9000-green.svg)](https://github.com/shosaco/vistime/blob/dev/NEWS.md)
 [![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
@@ -10,7 +10,7 @@ vistime - Pretty Timelines
 
 A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
 
-If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
+If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/e4SqIQH.png" alt="Buy Me A Coffee"></a>"
 
 **Feedback welcome:** [sa.ra.online@posteo.de](mailto:sa.ra.online@posteo.de)
 
