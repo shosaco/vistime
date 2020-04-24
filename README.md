@@ -10,7 +10,7 @@ vistime - Pretty Timelines
 
 A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
 
-If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/e4SqIQH.png" alt="Buy Me A Coffee"></a>"
+If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/e4SqIQH.png" alt="Buy Me A Coffee"></a>
 
 **Feedback welcome:** [sa.ra.online@posteo.de](mailto:sa.ra.online@posteo.de)
 
