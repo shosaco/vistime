@@ -31,6 +31,7 @@
 #'   visible. Default: \code{TRUE}.
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the
 #'   background to demonstrate structure (default: 10). Less means more memory-efficient plot.
+#' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @export
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 #'  See `gg_vistime` for the static `ggplot` version.
@@ -138,8 +139,45 @@ vistime <- function(data,
                     col.fontcolor = "fontcolor",
                     col.tooltip = "tooltip",
                     optimize_y = TRUE, linewidth = NULL, title = NULL,
-                    show_labels = TRUE, background_lines = 10) {
+                    show_labels = TRUE, background_lines = 10, ...) {
 
+  .dots = list(...)
+
+  if("events" %in% names(.dots)){
+    .Deprecated(new = "col.event", old = "events")
+    col.event = .dots$events
+  }
+  if("start" %in% names(.dots)){
+    .Deprecated(new = "col.start", old = "start")
+    col.start = .dots$start
+  }
+  if("end" %in% names(.dots)){
+    .Deprecated(new = "col.end", old = "end")
+    col.end = .dots$end
+  }
+  if("groups" %in% names(.dots)){
+    .Deprecated(new = "col.group", old = "groups")
+    col.group = .dots$groups
+  }
+  if("colors" %in% names(.dots)){
+    .Deprecated(new = "col.color", old = "colors")
+    col.color = .dots$colors
+  }
+  if("fontcolors" %in% names(.dots)){
+    .Deprecated(new = "col.fontcolor", old = "fontcolors")
+    col.fontcolor = .dots$fontcolors
+  }
+  if("tooltips" %in% names(.dots)){
+    .Deprecated(new = "col.tooltip", old = "tooltips")
+    col.tooltip = .dots$tooltips
+  }
+  if("lineInterval" %in% names(.dots)){
+    .Deprecated(new = "background_lines", old = "lineInterval")
+  }
+  if("showLabels" %in% names(.dots)){
+    .Deprecated(new = "show_labels", old = "showLabels")
+    col.event = .dots$events
+  }
 
   data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
   cleaned_dat <- vistime_data(data, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip, optimize_y)
