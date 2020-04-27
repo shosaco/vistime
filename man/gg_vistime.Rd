@@ -16,7 +16,8 @@ gg_vistime(
   linewidth = NULL,
   title = NULL,
   show_labels = TRUE,
-  background_lines = 10
+  background_lines = 10,
+  ...
 )
 }
 \arguments{
@@ -55,6 +56,8 @@ Default: \code{NULL}.}
 visible. Default: \code{TRUE}.}
 
 \item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.}
+
+\item{...}{for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)}
 }
 \value{
 \code{gg_vistime} returns an object of class \code{gg} and \code{ggplot}.
