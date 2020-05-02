@@ -40,38 +40,7 @@ vistime_data <- function(data, col.event = "event", col.start = "start", col.end
                          col.color = "color", col.fontcolor = "fontcolor", col.tooltip = "tooltip",
                          optimize_y = TRUE, ...) {
 
-  .dots = list(...)
-
-  if("events" %in% names(.dots)){
-    .Deprecated(new = "col.event", old = "events")
-    col.event = .dots$events
-  }
-  if("start" %in% names(.dots)){
-    .Deprecated(new = "col.start", old = "start")
-    col.start = .dots$start
-  }
-  if("end" %in% names(.dots)){
-    .Deprecated(new = "col.end", old = "end")
-    col.end = .dots$end
-  }
-  if("groups" %in% names(.dots)){
-    .Deprecated(new = "col.group", old = "groups")
-    col.group = .dots$groups
-  }
-  if("colors" %in% names(.dots)){
-    .Deprecated(new = "col.color", old = "colors")
-    col.color = .dots$colors
-  }
-  if("fontcolors" %in% names(.dots)){
-    .Deprecated(new = "col.fontcolor", old = "fontcolors")
-    col.fontcolor = .dots$fontcolors
-  }
-  if("tooltips" %in% names(.dots)){
-    .Deprecated(new = "col.tooltip", old = "tooltips")
-    col.tooltip = .dots$tooltips
-  }
-
-  data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y)
+  data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, ...)
 
   data <- set_colors(data, col.color, col.fontcolor)
   data <- fix_columns(data, col.event, col.start, col.end, col.group, col.tooltip)

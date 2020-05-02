@@ -22,7 +22,44 @@
 #'   background_lines = 10
 #' )
 #' }
-validate_input <- function(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth = 0, title = NULL, show_labels = FALSE, background_lines = NULL) {
+validate_input <- function(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth = 0, title = NULL, show_labels = FALSE, background_lines = NULL, ...) {
+
+  .dots = list(...)
+
+  if("events" %in% names(.dots)){
+    .Deprecated(new = "col.event", old = "events")
+    col.event = .dots$events
+  }
+  if("start" %in% names(.dots)){
+    .Deprecated(new = "col.start", old = "start")
+    col.start = .dots$start
+  }
+  if("end" %in% names(.dots)){
+    .Deprecated(new = "col.end", old = "end")
+    col.end = .dots$end
+  }
+  if("groups" %in% names(.dots)){
+    .Deprecated(new = "col.group", old = "groups")
+    col.group = .dots$groups
+  }
+  if("colors" %in% names(.dots)){
+    .Deprecated(new = "col.color", old = "colors")
+    col.color = .dots$colors
+  }
+  if("fontcolors" %in% names(.dots)){
+    .Deprecated(new = "col.fontcolor", old = "fontcolors")
+    col.fontcolor = .dots$fontcolors
+  }
+  if("tooltips" %in% names(.dots)){
+    .Deprecated(new = "col.tooltip", old = "tooltips")
+    col.tooltip = .dots$tooltips
+  }
+  if("lineInterval" %in% names(.dots)){
+    .Deprecated(new = "background_lines", old = "lineInterval")
+  }
+  if("showLabels" %in% names(.dots)){
+    .Deprecated(new = "show_labels", old = "showLabels")
+  }
 
   assertive::assert_is_character(col.start)
   assertive::assert_is_character(col.end)
