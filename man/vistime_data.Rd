@@ -13,8 +13,7 @@ vistime_data(
   col.color = "color",
   col.fontcolor = "fontcolor",
   col.tooltip = "tooltip",
-  optimize_y = TRUE,
-  ...
+  optimize_y = TRUE
 )
 }
 \arguments{
@@ -45,8 +44,6 @@ mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
 then tooltips are build from event name and date.}
 
 \item{optimize_y}{(optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.}
-
-\item{...}{for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)}
 }
 \value{
 \code{vistime_data} returns a data.frame with the following columns: event, start, end, group, tooltip, label, col, fontcol, subplot, y

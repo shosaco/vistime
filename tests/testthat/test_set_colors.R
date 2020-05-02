@@ -17,8 +17,8 @@ data <- data.frame(
   FARBE = c("red", "green"),
   stringsAsFactors = FALSE
 )
-data <- validate_input(data, col.start, col.end, col.event, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
-
+l <- validate_input(data, col.start, col.end, col.event, col.group, col.color, col.fontcolor, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
+data <- l$data
 
 test_that("color columns not existing", {
   result <- set_colors(data, eventcolor_column = "NOTEXISTING", fontcolor_column = "NOTEXISTING")

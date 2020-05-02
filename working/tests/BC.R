@@ -1,7 +1,7 @@
 library(rcarbon)
 library(lubridate)
 
-#This isn't my function - from 
+#This isn't my function - from
 as_BC_date <- function(year, month = 1, day = 1){
   if(year < 0) year<-(-year)
   Y <- as.character(year)
@@ -40,12 +40,12 @@ Falling SST, Regional Climate,  3500, 1600, #9fd8fb,  Black
 Increasing SST & weak monsoon, Regional Climate,  1600, 0, #d0ecfd, Black")
 
 data[3]<-as.data.frame(BPtoBCAD(as.vector(t(data[3])))) #uses function from rcarbon to convert from BP to BCE/AD
-data[4]<-as.data.frame(BPtoBCAD(as.vector(t(data[4])))) 
+data[4]<-as.data.frame(BPtoBCAD(as.vector(t(data[4]))))
 data_AD<-data #have to split the dataframe into two sections and treat BCE separately from AD
 data[3][data[3]>0] <- NA #Anything AD is set to NA
-data[4][data[4]>0] <- NA 
+data[4][data[4]>0] <- NA
 data_AD[3][data_AD[3]<0] <- NA #Anything BCE is set to NA
-data_AD[4][data_AD[4]<0] <- NA 
+data_AD[4][data_AD[4]<0] <- NA
 data[3]<-as.data.frame(as_BC_date(as.numeric(t(data[3])))) #converts numbers to date (BCE)
 data[4]<-as.data.frame(as_BC_date(as.numeric(t(data[4]))))
 data_AD[3]<-as.data.frame(as.Date(ISOdate(t(data_AD[3]),1,1))) #converts numbers to date (AD)
@@ -58,5 +58,5 @@ vistime(data) #visualise
 
 
 data$fontcolor = "black"
-gg_vistime(data, linewidth=10)
+vistime(data, linewidth=10)
 

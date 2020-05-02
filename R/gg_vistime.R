@@ -41,13 +41,41 @@
 #' )
 #'
 #' gg_vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
+#'
+#' \dontrun{
+#' # ------ It is possible to change all attributes of the timeline using ggplot2::theme()
+#' data <- read.csv(text="event,start,end
+#'                        Phase 1,2020-12-15,2020-12-24
+#'                        Phase 2,2020-12-23,2020-12-29
+#'                        Phase 3,2020-12-28,2021-01-06
+#'                        Phase 4,2021-01-06,2021-02-02")
+#'
+#' p <- gg_vistime(data, optimize_y = T, col.group = "event", title = "ggplot customization example")
+#'
+#' library(ggplot2)
+#' p + theme(
+#'   plot.title = element_text(hjust = 0, size=30),
+#'   axis.text.x = element_text(size = 30, color = "violet"),
+#'   axis.text.y = element_text(size = 30, color = "red", angle = 30),
+#'   panel.border = element_rect(linetype = "dashed", fill=NA),
+#'   panel.background = element_rect(fill = 'green')) +
+#'   coord_cartesian(ylim = c(0.7, 3.5))
+#' }
+
 
 gg_vistime <- function(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group",
                        col.color = "color", col.fontcolor = "fontcolor", optimize_y = TRUE,
                        linewidth = NULL, title = NULL, show_labels = TRUE, background_lines = NULL, ...) {
 
-  data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip = NULL, optimize_y, linewidth, title, show_labels, background_lines, ...)
-  cleaned_dat <- vistime_data(data, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip = "tooltip", optimize_y)
+  col.tooltip <- NULL
+
+  checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
+                                col.fontcolor, col.tooltip, optimize_y, linewidth, title,
+                                show_labels, background_lines, ...)
+
+  cleaned_dat <- vistime_data(checked_dat$data, checked_dat$col.event, checked_dat$col.start,
+                              checked_dat$col.end, checked_dat$col.group, checked_dat$col.color,
+                              checked_dat$col.fontcolor, checked_dat$col.tooltip, optimize_y)
 
   total <- plot_ggplot(cleaned_dat, linewidth, title, show_labels, background_lines)
 

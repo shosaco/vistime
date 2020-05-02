@@ -1,11 +1,11 @@
 #' Standardize column names
 #'
 #' @param data input data frame
-#' @param events event column name
-#' @param start name of start column
-#' @param end name of end column
-#' @param groups name of group column
-#' @param tooltips column name of tooltips
+#' @param col.event event column name
+#' @param col.start name of col.start column
+#' @param col.end name of end column
+#' @param col.group name of group column
+#' @param col.tooltip column name of tooltips
 #'
 #' @return the data frame prepared for plotting
 #'
@@ -16,38 +16,33 @@
 #' \dontrun{
 #' fix_columns(data.frame(
 #'   event = 1:4,
-#'   start = c("2019-01-01", "2019-01-10"),
-#'   end = c("2019-01-01", "2019-01-10"),
-#'   events = "event", start = "start", end = "end",
-#'   groups = "group", tooltips = "tooltip"
+#'   col.start = c("2019-01-01", "2019-01-10"),
+#'   col.end = c("2019-01-01", "2019-01-10"),
+#'   col.event = "event", col.start = "start", end = "end",
+#'   col.group = "group", col.tooltip = "tooltip"
 #' ))
 #' }
 #'
-fix_columns <- function(data, events, start, end, groups, tooltips) {
+fix_columns <- function(data, col.event, col.start, col.end, col.group, col.tooltip) {
 
-  # add additional columns
-  if (!groups %in% names(data)) {
+
+  if (!col.group %in% names(data)) {
     data$group <- ""
-  } else if (any(is.na(data[, groups])))
+    col.group <- "group"
+  } else if (any(is.na(data[, col.group]))){
     stop("if using groups argument, all groups must be set to a non-NA value")
-  if (!end %in% names(data) | end == start) data$end <- data[, start]
-
-  # set column names
-  if (events == groups) {
-    data$group <- data[, groups]
-  } else {
-    names(data)[names(data) == groups] <- "group"
   }
-  names(data)[names(data) == start] <- "start"
-  names(data)[names(data) == end] <- "end"
-  names(data)[names(data) == events] <- "event"
 
-  data$start <- as.POSIXct(data$start)
-  data$end <- as.POSIXct(data$end)
+  if (!col.end %in% names(data) | col.end == col.start) col.end <- col.start
+
+  data$group <- data[[col.group]]
+  data$start <- as.POSIXct(data[[col.start]])
+  data$end <- as.POSIXct(data[[col.end]])
+  data$event <- data[[col.event]]
 
   # convert to character if factor
   for (col in names(data)[!names(data) %in% c("start", "end")])
-    data[, col] <- as.character(data[, col])
+    data[[col]] <- as.character(data[[col]])
 
   # sort out missing end dates
   if (any(is.na(data$end)))
@@ -58,8 +53,8 @@ fix_columns <- function(data, events, start, end, groups, tooltips) {
   data$group <- trimws(data$group)
 
   # set tooltips
-  if (tooltips %in% names(data)) {
-    names(data)[names(data) == tooltips] <- "tooltip"
+  if (!is.null(col.tooltip) && col.tooltip %in% names(data)) {
+    data$tooltip <- data[[col.tooltip]]
   } else {
     data$tooltip <- ifelse(data$start == data$end,
       paste0("<b>", data$event, ": ", data$start, "</b>"),

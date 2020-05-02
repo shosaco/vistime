@@ -19,7 +19,6 @@
 #'   mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
 #'   then tooltips are build from event name and date.
 #' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.
-#' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @export
 #' @return \code{vistime_data} returns a data.frame with the following columns: event, start, end, group, tooltip, label, col, fontcol, subplot, y
 #' @examples
@@ -38,12 +37,15 @@
 
 vistime_data <- function(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group",
                          col.color = "color", col.fontcolor = "fontcolor", col.tooltip = "tooltip",
-                         optimize_y = TRUE, ...) {
+                         optimize_y = TRUE) {
 
-  data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, ...)
+  checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
+                                col.fontcolor, col.tooltip, optimize_y, linewidth = NULL, title = NULL,
+                                show_labels = TRUE, background_lines = NULL)
 
-  data <- set_colors(data, col.color, col.fontcolor)
-  data <- fix_columns(data, col.event, col.start, col.end, col.group, col.tooltip)
+  data <- set_colors(checked_dat$data, checked_dat$col.color, checked_dat$col.fontcolor)
+  data <- fix_columns(data, checked_dat$col.event, checked_dat$col.start, checked_dat$col.end,
+                      checked_dat$col.group, checked_dat$col.tooltip)
   data <- set_order(data)
   data <- set_y_values(data, optimize_y)
   return(data)

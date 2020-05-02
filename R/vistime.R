@@ -141,8 +141,14 @@ vistime <- function(data,
                     optimize_y = TRUE, linewidth = NULL, title = NULL,
                     show_labels = TRUE, background_lines = NULL, ...) {
 
-  data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines, ...)
-  cleaned_dat <- vistime_data(data, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip, optimize_y)
+  checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
+                                col.fontcolor, col.tooltip, optimize_y, linewidth, title,
+                                show_labels, background_lines, ...)
+
+  cleaned_dat <- vistime_data(checked_dat$data, checked_dat$col.event, checked_dat$col.start,
+                              checked_dat$col.end, checked_dat$col.group, checked_dat$col.color,
+                              checked_dat$col.fontcolor, checked_dat$col.tooltip, optimize_y)
+
   total <- plot_plotly(cleaned_dat, linewidth, title, show_labels, background_lines)
 
   return(total)

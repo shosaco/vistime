@@ -77,4 +77,24 @@ pres <- data.frame(
 )
 
 gg_vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
+
+\dontrun{
+# ------ It is possible to change all attributes of the timeline using ggplot2::theme()
+data <- read.csv(text="event,start,end
+                       Phase 1,2020-12-15,2020-12-24
+                       Phase 2,2020-12-23,2020-12-29
+                       Phase 3,2020-12-28,2021-01-06
+                       Phase 4,2021-01-06,2021-02-02")
+
+p <- gg_vistime(data, optimize_y = T, col.group = "event", title = "ggplot customization example")
+
+library(ggplot2)
+p + theme(
+  plot.title = element_text(hjust = 0, size=30),
+  axis.text.x = element_text(size = 30, color = "violet"),
+  axis.text.y = element_text(size = 30, color = "red", angle = 30),
+  panel.border = element_rect(linetype = "dashed", fill=NA),
+  panel.background = element_rect(fill = 'green')) +
+  coord_cartesian(ylim = c(0.7, 3.5))
+}
 }

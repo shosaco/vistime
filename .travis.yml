@@ -19,5 +19,5 @@ notifications:
   email:
     recipients:
       - sa.ra.online@posteo.de
-    on_success: always # default: change
-    on_failure: always # default: always
+    on_success: change # default: change
+    on_failure: change # default: always

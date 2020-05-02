@@ -16,8 +16,8 @@ linewidth <- NULL
 title <- NULL
 show_labels <- TRUE
 background_lines <- 10
-dat <- validate_input(dat, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
-dat <- set_colors(dat, col.color, col.fontcolor)
+checked_dat <- validate_input(dat, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
+dat <- set_colors(checked_dat$data, col.color, col.fontcolor)
 
 test_that("new columns", {
   result <- fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip)
@@ -89,6 +89,6 @@ test_that("tooltips", {
   expect_equal(fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip)$tooltip, as.character(1:2))
 
   dat$MYTOOLTIPS <- 1:2
-  expect_equal(fix_columns(dat, col.event, col.start, col.end, col.group, tooltips = "MYTOOLTIPS")$tooltip, as.character(1:2))
+  expect_equal(fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip = "MYTOOLTIPS")$tooltip, as.character(1:2))
 })
 
