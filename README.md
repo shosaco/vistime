@@ -8,7 +8,7 @@
 vistime - Pretty Timelines
 =========
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `ggplot::theme()` or `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/e4SqIQH.png" alt="Buy Me A Coffee"></a>
 
@@ -27,8 +27,8 @@ If you find vistime useful, please consider supporting its development: <a href=
 7. [Exporting](#7-export-of-vistime-as-pdf-or-png)
 8. [Usage in Shiny apps](#8-usage-in-shiny-apps)
 9. [Customization](#9-customization)
-   * [Use `ggplot2` customization for `gg_vistime` charts](#Use-ggplot2-customization-for-gg_vistime-charts)
-   * [Use `plotly_build` for `vistime` charts](#Use-plotly_build-for-vistime-charts)
+   * [Use `ggplot2::theme()` for `gg_vistime` charts](#use-ggplot2theme-for-gg_vistime-charts)
+   * [Use `plotly::plotly_build()` for `vistime` charts](#use-plotlyplotly_build-for-vistime-charts)
       * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
       * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
       * [Changing events font size](#changing-events-font-size)
@@ -257,13 +257,20 @@ p + theme(
       panel.border = element_rect(linetype = "dashed", fill=NA),
       panel.background = element_rect(fill = 'green')) +
     coord_cartesian(ylim = c(0.7, 3.5))
-
 ```
 
 <img src="inst/img/ggplot_cust.png" />
 
 
+**Remark:** It's similar for `vistime` objects, use `Plotly`'s `layout` function, though not all attributes are changeable there:
 
+```{r}
+p <- vistime(data, optimize_y = T, col.group = "event", title = "plotly customization example")
+library(plotly)
+p %>% layout(yaxis=list(fixedrange=TRUE), title = "A different plot",
+             plot_bgcolor = "yellow", xaxis = list(title = "x Axis"), 
+             yaxis = list(mirror = FALSE, range = c(0.7, 3.5), showgrid = T))
+```
 
 ### Use `plotly_build` for `vistime` charts
 

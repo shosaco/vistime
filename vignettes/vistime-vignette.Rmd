@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 [![Donate](https://i.imgur.com/vCIGFrH.png)](https://www.paypal.me/shosaco/)
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build()`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using using `ggplot::theme()` or `plotly_build()`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.paypal.me/shosaco/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" /> </a>
 
@@ -276,6 +276,16 @@ p +  ggplot2::theme(
 
 ```{r echo=FALSE, out.width = "50%"}
 knitr::include_graphics("../inst//img/ggplot_cust.png")
+```
+
+**Remark:** It's similar for `vistime` objects, use `Plotly`'s `layout` function, though not all attributes are changeable there:
+
+```{r}
+p <- vistime(data, optimize_y = T, col.group = "event", title = "plotly customization example")
+library(plotly)
+p %>% layout(yaxis=list(fixedrange=TRUE), title = "A different plot",
+             plot_bgcolor = "yellow", xaxis = list(title = "x Axis"), 
+             yaxis = list(mirror = FALSE, range = c(0.7, 3.5), showgrid = T))
 ```
 
 ### Use `plotly_build` for `vistime` charts
