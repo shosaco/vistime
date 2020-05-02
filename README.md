@@ -69,7 +69,7 @@ You want to use this for the intelligent y-axis assignment depending on overlapp
 
 ## 2. Installation
 
-To install the package from CRAN (v0.9.0), type the following in your R console:
+To install the package from CRAN (v1.0.0), type the following in your R console:
 ```{r}
 install.packages("vistime")
 ```
