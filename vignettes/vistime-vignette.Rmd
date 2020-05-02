@@ -249,7 +249,7 @@ shinyApp(
 
 ## 8. Customization
 
-### Use `ggplot2` customisation for `gg_vistime` charts
+### Using `ggplot2::theme()` for `gg_vistime` charts
 
 Since every `gg_vistime` output is a `ggplot` object, you can customize and override literally everything:
 
@@ -288,7 +288,7 @@ p %>% layout(yaxis=list(fixedrange=TRUE), title = "A different plot",
              yaxis = list(mirror = FALSE, range = c(0.7, 3.5), showgrid = T))
 ```
 
-### Use `plotly_build` for `vistime` charts
+### Using `plotly::plotly_build()` for `vistime` charts
 
 The function `plotly_build` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 

@@ -27,8 +27,8 @@ If you find vistime useful, please consider supporting its development: <a href=
 7. [Exporting](#7-export-of-vistime-as-pdf-or-png)
 8. [Usage in Shiny apps](#8-usage-in-shiny-apps)
 9. [Customization](#9-customization)
-   * [Use `ggplot2::theme()` for `gg_vistime` charts](#use-ggplot2theme-for-gg_vistime-charts)
-   * [Use `plotly::plotly_build()` for `vistime` charts](#use-plotlyplotly_build-for-vistime-charts)
+   * [Using `ggplot2::theme()` for `gg_vistime` charts](#using-ggplot2theme-for-gg_vistime-charts)
+   * [Using `plotly::plotly_build()` for `vistime` charts](#using-plotlyplotly_build-for-vistime-charts)
       * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
       * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
       * [Changing events font size](#changing-events-font-size)
@@ -236,7 +236,7 @@ shinyApp(
 
 ## 9. Customization
 
-### Use `ggplot2` customization for `gg_vistime` charts
+### Using `ggplot2::theme()` for `gg_vistime` charts
 
 Since every `gg_vistime` output is a `ggplot` object, you can customize and override literally everything:
 
@@ -272,7 +272,7 @@ p %>% layout(yaxis=list(fixedrange=TRUE), title = "A different plot",
              yaxis = list(mirror = FALSE, range = c(0.7, 3.5), showgrid = T))
 ```
 
-### Use `plotly_build` for `vistime` charts
+### Using `plotly::plotly_build()` for `vistime` charts
 
 The function `plotly_build()` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
