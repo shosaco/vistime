@@ -1,4 +1,4 @@
-# vistime (development version) (branch dev)
+# vistime (development version)
  
 ## Breaking Changes
 - more intuitive argument naming:
@@ -10,11 +10,16 @@
   * `col.fontcolor` instead of `fontcolors`
   * `col.tooltip` instead of `tooltips`
 
-
 ## New features
 <!-- - new function `hc_vistime()`: Create an interactive timeline rendered by the famous `Highcharter.js` library. -->
 
-# vistime 1.0.0 (branch master)
+## Minor adjustments
+- `gg_vistime`:
+  * now uses `geom_label` for events and `geom_text` for ranges
+  * alternating `y` position of event labelling
+  * layout adjustments: Panel border and changes under-the-hood
+ 
+# vistime 1.0.0
  
 ## Breaking Changes
 - `vistime` no longer uses cumbersome Plotly-subplots. Everything renders in the same plot and can be zoomed seamlessly.

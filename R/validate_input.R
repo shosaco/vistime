@@ -22,7 +22,7 @@
 #'   background_lines = 10
 #' )
 #' }
-validate_input <- function(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth = 0, title = NULL, show_labels = FALSE, background_lines = 0) {
+validate_input <- function(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth = 0, title = NULL, show_labels = FALSE, background_lines = NULL) {
 
   assertive::assert_is_character(col.start)
   assertive::assert_is_character(col.end)
@@ -32,7 +32,7 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.t
   assertive::assert_is_logical(optimize_y)
   if(!is.null(linewidth)) assertive::assert_is_numeric(linewidth)
   if(!is.null(title)) assertive::assert_is_character(title)
-  assertive::assert_is_numeric(background_lines)
+  if(!is.null(background_lines)) assertive::assert_is_numeric(background_lines)
   assertive::assert_is_logical(show_labels)
 
   if (class(try(as.data.frame(data), silent = T))[1] == "try-error")
@@ -51,11 +51,6 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.t
 
   if (!col.event %in% names(data))
     stop("Please provide the name of the events column in parameter 'events'")
-
-  if(round(background_lines) != background_lines){
-    background_lines <- round(background_lines)
-    warning("background_lines was not integer. Rounded to ", background_lines)
-  }
 
   return(data)
 }

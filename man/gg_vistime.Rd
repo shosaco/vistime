@@ -16,7 +16,7 @@ gg_vistime(
   linewidth = NULL,
   title = NULL,
   show_labels = TRUE,
-  background_lines = 10,
+  background_lines = NULL,
   ...
 )
 }
@@ -55,7 +55,7 @@ Default: \code{NULL}.}
 \item{show_labels}{(optional, boolean) choose whether or not event labels shall be
 visible. Default: \code{TRUE}.}
 
-\item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.}
+\item{background_lines}{(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: heuristic).}
 
 \item{...}{for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)}
 }

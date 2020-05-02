@@ -87,13 +87,6 @@ test_that("data formats", {
     "background_lines is not of class 'numeric'"
   )
 
-  expect_warning(
-    validate_input(dat, col.event, col.start, col.end, col.group,  col.tooltip, optimize_y, linewidth, title,
-                             show_labels, background_lines = 11.5),
-    "background_lines was not integer."
-  )
-
-
   expect_error(
     validate_input(dat, col.event, col.start, col.end, col.group,  col.tooltip, optimize_y, linewidth, title,
                              show_labels, background_lines = TRUE),

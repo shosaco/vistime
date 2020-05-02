@@ -26,7 +26,7 @@
 #'   Default: \code{NULL}.
 #' @param show_labels (optional, boolean) choose whether or not event labels shall be
 #'   visible. Default: \code{TRUE}.
-#' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: 10). Less means more memory-efficient plot.
+#' @param background_lines (optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: heuristic).
 #' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @export
 #' @return \code{gg_vistime} returns an object of class \code{gg} and \code{ggplot}.
@@ -44,7 +44,7 @@
 
 gg_vistime <- function(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group",
                        col.color = "color", col.fontcolor = "fontcolor", optimize_y = TRUE,
-                       linewidth = NULL, title = NULL, show_labels = TRUE, background_lines = 10, ...) {
+                       linewidth = NULL, title = NULL, show_labels = TRUE, background_lines = NULL, ...) {
 
   .dots = list(...)
 
@@ -77,10 +77,8 @@ gg_vistime <- function(data, col.event = "event", col.start = "start", col.end =
   }
   if("showLabels" %in% names(.dots)){
     .Deprecated(new = "show_labels", old = "showLabels")
-    col.event = .dots$events
   }
 
-  data$tooltip <- ""
   data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip = NULL, optimize_y, linewidth, title, show_labels, background_lines)
   cleaned_dat <- vistime_data(data, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip = "tooltip", optimize_y)
 

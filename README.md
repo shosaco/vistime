@@ -27,10 +27,12 @@ If you find vistime useful, please consider supporting its development: <a href=
 7. [Exporting](#7-export-of-vistime-as-pdf-or-png)
 8. [Usage in Shiny apps](#8-usage-in-shiny-apps)
 9. [Customization](#9-customization)
-   * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
-   * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
-   * [Changing events font size](#changing-events-font-size)
-   * [Changing marker size](#changing-marker-size)
+   * [Use `ggplot2` customization for `gg_vistime` charts](#Use-ggplot2-customization-for-gg_vistime-charts)
+   * [Use `plotly_build` for `vistime` charts](#Use-plotly_build-for-vistime-chart)
+    * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
+    * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
+    * [Changing events font size](#changing-events-font-size)
+    * [Changing marker size](#changing-marker-size)
 
 ## 1. Main functionality
 
@@ -91,7 +93,7 @@ vistime(data, col.event = "event", col.start = "start", col.end = "end", col.gro
 
 gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.color = "color", 
            col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
-           title = NULL, show_labels = TRUE, background_lines = 10)
+           title = NULL, show_labels = TRUE, background_lines = NULL)
 
 vistime_data(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.colors = "color", 
              col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE)
@@ -233,11 +235,42 @@ shinyApp(
 ```
 
 ## 9. Customization
+
+### Use `ggplot2` customization for `gg_vistime` charts
+
+Since every `gg_vistime` output is a `ggplot` object, you can customize and override literally everything:
+
+```{r}
+data <- read.csv(text="event,start,end
+                       Phase 1,2020-12-15,2020-12-24
+                       Phase 2,2020-12-23,2020-12-29
+                       Phase 3,2020-12-28,2021-01-06
+                       Phase 4,2021-01-06,2021-02-02")
+        
+p <- gg_vistime(data, optimize_y = T, col.group = "event", title = "ggplot customization example")
+
+p +  ggplot2::theme(
+      plot.title = ggplot2::element_text(hjust = 0, size=30),
+      axis.text.x = ggplot2::element_text(size = 30, color = "violet"),
+      axis.text.y = ggplot2::element_text(size = 30, color = "red", angle = 30),
+      panel.border = element_rect(linetype = "dashed", fill=NA),
+      panel.background = element_rect(fill = 'green')) +
+    ggplot2::coord_cartesian(ylim = c(0.7, 3.5))
+
+```
+
+<img src="inst/img/ggplot_cust.png" />
+
+
+
+
+### Use `plotly_build` for `vistime` charts
+
 The function `plotly_build()` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
 The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build()`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
 
-### Changing x-axis tick font size
+#### Changing x-axis tick font size
 The following example creates the presidents example and manipulates the font size of the x axis ticks:
 
 ```{r}
@@ -261,7 +294,7 @@ pp
 ```
 <img src="inst/img/ex2-tickfontsize.png" />
 
-### Changing y-axis tick font size
+#### Changing y-axis tick font size
 We need to change the font size of the y-axis:
 
 ```{r}
@@ -271,7 +304,7 @@ pp
 ```
 <img src="inst/img/ex2-yfontsize.png" />
 
-### Changing events font size
+#### Changing events font size
 The following example creates the presidents example and manipulates the font size of the events:
 
 
@@ -303,7 +336,7 @@ pp
 ```
 <img src="inst/img/ex2-eventfontsize.png" />
 
-### Changing marker size
+#### Changing marker size
 The following example a simple example using markers and manipulates the size of the markers:
 
 

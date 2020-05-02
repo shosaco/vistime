@@ -139,7 +139,7 @@ vistime <- function(data,
                     col.fontcolor = "fontcolor",
                     col.tooltip = "tooltip",
                     optimize_y = TRUE, linewidth = NULL, title = NULL,
-                    show_labels = TRUE, background_lines = 10, ...) {
+                    show_labels = TRUE, background_lines = NULL, ...) {
 
   .dots = list(...)
 
@@ -176,7 +176,6 @@ vistime <- function(data,
   }
   if("showLabels" %in% names(.dots)){
     .Deprecated(new = "show_labels", old = "showLabels")
-    col.event = .dots$events
   }
 
   data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)

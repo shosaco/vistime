@@ -17,7 +17,7 @@ vistime(
   linewidth = NULL,
   title = NULL,
   show_labels = TRUE,
-  background_lines = 10,
+  background_lines = NULL,
   ...
 )
 }
