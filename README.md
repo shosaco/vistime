@@ -28,11 +28,11 @@ If you find vistime useful, please consider supporting its development: <a href=
 8. [Usage in Shiny apps](#8-usage-in-shiny-apps)
 9. [Customization](#9-customization)
    * [Use `ggplot2` customization for `gg_vistime` charts](#Use-ggplot2-customization-for-gg_vistime-charts)
-   * [Use `plotly_build` for `vistime` charts](#Use-plotly_build-for-vistime-chart)
-    * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
-    * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
-    * [Changing events font size](#changing-events-font-size)
-    * [Changing marker size](#changing-marker-size)
+   * [Use `plotly_build` for `vistime` charts](#Use-plotly_build-for-vistime-charts)
+      * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
+      * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
+      * [Changing events font size](#changing-events-font-size)
+      * [Changing marker size](#changing-marker-size)
 
 ## 1. Main functionality
 
@@ -249,13 +249,14 @@ data <- read.csv(text="event,start,end
         
 p <- gg_vistime(data, optimize_y = T, col.group = "event", title = "ggplot customization example")
 
-p +  ggplot2::theme(
-      plot.title = ggplot2::element_text(hjust = 0, size=30),
-      axis.text.x = ggplot2::element_text(size = 30, color = "violet"),
-      axis.text.y = ggplot2::element_text(size = 30, color = "red", angle = 30),
+library(ggplot2)
+p + theme(
+      plot.title = element_text(hjust = 0, size=30),
+      axis.text.x = element_text(size = 30, color = "violet"),
+      axis.text.y = element_text(size = 30, color = "red", angle = 30),
       panel.border = element_rect(linetype = "dashed", fill=NA),
       panel.background = element_rect(fill = 'green')) +
-    ggplot2::coord_cartesian(ylim = c(0.7, 3.5))
+    coord_cartesian(ylim = c(0.7, 3.5))
 
 ```
 
