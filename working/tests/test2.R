@@ -34,4 +34,4 @@ title=NULL
 events="Name"
 start="start_year"
 end="end_year"
-gg_vistime(origData,events="Name", start="start_year", end="end_year", groups = "Group")
+vistime(origData,events="Name", start="start_year", end="end_year", groups = "Group")

@@ -6,6 +6,6 @@ syst2 <- data.frame(Position = c(0,0,rep(c( 1,0), 3)),
                     fontcolor = c('#FF0000','#FF0000',rep(c("#008000",'#FF0000'), 3)))
 
 
-vistime(syst2, events = "Position", groups = "Name", optimize_y = T)
+gg_vistime(syst2, events = "Position", groups = "Name", optimize_y = T)
 
-vistime(syst2, events = "Position", groups = "Name", optimize_y = F)  # nice Gantt chart
+gg_vistime(syst2, events = "Position", groups = "Name", optimize_y = F)  # nice Gantt chart

@@ -20,4 +20,6 @@ library(lubridate)
 start_date = as_date(lubridate::ymd("2018-05-01", tz = "GMT"))
 d$start = start_date + d$start * 7
 d$end = d$start + d$duration * 7
-vistime::vistime(d, linewidth = 20)
+
+vistime(d, linewidth = 20)
+gg_vistime(d)

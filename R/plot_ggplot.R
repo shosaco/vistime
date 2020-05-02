@@ -33,40 +33,40 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
       plot.title = ggplot2::element_text(hjust = 0.5),
       axis.ticks.y = ggplot2::element_blank(),
       axis.text.y  = ggplot2::element_text(hjust = 1),
-      line = ggplot2::element_blank(),
-      panel.background = ggplot2::element_blank()) #element_rect(colour="black", linetype = "solid"))
+      # line = ggplot2::element_blank(),
+      panel.background = ggplot2::element_rect(colour = "black", linetype = "solid")) +
+    ggplot2::coord_cartesian(ylim = c(0.5, max(data$y) + 0.5))
 
+  # 2. Add background vertical lines
+  if(is.null(background_lines)){
+    gg <- gg + ggplot2::theme(panel.grid.major.x = ggplot2::element_line(colour = "grey90"),
+                              panel.grid.minor.x = ggplot2::element_line(colour = "grey90"))
+  }else{
+    gg <- gg + ggplot2::geom_vline(xintercept = seq(min(c(data$start, data$end)), max(c(data$start, data$end)),
+                                                    length.out = round(background_lines) + 1), colour = "grey90")
+  }
 
-  # 2. add vertical lines
-  vert_lines <- data.frame(x = seq(min(c(data$start, data$end)), max(c(data$start, data$end)), length.out = background_lines + 1),
-                           xend = seq(min(c(data$start, data$end)), max(c(data$start, data$end)), length.out = background_lines + 1),
-                           y = 0,
-                           yend = max(data$y) + 1)
-  gg <- gg + ggplot2::geom_segment(mapping = ggplot2::aes_(x = ~x, xend = ~x, y = ~y, yend = ~yend), data = vert_lines, colour = "grey90")
-
-  # 2. Divide subplots with horizontal lines
-  divide_at_y <- data.frame(x = min(data$start), xend = max(data$end),
-                            y = c(0, setdiff(seq_len(max(data$y)), data$y), max(data$y) + 1))
-  gg <- gg + ggplot2::geom_segment(mapping = ggplot2::aes_(x = ~x, xend = ~xend, y = ~y, yend = ~y), data = divide_at_y, colour = "grey65")
+  # 3. Divide subplots with horizontal lines
+  gg <- gg + ggplot2::geom_hline(yintercept = c(setdiff(seq_len(max(data$y)), data$y)),
+                                 colour = "grey65")
 
   # Plot ranges and events
-  lw <- ifelse(is.null(linewidth), max(-3 * max(data$subplot) + max(data$y) + 5, 5), linewidth)
+  lw <- ifelse(is.null(linewidth), 150/max(data$y), linewidth)
 
   range_dat <- data[data$start != data$end, ]
   event_dat <- data[data$start == data$end, ]
   gg <- gg +
     ggplot2::geom_segment(data = range_dat, size = lw) +
     ggplot2::geom_point(data = event_dat, mapping = ggplot2::aes_(fill = ~I(col)),
-                        shape = 21, size = lw, colour = "black", stroke = 0.1)
+                        shape = 21, size = 0.5 * lw, colour = "black", stroke = 0.1)
 
   # Labels for Ranges in center of range
   ranges <- data[data$start != data$end, ]
   ranges$start <- ranges$start + (ranges$end - ranges$start)/2
   if(show_labels){
-    # TODO: up/down alignment of event labels
     gg <- gg +
-      ggplot2::geom_label(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = ranges) + #, hjust=0.5) +
-      ggplot2::geom_label(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat) #, hjust=-0.1)
+      ggplot2::geom_text(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = ranges) +
+      ggplot2::geom_label(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat, nudge_y = rep_len(c(0.3,-0.3), nrow(event_dat)))
   }
 
   return(gg)

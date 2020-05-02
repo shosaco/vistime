@@ -6,44 +6,47 @@
 \usage{
 vistime_data(
   data,
-  events = "event",
-  start = "start",
-  end = "end",
-  groups = "group",
-  colors = "color",
-  fontcolors = "fontcolor",
-  tooltips = "tooltip",
-  optimize_y = TRUE
+  col.event = "event",
+  col.start = "start",
+  col.end = "end",
+  col.group = "group",
+  col.color = "color",
+  col.fontcolor = "fontcolor",
+  col.tooltip = "tooltip",
+  optimize_y = TRUE,
+  ...
 )
 }
 \arguments{
-\item{data}{\code{data.frame} that contains the data to be visualised}
+\item{data}{\code{data.frame} that contains the data to be normalized}
 
-\item{events}{(optional, character) the column name in \code{data} that contains event
+\item{col.event}{(optional, character) the column name in \code{data} that contains event
 names. Default: \emph{event}.}
 
-\item{start}{(optional, character) the column name in \code{data} that contains start
+\item{col.start}{(optional, character) the column name in \code{data} that contains start
 dates. Default: \emph{start}.}
 
-\item{end}{(optional, character) the column name in \code{data} that contains end dates.
+\item{col.end}{(optional, character) the column name in \code{data} that contains end dates.
 Default: \emph{end}.}
 
-\item{groups}{(optional, character) the column name in \code{data} to be used for
+\item{col.group}{(optional, character) the column name in \code{data} to be used for
 grouping. Default: \emph{group}.}
 
-\item{colors}{(optional, character) the column name in \code{data} that contains colors
+\item{col.color}{(optional, character) the column name in \code{data} that contains colors
 for events. Default: \emph{color}, if not present, colors are chosen via
 \code{RColorBrewer}.}
 
-\item{fontcolors}{(optional, character) the column name in \code{data} that contains the
+\item{col.fontcolor}{(optional, character) the column name in \code{data} that contains the
 font color for event labels. Default: \emph{fontcolor}, if not present,
 color will be black.}
 
-\item{tooltips}{(optional, character) the column name in \code{data} that contains the
+\item{col.tooltip}{(optional, character) the column name in \code{data} that contains the
 mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
 then tooltips are build from event name and date.}
 
 \item{optimize_y}{(optional, logical) distribute events on y-axis by smart heuristic (default), otherwise use order of input data.}
+
+\item{...}{for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)}
 }
 \value{
 \code{vistime_data} returns a data.frame with the following columns: event, start, end, group, tooltip, label, col, fontcol, subplot, y
@@ -62,5 +65,5 @@ pres <- data.frame(
   fontcolor = c("black", "white", "black")
 )
 
-vistime_data(pres, events = "Position", groups = "Name")
+vistime_data(pres, col.event = "Position", col.group = "Name")
 }

@@ -1,3 +1,27 @@
+# vistime (development version)
+ 
+## Breaking Changes
+- more intuitive argument naming:
+  * `col.event` instead of `event`
+  * `col.start` instead of `start`
+  * `col.end` instead of `end`
+  * `col.group` instead of `groups`
+  * `col.color` instead of `colors`
+  * `col.fontcolor` instead of `fontcolors`
+  * `col.tooltip` instead of `tooltips`
+
+## New features
+<!-- - new function `hc_vistime()`: Create an interactive timeline rendered by the famous `Highcharter.js` library. -->
+
+## Minor adjustments
+- `gg_vistime`:
+  * now uses `geom_label` for events and `geom_text` for ranges
+  * alternating `y` position of event labelling
+  * layout adjustments: Panel border and changes under-the-hood
+- `vistime`:
+  * changes under the hood (vertical and horizontal lines)
+  * panel border
+ 
 # vistime 1.0.0
  
 ## Breaking Changes
@@ -33,7 +57,7 @@
 - remove leading and trailing whitespaces of events and groups before drawing 
 
 # vistime 0.6.0
-- Hotfix for broken y-axis labelling (introduced through new plotly package 4.8.0.)
+- Hotfix for broken y-axis labeling (introduced through new plotly package 4.8.0.)
 - events are now shown as circles (was: squares)
 - corrected font colors of Presidents example on help page
 
@@ -45,7 +69,7 @@
 # vistime 0.4.0
 - line width calculation for ranges improved (thicker lines if less events happening simultaneously)
 - new parameter: `linewidth` to override the calculated line width for events
-- layout and labelling improvements
+- layout and labeling improvements
 - simplified examples
 - improved error checking
 

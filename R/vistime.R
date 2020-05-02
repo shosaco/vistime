@@ -3,22 +3,22 @@
 #' Provide a data frame with event data to create a visual and interactive timeline plot.
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
-#' @param data \code{data.frame} that contains the data to be visualised
-#' @param events (optional, character) the column name in \code{data} that contains event
+#' @param data \code{data.frame} that contains the data to be visualized
+#' @param col.event (optional, character) the column name in \code{data} that contains event
 #'   names. Default: \emph{event}.
-#' @param start (optional, character) the column name in \code{data} that contains start
+#' @param col.start (optional, character) the column name in \code{data} that contains start
 #'   dates. Default: \emph{start}.
-#' @param end (optional, character) the column name in \code{data} that contains end dates.
+#' @param col.end (optional, character) the column name in \code{data} that contains end dates.
 #'   Default: \emph{end}.
-#' @param groups (optional, character) the column name in \code{data} to be used for
+#' @param col.group (optional, character) the column name in \code{data} to be used for
 #'   grouping. Default: \emph{group}.
-#' @param colors (optional, character) the column name in \code{data} that contains colors
+#' @param col.color (optional, character) the column name in \code{data} that contains colors
 #'   for events. Default: \emph{color}, if not present, colors are chosen via
 #'   \code{RColorBrewer}.
-#' @param fontcolors (optional, character) the column name in \code{data} that contains the
+#' @param col.fontcolor (optional, character) the column name in \code{data} that contains the
 #'   font color for event labels. Default: \emph{fontcolor}, if not present,
 #'   color will be black.
-#' @param tooltips (optional, character) the column name in \code{data} that contains the
+#' @param col.tooltip (optional, character) the column name in \code{data} that contains the
 #'   mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
 #'   then tooltips are build from event name and date.
 #' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic
@@ -31,6 +31,7 @@
 #'   visible. Default: \code{TRUE}.
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the
 #'   background to demonstrate structure (default: 10). Less means more memory-efficient plot.
+#' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @export
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
 #'  See `gg_vistime` for the static `ggplot` version.
@@ -45,7 +46,7 @@
 #'   fontcolor = c("black", "white", "black")
 #' )
 #'
-#' vistime(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
+#' vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 #'
 #'
 #' \dontrun{
@@ -129,14 +130,56 @@
 #' pp
 #' }
 #'
-vistime <- function(data, events = "event", start = "start", end = "end", groups = "group",
-                    colors = "color", fontcolors = "fontcolor", tooltips = "tooltip",
+vistime <- function(data,
+                    col.event = "event",
+                    col.start = "start",
+                    col.end = "end",
+                    col.group = "group",
+                    col.color = "color",
+                    col.fontcolor = "fontcolor",
+                    col.tooltip = "tooltip",
                     optimize_y = TRUE, linewidth = NULL, title = NULL,
-                    show_labels = TRUE, background_lines = 10) {
+                    show_labels = TRUE, background_lines = NULL, ...) {
 
+  .dots = list(...)
 
-  data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
-  cleaned_dat <- vistime_data(data, events, start, end, groups, colors, fontcolors, tooltips, optimize_y)
+  if("events" %in% names(.dots)){
+    .Deprecated(new = "col.event", old = "events")
+    col.event = .dots$events
+  }
+  if("start" %in% names(.dots)){
+    .Deprecated(new = "col.start", old = "start")
+    col.start = .dots$start
+  }
+  if("end" %in% names(.dots)){
+    .Deprecated(new = "col.end", old = "end")
+    col.end = .dots$end
+  }
+  if("groups" %in% names(.dots)){
+    .Deprecated(new = "col.group", old = "groups")
+    col.group = .dots$groups
+  }
+  if("colors" %in% names(.dots)){
+    .Deprecated(new = "col.color", old = "colors")
+    col.color = .dots$colors
+  }
+  if("fontcolors" %in% names(.dots)){
+    .Deprecated(new = "col.fontcolor", old = "fontcolors")
+    col.fontcolor = .dots$fontcolors
+  }
+  if("tooltips" %in% names(.dots)){
+    .Deprecated(new = "col.tooltip", old = "tooltips")
+    col.tooltip = .dots$tooltips
+  }
+  if("lineInterval" %in% names(.dots)){
+    .Deprecated(new = "background_lines", old = "lineInterval")
+  }
+  if("showLabels" %in% names(.dots)){
+    .Deprecated(new = "show_labels", old = "showLabels")
+  }
+
+  data <- validate_input(data, col.event, col.start, col.end, col.group, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
+  cleaned_dat <- vistime_data(data, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip, optimize_y)
   total <- plot_plotly(cleaned_dat, linewidth, title, show_labels, background_lines)
 
   return(total)

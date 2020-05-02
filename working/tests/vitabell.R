@@ -2,7 +2,6 @@
 
 library(plotly)
 library(ggplot2)
-library(vistime)
 
 library(tidyverse)
 Ymd.format <- "%Y-%m-%d"

@@ -8,7 +8,7 @@
 vistime - Pretty Timelines
 =========
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualising the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/e4SqIQH.png" alt="Buy Me A Coffee"></a>
 
@@ -27,10 +27,12 @@ If you find vistime useful, please consider supporting its development: <a href=
 7. [Exporting](#7-export-of-vistime-as-pdf-or-png)
 8. [Usage in Shiny apps](#8-usage-in-shiny-apps)
 9. [Customization](#9-customization)
-   * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
-   * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
-   * [Changing events font size](#changing-events-font-size)
-   * [Changing marker size](#changing-marker-size)
+   * [Use `ggplot2` customization for `gg_vistime` charts](#Use-ggplot2-customization-for-gg_vistime-charts)
+   * [Use `plotly_build` for `vistime` charts](#Use-plotly_build-for-vistime-chart)
+    * [Changing x-axis tick font size](#changing-x-axis-tick-font-size)
+    * [Changing y-axis tick font size](#changing-y-axis-tick-font-size)
+    * [Changing events font size](#changing-events-font-size)
+    * [Changing marker size](#changing-marker-size)
 
 ## 1. Main functionality
 
@@ -67,7 +69,7 @@ You want to use this for the intelligent y-axis assignment depending on overlapp
 
 ## 2. Installation
 
-To install the package from CRAN (v0.9.0), type the following in your R console:
+To install the package from CRAN (v1.0.0), type the following in your R console:
 ```{r}
 install.packages("vistime")
 ```
@@ -85,30 +87,30 @@ devtools::install_github("shosaco/vistime")
 The simplest way to create a timeline is by providing a data frame with `event` and `start` columns. If your columns are named otherwise, you need to tell the function. You can also tweak the y positions, linewidth, title, label visibility and number of lines in the background.
 
 ```{r}
-vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-              fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE, linewidth = NULL, 
-              title = NULL, show_labels = TRUE, background_lines = 10)
+vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
+              col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE, linewidth = NULL, 
+              col.title = NULL, show_labels = TRUE, background_lines = 10)
 
-gg_vistime(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-           fontcolors = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
-           title = NULL, show_labels = TRUE, background_lines = 10)
+gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.color = "color", 
+           col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
+           title = NULL, show_labels = TRUE, background_lines = NULL)
 
-vistime_data(data, start = "start", end = "end", groups = "group", events = "event", colors = "color", 
-             fontcolors = "fontcolor", tooltips = "tooltip", optimize_y = TRUE)
+vistime_data(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.colors = "color", 
+             col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE)
 ```
 
 ## 4. Arguments
 
 parameter | optional? | data type | explanation 
 --------- |----------- | -------- | ----------- 
-data | mandatory | data.frame | data.frame that contains the data to be visualised
-start | optional | character | the column name in data that contains start dates. Default: *start*
-end | optional | character | the column name in data that contains end dates. Default: *end*
-groups | optional | character | the column name in data to be used for grouping. Default: *group*
-events | optional | character | the column name in data that contains event names. Default: *event*
-colors | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
-fontcolors | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
-tooltips | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
+data | mandatory | data.frame | data.frame that contains the data to be visualized
+col.event | optional | character | the column name in data that contains event names. Default: *event*
+col.start | optional | character | the column name in data that contains start dates. Default: *start*
+col.end | optional | character | the column name in data that contains end dates. Default: *end*
+col.group | optional | character | the column name in data to be used for grouping. Default: *group*
+col.color | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
+col.fontcolor | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
+col.tooltip | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
 optimize_y | optional | logical | distribute events on y-axis by smart heuristic (default) or use order of input data.
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
@@ -130,7 +132,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
                   
-vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 ```
 <img src="inst/img/ex2.png" />
 
@@ -226,18 +228,49 @@ shinyApp(
   ui = plotlyOutput("myVistime"),
   server = function(input, output) {
     output$myVistime <- renderPlotly({
-      vistime(pres, events="Position", groups="Name")
+      vistime(pres, col.event = "Position", col.group = "Name")
     })
   }
 )
 ```
 
 ## 9. Customization
+
+### Use `ggplot2` customization for `gg_vistime` charts
+
+Since every `gg_vistime` output is a `ggplot` object, you can customize and override literally everything:
+
+```{r}
+data <- read.csv(text="event,start,end
+                       Phase 1,2020-12-15,2020-12-24
+                       Phase 2,2020-12-23,2020-12-29
+                       Phase 3,2020-12-28,2021-01-06
+                       Phase 4,2021-01-06,2021-02-02")
+        
+p <- gg_vistime(data, optimize_y = T, col.group = "event", title = "ggplot customization example")
+
+p +  ggplot2::theme(
+      plot.title = ggplot2::element_text(hjust = 0, size=30),
+      axis.text.x = ggplot2::element_text(size = 30, color = "violet"),
+      axis.text.y = ggplot2::element_text(size = 30, color = "red", angle = 30),
+      panel.border = element_rect(linetype = "dashed", fill=NA),
+      panel.background = element_rect(fill = 'green')) +
+    ggplot2::coord_cartesian(ylim = c(0.7, 3.5))
+
+```
+
+<img src="inst/img/ggplot_cust.png" />
+
+
+
+
+### Use `plotly_build` for `vistime` charts
+
 The function `plotly_build()` from package `plotly` turns your plot into a list. You can then use the function `str` to explore the structure of your plot. You can even manipulate all the elements there.
 
 The key is to first create a **simple Plotly example** yourself, turning it into a list (using `plotly_build()`) and **exploring the resulting list** regarding the naming of the relevant attributes. Then manipulate or create them in your vistime example accordingly. Below are some examples of common solutions.
 
-### Changing x-axis tick font size
+#### Changing x-axis tick font size
 The following example creates the presidents example and manipulates the font size of the x axis ticks:
 
 ```{r}
@@ -248,7 +281,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
  
-p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+p <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
 library(plotly)
@@ -261,7 +294,7 @@ pp
 ```
 <img src="inst/img/ex2-tickfontsize.png" />
 
-### Changing y-axis tick font size
+#### Changing y-axis tick font size
 We need to change the font size of the y-axis:
 
 ```{r}
@@ -271,7 +304,7 @@ pp
 ```
 <img src="inst/img/ex2-yfontsize.png" />
 
-### Changing events font size
+#### Changing events font size
 The following example creates the presidents example and manipulates the font size of the events:
 
 
@@ -283,7 +316,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                     color = c('#cbb69d', '#603913', '#c69c6e'),
                     fontcolor = c("black", "white", "black"))
  
-p <- vistime(pres, events="Position", groups="Name", title="Presidents of the USA")
+p <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
 library(plotly)
@@ -303,7 +336,7 @@ pp
 ```
 <img src="inst/img/ex2-eventfontsize.png" />
 
-### Changing marker size
+#### Changing marker size
 The following example a simple example using markers and manipulates the size of the markers:
 
 

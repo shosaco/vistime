@@ -2,9 +2,9 @@ library(purrr)
 
 dat <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
 
-generated <- vistime(dat, events = "event", start = "start", end = "end",
-                     groups = "group", colors = "color", fontcolors = "fontcolor",
-                     tooltips = "tooltip", linewidth = NULL, title = NULL,
+generated <- vistime(dat, col.event = "event", col.start = "start", col.end = "end",
+                     col.group = "group", col.color = "color", col.fontcolor = "fontcolor",
+                     col.tooltip = "tooltip", linewidth = NULL, title = NULL,
                      show_labels = TRUE, background_lines = 10)
 
 test_that("class is htmlwidget", expect_is(generated, "htmlwidget"))
@@ -24,8 +24,8 @@ test_that("y values",
                             keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector))
 
 test_that("background_lines",
-          expect_equal(11,
-                       keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 2) %>% length))
+          expect_equal(12,
+                       length(plotly_build(generated)$x$layout$shapes)))
 
 # presidents example
 pres <- data.frame(
@@ -37,7 +37,7 @@ pres <- data.frame(
   fontcolor = c("black", "white", "black")
 )
 
-result <- vistime(pres, events = "Position", groups = "Name", title = "Presidents of the USA")
+result <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 relevant_dat <- result$x$attrs
 test_that("colors are same as in dataframe", {
   # line colors
@@ -65,10 +65,10 @@ test_that("colors are same as in dataframe", {
 
 
 test_that("y values are distributed", {
-  expect_setequal(1:7,
-                  keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)
+  expect_equal(c(7,5,3,1),
+               keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)
 
-  result2 <- vistime(pres, events = "Position")
+  result2 <- vistime(pres, col.event = "Position")
   relevant_dat2 <- result2$x$attrs
   expect_equivalent(2:1,
                     keep(relevant_dat2, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)

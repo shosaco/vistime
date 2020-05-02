@@ -1,4 +1,5 @@
 library(purrr)
+library(plotly)
 
 # test ranges
 dat <- data.frame(start = c("2019-01-01 00:00", "2019-01-01 04:00"),
@@ -8,15 +9,13 @@ dat <- data.frame(start = c("2019-01-01 00:00", "2019-01-01 04:00"),
 test_that("class is htmlwidget", expect_is(vistime(dat), "htmlwidget"))
 
 test_that("background_lines",{
-  bg = 10
-  expect_equal(bg + 1,
-               keep(vistime(dat, background_lines = bg)$x$attrs, ~length(.x$y) == 2) %>% map("y") %>% keep(~.x[1] == 0 && .x[2] == 3) %>% length)
-  bg = 15
-  expect_equal(bg + 1,
-               keep(vistime(dat, background_lines = bg)$x$attrs, ~length(.x$y) == 2) %>% map("y") %>% keep(~.x[1] == 0 && .x[2] == 3) %>% length)
-  bg = 50
-  expect_equal(bg + 1,
-               keep(vistime(dat, background_lines = bg)$x$attrs, ~length(.x$y) == 2) %>% map("y") %>% keep(~.x[1] == 0 && .x[2] == 3) %>% length)
+  for(bg in c(1, 5, 10)){
+    expect_equal(bg + 2,
+                 length(plotly_build(vistime(dat, background_lines = bg))$x$layout$shapes))
+  }
+
+  expect_true(plotly_build(vistime(dat, background_lines = NULL))$x$layout$xaxis$showgrid)
+  expect_false(plotly_build(vistime(dat, background_lines = 10))$x$layout$xaxis$showgrid)
 })
 
 
