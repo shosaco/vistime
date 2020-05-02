@@ -82,3 +82,4 @@ test_that("Events start from top not from bottom of chart", {
 
   expect_equal(set_y_values(d, TRUE)$y, c(2,1,2))
 })
+

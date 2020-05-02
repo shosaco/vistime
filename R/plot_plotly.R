@@ -24,7 +24,42 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
   # 1. Prepare basic plot
   p <- plotly::plot_ly(type = "scatter", mode = "lines")
 
-  # 2. plot ranges
+  y_ticks <- sapply(split(data, data$subplot), function(subplot) mean(subplot$y))
+
+  # 2. Divide subplots with horizontal lines
+  hline <- function(y = 0) list(type = "line", x0 = 0, x1 = 1, xref = "paper", y0 = y, y1 = y, line = list(color = "grey65", width = 0.5))
+  vline <- function(x = 0) list(type = "line", y0 = 0, y1 = 1, yref = "paper", x0 = x, x1 = x, line = list(color = "grey90", width = 0.1))
+  horizontal_lines <- lapply(setdiff(seq_len(max(data$y)), data$y), hline)
+
+  # 3. Add vertical lines
+  if(!is.null(background_lines)){
+    day_breaks <- as.POSIXct(seq(min(c(data$start, data$end)), max(c(data$start, data$end)),
+                                 length.out = round(background_lines) + 2), origin = "1970-01-01")
+    vertical_lines <- lapply(day_breaks, vline)
+  }else{
+    vertical_lines <- list()
+  }
+
+  p <- plotly::layout(p,
+                      hovermode = "closest",
+                      plot_bgcolor = "#FCFCFC",
+                      title = title,
+                      shapes = append(vertical_lines, horizontal_lines),
+                      # Axis options:
+                      xaxis = list(linewidth = 1,  mirror = TRUE,
+                                   showgrid = is.null(background_lines),
+                                   gridcolor = "grey90", title = ""),
+                      yaxis = list(
+                        linewidth = 1, mirror = TRUE,
+                        range = c(0, max(data$y) + 1),
+                        showgrid = F, title = "",
+                        tickmode = "array",
+                        tickvals = y_ticks,
+                        ticktext = as.character(unique(data$group))
+                      )
+  )
+
+  # 4. plot ranges
   range_dat <- data[data$start != data$end, ]
 
   lw <- ifelse(is.null(linewidth), 300 / max(data$y), linewidth)
@@ -57,7 +92,7 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
     }
   }
 
-  # 3. plot events
+  # 5. plot events
   event_dat <- data[data$start == data$end, ]
   if(nrow(event_dat) > 0){
     # alternate y positions for event labels
@@ -84,40 +119,6 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
 
   }
 
-  y_ticks <- sapply(split(data, data$subplot), function(subplot) mean(subplot$y))
-
-  # 4. Divide subplots with horizontal lines
-  hline <- function(y = 0) list(type = "line", x0 = 0, x1 = 1, xref = "paper", y0 = y, y1 = y, line = list(color = "grey65", width = 0.5))
-  vline <- function(x = 0) list(type = "line", y0 = 0, y1 = 1, yref = "paper", x0 = x, x1 = x, line = list(color = "grey90", width = 0.1))
-  horizontal_lines <- lapply(setdiff(seq_len(max(data$y)), data$y), hline)
-
-  # 4. Add vertical lines
-  if(!is.null(background_lines)){
-    day_breaks <- as.POSIXct(seq(min(c(data$start, data$end)), max(c(data$start, data$end)),
-                                     length.out = round(background_lines) + 2), origin = "1970-01-01")
-    vertical_lines <- lapply(day_breaks, vline)
-  }else{
-    vertical_lines <- list()
-  }
-
-  p <- plotly::layout(p,
-                      hovermode = "closest",
-                      plot_bgcolor = "#FCFCFC",
-                      title = title,
-                      shapes = append(vertical_lines, horizontal_lines),
-                      # Axis options:
-                      xaxis = list(linewidth = 1,  mirror = TRUE,
-                                   showgrid = is.null(background_lines),
-                                   gridcolor = "grey90", title = ""),
-                      yaxis = list(
-                        linewidth = 1, mirror = TRUE,
-                        range = c(0, max(data$y) + 1),
-                        showgrid = F, title = "",
-                        tickmode = "array",
-                        tickvals = y_ticks,
-                        ticktext = as.character(unique(data$group))
-                      )
-  )
 
   return(p)
 }

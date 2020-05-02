@@ -254,6 +254,7 @@ shinyApp(
 Since every `gg_vistime` output is a `ggplot` object, you can customize and override literally everything:
 
 ```{r}
+library(vistime)
 data <- read.csv(text="event,start,end
                        Phase 1,2020-12-15,2020-12-24
                        Phase 2,2020-12-23,2020-12-29
@@ -262,18 +263,19 @@ data <- read.csv(text="event,start,end
         
 p <- gg_vistime(data, optimize_y = T, col.group = "event", title = "ggplot customization example")
 
+library(ggplot2)
 p +  ggplot2::theme(
-      plot.title = ggplot2::element_text(hjust = 0, size=30),
-      axis.text.x = ggplot2::element_text(size = 30, color = "violet"),
-      axis.text.y = ggplot2::element_text(size = 30, color = "red", angle = 30),
+      plot.title = element_text(hjust = 0, size=30),
+      axis.text.x = element_text(size = 30, color = "violet"),
+      axis.text.y = element_text(size = 30, color = "red", angle = 30),
       panel.border = element_rect(linetype = "dashed", fill=NA),
       panel.background = element_rect(fill = 'green')) +
-    ggplot2::coord_cartesian(ylim = c(0.7, 3.5))
+    coord_cartesian(ylim = c(0.7, 3.5))
 
 ```
 
 ```{r echo=FALSE, out.width = "50%"}
-knitr::include_graphics("../inst//img/ggplot_cust.png.png")
+knitr::include_graphics("../inst//img/ggplot_cust.png")
 ```
 
 ### Use `plotly_build` for `vistime` charts

@@ -18,6 +18,9 @@
   * now uses `geom_label` for events and `geom_text` for ranges
   * alternating `y` position of event labelling
   * layout adjustments: Panel border and changes under-the-hood
+- `vistime`:
+  * changes under the hood (vertical and horizontal lines)
+  * panel border
  
 # vistime 1.0.0
  

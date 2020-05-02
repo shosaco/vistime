@@ -24,8 +24,8 @@ test_that("y values",
                             keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector))
 
 test_that("background_lines",
-          expect_equal(11,
-                       keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 2) %>% length))
+          expect_equal(12,
+                       length(plotly_build(generated)$x$layout$shapes)))
 
 # presidents example
 pres <- data.frame(
@@ -65,8 +65,8 @@ test_that("colors are same as in dataframe", {
 
 
 test_that("y values are distributed", {
-  expect_setequal(1:7,
-                  keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)
+  expect_equal(c(7,5,3,1),
+               keep(relevant_dat, ~.x$mode == "lines" && length(.x$y) == 1) %>% map("y") %>% as_vector %>% unique)
 
   result2 <- vistime(pres, col.event = "Position")
   relevant_dat2 <- result2$x$attrs
