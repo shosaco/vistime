@@ -51,14 +51,14 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
                                  colour = "grey65")
 
   # Plot ranges and events
-  lw <- ifelse(is.null(linewidth), 150/max(data$y), linewidth)
+  lw <- ifelse(is.null(linewidth), min(30, 100/max(data$y)), linewidth) # 1->30, 2->30, 3->30, 4->25
 
   range_dat <- data[data$start != data$end, ]
   event_dat <- data[data$start == data$end, ]
   gg <- gg +
     ggplot2::geom_segment(data = range_dat, size = lw) +
     ggplot2::geom_point(data = event_dat, mapping = ggplot2::aes_(fill = ~I(col)),
-                        shape = 21, size = 0.5 * lw, colour = "black", stroke = 0.1)
+                        shape = 21, size = 0.7 * lw, colour = "black", stroke = 0.1)
 
   # Labels for Ranges in center of range
   ranges <- data[data$start != data$end, ]

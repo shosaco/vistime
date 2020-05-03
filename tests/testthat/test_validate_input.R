@@ -17,9 +17,9 @@ validate_input2 <- function(data,
 }
 
 test_that("event defaults to start", {
-  expect_warning(validate_input2(data.frame(start = Sys.Date())),
+  expect_message(validate_input2(data.frame(start = Sys.Date())),
                  "Column 'event' not found in data. Defaulting")
-  expect_equal(suppressWarnings(validate_input2(data.frame(start = Sys.Date())))$col.event,
+  expect_equal(validate_input2(data.frame(start = Sys.Date()))$col.event,
                "start")
 })
 
@@ -38,7 +38,7 @@ test_that("Deprecated arguments are transferred to new arguments", {
 
 test_that("missing columns are warned", {
   expect_error(validate_input2(dat, col.start = "notexisting"), "Column 'notexisting' not found")
-  expect_warning(validate_input2(dat, col.event = "notexisting"), "Column 'notexisting' not found")
+  expect_message(validate_input2(dat, col.event = "notexisting"), "Column 'notexisting' not found")
 
 })
 
@@ -82,7 +82,7 @@ test_that("data formats", {
 
   expect_error(
     validate_input2(data.frame(mystart = "20180101"), col.event = "mystart", col.start = "mystart"),
-    "date format error: please make sure column mystart can be converted to POSIX"
+    "date format error: please make sure column 'mystart' can be converted to POSIX"
   )
 
   expect_error(

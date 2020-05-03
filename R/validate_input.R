@@ -87,7 +87,7 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.c
   if(!missing(show_labels)) assertive::assert_is_logical(show_labels)
   if(!missing(background_lines) && !is.null(background_lines)) assertive::assert_is_numeric(background_lines)
 
-  if (class(try(as.data.frame(data), silent = T))[1] == "try-error")
+  if ("try-error" %in% class(try(as.data.frame(data), silent = T)))
     stop(paste("Expected an input data frame, but encountered", class(data)[1]))
 
   df <- as.data.frame(data, stringsAsFactors = F)
@@ -98,11 +98,11 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.c
   if (sum(!is.na(df[[col.start]])) == 0)
     stop(paste0("error in column '", col.start, "': Please provide at least one point in time"))
 
-  if (class(try(as.POSIXct(df[, col.start]), silent = T))[1] == "try-error")
-    stop(paste("date format error: please make sure column", col.start, "can be converted to POSIXct type"))
+  if ("try-error" %in% class(try(as.POSIXct(df[[col.start]]), silent = T)))
+    stop("date format error: please make sure column '", col.start, "' can be converted to POSIXct type")
 
   if (!col.event %in% names(df)){
-    warning("Column '", col.event, "' not found in data. Defaulting to col.event='", col.start, "'")
+    message("Column '", col.event, "' not found in data. Defaulting to col.event='", col.start, "'")
     col.event <- col.start
   }
 

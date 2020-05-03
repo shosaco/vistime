@@ -62,7 +62,7 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
   # 4. plot ranges
   range_dat <- data[data$start != data$end, ]
 
-  lw <- ifelse(is.null(linewidth), 300 / max(data$y), linewidth)
+  lw <- ifelse(is.null(linewidth), min(100, 300/max(data$y)), linewidth) # 1-> 100, 2->100, 3->100, 4->70
 
   if(nrow(range_dat) > 0){
     # draw ranges piecewise
@@ -112,7 +112,7 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
     if (show_labels) {
       p <- plotly::add_text(p,
                             x = event_dat$start, y = event_dat$labelY, textfont = list(family = "Arial", size = 14,
-                                                                                 color = plotly::toRGB(event_dat$fontcol)),
+                                                                                       color = plotly::toRGB(event_dat$fontcol)),
                             textposition ="center", showlegend = F, text = event_dat$label, hoverinfo = "none"
       )
     }
