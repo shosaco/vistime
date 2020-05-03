@@ -91,11 +91,11 @@ vistime(data, col.event = "event", col.start = "start", col.end = "end", col.gro
               col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE, linewidth = NULL, 
               title = NULL, show_labels = TRUE, background_lines = NULL)
 
-gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.color = "color", 
+gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
            col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
            title = NULL, show_labels = TRUE, background_lines = NULL)
 
-vistime_data(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.colors = "color", 
+vistime_data(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
              col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE)
 ```
 
