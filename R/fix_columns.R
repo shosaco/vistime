@@ -1,13 +1,13 @@
 #' Standardize column names
 #'
 #' @param data input data frame
-#' @param col.event event column name
-#' @param col.start name of col.start column
-#' @param col.end name of end column
-#' @param col.group name of group column
-#' @param col.tooltip column name of tooltips
+#' @param col.event event column name (optional)
+#' @param col.start name of col.start column, default: "start"
+#' @param col.end name of end column (optional)
+#' @param col.group name of group column (optional)
+#' @param col.tooltip column name of tooltips (optional)
 #'
-#' @return the data frame prepared for plotting
+#' @return of the data frame prepared for plotting
 #'
 #' @keywords internal
 #' @noRd
@@ -23,24 +23,45 @@
 #' ))
 #' }
 #'
-fix_columns <- function(data, col.event, col.start, col.end, col.group, col.tooltip) {
+fix_columns <- function(data, col.event, col.start, col.end, col.group, col.color,
+                        col.fontcolor, col.tooltip) {
 
-
-  if (!col.group %in% names(data)) {
-    data$group <- ""
-    col.group <- "group"
-  } else if (any(is.na(data[, col.group]))){
-    stop("if using groups argument, all groups must be set to a non-NA value")
-  }
-
-  if (!col.end %in% names(data) | col.end == col.start) col.end <- col.start
-
-  data$group <- data[[col.group]]
-  data$start <- as.POSIXct(data[[col.start]])
-  data$end <- as.POSIXct(data[[col.end]])
+  # col.event -> "event"
   data$event <- data[[col.event]]
 
-  # convert to character if factor
+  # col.start and col.end -> "start" and "end"
+  data$start <- data[[col.start]]
+  if (!is.null(col.end) && col.end %in% names(data)){
+    data$end <- data[[col.end]]
+  }else{
+    data$end <- data$start
+  }
+
+  data$start <- as.POSIXct(data$start)
+  data$end <- as.POSIXct(data$end)
+
+
+  # col.group -> "group"
+  if (col.group %in% names(data)){
+    data$group <- data[[col.group]]
+  }else{
+    data$group <- ""
+  }
+
+  # col.tooltip -> "tooltip"
+  if (!is.null(col.tooltip) && col.tooltip %in% names(data)) {
+    data$tooltip <- data[[col.tooltip]]
+  } else {
+    data$tooltip <- ifelse(data$start == data$end,
+                           paste0("<b>", data$event, ": ", data$start, "</b>"),
+                           paste0("<b>", data$event, "</b><br>from <b>",
+                                  data$start, "</b> to <b>", data$end, "</b>")
+    )
+  }
+
+  data <- set_colors(data, col.color, col.fontcolor)
+
+  # convert all but times to character
   for (col in names(data)[!names(data) %in% c("start", "end")])
     data[[col]] <- as.character(data[[col]])
 
@@ -51,17 +72,6 @@ fix_columns <- function(data, col.event, col.start, col.end, col.group, col.tool
   # remove leading and trailing whitespaces
   data$event <- trimws(data$event)
   data$group <- trimws(data$group)
-
-  # set tooltips
-  if (!is.null(col.tooltip) && col.tooltip %in% names(data)) {
-    data$tooltip <- data[[col.tooltip]]
-  } else {
-    data$tooltip <- ifelse(data$start == data$end,
-      paste0("<b>", data$event, ": ", data$start, "</b>"),
-      paste0("<b>", data$event, "</b><br>from <b>",
-             data$start, "</b> to <b>", data$end, "</b>")
-    )
-  }
 
   # shorten long labels
   data$label <- ifelse(data$start == data$end,

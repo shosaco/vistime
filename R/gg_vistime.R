@@ -63,14 +63,18 @@
 #' }
 
 
-gg_vistime <- function(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group",
-                       col.color = "color", col.fontcolor = "fontcolor", optimize_y = TRUE,
-                       linewidth = NULL, title = NULL, show_labels = TRUE, background_lines = NULL, ...) {
-
-  col.tooltip <- NULL
+gg_vistime <- function(data,
+                       col.event = "event",
+                       col.start = "start",
+                       col.end = "end",
+                       col.group = "group",
+                       col.color = "color",
+                       col.fontcolor = "fontcolor",
+                       optimize_y = TRUE, linewidth = NULL, title = NULL,
+                       show_labels = TRUE, background_lines = NULL, ...) {
 
   checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
-                                col.fontcolor, col.tooltip, optimize_y, linewidth, title,
+                                col.fontcolor, col.tooltip = NULL, optimize_y, linewidth, title,
                                 show_labels, background_lines, ...)
 
   cleaned_dat <- vistime_data(checked_dat$data, checked_dat$col.event, checked_dat$col.start,

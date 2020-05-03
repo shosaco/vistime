@@ -89,7 +89,7 @@ The simplest way to create a timeline is by providing a data frame with `event` 
 ```{r}
 vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
               col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE, linewidth = NULL, 
-              col.title = NULL, show_labels = TRUE, background_lines = 10)
+              title = NULL, show_labels = TRUE, background_lines = NULL)
 
 gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.groups = "group", col.color = "color", 
            col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, 

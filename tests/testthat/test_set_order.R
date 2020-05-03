@@ -11,11 +11,11 @@
   linewidth <- NULL
   title <- NULL
   show_labels <- TRUE
-  background_lines <- 11
+  background_lines <- NULL
 
   l <- validate_input(dat, col.start, col.end, col.event, col.group, col.color, col.fontcolor, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
   dat <- set_colors(l$data, col.color, col.fontcolor)
-  dat <- fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip)
+  dat <- fix_columns(dat, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip)
   return(dat)
 }
 

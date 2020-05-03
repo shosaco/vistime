@@ -35,17 +35,23 @@
 #' vistime_data(pres, col.event = "Position", col.group = "Name")
 
 
-vistime_data <- function(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group",
-                         col.color = "color", col.fontcolor = "fontcolor", col.tooltip = "tooltip",
+vistime_data <- function(data,
+                         col.event = "event",
+                         col.start = "start",
+                         col.end = "end",
+                         col.group = "group",
+                         col.color = "color",
+                         col.fontcolor = "fontcolor",
+                         col.tooltip = "tooltip",
                          optimize_y = TRUE) {
 
   checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
-                                col.fontcolor, col.tooltip, optimize_y, linewidth = NULL, title = NULL,
-                                show_labels = TRUE, background_lines = NULL)
+                                col.fontcolor, col.tooltip, optimize_y)
 
-  data <- set_colors(checked_dat$data, checked_dat$col.color, checked_dat$col.fontcolor)
   data <- fix_columns(data, checked_dat$col.event, checked_dat$col.start, checked_dat$col.end,
-                      checked_dat$col.group, checked_dat$col.tooltip)
+                      checked_dat$col.group, checked_dat$col.color, checked_dat$col.fontcolor,
+                      checked_dat$col.tooltip)
+
   data <- set_order(data)
   data <- set_y_values(data, optimize_y)
   return(data)

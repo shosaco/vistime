@@ -30,37 +30,37 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.c
 
   if("events" %in% names(.dots)){
     .Deprecated(new = "col.event", old = "events")
-    col.event = .dots$events
+    col.event <- .dots$events
     .dots$events <- NULL
   }
   if("start" %in% names(.dots)){
     .Deprecated(new = "col.start", old = "start")
-    col.start = .dots$start
+    col.start <- .dots$start
     .dots$start <- NULL
   }
   if("end" %in% names(.dots)){
     .Deprecated(new = "col.end", old = "end")
-    col.end = .dots$end
+    col.end <- .dots$end
     .dots$end <- NULL
   }
   if("groups" %in% names(.dots)){
     .Deprecated(new = "col.group", old = "groups")
-    col.group = .dots$groups
+    col.group <- .dots$groups
     .dots$groups <- NULL
   }
   if("colors" %in% names(.dots)){
     .Deprecated(new = "col.color", old = "colors")
-    col.color = .dots$colors
+    col.color <- .dots$colors
     .dots$colors <- NULL
   }
   if("fontcolors" %in% names(.dots)){
     .Deprecated(new = "col.fontcolor", old = "fontcolors")
-    col.fontcolor = .dots$fontcolors
+    col.fontcolor <- .dots$fontcolors
     .dots$fontcolors <- NULL
   }
   if("tooltips" %in% names(.dots)){
     .Deprecated(new = "col.tooltip", old = "tooltips")
-    col.tooltip = .dots$tooltips
+    col.tooltip <- .dots$tooltips
     .dots$tooltips <- NULL
   }
   if("lineInterval" %in% names(.dots)){
@@ -80,29 +80,33 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.c
   assertive::assert_is_character(col.group)
   if(!is.null(col.tooltip)) assertive::assert_is_character(col.tooltip)
   assertive::assert_is_logical(optimize_y)
-  if(!is.null(linewidth)) assertive::assert_is_numeric(linewidth)
-  if(!is.null(title)) assertive::assert_is_character(title)
-  if(!is.null(background_lines)) assertive::assert_is_numeric(background_lines)
-  assertive::assert_is_logical(show_labels)
+
+  # missing if called from vistime_data
+  if(!missing(linewidth) && !is.null(linewidth)) assertive::assert_is_numeric(linewidth)
+  if(!missing(title) && !is.null(title)) assertive::assert_is_character(title)
+  if(!missing(show_labels)) assertive::assert_is_logical(show_labels)
+  if(!missing(background_lines) && !is.null(background_lines)) assertive::assert_is_numeric(background_lines)
 
   if (class(try(as.data.frame(data), silent = T))[1] == "try-error")
     stop(paste("Expected an input data frame, but encountered", class(data)[1]))
 
-  data <- as.data.frame(data, stringsAsFactors = F)
+  df <- as.data.frame(data, stringsAsFactors = F)
 
-  if (!col.start %in% names(data))
-    stop("Please provide the name of the start date column in parameter 'col.start'")
+  if (!col.start %in% names(df))
+    stop("Column '", col.start, "' not found in data")
 
-  if (sum(!is.na(data[[col.start]])) == 0)
+  if (sum(!is.na(df[[col.start]])) == 0)
     stop(paste0("error in column '", col.start, "': Please provide at least one point in time"))
 
-  if (class(try(as.POSIXct(data[, col.start]), silent = T))[1] == "try-error")
-    stop(paste("date format error: please make sure columns", col.start, "and", col.end, "can be converted to POSIXct type"))
+  if (class(try(as.POSIXct(df[, col.start]), silent = T))[1] == "try-error")
+    stop(paste("date format error: please make sure column", col.start, "can be converted to POSIXct type"))
 
-  if (!col.event %in% names(data))
-    stop("Please provide the name of the events column in parameter 'col.event'")
+  if (!col.event %in% names(df)){
+    warning("Column '", col.event, "' not found in data. Defaulting to col.event='", col.start, "'")
+    col.event <- col.start
+  }
 
-  return(list(data = data, col.event = col.event, col.start = col.start, col.end = col.end,
+  return(list(data = df, col.event = col.event, col.start = col.start, col.end = col.end,
               col.group = col.group, col.color = col.color, col.fontcolor = col.fontcolor,
               col.tooltip = col.tooltip))
 }

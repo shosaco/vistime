@@ -1,25 +1,23 @@
 #' Set column col for event colors and column fontcol for label colors
 #'
 #' @param data the data frame containing event data
-#' @param eventcolor_column name of the event color column
-#' @param fontcolor_column name of the lable color column
+#' @param col.color name of the event color column
+#' @param col.fontcolor name of the fontcolor column
 #'
 #' @return same data frame as input, but with columns \code{col} and \code{fontcol} filled with color codes or names.
 #' @keywords internal
 #' @noRd
 
-set_colors <- function(data, eventcolor_column, fontcolor_column) {
-  if (eventcolor_column %in% names(data)) {
-    names(data)[names(data) == eventcolor_column] <- "col"
-    data[["col"]] <- trimws(data[["col"]])
-  } else {
+set_colors <- function(data, col.color, col.fontcolor) {
+  if (!is.null(col.color) && col.color %in% names(data)){
+    data$col <- trimws(data[[col.color]])
+  }else{
     palette <- "Set3"
     data$col <- rep(RColorBrewer::brewer.pal(min(11, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
   }
 
-  if (fontcolor_column %in% names(data)) {
-    names(data)[names(data) == fontcolor_column] <- "fontcol"
-    data[["fontcol"]] <- trimws(data[["fontcol"]])
+  if (!is.null(col.fontcolor) && col.fontcolor %in% names(data)){
+    data$fontcol <- trimws(data[[col.fontcolor]])
   } else {
     data$fontcol <- "black"
   }

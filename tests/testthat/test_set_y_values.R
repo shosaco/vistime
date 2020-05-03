@@ -1,35 +1,22 @@
-
-prepare_data <- function(dat){
-
-  col.event <- "event"
-  col.start <- "start"
-  col.end <- "end"
-  col.group <- "group"
-  col.color <- "color"
-  col.fontcolor <- "fontcolor"
-  col.tooltip <- "tooltip"
-  optimize_y <- TRUE
-  linewidth <- NULL
-  title <- NULL
-  show_labels <- TRUE
-  background_lines <- 11
-
-  list <- validate_input(dat, col.start, col.end, col.event, col.group, col.color, col.fontcolor, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines)
-  dat <- set_colors(list$data, col.color, col.fontcolor)
-  dat <- fix_columns(dat, col.event, col.start, col.end, col.group, col.tooltip)
-  dat <- set_order(dat)
-  return(dat)
-
+prepare_data <- function(d){
+  set_order(fix_columns(d, col.event = "event",
+                        col.start = "start",
+                        col.end = "end",
+                        col.group = "group",
+                        col.color = "color",
+                        col.fontcolor = "fontcolor",
+                        col.tooltip = "tooltip"))
 }
 
-test_that("Basic test", {
+test_that("1 group -> do is sophisticated", {
 
   dat <- data.frame(
     event = 1:4, start = c("2019-01-01", "2019-01-10"),
-    end = c("2019-01-01", "2019-01-10")
+    end = c("2019-01-01", "2019-01-10"),
+    subplot = 1,
+    stringsAsFactors = FALSE
   )
 
-  dat <- prepare_data(dat)
   expect_equal(set_y_values(dat, TRUE)$y, rep(2:1, 2))
   expect_equal(set_y_values(dat, FALSE)$y, rev(as.integer(factor(dat$event))))
 })
