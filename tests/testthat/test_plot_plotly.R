@@ -55,9 +55,9 @@ test_that("class is htmlwidget", expect_is(vistime(dat), "htmlwidget"))
 relevant_dat <- vistime(dat)$x$attrs
 
 test_that("Number of markers", {
-  res <- list()
-  for(x in relevant_dat) if(x$mode == "markers") res <- append(res, x$x)
-  expect_equal(length(res), nrow(dat))
+  num_markers <- 0
+  for(x in relevant_dat) if(x$mode == "markers") num_markers <- num_markers + length(x$x)
+  expect_equal(num_markers, nrow(dat))
 })
 
 test_that("Symbol is circle", {
@@ -68,6 +68,6 @@ test_that("Symbol is circle", {
 
 test_that("x Values", {
   res <- list()
-  for(x in relevant_dat) if(x$mode == "markers") res <- append(res, x$x)
-          expect_setequal(as.integer(res), as.integer(as.POSIXct(dat$start)))
+  for(x in relevant_dat) if(x$mode == "markers") res <- c(res, as.integer(x$x))
+  expect_setequal(res, as.integer(as.POSIXct(dat$start)))
 })
