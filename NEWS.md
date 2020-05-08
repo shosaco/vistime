@@ -26,7 +26,7 @@
  
 ## Breaking Changes
 - `vistime` no longer uses cumbersome Plotly-subplots. Everything renders in the same plot and can be zoomed seamlessly.
-- Events are drawn from top to bottom (not from bottom to top) - in the order of the input data frame. This makes the result more intuitive: &#8212;-&#175;\_-\_ instead of \_-\_&#175;-&#8212;
+- Events are drawn from top to bottom (not from bottom to top) - always in the order of the input data frame (per groups that are arranged from top to bottom). This makes the result more intuitive: &#175;&#8212;-\_-\_ instead of \_-\_-&#8212;&#175;
 
 ## New features
 - `gg_vistime()` as new function to output the timeline as a static ggplot (in contrast to `vistime`, which outputs an interactive Plotly object).
