@@ -52,8 +52,8 @@ ui <- fluidPage(
                   multiple = TRUE),
       radioButtons("transformation",
                    "Data Transformation:",
-                   c("Monthly" = "monthly", "Weekly" = "weekly", "Cumulative" = "cumulative")),
-      sliderInput("mav_n", "Windows for moving average", min = 1, max = 50, step = 5, value = 7),
+                   c("Monthly", "Weekly", "Daily", "Cumulative")),
+      sliderInput("mav_n", "Window for moving average", min = 1, max = 50, step = 5, value = 7),
       HTML("Created using the <a href='https://github.com/metacran/cranlogs'>cranlogs</a> package.",
            "This app is not affiliated with RStudio or CRAN.",
            "You can find the code for the app <a href='https://github.com/dgrtwo/cranview'>here</a>,",
@@ -74,48 +74,51 @@ server <- function(input, output) {
       # cran_downloads0 <- purrr::possibly(cran_downloads, otherwise = NULL)
       cran_downloads(packages = packages,
                       from    = get_initial_release_date(packages),
-                      to      = Sys.Date()-2)
+                      to      = Sys.Date()-2) %>% as_tibble
     })
 
     output$downloadsPlot <- renderPlotly({
-      d <- downloads()
+      d <- downloads() %>% group_by(package)
 
-      if (input$transformation=="monthly") {
-        d <- d %>%
-          group_by(package) %>% mutate(count = rollsum(count, 30, fill=NA)) %>% ungroup() %>% filter(!is.na(count))
-      } else if (input$transformation=="weekly") {
-        d <- d %>%
-          group_by(package) %>% mutate(count = rollsum(count, 7, fill=NA)) %>% ungroup() %>% filter(!is.na(count))
-      } else if (input$transformation=="cumulative") {
-        d = d %>%
-          group_by(package) %>%
-          transmute(count=cumsum(count), date=date)
+      if (input$transformation == "Cumulative") {
+        d <- d %>% mutate_at("count", cumsum)
+      } else if (input$transformation == "Monthly"){
+        d <- d %>% group_by(package, month = as.yearmon(date)) %>%
+          summarize(date = min(date), count = sum(count))
+      } else if (input$transformation == "Weekly"){
+        d <- d %>% group_by(package, week = paste0(year(date), "-", str_pad(week(date), pad = "0", width = 2))) %>%
+          summarize(date = min(date), count = sum(count))
       }
 
-      d <- d %>% group_by(package) %>% mutate(mav = rollmean(count, input$mav_n, fill = 0, align = "right")) %>% ungroup()
+      d <- d %>% group_by(package) %>%
+        mutate(mav = rollmean(count, input$mav_n, fill = NA, align = "right")) %>%
+        ungroup() %>% filter(!is.na(mav))
 
-      p <- plot_ly(d, type="scatter", x=~date, y=~mav, color=~package) %>%
-        layout(xaxis=list(title="Date"),
-               yaxis=list(title="Number of downloads"))
+      p <- plot_ly(type = "scatter")
 
       if('vistime' %in% input$package){
-        print(d %>% filter(package == 'vistime') %>% tail)
+        #p <- p %>% add_bars(x=~date, y=~count, data = downloads() %>% filter(package == "vistime"), color = I("grey90"))
+
         releases <- content(GET(paste0("http://crandb.r-pkg.org/vistime/all")))$timeline
 
         for(version in names(releases)){
 
           p <- p %>%
             add_segments(x = as.POSIXct(releases[[version]]), xend = as.POSIXct(releases[[version]]),
-                                 y = 0, yend = max(d$count), color = I("grey"), showlegend = FALSE) %>%
+                                 y = 0, yend = max(d$mav), color = I("grey"), showlegend = FALSE) %>%
             add_text(x = as.POSIXct(releases[[version]]),
-                     y = max(d$count)*1.01,
+                     y = max(d$mav)*1.1,
                      text = version,
                      color = I("grey"), showlegend = FALSE)
         }
       }
-
-
-      return(p)
+      p %>%
+        add_lines(x = ~date, y=~mav, data = d, color = ~package) %>%
+        layout(xaxis=list(title="Date"),
+               yaxis=list(title="Number of downloads"),
+               title = paste("Averaged over", input$mav_n, case_when(input$transformation == "7" ~ "weeks",
+                                                                     input$transformation == "30" ~ "months",
+                                                                     TRUE ~ "days")))
     })
 
 

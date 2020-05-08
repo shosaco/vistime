@@ -1,5 +1,5 @@
 #' Pretty timelines.
-#' 
+#'
 #' @name vistime-package
 #' @docType package
 #' @title vistime
