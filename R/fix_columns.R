@@ -73,13 +73,7 @@ fix_columns <- function(data, col.event, col.start, col.end, col.group, col.colo
   data$event <- trimws(data$event)
   data$group <- trimws(data$group)
 
-  # shorten long labels
-  data$label <- ifelse(data$start == data$end,
-    ifelse(nchar(data$event) > 10,
-           paste0(substr(data$event, 1, 13), "..."),
-           data$event),
-    data$event
-  )
+  data$label <- data$event
 
   return(data[, c("event", "start", "end", "group", "tooltip", "label", "col", "fontcol")])
 }

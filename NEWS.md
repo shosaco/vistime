@@ -15,8 +15,8 @@
 
 ## Minor adjustments
 - `gg_vistime`:
-  * now uses `geom_label` for events and `geom_text` for ranges
-  * alternating `y` position of event labelling
+  * use `geom_text` for labels
+  * avoid overlapping of event labels using `ggrepel::geom_text_repel()`
   * layout adjustments: Panel border and changes under-the-hood
 - `vistime`:
   * changes under the hood (vertical and horizontal lines)
@@ -43,7 +43,7 @@
 - relaxed package dependencies: (e.g. `plotly` only Imports, not Depends)
 
 # vistime 0.8.1
-- hotfix: colors and fontcolors handling was broken.
+- hotfix: due to new Plotly version, colors and fontcolors handling was broken. Changed dependency to Plotly > 4.0.0.
 
 # vistime 0.8.0
 - internals (no exporting of helper functions, unit tests using `testthat` package, continuous integration using `travis`, test code coverage using `covr`)

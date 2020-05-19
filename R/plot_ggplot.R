@@ -66,7 +66,7 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   if(show_labels){
     gg <- gg +
       ggplot2::geom_text(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = ranges) +
-      ggplot2::geom_label(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat, nudge_y = rep_len(c(0.3,-0.3), nrow(event_dat)))
+      ggrepel::geom_text_repel(mapping = ggplot2::aes_(colour = ~I(fontcol), label = ~label), data = event_dat, direction = "y", segment.alpha = 0, point.padding = grid::unit(0.75, "lines"))#, nudge_y = rep_len(c(0.3,-0.3), nrow(event_dat)))
   }
 
   return(gg)
