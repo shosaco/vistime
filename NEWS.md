@@ -11,7 +11,7 @@
   * `col.tooltip` instead of `tooltips`
 
 ## New features
-<!-- - new function `hc_vistime()`: Create an interactive timeline rendered by the famous `Highcharter.js` library. -->
+- new function `hc_vistime()`: Create an interactive timeline rendered by the famous `Highcharter.js` library
 
 ## Minor adjustments
 - `gg_vistime`:

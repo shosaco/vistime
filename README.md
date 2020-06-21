@@ -8,7 +8,7 @@
 vistime - Pretty Timelines
 =========
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive `plotly` output, you can hover the mouse pointer over a point or task to show details or drag a rectangle to zoom in. Timelines and their components can afterwards be manipulated using `ggplot::theme()` or `plotly_build`, which transforms the plot into a mutable list. When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by `Plotly.js` and `Highcharts.js`, you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using `ggplot::theme()`, `plotly_build` or `hc_*`functions (for `gg-vistime`, `vistime` or `hc_vistime`, respectively). When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a>
 
@@ -46,7 +46,17 @@ vistime(timeline_data)
 ```
 <img src="inst/img/basic_plotly.png" />
 
-### 2) `gg_vistime()` to produce static `ggplot` output:
+
+### 2) `hcvistime()` to produce interactive `Highcharts` charts:
+
+```{r}
+timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+hc_vistime(timeline_data)
+```
+<img src="inst/img/basic_highchart.png" />
+
+
+### 3) `gg_vistime()` to produce static `ggplot` output:
 
 ```{r}
 timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
@@ -54,7 +64,7 @@ gg_vistime(timeline_data)
 ```
 <img src="inst/img/basic_ggplot.png" />
 
-### 3)  `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
+### 4)  `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
 
 ```{r}
 timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
@@ -91,6 +101,9 @@ vistime(data, col.event = "event", col.start = "start", col.end = "end", col.gro
               col.fontcolor = "fontcolor", col.tooltip = "tooltip", optimize_y = TRUE, linewidth = NULL, 
               title = NULL, show_labels = TRUE, background_lines = NULL)
 
+hc_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
+           optimize_y = TRUE, title = NULL, show_labels = TRUE)
+           
 gg_vistime(data, col.event = "event", col.start = "start", col.end = "end", col.group = "group", col.color = "color", 
            col.fontcolor = "fontcolor", optimize_y = TRUE, linewidth = NULL, 
            title = NULL, show_labels = TRUE, background_lines = NULL)
@@ -119,7 +132,10 @@ background_lines | optional | integer | the number of vertical lines to draw in 
 
 ## 5. Value
 
-`vistime` returns an object of class `plotly` and `htmlwidget`, `gg_vistime` returns an object of class `gg` and `ggplot` and `vistime_data` returns an object of class `data.frame`.
+* `vistime` returns an object of class `plotly` and `htmlwidget`
+* `hc_vistime` returns an object of class `highchart` and `htmlwidget`
+* `gg_vistime` returns an object of class `gg` and `ggplot`
+* `vistime_data` returns an object of class `data.frame`
 
 ## 6. Examples  
 
@@ -132,7 +148,9 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    color = c('#cbb69d', '#603913', '#c69c6e'),
                    fontcolor = c("black", "white", "black"))
                   
-vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
+vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")      # the Plotly version
+# hc_vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA") # Alternative for Highcharts
+# gg_vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA") # Alternative for ggplot2
 ```
 <img src="inst/img/ex2.png" />
 
@@ -164,7 +182,9 @@ data <- read.csv(text="event,group,start,end,color
                        B95.7,Meetings,2017-01-15,2017-01-15,#e8a735
                        T82.7,Meetings,2017-01-15,2017-01-15,#e8a735")
                            
-vistime(data)
+vistime(data)    # the Plotly version
+# hc_vistime(data) # Alternative for Highcharts
+# gg_vistime(data) # Alternative for ggplot2
 ```
 
 <img src="inst/img/ex3.png" />
@@ -344,6 +364,7 @@ pp
 ```
 <img src="inst/img/ex2-eventfontsize.png" />
 
+<!-- todo: add from highcharter: http://jkunst.com/highcharter/highcharts-api.html -->
 #### Changing marker size
 The following example a simple example using markers and manipulates the size of the markers:
 
