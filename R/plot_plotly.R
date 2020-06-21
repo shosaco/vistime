@@ -24,7 +24,7 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines) {
   # 1. Prepare basic plot
   p <- plotly::plot_ly(type = "scatter", mode = "lines")
 
-  y_ticks <- sapply(split(data, data$subplot), function(subplot) mean(subplot$y))
+  y_ticks <- tapply(data$y, data$subplot, mean)
 
   # 2. Divide subplots with horizontal lines
   hline <- function(y = 0) list(type = "line", x0 = 0, x1 = 1, xref = "paper", y0 = y, y1 = y, line = list(color = "grey65", width = 0.5))

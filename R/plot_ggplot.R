@@ -23,7 +23,7 @@
 plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
 
   # 1. Prepare basic plot
-  y_ticks <- sapply(split(data, data$subplot), function(subplot) mean(subplot$y))
+  y_ticks <- tapply(data$y, data$subplot, mean)
 
   gg <- ggplot2::ggplot(data, ggplot2::aes_(x = ~start, y = ~y, xend = ~end, yend = ~y, color = ~I(col))) +
     ggplot2::ggtitle(title) + ggplot2::labs(x = NULL, y = NULL) +
