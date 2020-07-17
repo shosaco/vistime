@@ -13,6 +13,7 @@ Github
 hotfix
 Hotfix
 levelling
+assertthat
 linewidth
 md
 mouseover

@@ -1,7 +1,7 @@
 Package: vistime
 Title: Pretty Timelines
-Version: 1.0.0.9000
-Date: 2020-06-21
+Version: 1.0.0.9001
+Date: 2020-07-17
 Author: Sandro Raabe [aut, cre]
 Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
 Description: A library for creating time based charts, like Gantt or timelines. Possible outputs 
@@ -15,7 +15,7 @@ BugReports: https://github.com/shosaco/vistime/issues
 Depends:
     R (>= 3.2.0)
 Imports:
-    assertive (>= 0.1.4),
+    assertthat (>= 0.1),
     plotly (>= 4.0.0),
     ggplot2 (>= 2.0.0),
     ggrepel (>= 0.7.0),
@@ -23,7 +23,7 @@ Imports:
     highcharter (> 0.1.0)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Suggests:
     knitr,
     rmarkdown,

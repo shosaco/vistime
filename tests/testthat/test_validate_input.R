@@ -48,36 +48,36 @@ test_that("data formats", {
   expect_error(validate_input2(dat, col.start = "mystart"),
                "error in column 'mystart': Please provide at least one point in time")
   expect_error(validate_input2(tibble(), col.event = 1),
-               "col.event is not of class 'character'; it has class 'numeric'")
+               "col.event is not a string")
   expect_error(validate_input2(tibble(), col.end=1),
-               "col.end is not of class 'character'; it has class 'numeric'")
+               "col.end is not a string")
   expect_error(validate_input2(tibble(), col.event = 1, col.start=1),
-               "col.start is not of class 'character'; it has class 'numeric'")
+               "col.start is not a string")
   expect_error(validate_input2(tibble(), col.group=1),
-               "col.group is not of class 'character'; it has class 'numeric'")
+               "col.group is not a string")
 
   expect_error(
     validate_input2(plotly::plot_ly()), "Expected an input data frame, but encountered plotly"
   )
 
   expect_error(
-    validate_input2(dat, show_labels = NULL), "show_labels is not of class 'logical'"
+    validate_input2(dat, show_labels = NULL), "show_labels is not a flag"
   )
 
   expect_error(
-    validate_input2(dat, show_labels = "yes"), "show_labels is not of class 'logical'"
+    validate_input2(dat, show_labels = "yes"), "show_labels is not a flag"
   )
 
   expect_error(
-    validate_input2(dat, show_labels = "TRUE"), "show_labels is not of class 'logical'"
+    validate_input2(dat, show_labels = "TRUE"), "show_labels is not a flag"
   )
 
   expect_error(
-    validate_input2(dat, background_lines = "11"), "background_lines is not of class 'numeric'"
+    validate_input2(dat, background_lines = "11"), "background_lines is not a numeric or integer vector"
   )
 
   expect_error(
-    validate_input2(dat, background_lines = TRUE), "background_lines is not of class 'numeric'"
+    validate_input2(dat, background_lines = TRUE), "background_lines is not a numeric or integer vector"
   )
 
   expect_error(
@@ -86,19 +86,19 @@ test_that("data formats", {
   )
 
   expect_error(
-    validate_input2(dat, linewidth = "g"), "linewidth is not of class 'numeric'"
+    validate_input2(dat, linewidth = "g"), "linewidth is not a numeric or integer vector"
   )
 
   expect_error(
-    validate_input2(dat, linewidth = "5"), "linewidth is not of class 'numeric'"
+    validate_input2(dat, linewidth = "5"), "linewidth is not a numeric or integer vector"
   )
 
   expect_error(
-    validate_input2(dat, background_lines = TRUE), "background_lines is not of class 'numeric'"
+    validate_input2(dat, background_lines = TRUE), "background_lines is not a numeric or integer vector"
   )
 
   expect_error(
-    validate_input2(dat, title = ggplot2::ggtitle("test")), "title is not of class 'character'"
+    validate_input2(dat, title = ggplot2::ggtitle("test")), "title is not a string"
   )
 })
 

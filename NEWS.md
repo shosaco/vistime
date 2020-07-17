@@ -21,6 +21,7 @@
 - `vistime`:
   * changes under the hood (vertical and horizontal lines)
   * panel border
+- usage of package `assertthat` and re-organisation of dependencies
  
 # vistime 1.0.0
  

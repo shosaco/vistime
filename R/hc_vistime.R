@@ -1,6 +1,6 @@
 #' Create a Timeline rendered by Highcharts.js
 #'
-#' Provide a data frame with event data to create a static timeline plot.
+#' Provide a data frame with event data to create a visual and interactive timeline plot.
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
 #' @param data \code{data.frame} that contains the data to be visualized
@@ -15,6 +15,9 @@
 #' @param col.color (optional, character) the column name in \code{data} that contains colors
 #'   for events. Default: \emph{color}, if not present, colors are chosen via
 #'   \code{RColorBrewer}.
+#' @param col.tooltip (optional, character) the column name in \code{data} that contains the
+#'   mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
+#'   then tooltips are build from event name and date.
 #' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic (default),
 #'   otherwise use order of input data.
 #' @param title (optional, character) the title to be shown on top of the timeline.
@@ -24,7 +27,6 @@
 #' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @export
 #' @return \code{hc_vistime} returns an object of class \code{highchart} and \code{htmlwiget}
-#' }.
 #' @examples
 #' # presidents and vice presidents
 #' pres <- data.frame(

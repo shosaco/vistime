@@ -1,38 +1,3 @@
-# notebook to output plot as highchart
-library(highcharter)
-
-vistime_hc <- function(data, events = "event", start = "start", end = "end", groups = "group",
-                    colors = "color", fontcolors = "fontcolor", tooltips = "tooltip",
-                    optimize_y = TRUE, linewidth = NULL, title = NULL,
-                    show_labels = TRUE, background_lines = 10) {
-  library(dplyr)
-  library(tidyr)
-  data <- validate_input(data, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
-  data <- set_colors(data, colors, fontcolors)
-  data <- fix_columns(data, events, start, end, groups, tooltips)
-  data <- set_order(data)
-  data <- set_y_values(data, optimize_y) %>%
-    # experimental: An events length is 1/20 of the total event range
-    mutate(end = if_else(start != end, end, end + diff(range(c(start, end)))/50)) %>%
-    mutate_at(c("start", "end"), ~1000*as.double(.x)) %>% mutate(y = max(y) - y + 1)
-
-  cat <- data %>% distinct(y, group) %>% distinct(group, .keep_all = TRUE)
-  highchart() %>%
-    hc_chart(zoomType = "xy") %>%
-    hc_add_series(type = "columnrange", data = data,  hcaes(x = y, low = start, high = end, color = col),
-                  dataLabels = list(
-                    enabled = TRUE, inside=T,
-                    formatter = JS("function () {return (this.y === this.point.high ? this.point.event : \"\")}"))) %>%
-    hc_yAxis(type = "datetime") %>%
-    hc_xAxis(categories = c("", tibble(y = seq_len(max(cat$y))) %>% left_join(cat) %>% pull(group) %>% replace_na(""))) %>%
-    hc_chart(inverted = TRUE) %>%
-    hc_tooltip(crosshairs = TRUE, pointFormat = "{point.event}: from: {point.y:%Y-%m-%d}") %>%
-    hc_legend(enabled=F) %>%
-    hc_title(text = title)
-
-}
-
-
 
 ##########################################
 origData <- read.csv(text="event,group,start,end,color
@@ -62,45 +27,40 @@ Group 2,Team 2,2016-12-28,2017-01-23,#C7E9C0", stringsAsFactors = F) %>%
   as_tibble %>%
   mutate_at(c("start", "end"), as.Date)
 
-prepare_data <- function(dat){
+plot_highcharts <- function(data, title, show_labels){
 
-  events <- "event"
-  start <- "start"
-  end <- "end"
-  groups <- "group"
-  colors <- "color"
-  fontcolors <- "fontcolor"
-  tooltips <- "tooltip"
-  optimize_y <- TRUE
-  linewidth <- NULL
-  title <- NULL
-  show_labels <- TRUE
-  background_lines <- 11
+  library(tidyr)
 
-  dat <- validate_input(dat, start, end, events, groups, tooltips, optimize_y, linewidth, title, show_labels, background_lines)
-  dat <- set_colors(dat, colors, fontcolors)
-  dat <- fix_columns(dat, events, start, end, groups, tooltips)
-  dat <- set_order(dat)
-  dat <- set_y_values(dat, TRUE) %>%
+  data2 <- data %>%
+    # experimental: An events length is 1/20 of the total event range
     mutate(end = if_else(start != end, end, end + diff(range(c(start, end)))/50)) %>%
-    mutate_at(c("start", "end"), ~1000*as.double(.x)) %>% mutate(y = max(y) - y + 1)
-  return(dat)
+    mutate(y = max(y) - y + 1)
+
+  cat <- data2 %>% group_by(group) %>% summarize(y = round(mean(y)))
+  y_axis <- tibble(y = seq_len(max(cat$y))) %>% left_join(cat) %>% pull(group) %>% as.character %>% replace_na("")
+
+  data$start <- as.POSIXct(data$start, tz = Sys.timezone())
+  data$end <- as.POSIXct(data$end, tz = Sys.timezone())
+
+  highchart() %>%
+    hc_chart(inverted =TRUE) %>%
+    hc_add_series(data, "columnrange", hcaes(x=y, low=start, high=end, color=col),
+                  dataLabels = list(enabled = show_labels, inside=T,
+                    formatter = JS("function () {return (this.y === this.point.low ? this.point.event : \"\")}"))) %>%
+    hc_yAxis(type = "datetime") %>%
+    hc_xAxis(categories = c("", y_axis)) %>%
+    hc_tooltip(crosshairs = TRUE, formatter = JS("function () {return this.point.event}")) %>%
+    hc_legend(enabled=F)%>%
+    hc_title(text = title)
 }
 
-data <- prepare_data(origData) %>% as_tibble
-cat <- data %>% distinct(y, group) %>% distinct(group, .keep_all = TRUE)
-highchart() %>%
-  hc_add_series(type = "columnrange", data = data,  hcaes(x = y, low = start, high = end, color = col),
-                dataLabels = list(
-                  enabled = TRUE, inside=T,
-                  formatter = JS("function () {return (this.y === this.point.high ? this.point.event : \"\")}"))) %>%
-  hc_yAxis(type = "datetime") %>%
-  hc_xAxis(categories = c("", tibble(y = seq_len(max(cat$y))) %>% left_join(cat) %>% pull(group) %>% replace_na(""))) %>%
-  hc_chart(inverted = TRUE) %>%
-  hc_tooltip(crosshairs = TRUE, pointFormat = "{point.event}: from: {point.y:%Y-%m-%d}") %>%
-  hc_legend(enabled=F)
 
+checked_dat <- validate_input(origData, "event", "start", "end", "group", "color", NULL, NULL,
+                              optimize_y = FALSE, title = "Highcharter Test",
+                              show_labels = TRUE)
 
-######################
-data <- origData %>% mutate_at(c("start", "end"), ~.x - years(500)) %>%
-  prepare_data() %>% as_tibble
+data <- vistime_data(checked_dat$data, checked_dat$col.event, checked_dat$col.start,
+                     checked_dat$col.end, checked_dat$col.group, checked_dat$col.color,
+                     checked_dat$col.fontcolor, checked_dat$col.tooltip, TRUE)
+
+plot_highcharts(data, 0, "Test Highcharts", T)

@@ -8,8 +8,11 @@
 #' @param col.tooltip tooltip column name
 #' @param linewidth width of range lines
 #' @param title plot title
-#' @param show_labels boolean
-#' @param background_lines interval of grey background lines
+#' @param show_labels logical
+#' @param background_lines interval of gray background lines
+#' @importFrom assertthat is.string
+#' @importFrom assertthat is.flag
+#' @importFrom assertthat assert_that
 #'
 #' @return list of the data frame and column arguments, or an error
 #' @keywords internal
@@ -74,18 +77,18 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.c
   if(length(.dots) > 0) warning("The following unexpected arguments were ignored: ",
                                 paste(names(.dots), collapse = ", "))
 
-  assertive::assert_is_character(col.start)
-  assertive::assert_is_character(col.end)
-  assertive::assert_is_character(col.event)
-  assertive::assert_is_character(col.group)
-  if(!is.null(col.tooltip)) assertive::assert_is_character(col.tooltip)
-  assertive::assert_is_logical(optimize_y)
+  assert_that(is.string(col.start))
+  assert_that(is.string(col.end))
+  assert_that(is.string(col.event))
+  assert_that(is.string(col.group))
+  if(!is.null(col.tooltip)) assert_that(is.string(col.tooltip))
+  assert_that(is.flag(optimize_y))
 
   # missing if called from vistime_data
-  if(!missing(linewidth) && !is.null(linewidth)) assertive::assert_is_numeric(linewidth)
-  if(!missing(title) && !is.null(title)) assertive::assert_is_character(title)
-  if(!missing(show_labels)) assertive::assert_is_logical(show_labels)
-  if(!missing(background_lines) && !is.null(background_lines)) assertive::assert_is_numeric(background_lines)
+  if(!missing(linewidth) && !is.null(linewidth)) assert_that(is.numeric(linewidth))
+  if(!missing(title) && !is.null(title)) assert_that(is.string(title))
+  if(!missing(show_labels)) assert_that(is.flag(show_labels))
+  if(!missing(background_lines) && !is.null(background_lines)) assert_that(is.numeric(background_lines))
 
   if ("try-error" %in% class(try(as.data.frame(data), silent = T)))
     stop(paste("Expected an input data frame, but encountered", class(data)[1]))
