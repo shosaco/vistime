@@ -10,10 +10,11 @@ data$end   <- paste0("2017-01-0", data$end)
 data$group <- paste("Group", c(1,2,1))
 
 #2. standard parameters
-events = "event"; start = "start"; end = "end"; groups = "group";
-colors = "color"; fontcolors = "fontcolor"; tooltips = "tooltip";
+col.event = "event"; col.start = "start"; col.end = "end"; col.group = "group";
+col.color = "color"; col.fontcolor = "fontcolor"; col.tooltip = "tooltip";
 optimize_y = TRUE; linewidth = NULL; title = NULL; showLabels = NULL;
 show_labels = TRUE; lineInterval = NULL; background_lines = 10
 
 # 3. function call
 vistime(data)
+hc_vistime(data)

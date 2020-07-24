@@ -56,7 +56,7 @@ visible. Default: \code{TRUE}.}
 \code{hc_vistime} returns an object of class \code{highchart} and \code{htmlwiget}
 }
 \description{
-Provide a data frame with event data to create a static timeline plot.
+Provide a data frame with event data to create a visual and interactive timeline plot.
 Simplest drawable dataframe can have columns `event` and `start`.
 }
 \examples{

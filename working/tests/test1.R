@@ -20,4 +20,5 @@ events <- sapply(events, as.character)
 data <- as.data.frame(rbind(crono, events[, c(1,4,2,3)]))
 
 # 3. function call
-vistime(data, events="Name", start="start_year", end="end_year", groups="Group", linewidth=70)
+vistime(data, col.event="Name", col.start="start_year", col.end ="end_year", col.group ="Group", linewidth=70)
+hc_vistime(data, col.event="Name", col.start="start_year", col.end ="end_year", col.group ="Group", )

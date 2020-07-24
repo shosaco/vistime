@@ -17,4 +17,6 @@ timeline_data <- timeline_data[!is.na(timeline_data$End.Date) & !is.na(timeline_
 party_colours <- list("Labour" = "#DC241f", "Conservatives" = "#0087DC", "Liberal Democrat" = "#FDBB30")
 party_colours <- as.character(party_colours[levels(timeline_data$Political.Party)])
 
-vistime(timeline_data[order(timeline_data$Start.Date),], events = "Prime.Minister", start = "Start.Date", end = "End.Date", groups = "Prime.Minister", colors = "Political.Party", optimize_y = T, show_labels =F, linewidth=8)
+vistime(timeline_data[order(timeline_data$Start.Date),], col.event = "Prime.Minister", start = "Start.Date", end = "End.Date", col.group = "Prime.Minister", colors = "Political.Party", optimize_y = T, show_labels =F, linewidth=8)
+
+hc_vistime(timeline_data[order(timeline_data$Start.Date),], col.event = "Prime.Minister", start = "Start.Date", end = "End.Date", col.group = "Prime.Minister", colors = "Political.Party", optimize_y = T, show_labels =T)

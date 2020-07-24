@@ -23,3 +23,4 @@ d$end = d$start + d$duration * 7
 
 vistime(d, linewidth = 20)
 gg_vistime(d)
+hc_vistime(d)

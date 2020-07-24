@@ -24,4 +24,5 @@ device.data <- data.frame(
 )
 
 
-vistime(device.data, events="DeviceName", groups="DeviceManufacturer", start="start_date", end="end_date", linewidth = 20)
+vistime(device.data, col.event="DeviceName", col.group ="DeviceManufacturer", col.start="start_date", col.end ="end_date", linewidth = 20)
+hc_vistime(device.data, col.event="DeviceName", col.group ="DeviceManufacturer", col.start="start_date", col.end ="end_date")

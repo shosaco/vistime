@@ -26,14 +26,14 @@ Group 2,Team 2,2016-12-28,2017-01-23,#C7E9C0")
 
 
 #2. standard parameters
-events="event"
-start="start"
-end="end"
-groups="group"
-colors="color"
-fontcolors="fontcolor"
-tooltips="tooltip"
+col.event="event"
+col.start="start"
+col.end="end"
+col.group="group"
+col.color="color"
+col.fontcolor="fontcolor"
+col.tooltip="tooltip"
 title=NULL
 
-vistime(origData, background_lines = 20)
-
+gg_vistime(origData, background_lines = 100)
+hc_vistime(origData)

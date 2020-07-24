@@ -20,18 +20,19 @@ events <- sapply(events, as.character)
 origData<-rbind(crono, events[, c(1,4,2,3)])
 
 #2. standard parameters
-events="event"
-start="start"
-end="end"
-groups="group"
-colors="color"
-fontcolors="fontcolor"
-tooltips="tooltip"
+col.event="event"
+col.start="start"
+col.end="end"
+col.group="group"
+col.color="color"
+col.fontcolor="fontcolor"
+col.tooltip="tooltip"
 title=NULL
 
 # 3. function call
-# vistime(origData,events="Name", start="start_year", end="end_year")
-events="Name"
-start="start_year"
-end="end_year"
-vistime(origData,events="Name", start="start_year", end="end_year", groups = "Group")
+# vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year")
+col.event="Name"
+col.start="start_year"
+col.end="end_year"
+gg_vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year", col.group = "Group")
+hc_vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year", col.group = "Group")

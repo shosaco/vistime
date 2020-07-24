@@ -24,7 +24,9 @@ return zones,7,3,policy analysis
 BikeHub-Ofo interaction,7,2,policy analysis
 write-up and comparison with other projects,4,6,write-up")
 
-start_date = as_date(lubridate::ymd("2018-05-01", tz = "GMT"))
-d$start = start_date + d$start * 7
-d$end = d$start + d$duration * 7
-gg_vistime(d, linewidth = 20)
+start_date = lubridate::ymd("2018-05-01", tz = Sys.timezone())
+d$start = start_date + days(as.integer(d$start))
+d$end = d$start + days(as.integer(d$duration))
+vistime(d, linewidth = 20)
+
+hc_vistime(d)

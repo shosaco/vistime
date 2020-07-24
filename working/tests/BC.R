@@ -56,7 +56,7 @@ rm(data_AD) #remove surplus dataset
 data <- as.data.frame(unclass(data)) #reformat
 vistime(data) #visualise
 
-
 data$fontcolor = "black"
 vistime(data, linewidth=10)
 
+hc_vistime(data)

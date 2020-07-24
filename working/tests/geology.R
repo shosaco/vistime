@@ -2,22 +2,22 @@ library(tidyverse)
 library(lubridate)
 
 dat <- read.csv(text = "gage,start_date,end_date,data_type,color
-12044900,3/26/1994,9/29/2011,Discharge,a6bddb
-                12061500,7/1/1943,10/24/2018,Discharge,a6bddb
-                12166300,3/25/2014,9/30/2015,Discharge,a6bddb
-                12170300,11/15/2013,9/5/2016,Discharge,a6bddb
-                12186000,10/1/1917,10/24/2018,Discharge,a6bddb
-                12187500,7/1/1914,7/15/2017,Discharge,a6bddb
-                12189500,4/1/1911,10/18/2018,Discharge,a6bddb
-                12200500,10/1/1940,10/20/2018,Discharge,a6bddb
-                12205000,10/1/1937,10/24/2018,Discharge,a6bddb
-                12208000,8/28/1920,10/24/2018,Discharge,a6bddb
-                12210000,9/1/1920,10/24/2018,Discharge,a6bddb
-                12210700,10/15/2004,10/24/2018,Discharge,a6bddb
-                12213100,10/1/1966,10/24/2018,Discharge,a6bddb
-                12214300,1/1/2011,10/1/2012,Discharge,a6bddb
-                12214350,1/1/2011,9/29/2013,Discharge,a6bddb
-                12214500,7/1/1948,9/29/2013,Discharge,a6bddb
+12044900,3/26/1994,9/29/2011,Discharge,#a6bddb
+                12061500,7/1/1943,10/24/2018,Discharge,#a6bddb
+                12166300,3/25/2014,9/30/2015,Discharge,#a6bddb
+                12170300,11/15/2013,9/5/2016,Discharge,#a6bddb
+                12186000,10/1/1917,10/24/2018,Discharge,#a6bddb
+                12187500,7/1/1914,7/15/2017,Discharge,#a6bddb
+                12189500,4/1/1911,10/18/2018,Discharge,#a6bddb
+                12200500,10/1/1940,10/20/2018,Discharge,#a6bddb
+                12205000,10/1/1937,10/24/2018,Discharge,#a6bddb
+                12208000,8/28/1920,10/24/2018,Discharge,#a6bddb
+                12210000,9/1/1920,10/24/2018,Discharge,#a6bddb
+                12210700,10/15/2004,10/24/2018,Discharge,#a6bddb
+                12213100,10/1/1966,10/24/2018,Discharge,#a6bddb
+                12214300,1/1/2011,10/1/2012,Discharge,#a6bddb
+                12214350,1/1/2011,9/29/2013,Discharge,#a6bddb
+                12214500,7/1/1948,9/29/2013,Discharge,#a6bddb
                 12044900,6/15/2011,11/13/2015,Turbidity,brown
                 12113390,11/27/2013,10/23/2018,Turbidity,brown
                 12166150,3/27/2014,10/5/2015,Turbidity,brown
@@ -431,6 +431,6 @@ dat <- read.csv(text = "gage,start_date,end_date,data_type,color
 dat <- dat %>% as_tibble %>% mutate_at(c(2,3), mdy)
 
 # dat <- dat %>% mutate(end_date = ifelse(is.na(end_date), start_date+25, end_date), end_date = as.Date(end_date, origin="1970-01-01"))
-chart <- vistime(dat, groups = "gage", events = "data_type", start = "start_date", end = "end_date", linewidth = 5, show_labels = FALSE)
+vistime(dat, col.group = "gage", col.event = "data_type", col.start = "start_date", col.end = "end_date", linewidth = 5, show_labels = FALSE)
 
-chart
+hc_vistime(dat, col.group = "gage", col.event = "data_type", col.start = "start_date", col.end = "end_date", show_labels = FALSE)

@@ -8,7 +8,7 @@ test_that("class is htmlwidget", expect_is(vistime(dat), "htmlwidget"))
 test_that("background_lines",{
   for(bg in c(1, 5, 10)){
     expect_equal(bg + 2,
-                 length(plotly::plotly_build(vistime(dat, background_lines = bg))$x$layout$shapes))
+                 length(suppressWarnings(plotly::plotly_build(vistime(dat, background_lines = bg))$x$layout$shapes)))
   }
 
   expect_true(plotly::plotly_build(vistime(dat, background_lines = NULL))$x$layout$xaxis$showgrid)

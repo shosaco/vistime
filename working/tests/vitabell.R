@@ -17,7 +17,7 @@ stage5= structure(c(365,365,365))
 stage6= structure(c(180,180,180))
 stage7= structure(c(0,0,90))
 stage8= structure(c(0,0,30))
-ends= as.Date(as.POSIXct(c(start+stage1+stage2+stage3+stage4+stage5+stage6+stage7+stage8),format=Ymd.format,'GMT'))
+col.ends= as.Date(as.POSIXct(c(start+stage1+stage2+stage3+stage4+stage5+stage6+stage7+stage8),format=Ymd.format,'GMT'))
 
 #Tabell:
 tids<-structure(list(Produkter = c("Product A", "Product B", "Product C"),
@@ -120,8 +120,9 @@ Vitabell<-data.frame(event= c("acceptering", "validering", "1a_kompletering", "u
                      sl=c(df_slutPA,df_slutPB,df_slutPC))
 
 
-vistime(Vitabell, events="event", start= "st", end="sl",groups = "projekt", title="Evaluation times")
+vistime(Vitabell, col.event="event", col.start= "st", col.end ="sl",col.group = "projekt", title="Evaluation times")
+hc_vistime(Vitabell, col.event="event", col.start= "st", col.end ="sl",col.group = "projekt", title="Evaluation times")
 
 
-
-vistime(Vitabell, events="event", start= "st", end="sl",groups = "projekt", title="Evaluation times", optimize_y = F, linewidth = 5)
+vistime(Vitabell, col.event="event", col.start= "st", col.end ="sl",col.group = "projekt", title="Evaluation times", optimize_y = F, linewidth = 5)
+hc_vistime(Vitabell, col.event="event", col.start= "st", col.end ="sl",col.group = "projekt", title="Evaluation times", optimize_y = F)

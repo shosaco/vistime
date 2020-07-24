@@ -50,7 +50,7 @@ vistime_data <- function(data,
                                 col.fontcolor, col.tooltip, optimize_y, linewidth=0, title="",
                                 show_labels=T, background_lines=0, ...)
 
-  data <- fix_columns(data, checked_dat$col.event, checked_dat$col.start, checked_dat$col.end,
+  data <- fix_columns(checked_dat$data, checked_dat$col.event, checked_dat$col.start, checked_dat$col.end,
                       checked_dat$col.group, checked_dat$col.color, checked_dat$col.fontcolor,
                       checked_dat$col.tooltip)
 
