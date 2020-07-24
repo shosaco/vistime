@@ -1,4 +1,4 @@
-# vistime (development version)
+# vistime 1.1.0
  
 ## Breaking Changes
 - more intuitive argument naming:
@@ -30,7 +30,7 @@
 - Events are drawn from top to bottom (not from bottom to top) - always in the order of the input data frame (per groups that are arranged from top to bottom). This makes the result more intuitive: &#175;&#8212;-\_-\_ instead of \_-\_-&#8212;&#175;
 
 ## New features
-- `gg_vistime()` as new function to output the timeline as a static ggplot (in contrast to `vistime`, which outputs an interactive Plotly object).
+- `gg_vistime()` as new function to output the timeline as a static ggplot (in addition to `vistime`, which outputs an interactive Plotly object).
 - `vistime_data()` as new function to output the cleaned and optimized timeline data for your own plotting experiments.
 
 ## Removed functionality

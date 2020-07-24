@@ -17,4 +17,5 @@ show_labels = TRUE; lineInterval = NULL; background_lines = 10
 
 # 3. function call
 vistime(data)
+gg_vistime(data)
 hc_vistime(data)

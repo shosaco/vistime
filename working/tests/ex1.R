@@ -29,4 +29,6 @@ d$start = start_date + days(as.integer(d$start))
 d$end = d$start + days(as.integer(d$duration))
 vistime(d, linewidth = 20)
 
-hc_vistime(d)
+d$color = head(rep(RColorBrewer::brewer.pal(16, "Set1"), 2), 16)
+
+hc_vistime(d, col.color = "color")

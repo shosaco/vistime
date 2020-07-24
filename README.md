@@ -1,6 +1,6 @@
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![dev](https://img.shields.io/badge/master-1.0.0.9001-green.svg)](https://github.com/shosaco/vistime/blob/master/NEWS.md)
+<!-- [![dev](https://img.shields.io/badge/master-1.0.0.9001-green.svg)](https://github.com/shosaco/vistime/blob/master/NEWS.md) -->
 [![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime) 
@@ -41,7 +41,7 @@ This package `vistime` provides three main functions:
 ### 1) `vistime()` to produce interactive `Plotly` charts:
 
 ```{r}
-timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+timeline_data <- data.frame(event = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 vistime(timeline_data)
 ```
 <img src="inst/img/basic_plotly.png" />
@@ -50,7 +50,7 @@ vistime(timeline_data)
 ### 2) `hc_vistime()` to produce interactive `Highcharts` charts:
 
 ```{r}
-timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+timeline_data <- data.frame(event = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 hc_vistime(timeline_data)
 ```
 <img src="inst/img/basic_highchart.png" />
@@ -59,7 +59,7 @@ hc_vistime(timeline_data)
 ### 3) `gg_vistime()` to produce static `ggplot` output:
 
 ```{r}
-timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+timeline_data <- data.frame( = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 gg_vistime(timeline_data)
 ```
 <img src="inst/img/basic_ggplot.png" />
@@ -67,7 +67,7 @@ gg_vistime(timeline_data)
 ### 4)  `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
 
 ```{r}
-timeline_data <- data.frame(event=c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
+timeline_data <- data.frame( = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 vistime_data(timeline_data)
 
 #>     event      start        end     group                                      tooltip      col subplot   y
@@ -79,17 +79,20 @@ You want to use this for the intelligent y-axis assignment depending on overlapp
 
 ## 2. Installation
 
-To install the package from CRAN (v1.0.0), type the following in your R console:
+To install the package from CRAN (v1.1.0), type the following in your R console:
 ```{r}
 install.packages("vistime")
 ```
 
+<!--
+
 To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 
 ```{r}
-if(!require("devtools")) install.packages("devtools")
-devtools::install_github("shosaco/vistime")
+remotes::install_github("shosaco/vistime")
 ```
+
+-->
 
 
 ## 3. Usage and default arguments
@@ -182,7 +185,7 @@ data <- read.csv(text="event,group,start,end,color
                        B95.7,Meetings,2017-01-15,2017-01-15,#e8a735
                        T82.7,Meetings,2017-01-15,2017-01-15,#e8a735")
                            
-vistime(data)    # the Plotly version
+vistime(data)      # the Plotly version
 # hc_vistime(data) # Alternative for Highcharts
 # gg_vistime(data) # Alternative for ggplot2
 ```
@@ -230,7 +233,10 @@ Note that export requires the `webshot` package and additional arguments like wi
 
 ## 8. Usage in Shiny apps
 
-The result of any call to `vistime(...)` is a `Plotly` object, so you can use `plotlyOutput()` in the UI and `renderPlotly()` in the server of your [Shiny app](https://shiny.rstudio.com/) to display your chart. The same goes for `gg_vistime(...)`, `plotOutput()` and `renderPlot()`:
+- `vistime()` objects can be integrated into [Shiny](https://shiny.rstudio.com/) via `plotlyOutput()` and `renderPlotly()`
+- `hc_vistime()` objects can be integrated into Shiny via `highchartOutput()` and `renderHighchart()`
+- `gg_vistime()` objects can be integrated into Shiny via `plotOutput()` and `renderPlot()`
+
 
 ```{r}
 library(shiny)
@@ -279,18 +285,40 @@ p + theme(
     coord_cartesian(ylim = c(0.7, 3.5))
 ```
 
+See `?ggplot2::theme` for details. 
+
 <img src="inst/img/ggplot_cust.png" />
 
-
-**Remark:** It's similar for `vistime` objects, use `Plotly`'s `layout` function, though not all attributes are changeable there:
+### Using `plotly::layout()` for `vistime` charts
 
 ```{r}
-p <- vistime(data, optimize_y = T, col.group = "event", title = "plotly customization example")
 library(plotly)
-p %>% layout(yaxis=list(fixedrange=TRUE), title = "A different plot",
-             plot_bgcolor = "yellow", xaxis = list(title = "x Axis"), 
-             yaxis = list(mirror = FALSE, range = c(0.7, 3.5), showgrid = T))
+p2 <- vistime(data, optimize_y = T, col.group = "event", title = "plotly customization example")
+p2 %>% layout(xaxis=list(fixedrange=TRUE, tickfont=list(size=30, color="violet")), 
+              yaxis=list(fixedrange=TRUE, tickfont=list(size=30, color="red"), tickangle=30,
+                         mirror = FALSE, range = c(0.7, 3.5), showgrid = T),
+              title = "A different plot", plot_bgcolor = "lightgreen")
 ```
+
+See `?plotly::layout` and the official [Plotly API reference](https://plotly.com/r/reference/#layout-title) for details. 
+
+<img src="inst/img/plotly_cust.png" />
+
+### Using `highcharter::hc_*()` for `hc_vistime` charts
+```
+library(highcharter)
+p3 <- hc_vistime(data, optimize_y = T, col.group = "event", title = "Highcharts customization example")
+p3 %>% hc_title(style = list(fontSize=30)) %>% 
+       hc_yAxis(labels = list(style = list(fontSize=30, color="violet"))) %>% 
+       hc_xAxis(labels = list(style = list(fontSize=30, color="red"), rotation=30)) %>% 
+       hc_chart(backgroundColor = "lightgreen")
+```
+
+See `?hc_xAxis`, `?hc_chart` and the official [Highcharts API reference](https://api.highcharts.com/highcharts) for details. 
+
+
+<img src="inst/img/highchart_cust.png" />
+
 
 ### Using `plotly::plotly_build()` for `vistime` charts
 
@@ -364,7 +392,6 @@ pp
 ```
 <img src="inst/img/ex2-eventfontsize.png" />
 
-<!-- todo: add from highcharter: http://jkunst.com/highcharter/highcharts-api.html -->
 #### Changing marker size
 The following example a simple example using markers and manipulates the size of the markers:
 
