@@ -1,7 +1,6 @@
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-<!-- [![dev](https://img.shields.io/badge/master-1.0.0.9001-green.svg)](https://github.com/shosaco/vistime/blob/master/NEWS.md) -->
-[![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
+<!-- [![dev](https://img.shields.io/badge/master-1.0.0.9001-green.svg)](https://github.com/shosaco/vistime/blob/master/NEWS.md) -->[![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime) 
 
@@ -297,7 +296,7 @@ p2 <- vistime(data, optimize_y = T, col.group = "event", title = "plotly customi
 p2 %>% layout(xaxis=list(fixedrange=TRUE, tickfont=list(size=30, color="violet")), 
               yaxis=list(fixedrange=TRUE, tickfont=list(size=30, color="red"), tickangle=30,
                          mirror = FALSE, range = c(0.7, 3.5), showgrid = T),
-              title = "A different plot", plot_bgcolor = "lightgreen")
+              plot_bgcolor = "lightgreen")
 ```
 
 See `?plotly::layout` and the official [Plotly API reference](https://plotly.com/r/reference/#layout-title) for details. 

@@ -276,11 +276,11 @@ p + ggplot2::theme(
 
 ```{r plotly_customization, fig.height=2.5, out.width="100%", message=FALSE}
 library(plotly)
-p2 <- vistime(data, optimize_y = T, col.group = "event", title = "plotly customization example")
+p2 <- vistime(data, optimize_y = T, col.group = "event", title = "Plotly customization example")
 p2 %>% layout(xaxis=list(fixedrange=TRUE, tickfont=list(size=30, color="violet")), 
               yaxis=list(fixedrange=TRUE, tickfont=list(size=30, color="red"), tickangle=30,
                          mirror = FALSE, range = c(0.7, 3.5), showgrid = T),
-              title = "A different plot", plot_bgcolor = "lightgreen") 
+              plot_bgcolor = "lightgreen") 
 ```
 
 See `?plotly::layout` and the official [Plotly API reference](https://plotly.com/r/reference/#Layout_and_layout_style_objects) for details. 

@@ -31,6 +31,7 @@ plot_highchart <- function(data, title, show_labels){
 
   # let an event be 1/50th of total timeline range
   data$end <- with(data, ifelse(start != end, end, end + diff(range(c(start, end)))/50))
+
   data$low <- 1000 * as.double(data$start)
   data$high <- 1000 * as.double(data$end)
   data$x <- max(data$y) - data$y + 1
