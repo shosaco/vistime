@@ -1,3 +1,6 @@
+# vistime 1.1.0.9000
+- added mouse zooming capability to `hc_vistime`
+
 # vistime 1.1.0 (2020-07-24)
  
 ## Breaking Changes

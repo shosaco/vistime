@@ -40,21 +40,23 @@ plot_highchart <- function(data, title, show_labels){
   cats <- round(tapply(data$y, data$group, mean))
   y_vals <- names(sort(c(cats, setdiff(seq_len(max(data$y)), cats))))
 
-  hc_title(
-    hc_legend(
-      hc_tooltip(
-        hc_xAxis(
-          hc_yAxis(
-            hc_add_series(
-              hc_chart(highchart(), inverted =TRUE),
-              data, "columnrange",
-              dataLabels = list(enabled = show_labels, inside=T,
-                                formatter = JS("function () {return (this.y === this.point.low ? this.point.event : \"\")}"))),
-            type = "datetime"),
-          categories = c("", y_vals)),
-        crosshairs = TRUE, formatter = JS("function () {return this.point.tooltip}")) ,
-      enabled=F),
-    text = title)
+  hc_chart(
+    hc_title(
+      hc_legend(
+        hc_tooltip(
+          hc_xAxis(
+            hc_yAxis(
+              hc_add_series(
+                hc_chart(highchart(), inverted =TRUE),
+                data, "columnrange",
+                dataLabels = list(enabled = show_labels, inside=T,
+                                  formatter = JS("function () {return (this.y === this.point.low ? this.point.event : \"\")}"))),
+              type = "datetime"),
+            categories = c("", y_vals)),
+          crosshairs = TRUE, formatter = JS("function () {return this.point.tooltip}")) ,
+        enabled=F),
+      text = title),
+    zoomType = "xy")
 
 
 }
