@@ -7,7 +7,7 @@
 vistime - Pretty Timelines
 =========
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs, `Highchart`s or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by `Plotly.js` and `Highcharts.js` you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using `ggplot::theme()`, `plotly_build` or `hc_*`functions (for `gg-vistime`, `vistime` or `hc_vistime`, respectively). When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs, `Highchart`s or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by `vistime()` and `hc_vistime()` you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using `ggplot::theme()`, `plotly_build` or `hc_*`functions (for `gg_vistime`, `vistime` or `hc_vistime`, respectively). When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a>
 

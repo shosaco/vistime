@@ -7,7 +7,7 @@ Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
 Description: A library for creating time based charts, like Gantt or timelines. Possible outputs 
   include 'ggplot' diagrams, 'Plotly' graphs, 'Highchart' widgets and 'data.frames'. Results can be
   used in the 'RStudio' viewer pane, in 'RMarkdown' documents or in 'Shiny' apps. In the 
-  interactive outputs created by 'Plotly.js' and 'Highcharts.js', you can interact with the 
+  interactive outputs created by 'vistime()' and 'hc_vistime()', you can interact with the 
   plot using mouse hover or zoom.
 License: GPL-3 | file LICENSE
 URL: https://shosaco.github.io/vistime/
@@ -15,7 +15,7 @@ BugReports: https://github.com/shosaco/vistime/issues
 Depends:
     R (>= 3.2.0)
 Imports:
-    assertthat (>= 0.1),
+    assertive.types (>= 0.0-3),
     plotly (>= 4.0.0),
     ggplot2 (>= 2.0.0),
     ggrepel (>= 0.7.0),

@@ -1,6 +1,6 @@
 #' Create a Timeline rendered by Plotly
 #'
-#' Provide a data frame with event data to create a visual and interactive timeline plot.
+#' Provide a data frame with event data to create a visual and interactive timeline plot rendered by Plotly.
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
 #' @param data \code{data.frame} that contains the data to be visualized
@@ -32,9 +32,9 @@
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the
 #'   background to demonstrate structure (default: 10). Less means more memory-efficient plot.
 #' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
+#' @seealso Functions \code{?hc_vistime} and \code{?gg_vistime} for different charting engines (Highcharts and ggplot2).
 #' @export
 #' @return \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
-#'  See `gg_vistime` for the static `ggplot` version.
 #' @examples
 #' # presidents and vice presidents
 #' pres <- data.frame(

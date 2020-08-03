@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg_vistime.R
 \name{gg_vistime}
 \alias{gg_vistime}
-\title{Create a Timeline rendered by ggplot}
+\title{Create a Timeline rendered by ggplot2}
 \usage{
 gg_vistime(
   data,
@@ -63,7 +63,7 @@ visible. Default: \code{TRUE}.}
 \code{gg_vistime} returns an object of class \code{gg} and \code{ggplot}.
 }
 \description{
-Provide a data frame with event data to create a static timeline plot.
+Provide a data frame with event data to create a static timeline plot created by ggplot2.
 Simplest drawable dataframe can have columns `event` and `start`.
 }
 \examples{
@@ -97,4 +97,7 @@ p + theme(
   panel.background = element_rect(fill = 'green')) +
   coord_cartesian(ylim = c(0.7, 3.5))
 }
+}
+\seealso{
+Functions \code{?vistime} and \code{?hc_vistime} for different charting engines
 }

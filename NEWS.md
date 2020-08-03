@@ -1,7 +1,9 @@
-# vistime 1.1.0.9000
+# vistime 1.1.0.9000 (2020-08-03 - not on CRAN)
 - added mouse zooming capability to `hc_vistime`
+- updated documentation
+- internals: using the `assertive.types` package instead of `assertthat` for nicer error messages
 
-# vistime 1.1.0 (2020-07-24)
+# vistime 1.1.0 (2020-07-24 - on CRAN)
  
 ## Breaking Changes
 - more intuitive argument naming:
