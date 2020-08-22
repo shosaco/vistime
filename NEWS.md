@@ -95,7 +95,7 @@
 
 # vistime 0.2.0 (2017-01-30)
 - improved error checking
-- various bugfixes
+- various bugfixes 
 
 # vistime 0.1.0 (2017-01-29)
 First public release on 29/01/2017
