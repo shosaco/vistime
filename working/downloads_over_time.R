@@ -69,12 +69,12 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    downloads <- shiny::reactive({
+    downloads <- reactive({
       packages <- input$package
       # cran_downloads0 <- purrr::possibly(cran_downloads, otherwise = NULL)
       cran_downloads(packages = packages,
-                      from    = get_initial_release_date(packages),
-                      to      = Sys.Date()-2) %>% as_tibble
+                      from    = get_initial_release_date("vistime"),
+                      to      = Sys.Date()-4) %>% as_tibble
     })
 
     output$downloadsPlot <- renderPlotly({
@@ -116,9 +116,7 @@ server <- function(input, output) {
         add_lines(x = ~date, y=~mav, data = d, color = ~package) %>%
         layout(xaxis=list(title="Date"),
                yaxis=list(title="Number of downloads"),
-               title = paste("Averaged over", input$mav_n, case_when(input$transformation == "7" ~ "weeks",
-                                                                     input$transformation == "30" ~ "months",
-                                                                     TRUE ~ "days")))
+               title = ifelse(input$mav_n > 1, paste("Averaged over", input$mav_n, str_replace(tolower(input$transformation), "ly", "s")), ""))
     })
 
 
