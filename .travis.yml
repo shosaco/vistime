@@ -3,6 +3,13 @@ cache: packages
 sudo: true
 warnings_are_errors: false
 
+addons:
+  apt:
+    packages:
+      - gcc-4.4
+      - g++-4.4
+      - clang
+
 r:
   - oldrel
   - release
