@@ -6,9 +6,9 @@ warnings_are_errors: false
 addons:
   apt:
     packages:
-      - gcc-5
-      - g++-5
-      - gfortran-5
+      - gcc-4.8-base
+      - libgfortran4
+      - gcc-fortran
 
 before_install:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
