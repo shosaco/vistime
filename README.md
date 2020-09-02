@@ -1,11 +1,14 @@
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
-[![Downloads](https://cranlogs.r-pkg.org/badges/last-month/vistime)](https://www.r-pkg.org/pkg/vistime)
-[![Downloads](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
-[![Downloads](https://cranlogs.r-pkg.org/badges/last-day/vistime)](https://www.r-pkg.org/pkg/vistime)
-[![Build Status](https://travis-ci.com/shosaco/vistime.svg?branch=master)](https://travis-ci.com/shosaco/vistime)
+[![Downloads per month](https://cranlogs.r-pkg.org/badges/last-month/vistime)](https://www.r-pkg.org/pkg/vistime)
+[![Downloads per week](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
+[![Downloads per day](https://cranlogs.r-pkg.org/badges/last-day/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime)
 [![HitCount](http://hits.dwyl.com/shosaco/vistime.svg)](http://hits.dwyl.com/shosaco/vistime)
+[![check-linux](https://github.com/shosaco/vistime/workflows/check-linux/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-linux)
+[![check-windows](https://github.com/shosaco/vistime/workflows/check-windows/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-windows)
+[![check-mac](https://github.com/shosaco/vistime/workflows/check-mac/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-mac)
+[![Github Stars](https://img.shields.io/github/stars/shosaco/vistime.svg)](https://github.com/shosaco/vistime)
 
 vistime - Pretty Timelines
 =========
