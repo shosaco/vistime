@@ -14,9 +14,9 @@ jobs:
         config:
         - { os: macOS-latest, r: '4.0' }
 
-env:
-    R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-    CRAN: ${{ matrix.config.cran }}
+    env:
+        R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+        CRAN: ${{ matrix.config.cran }}
 
     steps:
       - uses: actions/checkout@v1
