@@ -4,7 +4,6 @@
 [![Downloads per week](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Downloads per day](https://cranlogs.r-pkg.org/badges/last-day/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime)
-[![HitCount](http://hits.dwyl.com/shosaco/vistime.svg)](http://hits.dwyl.com/shosaco/vistime)
 [![check-linux](https://github.com/shosaco/vistime/workflows/check-linux/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-linux)
 [![check-windows](https://github.com/shosaco/vistime/workflows/check-windows/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-windows)
 [![check-mac](https://github.com/shosaco/vistime/workflows/check-mac/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-mac)
