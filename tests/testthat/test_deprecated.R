@@ -14,6 +14,6 @@ test_that("Unknown arguments", {
 
   dat <- data.frame(event = 1:2, start = c("2019-01-05", "2019-01-06"))
 
-  expect_warning(vistime(dat, arg1 = "bla"), "unexpected arguments")
-  expect_warning(vistime(dat, arg1 = "bla", arg2 = "blubb"), "unexpected arguments")
+  expect_message(vistime(dat, arg1 = "bla"), "unexpected arguments")
+  expect_message(vistime(dat, arg1 = "bla", arg2 = "blubb"), "unexpected arguments")
 })

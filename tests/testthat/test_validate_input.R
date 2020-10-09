@@ -107,5 +107,5 @@ test_that("return value", {
   expect_length(validate_input2(dat), 8)
   expect_is(validate_input2(dat)$data, "data.frame")
   expect_equal(validate_input2(dat[1, ])$dat,dat[1, ])
-  expect_warning(validate_input2(dat, testarg = "test"), "unexpected arguments were ignored")
+  expect_message(validate_input2(dat, testarg = "test"), "unexpected arguments were ignored")
 })
