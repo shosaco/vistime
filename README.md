@@ -60,6 +60,9 @@ vistime(timeline_data)
 timeline_data <- data.frame(event = c("Event 1", "Event 2"), start = c("2020-06-06", "2020-10-01"), end = c("2020-10-01", "2020-12-31"), group = "My Events")
 hc_vistime(timeline_data)
 ```
+
+(Please note the underlying JavaScript library `Highcharts.js` is not free for *commercial use*. See [this link](https://www.highcharts.com/blog/oss-discount) for a discounted licence if you plan to use `hc_vistime()` commercially.)
+
 <img src="inst/img/basic_highchart.png" />
 
 
