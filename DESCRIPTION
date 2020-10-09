@@ -1,7 +1,7 @@
 Package: vistime
 Title: Pretty Timelines
-Version: 1.1.0
-Date: 2020-07-24
+Version: 1.1.0.9000
+Date: 2020-10-09
 Author: Sandro Raabe [aut, cre]
 Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
 Description: A library for creating time based charts, like Gantt or timelines. Possible outputs 
