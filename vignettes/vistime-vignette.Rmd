@@ -49,6 +49,8 @@ timeline_data <- data.frame(event = c("Event 1", "Event 2"), start = c("2020-06-
 hc_vistime(timeline_data)
 ```
 
+(Please note the underlying JavaScript library `Highcharts.js` is not free for *commercial use*. See [this link](https://www.highcharts.com/blog/oss-discount) for a discounted licence if you plan to use `hc_vistime()` commercially.)
+
 ### 3) `gg_vistime()` to produce static `ggplot` output:
 
 ```{r gg_vistime_basic_ex, warning=FALSE, fig.width=4, fig.height=1.5}
@@ -73,7 +75,7 @@ You want to use this for the intelligent y-axis assignment depending on overlapp
 
 ## 2. Installation
 
-To install the package from CRAN (v1.0.0), type the following in your R console:
+To install the package from CRAN (v1.1.0), type the following in your R console:
 
 ```{r eval=FALSE}
 install.packages("vistime")
@@ -244,7 +246,7 @@ shinyApp(
 )
 ```
 
-## 8. Customization
+## 9. Customization
 
 ### Using `ggplot2::theme()` for `gg_vistime` charts
 
