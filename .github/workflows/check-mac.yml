@@ -6,7 +6,7 @@ on:
     branches:
       - master
 
-name: R-CMD-check
+name: check-mac
 
 jobs:
   R-CMD-check:
@@ -21,9 +21,7 @@ jobs:
           - {os: macOS-latest, r: '3.5'}
           - {os: macOS-latest, r: '3.6'}
           - {os: macOS-latest, r: '4.0'}
-          - {os: ubuntu-16.04, r: '3.3', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04, r: '3.4', rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-
+        
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       _R_CHECK_FORCE_SUGGESTS_: false
@@ -65,6 +63,7 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
+          install.packages('igraph')
         shell: Rscript {0}
 
       - name: Check
