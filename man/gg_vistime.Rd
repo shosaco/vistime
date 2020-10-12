@@ -99,5 +99,5 @@ p + theme(
 }
 }
 \seealso{
-Functions \code{?vistime} and \code{?hc_vistime} for different charting engines
+Functions \code{?vistime} and \code{?hc_vistime} for different charting engines (Plotly and Highcharts).
 }

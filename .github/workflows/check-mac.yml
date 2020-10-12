@@ -12,8 +12,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: macOS-latest, r: '3.5' }
-        - { os: macOS-latest, r: '3.6' }
         - { os: macOS-latest, r: '4.0' }
 
     env:

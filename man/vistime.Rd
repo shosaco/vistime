@@ -67,7 +67,6 @@ background to demonstrate structure (default: 10). Less means more memory-effici
 }
 \value{
 \code{vistime} returns an object of class \code{plotly} and \code{htmlwidget}.
- See `?gg_vistime` for the static `ggplot2` version and `?hc_vistime` for the interactive `Highcharts` version.
 }
 \description{
 Provide a data frame with event data to create a visual and interactive timeline plot rendered by Plotly.
@@ -170,5 +169,5 @@ pp
 
 }
 \seealso{
-Functions \code{?hc_vistime} and \code{?gg_vistime} for different charting engines
+Functions \code{?hc_vistime} and \code{?gg_vistime} for different charting engines (Highcharts and ggplot2).
 }

@@ -88,5 +88,5 @@ p \%>\% hc_title(style = list(fontSize=30)) \%>\%
 }
 }
 \seealso{
-Functions \code{?vistime} and \code{?gg_vistime} for different charting engines
+Functions \code{?vistime} and \code{?gg_vistime} for different charting engines (Plotly and ggplot2).
 }
