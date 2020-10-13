@@ -1,6 +1,6 @@
 ## Test environments
-* local R installation, R 4.0.2
-* ubuntu 16.04 (on travis-ci), R 3.6.3, 4.0.0, R under development (2020-07-24 r78910)
+* Windows-latest & Ubuntu 18.04 & macOS-latest 3.6 & 4.0  (Github Actions)
+* macOS-latest 3.4 (Github Actions)
 * win-builder (oldrelease, release, devel)
 
 -- R CMD check results -------------------------------------- vistime 1.1.0 ----
