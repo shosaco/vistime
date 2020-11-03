@@ -3,7 +3,7 @@ dat <- data.frame(start = c("2019-01-01 00:00", "2019-01-01 04:00"),
                   end = c("2019-01-01 05:00", "2019-01-05 06:00"),
                   event = 1:2)
 
-test_that("class is htmlwidget", expect_is(vistime(dat), "htmlwidget"))
+test_that("class is htmlwidget", expect_s3_class(vistime(dat), "htmlwidget"))
 
 test_that("background_lines",{
   for(bg in c(1, 5, 10)){
@@ -11,8 +11,8 @@ test_that("background_lines",{
                  length(suppressWarnings(plotly::plotly_build(vistime(dat, background_lines = bg))$x$layout$shapes)))
   }
 
-  expect_true(plotly::plotly_build(vistime(dat, background_lines = NULL))$x$layout$xaxis$showgrid)
-  expect_false(plotly::plotly_build(vistime(dat, background_lines = 10))$x$layout$xaxis$showgrid)
+  expect_true(suppressWarnings(plotly::plotly_build(vistime(dat, background_lines = NULL))$x$layout$xaxis$showgrid))
+  expect_false(suppressWarnings(plotly::plotly_build(vistime(dat, background_lines = 10))$x$layout$xaxis$showgrid))
 })
 
 
@@ -46,11 +46,11 @@ test_that("data having no real events (only ranges)", {
   dat$end <- dat$start + 5
   res <- list()
   for(x in vistime(dat)$x$attrs) if(x$mode == "markers") res <- append(res, x)
-  expect_equivalent(res, list())
+  expect_equal(res, list())
 })
 
 dat$end = NA
-test_that("class is htmlwidget", expect_is(vistime(dat), "htmlwidget"))
+test_that("class is htmlwidget", expect_s3_class(vistime(dat), "htmlwidget"))
 
 relevant_dat <- vistime(dat)$x$attrs
 
@@ -61,13 +61,14 @@ test_that("Number of markers", {
 })
 
 test_that("Symbol is circle", {
-  res <- list()
-  for(x in relevant_dat) if(x$mode == "markers") res <- append(res, x$marker$symbol)
-  expect_equivalent(unique(res), "circle")
+  res <- c()
+  for(x in relevant_dat) if(x$mode == "markers") res <- c(res, x$marker$symbol)
+  expect_equal(unique(res), "circle")
 })
 
 test_that("x Values", {
-  res <- list()
+  res <- c()
   for(x in relevant_dat) if(x$mode == "markers") res <- c(res, as.integer(x$x))
-  expect_setequal(res, as.integer(as.POSIXct(dat$start)))
+  expect_equal(res, as.integer(as.POSIXct(dat$start)))
 })
+

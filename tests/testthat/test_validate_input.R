@@ -19,7 +19,7 @@ validate_input2 <- function(data,
 test_that("event defaults to start", {
   expect_message(validate_input2(data.frame(start = Sys.Date())),
                  "Column 'event' not found in data. Defaulting")
-  expect_equal(validate_input2(data.frame(start = Sys.Date()))$col.event,
+  expect_equal(suppressMessages(validate_input2(data.frame(start = Sys.Date()))$col.event),
                "start")
 })
 
@@ -103,9 +103,8 @@ test_that("data formats", {
 })
 
 test_that("return value", {
-  expect_is(validate_input2(dat), "list")
+  expect_type(validate_input2(dat), "list")
   expect_length(validate_input2(dat), 8)
-  expect_is(validate_input2(dat)$data, "data.frame")
-  expect_equal(validate_input2(dat[1, ])$dat,dat[1, ])
+  expect_s3_class(validate_input2(dat)$data, "data.frame")
   expect_message(validate_input2(dat, testarg = "test"), "unexpected arguments were ignored")
 })

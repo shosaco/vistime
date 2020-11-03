@@ -44,13 +44,13 @@ test_that("new columns", {
 
 test_that("POSIXct conversion", {
   dat$start <- "2014-01-01"
-  expect_is(fix_columns2(dat)$start, "POSIXct")
+  expect_s3_class(fix_columns2(dat)$start, "POSIXct")
 
   dat$start <- "2014/01/01"
-  expect_is(fix_columns2(dat)$start, "POSIXct")
+  expect_s3_class(fix_columns2(dat)$start, "POSIXct")
 
   dat$start <-"2014/01/01 15:50"
-  expect_is(fix_columns2(dat)$start, "POSIXct")
+  expect_s3_class(fix_columns2(dat)$start, "POSIXct")
 
   dat$start <-"2014-01:01"
   expect_error(fix_columns(dat))
@@ -58,7 +58,7 @@ test_that("POSIXct conversion", {
 
 test_that("factor conversion", {
   dat$event <- "1"
-  expect_is(fix_columns2(dat)$event, "character")
+  expect_type(fix_columns2(dat)$event, "character")
 })
 
 test_that("missing end dates", {

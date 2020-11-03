@@ -5,31 +5,31 @@ generated <- vistime(dat, col.event = "event", col.start = "start", col.end = "e
                      col.tooltip = "tooltip", linewidth = NULL, title = NULL,
                      show_labels = TRUE, background_lines = 10)
 
-test_that("class is htmlwidget", expect_is(generated, "htmlwidget"))
+test_that("class is htmlwidget", expect_s3_class(generated, "htmlwidget"))
 
 relevant_dat <- generated$x$attrs
 
 test_that("color is same as in df", {
   res <- NULL
   for(x in relevant_dat) if(x$mode == "lines" && length(x$y) == 1) res <- x$line$color
-  expect_equivalent(res, "#8DD3C7")
+  expect_equal(res, "#8DD3C7")
 })
 
 test_that("start and end", {
   starts <- c()
   for (x in relevant_dat) if(x$mode == "lines" && length(x$y) == 1) starts <- c(starts, x$x)
-  expect_equivalent(starts, as.integer(c(as.POSIXct(dat$start), as.POSIXct(dat$end))))
+  expect_equal(starts, as.integer(c(as.POSIXct(dat$start), as.POSIXct(dat$end))))
 })
 
 test_that("y values", {
   y <- c()
   for (x in relevant_dat) if(x$mode == "lines" && length(x$y) == 1) y <- c(y, x$y)
-  expect_equivalent(y, 1)
+  expect_equal(y, 1)
 })
 
 test_that("background_lines",
           expect_equal(12,
-                       length(plotly::plotly_build(generated)$x$layout$shapes)))
+                       suppressWarnings(length(plotly::plotly_build(generated)$x$layout$shapes))))
 
 # presidents example
 pres <- data.frame(
@@ -83,5 +83,6 @@ test_that("y values are distributed", {
   all_y <- c()
   for (x in relevant_dat2) if(x$mode == "lines" && length(x$y) == 1) all_y <- unique(c(all_y, x$y))
 
-  expect_equivalent(all_y, 2:1)
+  expect_equal(all_y, 2:1)
 })
+

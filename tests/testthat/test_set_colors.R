@@ -34,6 +34,6 @@ test_that("trim whitespaces", {
   fixed <- set_colors(data.frame(event = "Event1", start = "2014-01-01", color = "   #676767"),
                       col.color = "color", col.fontcolor = NULL)[, c("col", "fontcol")]
 
-  expect_equivalent(fixed, lapply(fixed, trimws))
+  expect_equal(fixed, lapply(fixed, trimws), ignore_attr=T)
 })
 
