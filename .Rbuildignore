@@ -1,11 +1,9 @@
-^\.travis\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .gitignore
 .Rhistory
 vistime.Rproj
 working
-.travis.yml
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
@@ -14,3 +12,4 @@ working
 ^cran-comments.md
 ^CRAN-RELEASE$
 ^cran-comments\.md$
+^\.github$

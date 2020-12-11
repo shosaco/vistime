@@ -4,12 +4,10 @@
 [![Downloads per week](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Downloads per day](https://cranlogs.r-pkg.org/badges/last-day/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://codecov.io/github/shosaco/vistime)
-[![check-linux](https://github.com/shosaco/vistime/workflows/check-linux/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-linux)
-[![check-windows](https://github.com/shosaco/vistime/workflows/check-windows/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-windows)
-[![check-mac](https://github.com/shosaco/vistime/workflows/check-mac/badge.svg)](https://github.com/shosaco/vistime/actions?workflow=check-mac)
+[![R build status](https://github.com/shosaco/vistime/workflows/R-CMD-check/badge.svg)](https://github.com/shosaco/vistime/actions)
 [![Github Stars](https://img.shields.io/github/stars/shosaco/vistime.svg)](https://github.com/shosaco/vistime)
 
-vistime - Pretty Timelines
+vistime - Pretty Timelines in R
 =========
 
 A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs, `Highchart`s or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by `vistime()` and `hc_vistime()` you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using `ggplot::theme()`, `plotly_build` or `hc_*`functions (for `gg_vistime`, `vistime` or `hc_vistime`, respectively). When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
