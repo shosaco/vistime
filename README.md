@@ -1,5 +1,6 @@
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
+[![R build status](https://github.com/shosaco/vistime/workflows/R-CMD-check/badge.svg)](https://github.com/shosaco/vistime/actions)
 [![Downloads per month](https://cranlogs.r-pkg.org/badges/last-month/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Downloads per week](https://cranlogs.r-pkg.org/badges/last-week/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![Downloads per day](https://cranlogs.r-pkg.org/badges/last-day/vistime)](https://www.r-pkg.org/pkg/vistime)
