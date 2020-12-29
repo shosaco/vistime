@@ -228,7 +228,7 @@ vistime(data, optimize_y = FALSE)
 
 During COVID-19 2020, [wlhamilton](https://github.com/wlhamilton) used `gg_vistime` for visualising patient ward movements as timelines in order to investigate possible hospital acquired infections. See [his github](https://github.com/wlhamilton/Patient-ward-movement-timelines) for the code.
 
-<img src="inst/img/ward_movements.png" width="300"/>
+<img src="inst/img/ward_movements.png" width="350" height="100"/>
 
 ## 7. Export of vistime as PDF or PNG
 
