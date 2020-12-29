@@ -27,6 +27,7 @@ If you find vistime useful, please consider supporting its development: <a href=
    * [Ex. 1: Presidents](#ex-1-presidents)
    * [Ex. 2: Project Planning](#ex-2-project-planning)
    * [Ex. 3: Gantt Charts](#ex-3-gantt-charts)
+   * [Ex. 4: Real-life example](#ex-4-real-life-example)
 7. [Exporting](#7-export-of-vistime-as-pdf-or-png)
 8. [Usage in Shiny apps](#8-usage-in-shiny-apps)
 9. [Customization](#9-customization)
@@ -215,7 +216,7 @@ vistime(data, optimize_y = TRUE)
 <img src="inst/img/optimize_y_T.png" />
 
 
-`FALSE` will plot events as-is, not saving any space:
+`optimize_y = FALSE` will plot events as-is, not saving any space:
 
 ```{r}
 vistime(data, optimize_y = FALSE)
@@ -223,6 +224,11 @@ vistime(data, optimize_y = FALSE)
 
 <img src="inst/img/optimize_y_F.png" />
 
+### Ex. 4: Real-life example
+
+During COVID-19 2020, [wlhamilton](https://github.com/wlhamilton) used `gg_vistime` for visualising patient ward movements as timelines in order to investigate possible hospital acquired infections. See [his github](https://github.com/wlhamilton/Patient-ward-movement-timelines) for the code.
+
+<img src="inst/img/ward_movements.png" width="300"/>
 
 ## 7. Export of vistime as PDF or PNG
 
