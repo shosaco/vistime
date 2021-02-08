@@ -13,7 +13,7 @@ validate_input2 <- function(data,
                             show_labels = TRUE, background_lines = NULL, ...){
   validate_input(data, col.event, col.start, col.end, col.group, col.color,
                  col.fontcolor, col.tooltip, optimize_y, linewidth, title,
-                 show_labels, background_lines, ...)
+                 show_labels, background_lines, list(...))
 }
 
 test_that("event defaults to start", {
