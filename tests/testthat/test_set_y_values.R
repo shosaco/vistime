@@ -46,7 +46,7 @@ route networks,2,2,visualisation")
 
   # non-y-optimized
   d$target_y <- c(6,5,3,2,1)
-  actual <- set_y_values2(d, F)[,c("event", "y")]
+  actual <- set_y_values2(d, FALSE)[,c("event", "y")]
   expected <- d[,c("event", "target_y")]
   result <- merge(actual,expected)
   expect_equal(result$y, result$target_y)
@@ -83,4 +83,12 @@ test_that("optimize_y starts on top", {
 
   expect_equal(without_optimize$y, c(4,3,2,1))
   expect_equal(with_optimize$y, c(2,1,2,2))
+})
+
+test_that("event is inside another event", {
+  df <- read.csv(text = "event,start,end,
+                         event2,2020-12-16,2021-02-15,
+                         event3,2020-12-23,2021-01-12")
+  expect_equal(set_y_values2(df, TRUE)$y, c(2,1))
+
 })

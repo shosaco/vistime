@@ -30,9 +30,15 @@ col.tooltip="tooltip"
 title=NULL
 
 # 3. function call
-# vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year")
+vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year")
 col.event="Name"
 col.start="start_year"
 col.end="end_year"
-gg_vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year", col.group = "Group")
-hc_vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year", col.group = "Group")
+gg_vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year")
+hc_vistime(origData,col.event="Name", col.start="start_year", col.end ="end_year")
+
+
+
+# Range inside another range
+library(dplyr)
+as.data.frame(crono) %>% slice(3,4) %>% vistime(col.start="start_year", col.end ="end_year")

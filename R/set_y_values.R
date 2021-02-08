@@ -50,9 +50,11 @@ set_y_values <- function(data, optimize_y) {
               # case 3: toAdd = range, j = event
               all_on_current_y[j,"start"] == all_on_current_y[j,"end"] & toAdd$start <= all_on_current_y[j,"start"] & toAdd$end >= all_on_current_y[j,"end"] |
               # case 4: both are ranges
-              all_on_current_y[j,"start"] != all_on_current_y[j,"end"] & toAdd$start != toAdd$end &
-              (toAdd$start < all_on_current_y[j,"start"] & toAdd$end > all_on_current_y[j,"start"] |
-                 toAdd$start < all_on_current_y[j,"end"] & toAdd$end > all_on_current_y[j,"end"])
+                all_on_current_y[j,"start"] != all_on_current_y[j,"end"] & toAdd$start != toAdd$end &
+                # case 4.1: start inside other range
+                (toAdd$start > all_on_current_y[j,"start"] & toAdd$start < all_on_current_y[j,"end"] |
+                # case 4.2: end insider other range
+                 toAdd$end > all_on_current_y[j,"start"] & toAdd$end < all_on_current_y[j,"end"])
           }
           if (!conflict_seen){
             thisGroup$y[row] <- candidate_y
