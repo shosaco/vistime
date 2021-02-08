@@ -29,9 +29,7 @@
 #' }
 validate_input <- function(data, col.event, col.start, col.end, col.group, col.color,
                            col.fontcolor, col.tooltip, optimize_y, linewidth, title,
-                           show_labels, background_lines, ...) {
-
-  .dots = list(...)
+                           show_labels, background_lines, .dots) {
 
   if("events" %in% names(.dots)){
     .Deprecated(new = "col.event", old = "events")
