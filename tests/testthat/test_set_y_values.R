@@ -87,8 +87,18 @@ test_that("optimize_y starts on top", {
 
 test_that("event is inside another event", {
   df <- read.csv(text = "event,start,end,
-                         event2,2020-12-16,2021-02-15,
-                         event3,2020-12-23,2021-01-12")
+                         event2,2020-12-16,2020-12-20,
+                         event3,2020-12-18,2020-12-19")
   expect_equal(set_y_values2(df, TRUE)$y, c(2,1))
+
+})
+
+
+
+test_that("subsequent can be optimized", {
+  df <- read.csv(text = "event,start,end,
+                         event2,2020-12-16,2020-12-20,
+                         event3,2020-12-20,2020-12-22")
+  expect_equal(set_y_values2(df, TRUE)$y, c(1,1))
 
 })
