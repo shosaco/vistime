@@ -1,5 +1,5 @@
 # vistime 1.1.0.9000 (2021-02-08 - not on CRAN)
-- Bugfix: `optimize_y = TRUE` did not work correctly for ranges that occure during other ranges
+- Bugfix: `optimize_y = TRUE` did not work correctly for ranges that occure during other ranges (issue #22)
 - Added mouse zooming capability to `hc_vistime`
 - Updated documentation
 - Internals: 
