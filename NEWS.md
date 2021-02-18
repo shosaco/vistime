@@ -1,13 +1,22 @@
-# vistime 1.1.0.9000 (2021-02-08 - not on CRAN)
-- Bugfix: `optimize_y = TRUE` did not work correctly for ranges that occure during other ranges (issue #22)
+# vistime 1.2.0 (2021-02-18)
+
+## Breaking Changes
+- `highcharter` is no more installed by default when you install `vistime`
+
+## Bugfixes
+- `optimize_y = TRUE` did not work correctly for ranges that occur during other ranges
+
+## New features
 - Added mouse zooming capability to `hc_vistime`
+
+## Misc
 - Updated documentation
 - Internals: 
   * Using the `assertive.types` package instead of `assertthat` for nicer error messages
   * Upgraded to `testthat 3.0` for unit tests
   * Bugfixes for `hc_vistime()` arguments
 
-# vistime 1.1.0 (2020-07-24 - on CRAN)
+# vistime 1.1.0
  
 ## Breaking Changes
 - Made arguments more intuitive:
@@ -30,7 +39,7 @@
 - `vistime`:
   * Changes under the hood (vertical and horizontal lines)
   * Panel border
-- Usage of package `assertthat` and re-organisation of dependencies
+- Usage of package `assertthat` and re-organization of dependencies
  
 # vistime 1.0.0 (2020-04-17)
  

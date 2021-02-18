@@ -58,6 +58,8 @@ visible. Default: \code{TRUE}.}
 \description{
 Provide a data frame with event data to create a visual and interactive timeline plot
 rendered by Highcharts. Simplest drawable dataframe can have columns `event` and `start`.
+This feature is facilitated by the `highcharter` package, so, this package needs to be
+installed before attempting to produce any `hc_vistime()` output.
 }
 \examples{
 # presidents and vice presidents
