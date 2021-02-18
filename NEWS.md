@@ -1,7 +1,7 @@
 # vistime 1.2.0 (2021-02-18)
 
 ## Breaking Changes
-- `highcharter` is no more installed by default when you install `vistime`
+- `highcharter` is no more installed by default when you install `vistime`.
 
 ## Bugfixes
 - `optimize_y = TRUE` did not work correctly for ranges that occur during other ranges (issue #22)

@@ -131,7 +131,7 @@ col.end | optional | character | the column name in data that contains end dates
 col.group | optional | character | the column name in data to be used for grouping. Default: *group*
 col.color | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
 col.fontcolor | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
-col.tooltip | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://help.plot.ly/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
+col.tooltip | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://plotly.com/chart-studio-help/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
 optimize_y | optional | logical | distribute events on y-axis by smart heuristic (default) or use order of input data.
 linewidth | optional | numeric | override the calculated linewidth for events. Default: heuristic value.
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
@@ -249,8 +249,6 @@ Note that export requires the `webshot` package and additional arguments like wi
 
 
 ```{r}
-library(shiny)
-library(plotly)
 library(vistime)
 
 pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
@@ -261,9 +259,9 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    fontcolor = c("black", "white", "black"))
 
 shinyApp(
-  ui = plotlyOutput("myVistime"),
+  ui = plotly::plotlyOutput("myVistime"),
   server = function(input, output) {
-    output$myVistime <- renderPlotly({
+    output$myVistime <- plotly::renderPlotly({
       vistime(pres, col.event = "Position", col.group = "Name")
     })
   }
@@ -350,8 +348,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
 p <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
-library(plotly)
-pp <- plotly_build(p)
+pp <- plotly::plotly_build(p)
 
 # step 2: change the font size
 pp$x$layout$xaxis$tickfont <- list(size = 28)
@@ -385,8 +382,7 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
 p <- vistime(pres, col.event = "Position", col.group = "Name", title = "Presidents of the USA")
 
 # step 1: transform into a list
-library(plotly)
-pp <- plotly_build(p)
+pp <- plotly::plotly_build(p)
 
 # step 2: loop over pp$x$data, and change the font size of all text elements to 28
 for(i in seq_len(length(pp$x$data))){
@@ -412,8 +408,7 @@ dat <- data.frame(event = 1:4, start =  c("2019-01-01", "2019-01-10"))
 p <- vistime(dat)
 
 # step 1: transform into a list
-library(plotly)
-pp <- plotly_build(p)
+pp <- plotly::plotly_build(p)
 
 # step 2: loop over pp$x$data, and change the marker size of all text elements to 50px
 for(i in seq_len(length(pp$x$data)){
