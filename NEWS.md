@@ -4,12 +4,12 @@
 - `highcharter` is no more installed by default when you install `vistime`
 
 ## Bugfixes
-- `optimize_y = TRUE` did not work correctly for ranges that occur during other ranges
+- `optimize_y = TRUE` did not work correctly for ranges that occur during other ranges (issue #22)
 
 ## New features
 - Added mouse zooming capability to `hc_vistime`
 
-## Misc
+## Minor adjustments
 - Updated documentation
 - Internals: 
   * Using the `assertive.types` package instead of `assertthat` for nicer error messages
