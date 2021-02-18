@@ -322,7 +322,7 @@ p3 %>% hc_title(style = list(fontSize=30)) %>%
        hc_chart(backgroundColor = "lightgreen")
 ```
 
-See `?hc_xAxis`, `?hc_chart` and the official [Highcharts API reference](https://api.highcharts.com/highcharts) for details. 
+See `?hc_xAxis`, `?hc_chart` and the official [Highcharts API reference](https://api.highcharts.com/highcharts/) for details. 
 
 
 <img src="inst/img/highchart_cust.png" />

@@ -28,7 +28,6 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     covr,
-    highcharter (> 0.1.0),
-    vctrs
+    highcharter (> 0.1.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
