@@ -39,7 +39,7 @@ for events. Default: \emph{color}, if not present, colors are chosen via
 
 \item{col.tooltip}{(optional, character) the column name in \code{data} that contains the
 mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
-then tooltips are build from event name and date.}
+then tooltips are built from event name and date.}
 
 \item{optimize_y}{(optional, logical) distribute events on y-axis by smart heuristic (default),
 otherwise use order of input data.}

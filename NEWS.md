@@ -7,7 +7,11 @@
 - `optimize_y = TRUE` did not work correctly for ranges that occur during other ranges (issue #22)
 
 ## New features
-- Added mouse zooming capability to `hc_vistime`
+- Added mouse zooming capability to `hc_vistim()e`
+- Split the `README.md` into three vignettes:
+  - [`vistime()` manual](https://cran.r-project.org/web/packages/vistime/vignettes/vistime-vignette.html)
+  - [`gg_vistime()` manual]( https://cran.r-project.org/web/packages/vistime/vignettes/gg_vistime-vignette.html)
+  - [`hc_vistime()` manual]( https://cran.r-project.org/web/packages/vistime/vignettes/hc_vistime-vignette.html)
 
 ## Minor adjustments
 - Updated documentation
@@ -33,7 +37,7 @@
 
 ## Minor adjustments
 - `gg_vistime`:
-  * Use `geom_text` for labels
+  * Use `geom_text()` for labels
   * Avoid overlapping of event labels using `ggrepel::geom_text_repel()`
   * Layout adjustments: Panel border and changes under-the-hood
 - `vistime`:
@@ -48,7 +52,7 @@
 - Events are drawn from top to bottom (not from bottom to top) - always in the order of the input data frame (per groups that are arranged from top to bottom). This makes the result more intuitive: &#175;&#8212;-\_-\_ instead of \_-\_-&#8212;&#175;
 
 ## New features
-- `gg_vistime()` as new function to output the timeline as a static ggplot (in addition to `vistime`, which outputs an interactive Plotly object).
+- `gg_vistime()` as new function to output the timeline as a static ggplot (in addition to `vistime()`, which outputs an interactive Plotly object).
 - `vistime_data()` as new function to output the cleaned and optimized timeline data for your own plotting experiments.
 
 ## Removed functionality
