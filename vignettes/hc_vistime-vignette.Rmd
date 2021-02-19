@@ -1,12 +1,12 @@
 ---
-title: "Interactive timeline plots with `hc_vistime()`"
+title: "Interactive timeline plots with hc_vistime()"
 author: "Sandro Raabe"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Interactive timeline plots with `hc_vistime`}
+  %\VignetteIndexEntry{Interactive timeline plots with hc_vistime()}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

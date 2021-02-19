@@ -21,7 +21,7 @@ If you find vistime useful, please consider supporting its development: <a href=
 1. [Main functionality](#1-main-functionality)
 2. [Installation](#2-installation)
 3. [Real-life example](#3-real-life-example)
-3. [Usage and documentation](#3-usage-and-documentation)
+3. [Usage and documentation](#4-usage-and-documentation)
 
 ## 1. Main functionality
 
@@ -112,5 +112,5 @@ There is a vignette for each of the three functions of the package where they ar
 
 - `vistime()` for interactive **Plotly** output: [Link to manual](https://CRAN.R-project.org/package=vistime/vignettes/vistime-vignette.html)
 - `gg_vistime()` for static **ggplot2** output: [Link to manual](https://CRAN.R-project.org/package=vistime/vignettes/gg_vistime-vignette.html)
-- `hc_vistime()` for interactive **Highcharts** output: [Link to manual](https://CRAN.R-project.org/package=vignettes/hc_vistime-vignette.html)
+- `hc_vistime()` for interactive **Highcharts** output: [Link to manual](https://CRAN.R-project.org/package=vistime/vignettes/hc_vistime-vignette.html)
 

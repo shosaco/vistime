@@ -1,12 +1,12 @@
 ---
-title: "Static timeline plots with `gg_vistime()`"
+title: "Static timeline plots with gg_vistime()"
 author: "Sandro Raabe"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Static timeline plots with `gg_vistime`}
+  %\VignetteIndexEntry{Static timeline plots with gg_vistime()}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
