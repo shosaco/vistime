@@ -70,6 +70,11 @@ hc_vistime <- function(data,
                        optimize_y = TRUE, title = NULL,
                        show_labels = TRUE, ...) {
 
+  if (!requireNamespace("highcharter", quietly = TRUE)) {
+    stop("The `highcharter` package is required for creating `hc_vistime()` objects.",
+         call. = FALSE)
+  }
+
   checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
                                 col.fontcolor = NULL, col.tooltip, optimize_y, linewidth = 0, title,
                                 show_labels, background_lines = 0, list(...))

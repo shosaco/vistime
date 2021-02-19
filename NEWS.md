@@ -1,4 +1,4 @@
-# vistime 1.2.0 (2021-02-18)
+# vistime 1.2.0 (2021-02-19)
 
 ## Breaking Changes
 - `highcharter` is no more installed by default when you install `vistime`.
@@ -8,11 +8,11 @@
 
 ## New features
 - Added mouse zooming capability to `hc_vistim()e`
-- Split the `README.md` into three vignettes<!--:
+- Split the `README.md` into three vignettes:
   - [`vistime()` manual](https://CRAN.R-project.org/package=vistime/vignettes/vistime-vignette.html)
-  - [`gg_vistime()` manual]( https://CRAN.R-project.org/package=vistime/vignettes/gg_vistime-vignette.html)
-  - [`hc_vistime()` manual]( https://CRAN.R-project.org/package=vistime/vignettes/hc_vistime-vignette.html)
-  -->
+  - [`gg_vistime()` manual](https://CRAN.R-project.org/package=vistime/vignettes/gg_vistime-vignette.html)
+  - [`hc_vistime()` manual](https://CRAN.R-project.org/package=vistime/vignettes/hc_vistime-vignette.html)
+
 
 ## Minor adjustments
 - Updated documentation

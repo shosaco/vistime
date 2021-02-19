@@ -19,11 +19,6 @@
 #' }
 plot_highchart <- function(data, title, show_labels){
 
-  if (!requireNamespace("highcharter", quietly = TRUE)) {
-    stop("The `highcharter` package is required for creating `hc_vistime()` objects.",
-         call. = FALSE)
-  }
-
   # let an event be 1/50th of total timeline range
   data$end <- with(data, ifelse(start != end, end, end + diff(range(c(start, end)))/50))
 
