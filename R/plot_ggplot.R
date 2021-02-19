@@ -22,6 +22,7 @@
 #' @importFrom ggplot2 geom_point
 #' @importFrom ggplot2 geom_text
 #' @importFrom ggplot2 ggplot
+#' @importFrom ggrepel geom_text_repel
 #'
 #' @return a ggplot object
 #' @keywords internal
@@ -83,9 +84,9 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   if(show_labels){
     gg <- gg +
       geom_text(mapping = aes_(colour = ~I(fontcol), label = ~label), data = ranges) +
-      ggrepel::geom_text_repel(mapping = aes_(colour = ~I(fontcol), label = ~label),
-                               data = event_dat, direction = "y", segment.alpha = 0,
-                               point.padding = grid::unit(0.75, "lines"))
+      geom_text_repel(mapping = aes_(colour = ~I(fontcol), label = ~label),
+                      data = event_dat, direction = "y", segment.alpha = 0,
+                      point.padding = grid::unit(0.75, "lines"))
     #, nudge_y = rep_len(c(0.3,-0.3), nrow(event_dat)))
   }
 
