@@ -106,10 +106,13 @@ During COVID-19 2020, [wlhamilton](https://github.com/wlhamilton) used `gg_visti
 
 <img src="inst/img/ward_movements.png" width="500" height="283"/>
 
+<!--
 ## 4. Usage and documentation
 
 There is a vignette for each of the three functions of the package where they are explained in detail:
 
-- `vistime()` for interactive **Plotly** output: [Link to manual](https://cran.r-project.org/web/packages/vistime/vignettes/vistime-vignette.html)
-- `gg_vistime()` for static **ggplot2** output: [Link to manual]( https://cran.r-project.org/web/packages/vistime/vignettes/gg_vistime-vignette.html)
-- `hc_vistime()` for interactive **Highcharts** output: [Link to manual]( https://cran.r-project.org/web/packages/vistime/vignettes/hc_vistime-vignette.html)
+- `vistime()` for interactive **Plotly** output: [Link to manual](https://CRAN.R-project.org/package=vistime/vignettes/vistime-vignette.html)
+- `gg_vistime()` for static **ggplot2** output: [Link to manual]( https://CRAN.R-project.org/package=vistime/vignettes/gg_vistime-vignette.html)
+- `hc_vistime()` for interactive **Highcharts** output: [Link to manual]( https://CRAN.R-project.org/package=vignettes/hc_vistime-vignette.html)
+
+-->
