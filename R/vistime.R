@@ -20,7 +20,7 @@
 #'   color will be black.
 #' @param col.tooltip (optional, character) the column name in \code{data} that contains the
 #'   mouseover tooltips for the events. Default: \emph{tooltip}, if not present,
-#'   then tooltips are build from event name and date.
+#'   then tooltips are built from event name and date.
 #' @param optimize_y (optional, logical) distribute events on y-axis by smart heuristic
 #'   (default), otherwise use order of input data.
 #' @param linewidth (optional, numeric) the linewidth (in pixel) for the events
