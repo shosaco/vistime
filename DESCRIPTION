@@ -1,6 +1,6 @@
 Package: vistime
 Title: Pretty Timeline Charts in R
-Version: 1.2.0
+Version: 1.2.0.9000
 Date: 2021-02-19
 Author: Sandro Raabe [aut, cre]
 Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
