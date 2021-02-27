@@ -7,7 +7,7 @@
 - `optimize_y = TRUE` did not work correctly for ranges that occur during other ranges (issue #22)
 
 ## New features
-- Added mouse zooming capability to `hc_vistim()e`
+- Added mouse zooming capability to `hc_vistime()`
 - Split the `README.md` into three vignettes:
   - [`vistime()` manual](https://CRAN.R-project.org/package=vistime/vignettes/vistime-vignette.html)
   - [`gg_vistime()` manual](https://CRAN.R-project.org/package=vistime/vignettes/gg_vistime-vignette.html)

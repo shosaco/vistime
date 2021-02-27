@@ -1,10 +1,11 @@
 ---
 title: "Interactive timeline plots with hc_vistime()"
-author: "Sandro Raabe"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%B %Y')`"
 output: 
-  rmarkdown::html_vignette:
-    toc: true
+   prettydoc::html_pretty:
+     theme: architect
+     highlight: github
+     toc: true
 vignette: >
   %\VignetteIndexEntry{Interactive timeline plots with hc_vistime()}
   %\VignetteEngine{knitr::rmarkdown}
@@ -24,7 +25,7 @@ hc_vistime <- function(...) hc_size(vistime::hc_vistime(...), width=700, height=
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 
 
-**Feedback welcome:** sa.ra.online@posteo.de  
+**Feedback welcome:** <a href = "mailto:sa.ra.online@posteo.de">sa.ra.online@posteo.de</a>
 
 ## 1. Basic example
 

@@ -1,10 +1,11 @@
 ---
 title: "Interactive timeline plots with vistime()"
-author: "Sandro Raabe"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%B %Y')`"
 output: 
-  rmarkdown::html_vignette:
-    toc: true
+   prettydoc::html_pretty:
+     theme: architect
+     highlight: github
+     toc: true
 vignette: >
   %\VignetteIndexEntry{Interactive timeline plots with vistime()}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,7 +21,7 @@ library(vistime)
 ```
 
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
-**Feedback welcome:** sa.ra.online@posteo.de  
+**Feedback welcome:** <a href = "mailto:sa.ra.online@posteo.de">sa.ra.online@posteo.de</a>
 
 
 ## 1. Basic example
