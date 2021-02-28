@@ -32,7 +32,7 @@ This package `vistime` provides three main functions:
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
-                            end = c("2020-10-01", "2020-12-31"),
+                            end   = c("2020-10-01", "2020-12-31"),
                             group = "My Events")
                             
 vistime(timeline_data)
@@ -45,7 +45,7 @@ vistime(timeline_data)
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
-                            end = c("2020-10-01", "2020-12-31"),
+                            end   = c("2020-10-01", "2020-12-31"),
                             group = "My Events")
                             
 hc_vistime(timeline_data)
@@ -60,7 +60,7 @@ This is facilitated by the `highcharter` package, so, this package needs to be i
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
-                            end = c("2020-10-01", "2020-12-31"),
+                            end   = c("2020-10-01", "2020-12-31"),
                             group = "My Events")
                             
 gg_vistime(timeline_data)
@@ -72,7 +72,7 @@ gg_vistime(timeline_data)
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
-                            end = c("2020-10-01", "2020-12-31"),
+                            end   = c("2020-10-01", "2020-12-31"),
                             group = "My Events")
                             
 vistime_data(timeline_data)

@@ -36,14 +36,14 @@
   * `col.tooltip` instead of `tooltips`
 
 ## New features
-- New function `hc_vistime()`: Create an interactive timeline rendered by the famous `Highcharter.js` library
+- New function `hc_vistime()`: Create an interactive timeline rendered by the great `Highcharter.js` library
 
 ## Minor adjustments
-- `gg_vistime`:
+- `gg_vistime()`:
   * Use `geom_text()` for labels
   * Avoid overlapping of event labels using `ggrepel::geom_text_repel()`
   * Layout adjustments: Panel border and changes under-the-hood
-- `vistime`:
+- `vistime()`:
   * Changes under the hood (vertical and horizontal lines)
   * Panel border
 - Usage of package `assertthat` and re-organization of dependencies
@@ -51,7 +51,7 @@
 # vistime 1.0.0 (2020-04-17)
  
 ## Breaking Changes
-- `vistime` no longer uses cumbersome Plotly-subplots. Everything renders in the same plot and can be zoomed seamlessly.
+- `vistime()` no longer uses cumbersome Plotly-subplots. Everything renders in the same plot and can be zoomed seamlessly.
 - Events are drawn from top to bottom (not from bottom to top) - always in the order of the input data frame (per groups that are arranged from top to bottom). This makes the result more intuitive: &#175;&#8212;-\_-\_ instead of \_-\_-&#8212;&#175;
 
 ## New features

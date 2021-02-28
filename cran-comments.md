@@ -4,6 +4,6 @@
 * win-builder (oldrelease, release, devel)
 
 -- R CMD check results -------------------------------------- vistime 1.2.0 ----
-Duration: 43.7s
+Duration: 1m 47s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
