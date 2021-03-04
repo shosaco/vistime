@@ -10,7 +10,7 @@
 vistime - Pretty Timelines in R
 =========
 
-A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs, `Highchart`s or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by `vistime()` and `hc_vistime()` you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using `ggplot::theme()`, `plotly_build` or `hc_*`functions (for `gg_vistime`, `vistime` or `hc_vistime`, respectively). When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
+A library for creating time-based charts, like Gantt or timelines. Possible outputs include `ggplot`s, `plotly` graphs, `Highchart`s or `data.frame`s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by `vistime()` and `hc_vistime()` you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using `ggplot::theme()`, `plotly_build()` or `hc_*`functions (for `gg_vistime()`, `vistime()` or `hc_vistime()`, respectively). When choosing the `data.frame` output, you can use your own plotting engine for visualizing the graph.
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a>
 
@@ -18,16 +18,34 @@ If you find vistime useful, please consider supporting its development: <a href=
 
 ## Table of Contents
 
-1. [Main functionality](#1-main-functionality)
-2. [Installation](#2-installation)
+1. [Installation](#1-installation)
+2. [Main functionality](#2-main-functionality)
 3. [Real-life example](#3-real-life-example)
 3. [Usage and documentation](#4-usage-and-documentation)
 
-## 1. Main functionality
 
-This package `vistime` provides three main functions: 
+## 1. Installation
 
-### 1) `vistime()` to produce interactive `Plotly` charts:
+To install the package from CRAN, type the following in your R console:
+```{r}
+install.packages("vistime")
+```
+<!--
+To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
+
+```{r}
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("shosaco/vistime")
+```
+
+-->
+
+## 2. Main functionality
+
+This package `vistime` provides four main functions, the first three allow you to draw a timeline with Plotly, Highcharts or ggplot2, the last one 
+outputs the pure optimized data frame ready for plotting.
+
+### vistime() - interactive `Plotly` charts
 
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
@@ -37,10 +55,10 @@ timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             
 vistime(timeline_data)
 ```
-<img src="inst/img/basic_plotly.png" />
+<img src="man/figures/basic_plotly.png" />
 
 
-### 2) `hc_vistime()` to produce interactive `Highcharts` charts:
+### hc_vistime() - interactive `Highcharts` timelines
 
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
@@ -51,11 +69,11 @@ timeline_data <- data.frame(event = c("Event 1", "Event 2"),
 hc_vistime(timeline_data)
 ```
 
-<img src="inst/img/basic_highchart.png" />
+<img src="man/figures/basic_highchart.png" />
 
 This is facilitated by the `highcharter` package, so, this package needs to be installed before attempting to produce any `hc_vistime()` output.
 
-### 3) `gg_vistime()` to produce static `ggplot2` output:
+### gg_vistime() - static `ggplot2` output
 
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
@@ -65,9 +83,9 @@ timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             
 gg_vistime(timeline_data)
 ```
-<img src="inst/img/basic_ggplot.png" />
+<img src="man/figures/basic_ggplot.png" />
 
-### 4)  `vistime_data()`, for pure `data.frame` output that you can use with the plotting engine of your choice: 
+### vistime_data() - pure `data.frame` output if you want to draw yourself
 
 ```{r}
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
@@ -84,27 +102,12 @@ vistime_data(timeline_data)
 
 You want to use this for the intelligent y-axis assignment depending on overlapping of events (this can be disabled with `optimize_y = FALSE`).
 
-## 2. Installation
-
-To install the package from CRAN, type the following in your R console:
-```{r}
-install.packages("vistime")
-```
-<!--
-To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
-
-```{r}
-if (!require("remotes")) install.packages("remotes")
-remotes::install_github("shosaco/vistime")
-```
-
--->
 
 ## 3. Real-life example
 
 During COVID-19 2020, [wlhamilton](https://github.com/wlhamilton) used `gg_vistime()` for visualising patient ward movements as timelines in order to investigate possible hospital acquired infections. See [his github](https://github.com/wlhamilton/Patient-ward-movement-timelines) for the code.
 
-<img src="inst/img/ward_movements.png" width="500" height="283"/>
+<img src="man/figures/ward_movements.png" width="500" height="283"/>
 
 ## 4. Usage and documentation
 
