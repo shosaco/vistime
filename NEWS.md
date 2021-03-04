@@ -1,5 +1,3 @@
-# vistime (development version)
-
 # vistime 1.2.0 (2021-02-19)
 
 ## Breaking Changes

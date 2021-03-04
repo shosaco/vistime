@@ -1,9 +1,10 @@
 Package: vistime
 Title: Pretty Timeline Charts in R
-Version: 1.2.0.9000
+Version: 1.2.0
 Date: 2021-02-19
-Author: Sandro Raabe [aut, cre]
-Maintainer: Sandro Raabe <sa.ra.online@posteo.de>
+Authors@R: c(
+    person("Sandro", "Raabe", , "sa.ra.online@posteo.de", role = c("aut", "cre"))
+    )
 Description: A library for creating time based charts, like Gantt or timelines. Possible outputs 
   include 'ggplot' diagrams, 'Plotly' graphs, 'Highchart' widgets and 'data.frames'. Results can be
   used in the 'RStudio' viewer pane, in 'RMarkdown' documents or in 'Shiny' apps. In the 
