@@ -13,3 +13,4 @@ working
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^\.github$
+pkgdown/

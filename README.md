@@ -1,4 +1,4 @@
-# vistime - Pretty Timelines in R <img src="man/figures/vistime_logo.png" align="right" width="120" />
+# vistime - Pretty Timelines in R <img src="man/figures/logo.png" align="right" width="120" />
 
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)

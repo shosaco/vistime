@@ -9,3 +9,4 @@ revdep/
 working/TODO.R
 CRAN-RELEASE
 docs
+pkgdown/
