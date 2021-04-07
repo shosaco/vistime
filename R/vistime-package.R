@@ -1,8 +1,8 @@
-#' Pretty timelines.
-#'
-#' @name vistime-package
-#' @docType package
-#' @title vistime
-#' @author Sandro Raabe \email{sa.ra.online@posteo.de}
-#' @keywords timeline gantt timelines vistime plotly posix ggplot2
+#' @keywords internal
+"_PACKAGE"
+
+# The following block is used by usethis to automatically manage
+# roxygen namespace tags. Modify with care!
+## usethis namespace: start
+## usethis namespace: end
 NULL

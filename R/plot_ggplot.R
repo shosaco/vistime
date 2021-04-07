@@ -5,7 +5,8 @@
 #' @param title the title for the plot
 #' @param show_labels boolean, show labels on events or not
 #' @param background_lines number of grey background lines to draw
-#' @importFrom ggplot2 aes_
+#' @importFrom rlang .data
+#' @importFrom ggplot2 aes
 #' @importFrom ggplot2 ggtitle
 #' @importFrom ggplot2 labs
 #' @importFrom ggplot2 scale_y_continuous
@@ -43,7 +44,7 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   # 1. Prepare basic plot
   y_ticks <- tapply(data$y, data$subplot, mean)
 
-  gg <- ggplot(data, aes_(x = ~start, y = ~y, xend = ~end, yend = ~y, color = ~I(col))) +
+  gg <- ggplot(data, aes(x = .data$start, y = .data$y, xend = .data$end, yend = .data$y, color = I(.data$col))) +
     ggtitle(title) + labs(x = NULL, y = NULL) +
     scale_y_continuous(breaks = y_ticks, labels = unique(data$group)) +
     theme_classic() +
@@ -75,7 +76,7 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   event_dat <- data[data$start == data$end, ]
   gg <- gg +
     geom_segment(data = range_dat, size = lw) +
-    geom_point(data = event_dat, mapping = aes_(fill = ~I(col)),
+    geom_point(data = event_dat, mapping = aes(fill = I(.data$col)),
                shape = 21, size = 0.7 * lw, colour = "black", stroke = 0.1)
 
   # Labels for Ranges in center of range
@@ -83,8 +84,8 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   ranges$start <- ranges$start + (ranges$end - ranges$start)/2
   if(show_labels){
     gg <- gg +
-      geom_text(mapping = aes_(colour = ~I(fontcol), label = ~label), data = ranges) +
-      geom_text_repel(mapping = aes_(colour = ~I(fontcol), label = ~label),
+      geom_text(mapping = aes(colour = I(.data$fontcol), label = .data$label), data = ranges) +
+      geom_text_repel(mapping = aes(colour = I(.data$fontcol), label = .data$label),
                       data = event_dat, direction = "y", segment.alpha = 0,
                       point.padding = grid::unit(0.75, "lines"))
     #, nudge_y = rep_len(c(0.3,-0.3), nrow(event_dat)))
