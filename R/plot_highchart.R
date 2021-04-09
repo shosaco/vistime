@@ -28,7 +28,7 @@ plot_highchart <- function(data, title, show_labels){
   data$color = data$col
 
   cats <- round(tapply(data$y, data$group, mean))
-  y_vals <- names(sort(c(cats, setdiff(seq_len(max(data$y)), cats))))
+  y_vals <- names(sort(c(cats, setdiff(seq_len(max(data$y)), cats)), decreasing=TRUE))
 
   highcharter::hc_chart(
     highcharter::hc_title(

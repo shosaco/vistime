@@ -1,3 +1,7 @@
+# vistime 1.2.1
+## Bugfixes
+- Hotfix: y axis order was incorrectly inverted in `hc_vistime()` (#24)
+
 # vistime 1.2.0
 
 ## Breaking Changes
