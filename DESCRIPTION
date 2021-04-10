@@ -6,9 +6,9 @@ Authors@R: c(
     person("Sandro", "Raabe", , "sa.ra.online@posteo.de", role = c("aut", "cre"))
     )
 Description: A library for creating time based charts, like Gantt or timelines. Possible outputs 
-  include 'ggplot' diagrams, 'Plotly' graphs, 'Highchart' widgets and 'data.frames'. Results can be
-  used in the 'RStudio' viewer pane, in 'RMarkdown' documents or in 'Shiny' apps. In the 
-  interactive outputs created by 'vistime()' and 'hc_vistime()', you can interact with the 
+  include ggplot diagrams, plotly.js graphs, Highcharts.ja widgets and data.frames. Results can be
+  used in the RStudio viewer pane, in RMarkdown documents or in Shiny apps. In the 
+  interactive outputs created by vistime() and hc_vistime(), you can interact with the 
   plot using mouse hover or zoom.
 License: GPL-3 | file LICENSE
 URL: https://shosaco.github.io/vistime/
@@ -34,3 +34,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: 
     knitr
+Language: en-US
