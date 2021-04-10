@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Pretty Timeline Charts in R">
 <meta property="og:description" content="A library for creating time based charts, like Gantt or timelines. Possible outputs 
-  include ggplot diagrams, Plotly graphs, Highchart widgets and data.frames. Results can be
+  include ggplot diagrams, plotly.js graphs, Highcharts.ja widgets and data.frames. Results can be
   used in the RStudio viewer pane, in RMarkdown documents or in Shiny apps. In the 
   interactive outputs created by vistime() and hc_vistime(), you can interact with the 
   plot using mouse hover or zoom.">
@@ -103,7 +103,7 @@
 <a href="#vistime---pretty-timelines-in-r-" class="anchor"></a>vistime - Pretty Timelines in R <img src="reference/figures/logo.png" align="right" width="120">
 </h1></div>
 
-<p>A library for creating time-based charts, like Gantt or timelines. Possible outputs include <code>ggplot</code>s, <code>plotly</code> graphs, <code>Highchart</code>s or <code>data.frame</code>s. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by <code><a href="reference/vistime.html">vistime()</a></code> and <code><a href="reference/hc_vistime.html">hc_vistime()</a></code> you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using <code>ggplot::theme()</code>, <code>plotly_build()</code> or <code>hc_*</code>functions (for <code><a href="reference/gg_vistime.html">gg_vistime()</a></code>, <code><a href="reference/vistime.html">vistime()</a></code> or <code><a href="reference/hc_vistime.html">hc_vistime()</a></code>, respectively). When choosing the <code>data.frame</code> output, you can use your own plotting engine for visualizing the graph.</p>
+<p>A library for creating time-based charts, like Gantt or timelines. Possible outputs include <code>ggplot</code>s, <code>plotly</code> graphs, <code>Highcharts</code> or data.frames. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by <code><a href="reference/vistime.html">vistime()</a></code> and <code><a href="reference/hc_vistime.html">hc_vistime()</a></code> you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using <code>ggplot::theme()</code>, <code>plotly_build()</code> or <code>hc_*</code>functions (for <code><a href="reference/gg_vistime.html">gg_vistime()</a></code>, <code><a href="reference/vistime.html">vistime()</a></code> or <code><a href="reference/hc_vistime.html">hc_vistime()</a></code>, respectively). When choosing the <code>data.frame</code> output, you can use your own plotting engine for visualizing the graph.</p>
 <p>If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a></p>
 <p><strong>Feedback welcome:</strong> <a href="mailto:sa.ra.online@posteo.de">sa.ra.online@posteo.de</a></p>
 <div id="table-of-contents" class="section level2">
@@ -188,7 +188,7 @@ vistime_data(timeline_data)
 <div id="3-real-life-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#3-real-life-example" class="anchor"></a>3. Real-life example</h2>
-<p>During COVID-19 2020, <a href="https://github.com/wlhamilton">wlhamilton</a> used <code><a href="reference/gg_vistime.html">gg_vistime()</a></code> for visualising patient ward movements as timelines in order to investigate possible hospital acquired infections. See <a href="https://github.com/wlhamilton/Patient-ward-movement-timelines">his github</a> for the code.</p>
+<p>During COVID-19 2020, <a href="https://github.com/wlhamilton">@wlhamilton</a> used <code><a href="reference/gg_vistime.html">gg_vistime()</a></code> for visualizing patient ward movements as timelines in order to investigate possible hospital acquired infections. See <a href="https://github.com/wlhamilton/Patient-ward-movement-timelines">his github</a> for the code.</p>
 <p><img src="reference/figures/ward_movements.png" width="500" height="283"></p>
 </div>
 <div id="4-usage-and-documentation" class="section level2">
