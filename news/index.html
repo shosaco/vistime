@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vistime</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
       </span>
     </div>
 
@@ -140,15 +140,29 @@
       <small>Source: <a href='https://github.com/shosaco/vistime/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="vistime-121" class="section level1">
-<h1 class="page-header" data-toc-text="1.2.1">
-<a href="#vistime-121" class="anchor"></a>vistime 1.2.1<small> Unreleased </small>
+    <div id="vistime-122" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.2">
+<a href="#vistime-122" class="anchor"></a>vistime 1.2.2<small> Unreleased </small>
 </h1>
 <div id="bugfixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bugfixes" class="anchor"></a>Bugfixes</h2>
 <ul>
-<li>Hotfix: y axis order was incorrectly inverted in <code><a href="../reference/hc_vistime.html">hc_vistime()</a></code> (<a href='https://github.com/shosaco/vistime/issues/24'>#24</a>)</li>
+<li>added <code>markdown</code> dependency for vignette building as per <a href="https://github.com/yihui/knitr/issues/1864">yhui/knitr<a href='https://github.com/shosaco/vistime/issues/1864'>#1864</a></a>
+</li>
+</ul>
+</div>
+</div>
+    <div id="vistime-121" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.1">
+<a href="#vistime-121" class="anchor"></a>vistime 1.2.1<small> 2021-04-10 </small>
+</h1>
+<div id="bugfixes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bugfixes-1" class="anchor"></a>Bugfixes</h2>
+<ul>
+<li>
+<code><a href="../reference/hc_vistime.html">hc_vistime()</a></code> labels on y-axis were incorrectly reversed (<a href='https://github.com/shosaco/vistime/issues/24'>#24</a>)</li>
 </ul>
 </div>
 </div>
@@ -161,12 +175,13 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking Changes</h2>
 <ul>
 <li>
-<code>highcharter</code> is no more installed by default when you install <code>vistime</code>.</li>
+<code>highcharter</code> is no more installed by default when you install <code>vistime</code>
+</li>
 </ul>
 </div>
-<div id="bugfixes-1" class="section level2">
+<div id="bugfixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bugfixes-1" class="anchor"></a>Bugfixes</h2>
+<a href="#bugfixes-2" class="anchor"></a>Bugfixes</h2>
 <ul>
 <li>
 <code>optimize_y = TRUE</code> did not work correctly for ranges that occur during other ranges (issue <a href='https://github.com/shosaco/vistime/issues/22'>#22</a>)</li>
