@@ -21,11 +21,12 @@
 #'   group = c(1, 2, 1), stringsAsFactors = F))
 #' }
 set_order <- function(data) {
+    if (!is.factor(data$group)) {
+        # set group order to order of appearance using factor levels.
+        data$group <- factor(data$group, levels = unique(data$group))
+    }
+    data <- data[order(data$group),] # bring same groups together
+    data$subplot <- as.integer(data$group)
 
-  # set group order to order of appearance using factor levels
-  data$group <- factor(data$group, levels = unique(data$group))
-  data <- data[order(data$group), ] # bring same groups together
-  data$subplot <- as.integer(data$group)
-
-  return(data)
+    return(data)
 }
