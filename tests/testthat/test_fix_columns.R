@@ -38,7 +38,7 @@ test_that("new columns", {
     cols_expected
   )
 
-  expect_equal(groups_equal_events$event, groups_equal_events$group)
+  expect_equal(groups_equal_events$event, as.character(groups_equal_events$group))
 })
 
 
