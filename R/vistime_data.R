@@ -44,7 +44,7 @@ vistime_data <- function(data,
                          col.tooltip = "tooltip",
                          optimize_y = TRUE, ...) {
 
-  checked_dat <- vistime:::validate_input(data, col.event, col.start, col.end, col.group, col.color,
+  checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
                                 col.fontcolor, col.tooltip, optimize_y, linewidth = 0, title="",
                                 show_labels = T, background_lines = 0, list(...))
 
@@ -61,6 +61,6 @@ vistime_data <- function(data,
       )
 
   data <- set_order(data)
-  data <- vistime:::set_y_values(data, optimize_y)
+  data <- set_y_values(data, optimize_y)
   return(data)
 }
