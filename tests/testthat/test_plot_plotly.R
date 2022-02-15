@@ -3,16 +3,26 @@ dat <- data.frame(start = c("2019-01-01 00:00", "2019-01-01 04:00"),
                   end = c("2019-01-01 05:00", "2019-01-05 06:00"),
                   event = 1:2)
 
-test_that("class is htmlwidget", expect_s3_class(vistime(dat), "htmlwidget"))
+test_that("class is htmlwidget", {
+    expect_s3_class(vistime(dat), "htmlwidget")
+})
 
-test_that("background_lines",{
-  for(bg in c(1, 5, 10)){
-    expect_equal(bg + 2,
-                 length(suppressWarnings(plotly::plotly_build(vistime(dat, background_lines = bg))$x$layout$shapes)))
-  }
+test_that("background_lines", {
+    for (bg in c(1, 5, 10)) {
+        expect_equal(bg + 2,
+                     length(
+                         suppressWarnings(plotly::plotly_build(
+                             vistime(dat, background_lines = bg)
+                         )$x$layout$shapes)
+                     ))
+    }
 
-  expect_true(suppressWarnings(plotly::plotly_build(vistime(dat, background_lines = NULL))$x$layout$xaxis$showgrid))
-  expect_false(suppressWarnings(plotly::plotly_build(vistime(dat, background_lines = 10))$x$layout$xaxis$showgrid))
+    expect_true(suppressWarnings(plotly::plotly_build(vistime(
+        dat, background_lines = NULL
+    ))$x$layout$xaxis$showgrid))
+    expect_false(suppressWarnings(plotly::plotly_build(vistime(
+        dat, background_lines = 10
+    ))$x$layout$xaxis$showgrid))
 })
 
 
@@ -50,7 +60,9 @@ test_that("data having no real events (only ranges)", {
 })
 
 dat$end = NA
-test_that("class is htmlwidget", expect_s3_class(vistime(dat), "htmlwidget"))
+test_that("class is htmlwidget", {
+    expect_s3_class(vistime(dat), "htmlwidget")
+})
 
 relevant_dat <- vistime(dat)$x$attrs
 

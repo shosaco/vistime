@@ -2,11 +2,29 @@ dat <- data.frame(start = "2019-01-01", end = "2019-01-05", event = 1)
 
 generated <- vistime_data(dat)
 
-test_that("class is data.frame", expect_s3_class(generated, "data.frame"))
+
+test_that("class is data.frame", {
+    expect_s3_class(generated, "data.frame")
+})
 
 test_that("expected columns",
-          expect_setequal(names(generated), c("event", "start", "end", "group", "tooltip", "label", "col", "fontcol", "subplot", "y")))
-
+          {
+              expect_setequal(
+                  names(generated),
+                  c(
+                      "event",
+                      "start",
+                      "end",
+                      "group",
+                      "tooltip",
+                      "label",
+                      "col",
+                      "fontcol",
+                      "subplot",
+                      "y"
+                  )
+              )
+          })
 
 test_that("optimize_y", {
   data <- read.csv(text="event,start,end

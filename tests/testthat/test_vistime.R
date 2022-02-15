@@ -5,7 +5,10 @@ generated <- vistime(dat, col.event = "event", col.start = "start", col.end = "e
                      col.tooltip = "tooltip", linewidth = NULL, title = NULL,
                      show_labels = TRUE, background_lines = 10)
 
-test_that("class is htmlwidget", expect_s3_class(generated, "htmlwidget"))
+
+test_that("class is htmlwidget", {
+    expect_s3_class(generated, "htmlwidget")
+})
 
 relevant_dat <- generated$x$attrs
 
@@ -27,9 +30,13 @@ test_that("y values", {
   expect_equal(y, 1)
 })
 
-test_that("background_lines",
-          expect_equal(12,
-                       suppressWarnings(length(plotly::plotly_build(generated)$x$layout$shapes))))
+
+test_that("background_lines", {
+    expect_equal(12,
+                 suppressWarnings(length(
+                     plotly::plotly_build(generated)$x$layout$shapes
+                 )))
+})
 
 # presidents example
 pres <- data.frame(
