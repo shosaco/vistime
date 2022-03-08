@@ -33,7 +33,7 @@ get_initial_release_date = function(packages)
 
 
 # get the list of all packages on CRAN
-package_names = names(httr::content(httr::GET("http://crandb.r-pkg.org/-/desc")))
+package_names <- names(httr::content(httr::GET("http://crandb.r-pkg.org/-/desc")))
 
 ui <- fluidPage(
 
@@ -47,8 +47,7 @@ ui <- fluidPage(
            "You can enter multiple packages to compare them"),
       selectInput("package",
                   label = "Packages:",
-                  selected = c("timevis", "timeline", "vistime", "timelineS"), # initialize the graph with a random package
-                  choices = package_names,
+                  choices = NULL,
                   multiple = TRUE),
       radioButtons("transformation",
                    "Data Transformation:",
@@ -67,7 +66,9 @@ ui <- fluidPage(
   )
 )
 # Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output, session) {
+    updateSelectizeInput(session, 'package', choices = package_names, server = TRUE,
+                         selected = c("timevis", "timeline", "vistime", "timelineS"))
 
     downloads <- reactive({
       packages <- input$package

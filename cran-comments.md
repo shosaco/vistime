@@ -3,7 +3,7 @@
 * macOS-latest 3.4 (Github Actions)
 * win-builder (oldrelease, release, devel)
 
--- R CMD check results -------------------------------------- vistime 1.2.0 ----
+-- R CMD check results -------------------------------------- vistime 1.2.2 ----
 Duration: 1m 47s
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
