@@ -46,7 +46,7 @@ fix_columns <- function(data, col.event, col.start, col.end, col.group, col.colo
     data$group <- ""
   }
 
-  data <- vistime:::set_colors(data, col.color, col.fontcolor)
+  data <- set_colors(data, col.color, col.fontcolor)
 
   # convert all but start, end, & group to character
   for (col in names(data)[!names(data) %in% c("start", "end", 'group')])
