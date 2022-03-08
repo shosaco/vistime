@@ -34,8 +34,6 @@
 #' )
 #'
 #' vistime_data(pres, col.event = "Position", col.group = "Name")
-
-
 vistime_data <- function(data,
                          col.event = "event",
                          col.start = "start",
@@ -50,9 +48,17 @@ vistime_data <- function(data,
                                 col.fontcolor, col.tooltip, optimize_y, linewidth = 0, title="",
                                 show_labels = T, background_lines = 0, list(...))
 
-  data <- fix_columns(checked_dat$data, checked_dat$col.event, checked_dat$col.start, checked_dat$col.end,
-                      checked_dat$col.group, checked_dat$col.color, checked_dat$col.fontcolor,
-                      checked_dat$col.tooltip)
+  data <-
+      fix_columns(
+          checked_dat$data,
+          checked_dat$col.event,
+          checked_dat$col.start,
+          checked_dat$col.end,
+          checked_dat$col.group,
+          checked_dat$col.color,
+          checked_dat$col.fontcolor,
+          checked_dat$col.tooltip
+      )
 
   data <- set_order(data)
   data <- set_y_values(data, optimize_y)

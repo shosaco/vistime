@@ -56,7 +56,7 @@ set_y_values <- function(data, optimize_y) {
                 # case 4.2: end insider other range
                  toAdd$end > all_on_current_y[j,"start"] & toAdd$end < all_on_current_y[j,"end"])
           }
-          if (!conflict_seen){
+          if (!isTRUE(conflict_seen)) {
             thisGroup$y[row] <- candidate_y
             break
           }else{

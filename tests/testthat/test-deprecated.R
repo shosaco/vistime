@@ -6,7 +6,7 @@ test_that("Deprecated arguments", {
   expect_warning(vistime(dat, start = "start"), "deprecated")
   expect_warning(vistime(dat, end = "end"), "deprecated")
   expect_warning(vistime(dat, colors = "bla"), "deprecated")
-  expect_warning(vistime(dat, groups = "start"), "deprecated")
+  expect_warning(vistime(dat, groups = "custom_group_col"), "deprecated")
   expect_warning(vistime(dat, tooltips = "start"), "deprecated")
 })
 

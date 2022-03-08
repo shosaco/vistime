@@ -84,3 +84,22 @@ test_that("Groups are gathered together", {
   expect_equal(as.integer(as.character(set_order(dat)$group)), c(2,2,1,1,5))
   expect_equal(set_order(dat)$subplot, c(1,1,2,2,3))
 })
+
+test_that('Group factors are not re-ordered', {
+    dat <- data.frame(
+        event = c("Event B", "Event A", "Event C"),
+        start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+        end = c("1797-02-03", "1801-02-03", "1809-02-03"),
+        group = factor(c('b', 'a', 'c'), levels = c('a', 'b', 'c'))
+        )
+    expect_equal(set_order(prepare_data(dat))$group,
+                 factor(c('a', 'b', 'c'), levels = c('a', 'b', 'c')))
+    dat <- data.frame(
+        event = c("Event B", "Event A", "Event C"),
+        start = c("1789-03-29", "1797-02-03", "1801-02-03"),
+        end = c("1797-02-03", "1801-02-03", "1809-02-03"),
+        group = c('b', 'a', 'c')
+        )
+    expect_equal(set_order(prepare_data(dat))$group,
+                 factor(c('b', 'a', 'c'), levels = c('b', 'a', 'c')))
+})
