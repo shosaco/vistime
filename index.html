@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,23 +44,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">vistime</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -81,7 +77,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/shosaco/vistime/">
+  <a href="https://github.com/shosaco/vistime/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -98,29 +94,28 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="vistime---pretty-timelines-in-r-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#vistime---pretty-timelines-in-r-" class="anchor"></a>vistime - Pretty Timelines in R <img src="reference/figures/logo.png" align="right" width="120">
+<div class="section level1">
+<div class="page-header"><h1 id="vistime---pretty-timelines-in-r-">vistime - Pretty Timelines in R <img src="reference/figures/logo.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#vistime---pretty-timelines-in-r-"></a>
 </h1></div>
 
 <p>A library for creating time-based charts, like Gantt or timelines. Possible outputs include <code>ggplot</code>s, <code>plotly</code> graphs, <code>Highcharts</code> or data.frames. Results can be used in the RStudio viewer pane, in R Markdown documents or in Shiny apps. In the interactive outputs created by <code><a href="reference/vistime.html">vistime()</a></code> and <code><a href="reference/hc_vistime.html">hc_vistime()</a></code> you can interact with the plot using mouse hover or zoom. Timelines and their components can afterwards be manipulated using <code>ggplot::theme()</code>, <code>plotly_build()</code> or <code>hc_*</code>functions (for <code><a href="reference/gg_vistime.html">gg_vistime()</a></code>, <code><a href="reference/vistime.html">vistime()</a></code> or <code><a href="reference/hc_vistime.html">hc_vistime()</a></code>, respectively). When choosing the <code>data.frame</code> output, you can use your own plotting engine for visualizing the graph.</p>
-<p>If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a></p>
+<p>If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank" class="external-link"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a></p>
 <p><strong>Feedback welcome:</strong> <a href="mailto:sa.ra.online@posteo.de">sa.ra.online@posteo.de</a></p>
-<div id="table-of-contents" class="section level2">
-<h2 class="hasAnchor">
-<a href="#table-of-contents" class="anchor"></a>Table of Contents</h2>
-<ol>
+<div class="section level2">
+<h2 id="table-of-contents">Table of Contents<a class="anchor" aria-label="anchor" href="#table-of-contents"></a>
+</h2>
+<ol style="list-style-type: decimal">
 <li><a href="#1-installation">Installation</a></li>
 <li><a href="#2-main-functionality">Main functionality</a></li>
 <li><a href="#3-real-life-example">Real-life example</a></li>
 <li><a href="#4-usage-and-documentation">Usage and documentation</a></li>
 </ol>
 </div>
-<div id="1-installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#1-installation" class="anchor"></a>1. Installation</h2>
+<div class="section level2">
+<h2 id="1-installation">1. Installation<a class="anchor" aria-label="anchor" href="#1-installation"></a>
+</h2>
 <p>To install the package from CRAN, type the following in your R console:</p>
-<pre class="{r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("vistime")</a></code></pre>
+<pre class="{r}"><code><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"vistime"</span><span class="op">)</span></code></pre>
 <!--
 To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 
@@ -131,79 +126,79 @@ remotes::install_github("shosaco/vistime")
 
 -->
 </div>
-<div id="2-main-functionality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#2-main-functionality" class="anchor"></a>2. Main functionality</h2>
+<div class="section level2">
+<h2 id="2-main-functionality">2. Main functionality<a class="anchor" aria-label="anchor" href="#2-main-functionality"></a>
+</h2>
 <p>This package <code>vistime</code> provides four main functions, the first three allow you to draw a timeline with Plotly, Highcharts or ggplot2, the last one outputs the pure optimized data frame ready for plotting.</p>
-<div id="vistime---interactive-plotly-charts" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vistime---interactive-plotly-charts" class="anchor"></a>vistime() - interactive <code>Plotly</code> charts</h3>
-<pre class="{r}"><code>timeline_data &lt;- data.frame(event = c("Event 1", "Event 2"),
-                            start = c("2020-06-06", "2020-10-01"), 
-                            end   = c("2020-10-01", "2020-12-31"),
-                            group = "My Events")
+<div class="section level3">
+<h3 id="vistime---interactive-plotly-charts">vistime() - interactive <code>Plotly</code> charts<a class="anchor" aria-label="anchor" href="#vistime---interactive-plotly-charts"></a>
+</h3>
+<pre class="{r}"><code><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,
+                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, 
+                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,
+                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span>
                             
-vistime(timeline_data)</code></pre>
+<span class="fu"><a href="reference/vistime.html">vistime</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span></code></pre>
 <p><img src="reference/figures/basic_plotly.png"></p>
 </div>
-<div id="hc_vistime---interactive-highcharts-timelines" class="section level3">
-<h3 class="hasAnchor">
-<a href="#hc_vistime---interactive-highcharts-timelines" class="anchor"></a>hc_vistime() - interactive <code>Highcharts</code> timelines</h3>
-<pre class="{r}"><code>timeline_data &lt;- data.frame(event = c("Event 1", "Event 2"),
-                            start = c("2020-06-06", "2020-10-01"), 
-                            end   = c("2020-10-01", "2020-12-31"),
-                            group = "My Events")
+<div class="section level3">
+<h3 id="hc_vistime---interactive-highcharts-timelines">hc_vistime() - interactive <code>Highcharts</code> timelines<a class="anchor" aria-label="anchor" href="#hc_vistime---interactive-highcharts-timelines"></a>
+</h3>
+<pre class="{r}"><code><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,
+                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, 
+                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,
+                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span>
                             
-hc_vistime(timeline_data)</code></pre>
+<span class="fu"><a href="reference/hc_vistime.html">hc_vistime</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span></code></pre>
 <p><img src="reference/figures/basic_highchart.png"></p>
 <p>This is facilitated by the <code>highcharter</code> package, so, this package needs to be installed before attempting to produce any <code><a href="reference/hc_vistime.html">hc_vistime()</a></code> output.</p>
 </div>
-<div id="gg_vistime---static-ggplot2-output" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gg_vistime---static-ggplot2-output" class="anchor"></a>gg_vistime() - static <code>ggplot2</code> output</h3>
-<pre class="{r}"><code>timeline_data &lt;- data.frame(event = c("Event 1", "Event 2"),
-                            start = c("2020-06-06", "2020-10-01"), 
-                            end   = c("2020-10-01", "2020-12-31"),
-                            group = "My Events")
+<div class="section level3">
+<h3 id="gg_vistime---static-ggplot2-output">gg_vistime() - static <code>ggplot2</code> output<a class="anchor" aria-label="anchor" href="#gg_vistime---static-ggplot2-output"></a>
+</h3>
+<pre class="{r}"><code><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,
+                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, 
+                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,
+                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span>
                             
-gg_vistime(timeline_data)</code></pre>
+<span class="fu"><a href="reference/gg_vistime.html">gg_vistime</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span></code></pre>
 <p><img src="reference/figures/basic_ggplot.png"></p>
 </div>
-<div id="vistime_data---pure-dataframe-output-if-you-want-to-draw-yourself" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vistime_data---pure-dataframe-output-if-you-want-to-draw-yourself" class="anchor"></a>vistime_data() - pure <code>data.frame</code> output if you want to draw yourself</h3>
-<pre class="{r}"><code>timeline_data &lt;- data.frame(event = c("Event 1", "Event 2"),
-                            start = c("2020-06-06", "2020-10-01"), 
-                            end   = c("2020-10-01", "2020-12-31"),
-                            group = "My Events")
+<div class="section level3">
+<h3 id="vistime_data---pure-dataframe-output-if-you-want-to-draw-yourself">vistime_data() - pure <code>data.frame</code> output if you want to draw yourself<a class="anchor" aria-label="anchor" href="#vistime_data---pure-dataframe-output-if-you-want-to-draw-yourself"></a>
+</h3>
+<pre class="{r}"><code><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,
+                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, 
+                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,
+                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span>
                             
-vistime_data(timeline_data)
+<span class="fu"><a href="reference/vistime_data.html">vistime_data</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span>
 
-#&gt;     event      start        end     group                                      tooltip      col subplot   y
-#&gt; 1 Event 1 2020-06-06 2020-10-01 My Events  from &lt;b&gt;2020-06-06&lt;/b&gt; to &lt;b&gt;2020-10-01&lt;/b&gt;  #8DD3C7       1   1
-#&gt; 2 Event 2 2020-10-01 2020-12-31 My Events  from &lt;b&gt;2020-10-01&lt;/b&gt; to &lt;b&gt;2020-12-31&lt;/b&gt;  #FFFFB3       1   1</code></pre>
+<span class="co">#&gt;     event      start        end     group                                      tooltip      col subplot   y</span>
+<span class="co">#&gt; 1 Event 1 2020-06-06 2020-10-01 My Events  from &lt;b&gt;2020-06-06&lt;/b&gt; to &lt;b&gt;2020-10-01&lt;/b&gt;  #8DD3C7       1   1</span>
+<span class="co">#&gt; 2 Event 2 2020-10-01 2020-12-31 My Events  from &lt;b&gt;2020-10-01&lt;/b&gt; to &lt;b&gt;2020-12-31&lt;/b&gt;  #FFFFB3       1   1</span></code></pre>
 <p>You want to use this for the intelligent y-axis assignment depending on overlapping of events (this can be disabled with <code>optimize_y = FALSE</code>).</p>
 </div>
 </div>
-<div id="3-real-life-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#3-real-life-example" class="anchor"></a>3. Real-life example</h2>
-<p>During COVID-19 2020, <a href="https://github.com/wlhamilton">@wlhamilton</a> used <code><a href="reference/gg_vistime.html">gg_vistime()</a></code> for visualizing patient ward movements as timelines in order to investigate possible hospital acquired infections. See <a href="https://github.com/wlhamilton/Patient-ward-movement-timelines">his github</a> for the code.</p>
+<div class="section level2">
+<h2 id="3-real-life-example">3. Real-life example<a class="anchor" aria-label="anchor" href="#3-real-life-example"></a>
+</h2>
+<p>During COVID-19 2020, <a href="https://github.com/wlhamilton" class="external-link">@wlhamilton</a> used <code><a href="reference/gg_vistime.html">gg_vistime()</a></code> for visualizing patient ward movements as timelines in order to investigate possible hospital acquired infections. See <a href="https://github.com/wlhamilton/Patient-ward-movement-timelines" class="external-link">his github</a> for the code.</p>
 <p><img src="reference/figures/ward_movements.png" width="500" height="283"></p>
 </div>
-<div id="4-usage-and-documentation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#4-usage-and-documentation" class="anchor"></a>4. Usage and documentation</h2>
+<div class="section level2">
+<h2 id="4-usage-and-documentation">4. Usage and documentation<a class="anchor" aria-label="anchor" href="#4-usage-and-documentation"></a>
+</h2>
 <p>There is a vignette for each of the three functions of the package where they are explained in detail:</p>
 <ul>
 <li>
-<code><a href="reference/vistime.html">vistime()</a></code> for interactive <strong>Plotly</strong> output: <a href="https://CRAN.R-project.org/package=vistime/vignettes/vistime-vignette.html">Link to manual</a>
+<code><a href="reference/vistime.html">vistime()</a></code> for interactive <strong>Plotly</strong> output: <a href="https://CRAN.R-project.org/package=vistime/vignettes/vistime-vignette.html" class="external-link">Link to manual</a>
 </li>
 <li>
-<code><a href="reference/gg_vistime.html">gg_vistime()</a></code> for static <strong>ggplot2</strong> output: <a href="https://CRAN.R-project.org/package=vistime/vignettes/gg_vistime-vignette.html">Link to manual</a>
+<code><a href="reference/gg_vistime.html">gg_vistime()</a></code> for static <strong>ggplot2</strong> output: <a href="https://CRAN.R-project.org/package=vistime/vignettes/gg_vistime-vignette.html" class="external-link">Link to manual</a>
 </li>
 <li>
-<code><a href="reference/hc_vistime.html">hc_vistime()</a></code> for interactive <strong>Highcharts</strong> output: <a href="https://CRAN.R-project.org/package=vistime/vignettes/hc_vistime-vignette.html">Link to manual</a>
+<code><a href="reference/hc_vistime.html">hc_vistime()</a></code> for interactive <strong>Highcharts</strong> output: <a href="https://CRAN.R-project.org/package=vistime/vignettes/hc_vistime-vignette.html" class="external-link">Link to manual</a>
 </li>
 </ul>
 </div>
@@ -212,54 +207,64 @@ vistime_data(timeline_data)
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=vistime">https://​cloud.r-project.org/​package=vistime</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/shosaco/vistime/">https://​github.com/​shosaco/​vistime/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/shosaco/vistime/issues">https://​github.com/​shosaco/​vistime/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=vistime" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/shosaco/vistime/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/shosaco/vistime/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> | file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a> | file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing vistime</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Sandro Raabe <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.buymeacoffee.com/shosaco"><img src="https://i.imgur.com/xI5UtRm.png" alt="Buy Me A Coffee"></a></li>
-<li><a href="https://cran.r-project.org/package=vistime"><img src="https://www.r-pkg.org/badges/version/vistime" alt="CRAN"></a></li>
-<li><a href="https://github.com/shosaco/vistime/actions"><img src="https://github.com/shosaco/vistime/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://www.r-pkg.org/pkg/vistime"><img src="https://cranlogs.r-pkg.org/badges/last-month/vistime" alt="Downloads per month"></a></li>
-<li><a href="https://www.r-pkg.org/pkg/vistime"><img src="https://cranlogs.r-pkg.org/badges/last-week/vistime" alt="Downloads per week"></a></li>
-<li><a href="https://www.r-pkg.org/pkg/vistime"><img src="https://cranlogs.r-pkg.org/badges/last-day/vistime" alt="Downloads per day"></a></li>
-<li><a href="https://codecov.io/github/shosaco/vistime"><img src="https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg" alt="codecov"></a></li>
-<li><a href="https://github.com/shosaco/vistime"><img src="https://img.shields.io/github/stars/shosaco/vistime.svg" alt="Github Stars"></a></li>
+<li><a href="https://www.buymeacoffee.com/shosaco" class="external-link"><img src="https://i.imgur.com/xI5UtRm.png" alt="Buy Me A Coffee"></a></li>
+<li><a href="https://cran.r-project.org/package=vistime" class="external-link"><img src="https://www.r-pkg.org/badges/version/vistime" alt="CRAN"></a></li>
+<li><a href="https://github.com/shosaco/vistime/actions" class="external-link"><img src="https://github.com/shosaco/vistime/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/vistime" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/vistime" alt="Downloads per month"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/vistime" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-week/vistime" alt="Downloads per week"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/vistime" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-day/vistime" alt="Downloads per day"></a></li>
+<li><a href="https://codecov.io/github/shosaco/vistime" class="external-link"><img src="https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg" alt="codecov"></a></li>
+<li><a href="https://github.com/shosaco/vistime" class="external-link"><img src="https://img.shields.io/github/stars/shosaco/vistime.svg" alt="Github Stars"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Sandro Raabe.</p>
+  <p></p>
+<p>Developed by Sandro Raabe.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -267,6 +272,8 @@ vistime_data(timeline_data)
 
   
 
+
+  
 
   </body>
 </html>
