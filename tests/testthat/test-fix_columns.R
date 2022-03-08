@@ -81,6 +81,15 @@ test_that("tooltips", {
   expect_equal(fix_columns2(dat, col.tooltip = "MYTOOLTIPS")$tooltip, as.character(1:2))
 })
 
+test_that("whitespace is trimmed", {
+  dat <- data.frame(event = c("a", "  b"),
+                    start = c("2019-01-05", "2019-01-06"),
+                    groups = c("a", "  a"), 
+                    stringsAsFactors = TRUE)
+  expect_equal(fix_columns2(dat, col.group = "groups")$group, factor(c("a", "a"), levels = "a"))
+  expect_equal(fix_columns2(dat, col.group = "groups")$event, c("a", "b"))
+})
+
 test_that('Group column remains unchanged', {
     dat <- data.frame(
         event = c("Event B", "Event A", "Event C"),
@@ -105,5 +114,6 @@ test_that('Group column remains unchanged', {
         group = 1:3
         )
     expect_equal(fix_columns2(dat)$group,
-                 1:3)
+                 as.character(1:3))
 })
+

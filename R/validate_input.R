@@ -74,7 +74,7 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.c
     .Deprecated(new = "show_labels", old = "showLabels")
     .dots$showLabels <- NULL
   }
-  if(length(.dots) > 0) message("The following unexpected arguments were ignored by vistime: ", paste(names(.dots), collapse = ", "))
+  if(length(.dots) > 0) message("The following unexpected arguments were ignored: ", paste(names(.dots), collapse = ", "))
 
   assert_is_a_string(col.start)
   assert_is_a_string(col.end)

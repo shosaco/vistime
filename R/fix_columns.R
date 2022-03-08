@@ -55,7 +55,17 @@ fix_columns <- function(data, col.event, col.start, col.end, col.group, col.colo
   # sort out missing end dates
   if (any(is.na(data$end)))
     data$end[is.na(data$end)] <- data$start[is.na(data$end)]
-
+  
+  # remove leading and trailing whitespaces
+  data$event <- trimws(data$event)
+  data_group_character <- trimws(as.character(data$group))
+  
+  if(is.factor(data$group)){
+    data$group <- factor(data_group_character, levels = unique(trimws(levels(data$group))))
+  }else{
+    data$group <- data_group_character
+  }
+  
   # col.tooltip -> "tooltip"
   if (!is.null(col.tooltip) && col.tooltip %in% names(data)) {
     data$tooltip <- data[[col.tooltip]]
@@ -66,9 +76,6 @@ fix_columns <- function(data, col.event, col.start, col.end, col.group, col.colo
                                   data$start, "</b> to <b>", data$end, "</b>")
     )
   }
-
-  # remove leading and trailing whitespaces
-  data$event <- trimws(data$event)
 
   data$label <- data$event
 
