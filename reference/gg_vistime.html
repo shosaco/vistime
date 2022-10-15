@@ -18,7 +18,7 @@ Simplest drawable dataframe can have columns `event` and `start`."><meta propert
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">vistime</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
       </span>
     </div>
 
@@ -71,67 +71,94 @@ Simplest drawable dataframe can have columns `event` and `start`.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gg_vistime</span><span class="op">(</span>
-  <span class="va">data</span>,
-  col.event <span class="op">=</span> <span class="st">"event"</span>,
-  col.start <span class="op">=</span> <span class="st">"start"</span>,
-  col.end <span class="op">=</span> <span class="st">"end"</span>,
-  col.group <span class="op">=</span> <span class="st">"group"</span>,
-  col.color <span class="op">=</span> <span class="st">"color"</span>,
-  col.fontcolor <span class="op">=</span> <span class="st">"fontcolor"</span>,
-  optimize_y <span class="op">=</span> <span class="cn">TRUE</span>,
-  linewidth <span class="op">=</span> <span class="cn">NULL</span>,
-  title <span class="op">=</span> <span class="cn">NULL</span>,
-  show_labels <span class="op">=</span> <span class="cn">TRUE</span>,
-  background_lines <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gg_vistime</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  col.event <span class="op">=</span> <span class="st">"event"</span>,</span>
+<span>  col.start <span class="op">=</span> <span class="st">"start"</span>,</span>
+<span>  col.end <span class="op">=</span> <span class="st">"end"</span>,</span>
+<span>  col.group <span class="op">=</span> <span class="st">"group"</span>,</span>
+<span>  col.color <span class="op">=</span> <span class="st">"color"</span>,</span>
+<span>  col.fontcolor <span class="op">=</span> <span class="st">"fontcolor"</span>,</span>
+<span>  optimize_y <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  linewidth <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  show_labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  background_lines <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p><code>data.frame</code> that contains the data to be visualized</p></dd>
+
+
 <dt>col.event</dt>
 <dd><p>(optional, character) the column name in <code>data</code> that contains event
 names. Default: <em>event</em>.</p></dd>
+
+
 <dt>col.start</dt>
 <dd><p>(optional, character) the column name in <code>data</code> that contains start
 dates. Default: <em>start</em>.</p></dd>
+
+
 <dt>col.end</dt>
 <dd><p>(optional, character) the column name in <code>data</code> that contains end dates.
 Default: <em>end</em>.</p></dd>
+
+
 <dt>col.group</dt>
 <dd><p>(optional, character) the column name in <code>data</code> to be used for
 grouping. Default: <em>group</em>.</p></dd>
+
+
 <dt>col.color</dt>
 <dd><p>(optional, character) the column name in <code>data</code> that contains colors
 for events. Default: <em>color</em>, if not present, colors are chosen via
 <code>RColorBrewer</code>.</p></dd>
+
+
 <dt>col.fontcolor</dt>
 <dd><p>(optional, character) the column name in <code>data</code> that contains the
 font color for event labels. Default: <em>fontcolor</em>, if not present,
 color will be black.</p></dd>
+
+
 <dt>optimize_y</dt>
 <dd><p>(optional, logical) distribute events on y-axis by smart heuristic (default),
 otherwise use order of input data.</p></dd>
+
+
 <dt>linewidth</dt>
 <dd><p>(optional, numeric) the linewidth (in pixel) for the events (typically used for
 large amount of parallel events). Default: heuristic value.</p></dd>
+
+
 <dt>title</dt>
 <dd><p>(optional, character) the title to be shown on top of the timeline.
 Default: <code>NULL</code>.</p></dd>
+
+
 <dt>show_labels</dt>
 <dd><p>(optional, boolean) choose whether or not event labels shall be
 visible. Default: <code>TRUE</code>.</p></dd>
+
+
 <dt>background_lines</dt>
 <dd><p>(optional, integer) the number of vertical lines to draw in the background to demonstrate structure (default: heuristic).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>gg_vistime</code> returns an object of class <code>gg</code> and <code>ggplot</code>.</p>
+    
+
+<p><code>gg_vistime</code> returns an object of class <code>gg</code> and <code>ggplot</code>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -140,37 +167,37 @@ visible. Default: <code>TRUE</code>.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># presidents and vice presidents</span></span>
-<span class="r-in"><span class="va">pres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">  Position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"President"</span>, <span class="st">"Vice"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">  Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Washington"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Adams"</span>, <span class="st">"Jefferson"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, <span class="st">"Burr"</span><span class="op">)</span>,</span>
-<span class="r-in">  start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1789-03-29"</span>, <span class="st">"1797-02-03"</span>, <span class="st">"1801-02-03"</span><span class="op">)</span>,</span>
-<span class="r-in">  end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1797-02-03"</span>, <span class="st">"1801-02-03"</span>, <span class="st">"1809-02-03"</span><span class="op">)</span>,</span>
-<span class="r-in">  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#cbb69d"</span>, <span class="st">"#603913"</span>, <span class="st">"#c69c6e"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">gg_vistime</span><span class="op">(</span><span class="va">pres</span>, col.event <span class="op">=</span> <span class="st">"Position"</span>, col.group <span class="op">=</span> <span class="st">"Name"</span>, title <span class="op">=</span> <span class="st">"Presidents of the USA"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># presidents and vice presidents</span></span></span>
+<span class="r-in"><span><span class="va">pres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  Position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"President"</span>, <span class="st">"Vice"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Washington"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Adams"</span>, <span class="st">"Jefferson"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, <span class="st">"Burr"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1789-03-29"</span>, <span class="st">"1797-02-03"</span>, <span class="st">"1801-02-03"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1797-02-03"</span>, <span class="st">"1801-02-03"</span>, <span class="st">"1809-02-03"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#cbb69d"</span>, <span class="st">"#603913"</span>, <span class="st">"#c69c6e"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">gg_vistime</span><span class="op">(</span><span class="va">pres</span>, col.event <span class="op">=</span> <span class="st">"Position"</span>, col.group <span class="op">=</span> <span class="st">"Name"</span>, title <span class="op">=</span> <span class="st">"Presidents of the USA"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="gg_vistime-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># ------ It is possible to change all attributes of the timeline using ggplot2::theme()</span></span>
-<span class="r-in"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="st">"event,start,end</span>
-<span class="r-in">                       Phase 1,2020-12-15,2020-12-24</span>
-<span class="r-in">                       Phase 2,2020-12-23,2020-12-29</span>
-<span class="r-in">                       Phase 3,2020-12-28,2021-01-06</span>
-<span class="r-in">                       Phase 4,2021-01-06,2021-02-02"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">gg_vistime</span><span class="op">(</span><span class="va">data</span>, optimize_y <span class="op">=</span> <span class="cn">T</span>, col.group <span class="op">=</span> <span class="st">"event"</span>, title <span class="op">=</span> <span class="st">"ggplot customization example"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span class="r-in">  plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, size<span class="op">=</span><span class="fl">30</span><span class="op">)</span>,</span>
-<span class="r-in">  axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">30</span>, color <span class="op">=</span> <span class="st">"violet"</span><span class="op">)</span>,</span>
-<span class="r-in">  axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">30</span>, color <span class="op">=</span> <span class="st">"red"</span>, angle <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>,</span>
-<span class="r-in">  panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"dashed"</span>, fill<span class="op">=</span><span class="cn">NA</span><span class="op">)</span>,</span>
-<span class="r-in">  panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">'green'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">3.5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># ------ It is possible to change all attributes of the timeline using ggplot2::theme()</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="st">"event,start,end</span></span></span>
+<span class="r-in"><span><span class="st">                       Phase 1,2020-12-15,2020-12-24</span></span></span>
+<span class="r-in"><span><span class="st">                       Phase 2,2020-12-23,2020-12-29</span></span></span>
+<span class="r-in"><span><span class="st">                       Phase 3,2020-12-28,2021-01-06</span></span></span>
+<span class="r-in"><span><span class="st">                       Phase 4,2021-01-06,2021-02-02"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">gg_vistime</span><span class="op">(</span><span class="va">data</span>, optimize_y <span class="op">=</span> <span class="cn">T</span>, col.group <span class="op">=</span> <span class="st">"event"</span>, title <span class="op">=</span> <span class="st">"ggplot customization example"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0</span>, size<span class="op">=</span><span class="fl">30</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">30</span>, color <span class="op">=</span> <span class="st">"violet"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">30</span>, color <span class="op">=</span> <span class="st">"red"</span>, angle <span class="op">=</span> <span class="fl">30</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"dashed"</span>, fill<span class="op">=</span><span class="cn">NA</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">'green'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a></span><span class="op">(</span>ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">3.5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -185,7 +212,7 @@ visible. Default: <code>TRUE</code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
