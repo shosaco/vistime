@@ -1,7 +1,7 @@
-# vistime 1.2.2.9000 (not on CRAN)
+# vistime 1.2.3
 - keep group column order in case of factors (otherwise groups appear in order of appearance) (closes #27, thanks @kelly-sovacool)
 
-# vistime 1.2.2 (on CRAN)
+# vistime 1.2.2
 ## Bugfixes
 - added `markdown` dependency for vignette building as per [yhui/knitr#1864](https://github.com/yihui/knitr/issues/1864)
 
