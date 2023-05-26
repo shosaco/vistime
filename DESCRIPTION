@@ -1,7 +1,7 @@
 Package: vistime
 Title: Pretty Timelines in R
-Version: 1.2.3
-Date: 2022-10-16
+Version: 1.2.4
+Date: 2023-05-26
 Authors@R: c(
     person("Sandro", "Raabe", , "sa.ra.online@posteo.de", role = c("aut", "cre"))
     )
@@ -23,7 +23,7 @@ Imports:
     ggrepel (>= 0.7.0),
     RColorBrewer (>= 0.2.2)
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests:
     prettydoc,
     knitr,

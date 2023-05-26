@@ -1,3 +1,7 @@
+# vistime 1.2.4
+
+- `vistime()` passes `source` and `customdata` to plot for interactive events
+
 # vistime 1.2.3
 - keep group column order in case of factors (otherwise groups appear in order of appearance) (closes #27, thanks @kelly-sovacool)
 
