@@ -1,3 +1,7 @@
+# vistime 1.2.4
+## Bugfixes
+- Fix failing dependency by exchanging package usage of `assertive.types` with `assertthat`
+
 # vistime 1.2.3
 - keep group column order in case of factors (otherwise groups appear in order of appearance) (closes #27, thanks @kelly-sovacool)
 

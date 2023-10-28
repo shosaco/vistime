@@ -13,7 +13,7 @@
   show_labels <- TRUE
   background_lines <- NULL
 
-  l <- validate_input(dat, col.start, col.end, col.event, col.group, col.color, col.fontcolor, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines, list())
+  l <- validate_input(dat, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip, optimize_y, linewidth, title, show_labels, background_lines, list())
   dat <- set_colors(l$data, col.color, col.fontcolor)
   dat <- fix_columns(dat, col.event, col.start, col.end, col.group, col.color, col.fontcolor, col.tooltip)
   return(dat)
