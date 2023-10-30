@@ -1,3 +1,5 @@
+# vistime (development version)
+
 # vistime 1.2.4
 ## Bugfixes
 - Fix failing dependency by exchanging package usage of `assertive.types` with `assertthat`

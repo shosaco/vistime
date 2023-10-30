@@ -1,6 +1,6 @@
 Package: vistime
 Title: Pretty Timelines in R
-Version: 1.2.4
+Version: 1.2.4.9000
 Date: 2023-10-28
 Authors@R: c(
     person("Sandro", "Raabe", , "sa.ra.online@posteo.de", role = c("aut", "cre"))
