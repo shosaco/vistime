@@ -181,7 +181,7 @@ Note that export requires the `webshot` package and `phantomjs` on your OS. Addi
 
 ## 8. Usage in Shiny apps
 
-- `vistime()` objects can be integrated into [Shiny](https://shiny.rstudio.com/) via `plotlyOutput()` and `renderPlotly()`
+- `vistime()` objects can be integrated into [Shiny](https://shiny.posit.co/) via `plotlyOutput()` and `renderPlotly()`
 
 
 ```{r eval=FALSE}
