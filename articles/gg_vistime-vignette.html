@@ -88,7 +88,7 @@
 
       
 
-      </header><script src="gg_vistime-vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Static timeline plots with gg_vistime()</h1>
@@ -103,11 +103,15 @@
     
     
 <p><a href="https://www.buymeacoffee.com/shosaco" class="external-link"><img src="https://i.imgur.com/xI5UtRm.png" alt="Buy Me A Coffee"></a></p>
-<p><strong>Feedback welcome:</strong> <a href="mailto:sa.ra.online@posteo.de">sa.ra.online@posteo.de</a></p>
+<p><strong>Feedback welcome:</strong>
+<a href="mailto:sa.ra.online@posteo.de">sa.ra.online@posteo.de</a></p>
 <div class="section level2">
 <h2 id="basic-example">1. Basic example<a class="anchor" aria-label="anchor" href="#basic-example"></a>
 </h2>
-<p><code><a href="../reference/gg_vistime.html">gg_vistime()</a></code> produces <strong>ggplot2</strong> charts. For interactive <strong>Plotly</strong> output, see <code><a href="../reference/vistime.html">vistime()</a></code>, for interactive <strong>Highcharts</strong> output, see <code><a href="../reference/hc_vistime.html">hc_vistime()</a></code>.</p>
+<p><code><a href="../reference/gg_vistime.html">gg_vistime()</a></code> produces <strong>ggplot2</strong> charts.
+For interactive <strong>Plotly</strong> output, see
+<code><a href="../reference/vistime.html">vistime()</a></code>, for interactive <strong>Highcharts</strong>
+output, see <code><a href="../reference/hc_vistime.html">hc_vistime()</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>, </span>
 <span>                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, </span>
@@ -120,14 +124,20 @@
 <div class="section level2">
 <h2 id="installation">2. Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>To install the package from CRAN, type the following in your R console:</p>
+<p>To install the package from CRAN, type the following in your R
+console:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"vistime"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage-and-default-arguments">3. Usage and default arguments<a class="anchor" aria-label="anchor" href="#usage-and-default-arguments"></a>
 </h2>
-<p>The simplest way to create a timeline is by providing a data frame with <code>event</code> and <code>start</code> columns. If your columns are named otherwise, you need to tell the function using the <code>col.</code> arguments. You can also tweak the y positions, linewidth, title, label visibility and number of lines in the background.</p>
+<p>The simplest way to create a timeline is by providing a data frame
+with <code>event</code> and <code>start</code> columns. If your columns
+are named otherwise, you need to tell the function using the
+<code>col.</code> arguments. You can also tweak the y positions,
+linewidth, title, label visibility and number of lines in the
+background.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_vistime.html">gg_vistime</a></span><span class="op">(</span><span class="va">data</span>, </span>
 <span>           col.event <span class="op">=</span> <span class="st">"event"</span>, </span>
@@ -169,53 +179,62 @@
 <td>col.event</td>
 <td>optional</td>
 <td>character</td>
-<td>the column name in data that contains event names. Default: <em>event</em>
+<td>the column name in data that contains event names. Default:
+<em>event</em>
 </td>
 </tr>
 <tr class="odd">
 <td>col.start</td>
 <td>optional</td>
 <td>character</td>
-<td>the column name in data that contains start dates. Default: <em>start</em>
+<td>the column name in data that contains start dates. Default:
+<em>start</em>
 </td>
 </tr>
 <tr class="even">
 <td>col.end</td>
 <td>optional</td>
 <td>character</td>
-<td>the column name in data that contains end dates. Default: <em>end</em>
+<td>the column name in data that contains end dates. Default:
+<em>end</em>
 </td>
 </tr>
 <tr class="odd">
 <td>col.group</td>
 <td>optional</td>
 <td>character</td>
-<td>the column name in data to be used for grouping. Default: <em>group</em>
+<td>the column name in data to be used for grouping. Default:
+<em>group</em>
 </td>
 </tr>
 <tr class="even">
 <td>col.color</td>
 <td>optional</td>
 <td>character</td>
-<td>the column name in data that contains colors for events. Default: <em>color</em>, if not present, colors are chosen via RColorBrewer.</td>
+<td>the column name in data that contains colors for events. Default:
+<em>color</em>, if not present, colors are chosen via RColorBrewer.</td>
 </tr>
 <tr class="odd">
 <td>col.fontcolor</td>
 <td>optional</td>
 <td>character</td>
-<td>the column name in data that contains the font color for event labels. Default: <em>fontcolor</em>, if not present, color will be black.</td>
+<td>the column name in data that contains the font color for event
+labels. Default: <em>fontcolor</em>, if not present, color will be
+black.</td>
 </tr>
 <tr class="even">
 <td>optimize_y</td>
 <td>optional</td>
 <td>logical</td>
-<td>distribute events on y-axis by smart heuristic (default) or use order of input data.</td>
+<td>distribute events on y-axis by smart heuristic (default) or use
+order of input data.</td>
 </tr>
 <tr class="odd">
 <td>linewidth</td>
 <td>optional</td>
 <td>numeric</td>
-<td>override the calculated linewidth for events. Default: heuristic value.</td>
+<td>override the calculated linewidth for events. Default: heuristic
+value.</td>
 </tr>
 <tr class="even">
 <td>title</td>
@@ -227,13 +246,15 @@
 <td>show_labels</td>
 <td>optional</td>
 <td>logical</td>
-<td>choose whether or not event labels shall be visible. Default: <code>TRUE</code>.</td>
+<td>choose whether or not event labels shall be visible. Default:
+<code>TRUE</code>.</td>
 </tr>
 <tr class="even">
 <td>background_lines</td>
 <td>optional</td>
 <td>integer</td>
-<td>the number of vertical lines to draw in the background to demonstrate structure. Default: 10.</td>
+<td>the number of vertical lines to draw in the background to
+demonstrate structure. Default: 10.</td>
 </tr>
 </tbody>
 </table>
@@ -243,7 +264,8 @@
 </h2>
 <ul>
 <li>
-<code>gg_vistime</code> returns an object of class <code>gg</code> and <code>ggplot</code>
+<code>gg_vistime</code> returns an object of class <code>gg</code>
+and <code>ggplot</code>
 </li>
 </ul>
 </div>
@@ -300,7 +322,9 @@
 <div class="section level3">
 <h3 id="ex--3-gantt-charts">Ex. 3: Gantt Charts<a class="anchor" aria-label="anchor" href="#ex--3-gantt-charts"></a>
 </h3>
-<p>The argument <code>optimize_y</code> can be used to change the look of the timeline. <code>TRUE</code> (the default) will find a nice heuristic to save <code>y</code>-space, distributing the events:</p>
+<p>The argument <code>optimize_y</code> can be used to change the look
+of the timeline. <code>TRUE</code> (the default) will find a nice
+heuristic to save <code>y</code>-space, distributing the events:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="st">"event,start,end</span></span>
 <span><span class="st">                       Phase 1,2020-12-15,2020-12-24</span></span>
@@ -319,7 +343,8 @@
 <div class="section level2">
 <h2 id="export-of-vistime-as-png">7. Export of vistime as PNG<a class="anchor" aria-label="anchor" href="#export-of-vistime-as-png"></a>
 </h2>
-<p>Once created, you can use <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> for saving your vistime chart as PNG:</p>
+<p>Once created, you can use <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggplot2::ggsave()</a></code> for saving
+your vistime chart as PNG:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chart</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/vistime.html">vistime</a></span><span class="op">(</span><span class="va">pres</span>, col.event <span class="op">=</span> <span class="st">"Position"</span><span class="op">)</span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"presidents.png"</span>, <span class="va">timeline</span><span class="op">)</span></span></code></pre></div>
@@ -329,7 +354,8 @@
 </h2>
 <ul>
 <li>
-<code><a href="../reference/gg_vistime.html">gg_vistime()</a></code> objects can be integrated into Shiny via <code>plotOutput()</code> and <code>renderPlot()</code>
+<code><a href="../reference/gg_vistime.html">gg_vistime()</a></code> objects can be integrated into Shiny via
+<code>plotOutput()</code> and <code>renderPlot()</code>
 </li>
 </ul>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -354,7 +380,8 @@
 <div class="section level2">
 <h2 id="customization">9. Customization<a class="anchor" aria-label="anchor" href="#customization"></a>
 </h2>
-<p>Since every <code><a href="../reference/gg_vistime.html">gg_vistime()</a></code> output is a <code>ggplot</code> object, you can customize and override literally everything:</p>
+<p>Since every <code><a href="../reference/gg_vistime.html">gg_vistime()</a></code> output is a <code>ggplot</code>
+object, you can customize and override literally everything:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shosaco.github.io/vistime/" class="external-link">vistime</a></span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>text<span class="op">=</span><span class="st">"event,start,end</span></span>
