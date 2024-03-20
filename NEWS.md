@@ -1,5 +1,8 @@
 # vistime (development version)
 
+## Bugfixes
+- Now asserts that `col.color` is a string, i.e. `vistime(dat, col.color = color_column)` fails and `vistime(dat, col.color = "color_column")` succeeds. This was implemented for the other columns already.
+
 # vistime 1.2.4
 ## Bugfixes
 - Fix failing dependency by exchanging package usage of `assertive.types` with `assertthat`
