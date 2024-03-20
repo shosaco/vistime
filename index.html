@@ -114,9 +114,7 @@
 <div class="section level2">
 <h2 id="id_1-installation">1. Installation<a class="anchor" aria-label="anchor" href="#id_1-installation"></a>
 </h2>
-<p>To install the package from CRAN, type the following in your R console:</p>
-<pre class="{r}"><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"vistime"</span><span class="op">)</span></span></code></pre>
-<!--
+<p>To install the package from CRAN, type the following in your R console: <code>{r} install.packages("vistime")</code> <!--
 To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 
 ```{r}
@@ -124,7 +122,7 @@ if (!require("remotes")) install.packages("remotes")
 remotes::install_github("shosaco/vistime")
 ```
 
--->
+--></p>
 </div>
 <div class="section level2">
 <h2 id="id_2-main-functionality">2. Main functionality<a class="anchor" aria-label="anchor" href="#id_2-main-functionality"></a>
@@ -133,50 +131,43 @@ remotes::install_github("shosaco/vistime")
 <div class="section level3">
 <h3 id="vistime---interactive-plotly-charts">vistime() - interactive <code>Plotly</code> charts<a class="anchor" aria-label="anchor" href="#vistime---interactive-plotly-charts"></a>
 </h3>
-<pre class="{r}"><code><span><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,</span>
-<span>                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, </span>
-<span>                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,</span>
-<span>                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span></span>
-<span>                            </span>
-<span><span class="fu"><a href="reference/vistime.html">vistime</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span></span></code></pre>
-<p><img src="reference/figures/basic_plotly.png"></p>
-</div>
-<div class="section level3">
-<h3 id="hc_vistime---interactive-highcharts-timelines">hc_vistime() - interactive <code>Highcharts</code> timelines<a class="anchor" aria-label="anchor" href="#hc_vistime---interactive-highcharts-timelines"></a>
-</h3>
-<pre class="{r}"><code><span><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,</span>
-<span>                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, </span>
-<span>                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,</span>
-<span>                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span></span>
-<span>                            </span>
-<span><span class="fu"><a href="reference/hc_vistime.html">hc_vistime</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span></span></code></pre>
+<p>```{r} timeline_data &lt;- data.frame(event = c(“Event 1”, “Event 2”), start = c(“2020-06-06”, “2020-10-01”), end = c(“2020-10-01”, “2020-12-31”), group = “My Events”)</p>
+<p>vistime(timeline_data)</p>
+<pre><code>&lt;img src="man/figures/basic_plotly.png" /&gt;
+
+
+### hc_vistime() - interactive `Highcharts` timelines
+
+```{r}
+timeline_data &lt;- data.frame(event = c("Event 1", "Event 2"),
+                            start = c("2020-06-06", "2020-10-01"), 
+                            end   = c("2020-10-01", "2020-12-31"),
+                            group = "My Events")
+                            
+hc_vistime(timeline_data)</code></pre>
 <p><img src="reference/figures/basic_highchart.png"></p>
 <p>This is facilitated by the <code>highcharter</code> package, so, this package needs to be installed before attempting to produce any <code><a href="reference/hc_vistime.html">hc_vistime()</a></code> output.</p>
 </div>
 <div class="section level3">
 <h3 id="gg_vistime---static-ggplot2-output">gg_vistime() - static <code>ggplot2</code> output<a class="anchor" aria-label="anchor" href="#gg_vistime---static-ggplot2-output"></a>
 </h3>
-<pre class="{r}"><code><span><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,</span>
-<span>                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, </span>
-<span>                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,</span>
-<span>                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span></span>
-<span>                            </span>
-<span><span class="fu"><a href="reference/gg_vistime.html">gg_vistime</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span></span></code></pre>
-<p><img src="reference/figures/basic_ggplot.png"></p>
-</div>
-<div class="section level3">
-<h3 id="vistime_data---pure-dataframe-output-if-you-want-to-draw-yourself">vistime_data() - pure <code>data.frame</code> output if you want to draw yourself<a class="anchor" aria-label="anchor" href="#vistime_data---pure-dataframe-output-if-you-want-to-draw-yourself"></a>
-</h3>
-<pre class="{r}"><code><span><span class="va">timeline_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>event <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Event 1"</span>, <span class="st">"Event 2"</span><span class="op">)</span>,</span>
-<span>                            start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-06-06"</span>, <span class="st">"2020-10-01"</span><span class="op">)</span>, </span>
-<span>                            end   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2020-10-01"</span>, <span class="st">"2020-12-31"</span><span class="op">)</span>,</span>
-<span>                            group <span class="op">=</span> <span class="st">"My Events"</span><span class="op">)</span></span>
-<span>                            </span>
-<span><span class="fu"><a href="reference/vistime_data.html">vistime_data</a></span><span class="op">(</span><span class="va">timeline_data</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#&gt;     event      start        end     group                                      tooltip      col subplot   y</span></span>
-<span><span class="co">#&gt; 1 Event 1 2020-06-06 2020-10-01 My Events  from &lt;b&gt;2020-06-06&lt;/b&gt; to &lt;b&gt;2020-10-01&lt;/b&gt;  #8DD3C7       1   1</span></span>
-<span><span class="co">#&gt; 2 Event 2 2020-10-01 2020-12-31 My Events  from &lt;b&gt;2020-10-01&lt;/b&gt; to &lt;b&gt;2020-12-31&lt;/b&gt;  #FFFFB3       1   1</span></span></code></pre>
+<p>```{r} timeline_data &lt;- data.frame(event = c(“Event 1”, “Event 2”), start = c(“2020-06-06”, “2020-10-01”), end = c(“2020-10-01”, “2020-12-31”), group = “My Events”)</p>
+<p>gg_vistime(timeline_data)</p>
+<pre><code>&lt;img src="man/figures/basic_ggplot.png" /&gt;
+
+### vistime_data() - pure `data.frame` output if you want to draw yourself
+
+```{r}
+timeline_data &lt;- data.frame(event = c("Event 1", "Event 2"),
+                            start = c("2020-06-06", "2020-10-01"), 
+                            end   = c("2020-10-01", "2020-12-31"),
+                            group = "My Events")
+                            
+vistime_data(timeline_data)
+
+#&gt;     event      start        end     group                                      tooltip      col subplot   y
+#&gt; 1 Event 1 2020-06-06 2020-10-01 My Events  from &lt;b&gt;2020-06-06&lt;/b&gt; to &lt;b&gt;2020-10-01&lt;/b&gt;  #8DD3C7       1   1
+#&gt; 2 Event 2 2020-10-01 2020-12-31 My Events  from &lt;b&gt;2020-10-01&lt;/b&gt; to &lt;b&gt;2020-12-31&lt;/b&gt;  #FFFFB3       1   1</code></pre>
 <p>You want to use this for the intelligent y-axis assignment depending on overlapping of events (this can be disabled with <code>optimize_y = FALSE</code>).</p>
 </div>
 </div>
