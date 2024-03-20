@@ -55,6 +55,10 @@ test_that("data formats", {
                "col.start is not a string")
   expect_error(validate_input2(tibble(), col.group=1),
                "col.group is not a string")
+  expect_error(validate_input2(tibble(), col.color=1),
+               "col.color is not a string")
+  expect_error(validate_input2(tibble(), col.fontcolor=1),
+               "col.fontcolor is not a string")
 
   expect_error(
     validate_input2(plotly::plot_ly()), "data is not a data.frame"

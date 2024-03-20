@@ -1,7 +1,7 @@
 # vistime (development version)
 
 ## Bugfixes
-- Now asserts that `col.color` is a string, i.e. `vistime(dat, col.color = color_column)` fails and `vistime(dat, col.color = "color_column")` succeeds. This was implemented for the other columns already.
+- Now asserts that `col.color` and `col.fontcolor` are string type, i.e. `vistime(dat, col.color = color_column)` fails and `vistime(dat, col.color = "color_column")` succeeds. This was implemented for the other columns already.
 
 # vistime 1.2.4
 ## Bugfixes
