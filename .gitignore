@@ -11,3 +11,5 @@ CRAN-RELEASE
 docs
 pkgdown/
 working/*
+vignettes/*.html
+vignettes/*.R
