@@ -79,7 +79,7 @@ validate_input <- function(data, col.event, col.start, col.end, col.group, col.c
   assert_that(is.string(col.end))
   assert_that(is.string(col.event))
   assert_that(is.string(col.color))
-  assert_that(is.string(col.fontcolor))
+  if(!is.null(col.fontcolor)) assert_that(is.string(col.fontcolor))
   assert_that(is.string(col.group))
 
   if(!is.null(col.tooltip)) assert_that(is.string(col.tooltip))
