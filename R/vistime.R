@@ -3,6 +3,7 @@
 #' Provide a data frame with event data to create a visual and interactive timeline plot rendered by Plotly.
 #' Simplest drawable dataframe can have columns `event` and `start`.
 #'
+#' @md
 #' @param data \code{data.frame} that contains the data to be visualized
 #' @param col.event (optional, character) the column name in \code{data} that contains event
 #'   names. Default: \emph{event}.
@@ -31,6 +32,9 @@
 #'   visible. Default: \code{TRUE}.
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the
 #'   background to demonstrate structure (default: 10). Less means more memory-efficient plot.
+#' @param source (optional, character) event source label for Plotly click/hover events in Shiny Apps..
+#' @param customdata (optional, character vector) values to make available to Plotly's
+#'   event data in Shiny Apps. Recycled across values in `data` where possible.
 #' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @seealso Functions \code{?hc_vistime} and \code{?gg_vistime} for different charting engines (Highcharts and ggplot2).
 #' @export
@@ -139,7 +143,8 @@ vistime <- function(data,
                     col.fontcolor = "fontcolor",
                     col.tooltip = "tooltip",
                     optimize_y = TRUE, linewidth = NULL, title = NULL,
-                    show_labels = TRUE, background_lines = NULL, ...) {
+                    show_labels = TRUE, background_lines = NULL,
+                    source = "A", customdata = NULL, ...) {
 
   checked_dat <- validate_input(data, col.event, col.start, col.end, col.group, col.color,
                                 col.fontcolor, col.tooltip, optimize_y, linewidth, title,
@@ -149,7 +154,7 @@ vistime <- function(data,
                               checked_dat$col.end, checked_dat$col.group, checked_dat$col.color,
                               checked_dat$col.fontcolor, checked_dat$col.tooltip, optimize_y)
 
-  total <- plot_plotly(cleaned_dat, linewidth, title, show_labels, background_lines)
+  total <- plot_plotly(cleaned_dat, linewidth, title, show_labels, background_lines, source, customdata)
 
   return(total)
 }

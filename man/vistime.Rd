@@ -18,6 +18,8 @@ vistime(
   title = NULL,
   show_labels = TRUE,
   background_lines = NULL,
+  source = "A",
+  customdata = NULL,
   ...
 )
 }
@@ -63,6 +65,11 @@ visible. Default: \code{TRUE}.}
 \item{background_lines}{(optional, integer) the number of vertical lines to draw in the
 background to demonstrate structure (default: 10). Less means more memory-efficient plot.}
 
+\item{source}{(optional, character) event source label (see \code{\link[plotly:plot_ly]{plotly::plot_ly()}})}
+
+\item{customdata}{(optional, character vector) values to make available to Plotly's
+event data. Recycled across values in \code{data} where possible.}
+
 \item{...}{for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)}
 }
 \value{
@@ -70,7 +77,7 @@ background to demonstrate structure (default: 10). Less means more memory-effici
 }
 \description{
 Provide a data frame with event data to create a visual and interactive timeline plot rendered by Plotly.
-Simplest drawable dataframe can have columns `event` and `start`.
+Simplest drawable dataframe can have columns \code{event} and \code{start}.
 }
 \examples{
 # presidents and vice presidents
