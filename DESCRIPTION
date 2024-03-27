@@ -17,7 +17,7 @@ Depends:
     R (>= 3.2.0)
 Imports:
     rlang,
-    assertive.types (>= 0.0-3),
+    assertthat (>= 0.1),
     plotly (>= 4.0.0),
     ggplot2 (>= 2.0.0),
     ggrepel (>= 0.7.0),
