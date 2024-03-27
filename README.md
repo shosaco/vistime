@@ -54,6 +54,7 @@ timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             
 vistime(timeline_data)
 ```
+
 <img src="man/figures/basic_plotly.png" />
 
 

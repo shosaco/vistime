@@ -87,6 +87,8 @@ linewidth | optional | numeric | override the calculated linewidth for events. D
 title | optional | character | the title to be shown on top of the timeline. Default: empty.
 show_labels | optional | logical | choose whether or not event labels shall be visible. Default: `TRUE`.
 background_lines | optional | integer | the number of vertical lines to draw in the background to demonstrate structure. Default: heuristic.
+source | optional | character | Information for `Plotly` to identify plot in Shiny Apps. Default: `A`.
+customdata | optional | character | Custom data passed to click or hover event in Shiny.
 
 
 ## 5. Value
