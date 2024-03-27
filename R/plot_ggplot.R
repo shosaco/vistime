@@ -75,7 +75,7 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
   range_dat <- data[data$start != data$end, ]
   event_dat <- data[data$start == data$end, ]
   gg <- gg +
-    geom_segment(data = range_dat, size = lw) +
+    geom_segment(data = range_dat, linewidth = lw) +
     geom_point(data = event_dat, mapping = aes(fill = I(.data$col)),
                shape = 21, size = 0.7 * lw, colour = "black", stroke = 0.1)
 
