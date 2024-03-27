@@ -181,11 +181,13 @@ Note that export requires the `webshot` package and `phantomjs` on your OS. Addi
 
 ## 8. Usage in Shiny apps
 
-- `vistime()` objects can be integrated into [Shiny](https://shiny.rstudio.com/) via `plotlyOutput()` and `renderPlotly()`
+- `vistime()` objects can be integrated into [Shiny](https://shiny.rstudio.com/) via `plotlyOutput()` and `renderPlotly()`. Using the arguments `source` and `customdata`, you can pass information to the click event.
 
 
 ```{r eval=FALSE}
 library(vistime)
+library(shiny)
+library(plotly)
 
 pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    Name = c("Washington", rep(c("Adams", "Jefferson"), 2), "Burr"),
@@ -195,11 +197,20 @@ pres <- data.frame(Position = rep(c("President", "Vice"), each = 3),
                    fontcolor = c("black", "white", "black"))
 
 shinyApp(
-  ui = plotly::plotlyOutput("myVistime"),
+  ui = basicPage("",
+                 mainPanel(plotlyOutput("my_plot"),
+                           verbatimTextOutput("clicked_info"))),
   server = function(input, output) {
-    output$myVistime <- plotly::renderPlotly({
-      vistime(pres, col.event = "Position", col.group = "Name")
+    output$my_plot <- plotly::renderPlotly({
+      vistime(pres, col.event = "Position", col.group = "Name", source = "my_plot", customdata = "some_information")
     })
+    
+    output$clicked_info <- renderPrint({
+            click_data <- event_data("plotly_click", source = "my_plot")
+            req(click_data)
+            message("CLICK!")
+            click_data
+        })
   }
 )
 ```

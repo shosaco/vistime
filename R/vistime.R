@@ -32,9 +32,9 @@
 #'   visible. Default: \code{TRUE}.
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the
 #'   background to demonstrate structure (default: 10). Less means more memory-efficient plot.
-#' @param source (optional, character) event source label (see [plotly::plot_ly()])
+#' @param source (optional, character) event source label for Plotly click/hover events in Shiny Apps..
 #' @param customdata (optional, character vector) values to make available to Plotly's
-#'   event data. Recycled across values in `data` where possible.
+#'   event data in Shiny Apps. Recycled across values in `data` where possible.
 #' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @seealso Functions \code{?hc_vistime} and \code{?gg_vistime} for different charting engines (Highcharts and ggplot2).
 #' @export
