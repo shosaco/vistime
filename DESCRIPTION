@@ -1,7 +1,7 @@
 Package: vistime
 Title: Pretty Timelines in R
-Version: 1.2.4
-Date: 2023-05-26
+Version: 1.2.4.9001
+Date: 2024-03-27
 Authors@R: c(
     person("Sandro", "Raabe", , "sa.ra.online@posteo.de", role = c("aut", "cre"))
     )
@@ -17,9 +17,9 @@ Depends:
     R (>= 3.2.0)
 Imports:
     rlang,
-    assertive.types (>= 0.0-3),
+    assertthat (>= 0.1),
     plotly (>= 4.0.0),
-    ggplot2 (>= 2.0.0),
+    ggplot2 (>= 3.4.0),
     ggrepel (>= 0.7.0),
     RColorBrewer (>= 0.2.2)
 Encoding: UTF-8
