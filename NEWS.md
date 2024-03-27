@@ -1,6 +1,6 @@
-# vistime 1.2.4
+# vistime 1.2.4.9001
 
-- `vistime()` passes `source` and `customdata` to plot for interactive events
+- `vistime()` passes `source` and `customdata` to Plotly for interactive click or hover events in Shiny.
 
 # vistime 1.2.3
 - keep group column order in case of factors (otherwise groups appear in order of appearance) (closes #27, thanks @kelly-sovacool)
