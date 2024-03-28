@@ -26,9 +26,11 @@ If you find vistime useful, please consider supporting its development: <a href=
 ## 1. Installation
 
 To install the package from CRAN, type the following in your R console:
-```{r}
+
+```r
 install.packages("vistime")
 ```
+
 <!--
 To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 
@@ -46,7 +48,7 @@ outputs the pure optimized data frame ready for plotting.
 
 ### vistime() - interactive `Plotly` charts
 
-```{r}
+```r
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
                             end   = c("2020-10-01", "2020-12-31"),
@@ -60,7 +62,7 @@ vistime(timeline_data)
 
 ### hc_vistime() - interactive `Highcharts` timelines
 
-```{r}
+```r
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
                             end   = c("2020-10-01", "2020-12-31"),
@@ -75,7 +77,7 @@ This is facilitated by the `highcharter` package, so, this package needs to be i
 
 ### gg_vistime() - static `ggplot2` output
 
-```{r}
+```r
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
                             end   = c("2020-10-01", "2020-12-31"),
@@ -87,7 +89,7 @@ gg_vistime(timeline_data)
 
 ### vistime_data() - pure `data.frame` output if you want to draw yourself
 
-```{r}
+```r
 timeline_data <- data.frame(event = c("Event 1", "Event 2"),
                             start = c("2020-06-06", "2020-10-01"), 
                             end   = c("2020-10-01", "2020-12-31"),
