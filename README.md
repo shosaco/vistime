@@ -3,7 +3,7 @@
 [![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
 [![CRAN](https://www.r-pkg.org/badges/version/vistime)](https://cran.r-project.org/package=vistime)
 [![R build status](https://github.com/shosaco/vistime/workflows/R-CMD-check/badge.svg)](https://github.com/shosaco/vistime/actions)
-[![Downloads]([https://cranlogs.r-pkg.org/badges/last-month/vistime](https://www.r-pkg.org/pkg/vistime)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/vistime)](https://www.r-pkg.org/pkg/vistime)
 [![codecov](https://codecov.io/github/shosaco/vistime/branch/master/graphs/badge.svg)](https://app.codecov.io/github/shosaco/vistime)
 [![Github Stars](https://img.shields.io/github/stars/shosaco/vistime.svg)](https://github.com/shosaco/vistime)
 
