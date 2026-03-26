@@ -9,15 +9,28 @@
 #' @noRd
 
 set_colors <- function(data, col.color, col.fontcolor) {
+  color_is_categorical <- FALSE
+
   if (!is.null(col.color) && col.color %in% names(data)){
-    data$col <- trimws(data[[col.color]])
-  }else{
+    data$col <- trimws(as.character(data[[col.color]]))
+
+    # Check if any non-NA value throws an error with col2rgb
+    test_colors <- data$col[!is.na(data$col)]
+    color_is_categorical <- any(is.na(sapply(test_colors, function(x) {
+      tryCatch(col2rgb(x), error = function(e) NA)
+    })))
+
+  } else {
+    # Auto-generate colors from RColorBrewer
     palette <- "Set3"
     data$col <- rep(RColorBrewer::brewer.pal(min(11, max(3, nrow(data))), palette), nrow(data))[1:nrow(data)]
   }
 
+  # Store flag to indicate if color should be treated as categorical aesthetic
+  attr(data, "color_is_categorical") <- color_is_categorical
+
   if (!is.null(col.fontcolor) && col.fontcolor %in% names(data)){
-    data$fontcol <- trimws(data[[col.fontcolor]])
+    data$fontcol <- trimws(as.character(data[[col.fontcolor]]))
   } else {
     data$fontcol <- "black"
   }
