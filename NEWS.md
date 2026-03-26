@@ -1,4 +1,4 @@
-# vistime (development version)
+# vistime 1.3.0
 
 ## New features
 - `vistime()` passes `source` and `customdata` to plot for interactive `Plotly` click or hover events in Shiny (closes #34, thanks @jonocarroll).
