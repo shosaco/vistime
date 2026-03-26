@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 library(vistime)
 ```
 
-[![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://www.buymeacoffee.com/shosaco)
+[![Buy Me A Coffee](https://i.imgur.com/xI5UtRm.png)](https://buymeacoffee.com/shosaco)
 **Feedback welcome:** <a href = "mailto:sa.ra.online@posteo.de">sa.ra.online@posteo.de</a>
 
 
