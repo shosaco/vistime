@@ -13,8 +13,9 @@
 #'   Default: \emph{end}.
 #' @param col.group (optional, character) the column name in \code{data} to be used for
 #'   grouping. Default: \emph{group}.
-#' @param col.color (optional, character) the column name in \code{data} that contains colors
-#'   for events. Default: \emph{color}, if not present, colors are chosen via
+##' @param col.color (optional, character) the column name in \code{data} that contains colors
+#'   for events. Can be hex codes (e.g., "#FF0000"), named colors (e.g., "red"), or categorical
+#'   data to be auto-colored. Default: \emph{color}, if not present, colors are chosen via
 #'   \code{RColorBrewer}.
 #' @param col.fontcolor (optional, character) the column name in \code{data} that contains the
 #'   font color for event labels. Default: \emph{fontcolor}, if not present,
@@ -33,7 +34,7 @@
 #' @param background_lines (optional, integer) the number of vertical lines to draw in the
 #'   background to demonstrate structure (default: 10). Less means more memory-efficient plot.
 #' @param source (optional, character) event source label for Plotly click/hover events in Shiny Apps..
-#' @param customdata (optional, character vector) values to make available to Plotly's
+#' @param customdata (optional, character vector) values to make available to Plotly
 #'   event data in Shiny Apps. Recycled across values in `data` where possible.
 #' @param ... for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)
 #' @seealso Functions \code{?hc_vistime} and \code{?gg_vistime} for different charting engines (Highcharts and ggplot2).

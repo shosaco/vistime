@@ -9,6 +9,8 @@ A library for creating time based charts, like Gantt or timelines. Possible outp
 }
 \details{
 Pretty timelines in R
+
+Create timeline visualizations with ggplot2, Plotly, or Highcharts
 }
 \seealso{
 Useful links: \itemize{ \item \url{https://shosaco.github.io/vistime/} \item Report bugs at \url{https://github.com/shosaco/vistime/issues}  }

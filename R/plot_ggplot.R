@@ -53,7 +53,8 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
       axis.ticks.y = element_blank(),
       axis.text.y  = element_text(hjust = 1),
       # line = element_blank(),
-      panel.background = element_rect(colour = "black", linetype = "solid")) +
+      panel.background = element_rect(colour = "black", linetype = "solid"),
+      legend.position = "none") +
     coord_cartesian(ylim = c(0.5, max(data$y) + 0.5))
 
   # 2. Add background vertical lines

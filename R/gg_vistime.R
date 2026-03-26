@@ -13,7 +13,8 @@
 #' @param col.group (optional, character) the column name in \code{data} to be used for
 #'   grouping. Default: \emph{group}.
 #' @param col.color (optional, character) the column name in \code{data} that contains colors
-#'   for events. Default: \emph{color}, if not present, colors are chosen via
+#'   for events. Can be hex codes (e.g., "#FF0000"), named colors (e.g., "red"), or categorical
+#'   data to be auto-colored. Default: \emph{color}, if not present, colors are chosen via
 #'   \code{RColorBrewer}.
 #' @param col.fontcolor (optional, character) the column name in \code{data} that contains the
 #'   font color for event labels. Default: \emph{fontcolor}, if not present,

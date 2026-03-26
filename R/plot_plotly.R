@@ -7,7 +7,7 @@
 #' @param show_labels boolean, show labels on events or not
 #' @param background_lines number of grey background lines to draw (can be NULL)
 #' @param source (optional, character) event source label (see [plotly::plot_ly()])
-#' @param customdata (optional, character vector) values to make available to Plotly's
+#' @param customdata (optional, character vector) values to make available to Plotly
 #'   event data. Recycled across values in `data` where possible.
 #' @importFrom plotly plot_ly
 #' @importFrom plotly layout
@@ -70,7 +70,8 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines, s
                 tickmode = "array",
                 tickvals = y_ticks,
                 ticktext = as.character(unique(data$group))
-              )
+              ),
+              showlegend = FALSE
   )
 
   # 4. plot ranges
@@ -84,17 +85,21 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines, s
       toAdd <- range_dat[i, ]
 
       p <- add_trace(p,
-                     x = c(toAdd$start, toAdd$end), # von, bis
+                     x = c(toAdd$start, toAdd$end),
                      y = toAdd$y,
                      line = list(color = toAdd$col, width = lw),
                      showlegend = F,
                      hoverinfo = "text",
                      text = toAdd$tooltip
       )
-      # add annotations or not
-      if (show_labels) {
+    }
+
+    # Add labels for ranges
+    if (show_labels) {
+      for (i in seq_len(nrow(range_dat))) {
+        toAdd <- range_dat[i, ]
         p <- add_text(p,
-                      x = toAdd$start + (toAdd$end - toAdd$start) / 2, # in der Mitte
+                      x = toAdd$start + (toAdd$end - toAdd$start) / 2,
                       y = toAdd$y,
                       textfont = list(family = "Arial", size = 14, color = toRGB(toAdd$fontcol)),
                       textposition = "center",
@@ -119,22 +124,19 @@ plot_plotly <- function(data, linewidth, title, show_labels, background_lines, s
                        color = event_dat$col, size = 0.7 * lw, symbol = "circle",
                        line = list(color = "black", width = 1)
                      ),
-                     showlegend = F, hoverinfo = "text", text = event_dat$tooltip
+                     showlegend = F,
+                     hoverinfo = "text", text = event_dat$tooltip
     )
 
     # add annotations or not
     if (show_labels) {
       p <- add_text(p,
-                    x = event_dat$start, y = event_dat$labelY, textfont = list(family = "Arial", size = 14,
-                                                                               color = toRGB(event_dat$fontcol)),
+                    x = event_dat$start, y = event_dat$labelY,
+                    textfont = list(family = "Arial", size = 14, color = toRGB(event_dat$fontcol)),
                     textposition ="center", showlegend = F, text = event_dat$label, hoverinfo = "none"
       )
     }
-
   }
-
 
   return(p)
 }
-
-
