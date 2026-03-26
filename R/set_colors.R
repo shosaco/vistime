@@ -1,10 +1,29 @@
 #' Set column col for event colors and column fontcol for label colors
 #'
+#' Detects whether the color column contains actual color codes (hex, RGB names)
+#' or categorical data. For categorical data, automatically maps values to colors
+#' from RColorBrewer's Set3 palette.
+#'
 #' @param data the data frame containing event data
-#' @param col.color name of the event color column
+#' @param col.color name of the event color column. Can contain either:
+#'   - Hex color codes (e.g., "#FF0000")
+#'   - Named R colors (e.g., "red", "blue")
+#'   - Categorical values to be mapped to automatic colors
 #' @param col.fontcolor name of the fontcolor column
 #'
-#' @return same data frame as input, but with columns \code{col} and \code{fontcol} filled with color codes or names.
+#' @details
+#' Color detection uses `col2rgb()` to test whether values are valid R colors.
+#' If any non-NA value is not a valid color, the entire column is treated as
+#' categorical and mapped to automatic colors.
+#'
+#' The `color_is_categorical` attribute is stored on the result for downstream
+#' plotting functions to adjust visualization accordingly.
+#'
+#' @return same data frame as input, but with:
+#'   - `col`: color codes (hex) or category names
+#'   - `fontcol`: font color codes
+#'   - `color_is_categorical` attribute: logical indicating if colors are categorical
+#'
 #' @keywords internal
 #' @noRd
 

@@ -23,7 +23,7 @@ Imports:
     ggrepel (>= 0.7.0),
     RColorBrewer (>= 0.2.2)
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Suggests:
     prettydoc,
     knitr,

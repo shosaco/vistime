@@ -39,7 +39,8 @@ Default: \emph{end}.}
 grouping. Default: \emph{group}.}
 
 \item{col.color}{(optional, character) the column name in \code{data} that contains colors
-for events. Default: \emph{color}, if not present, colors are chosen via
+for events. Can be hex codes (e.g., "#FF0000"), named colors (e.g., "red"), or categorical
+data to be auto-colored. Default: \emph{color}, if not present, colors are chosen via
 \code{RColorBrewer}.}
 
 \item{col.fontcolor}{(optional, character) the column name in \code{data} that contains the
@@ -65,10 +66,10 @@ visible. Default: \code{TRUE}.}
 \item{background_lines}{(optional, integer) the number of vertical lines to draw in the
 background to demonstrate structure (default: 10). Less means more memory-efficient plot.}
 
-\item{source}{(optional, character) event source label (see \code{\link[plotly:plot_ly]{plotly::plot_ly()}})}
+\item{source}{(optional, character) event source label for Plotly click/hover events in Shiny Apps..}
 
 \item{customdata}{(optional, character vector) values to make available to Plotly's
-event data. Recycled across values in \code{data} where possible.}
+event data in Shiny Apps. Recycled across values in \code{data} where possible.}
 
 \item{...}{for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)}
 }
