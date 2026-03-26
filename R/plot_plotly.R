@@ -7,7 +7,7 @@
 #' @param show_labels boolean, show labels on events or not
 #' @param background_lines number of grey background lines to draw (can be NULL)
 #' @param source (optional, character) event source label (see [plotly::plot_ly()])
-#' @param customdata (optional, character vector) values to make available to Plotly's
+#' @param customdata (optional, character vector) values to make available to Plotly
 #'   event data. Recycled across values in `data` where possible.
 #' @importFrom plotly plot_ly
 #' @importFrom plotly layout

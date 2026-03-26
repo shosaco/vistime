@@ -11,7 +11,7 @@ A library for creating time-based charts, like Gantt or timelines. Possible outp
 
 I'm glad if this can help people save time and effort, like this feedback suggests:
 
-![grafik](https://github.com/shosaco/vistime/assets/20717764/2af48992-6285-493a-8f4d-d5bb6e991b67)
+![coffee screenshot](https://github.com/shosaco/vistime/assets/20717764/2af48992-6285-493a-8f4d-d5bb6e991b67)
 
 If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a>
 

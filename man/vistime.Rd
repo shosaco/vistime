@@ -68,7 +68,7 @@ background to demonstrate structure (default: 10). Less means more memory-effici
 
 \item{source}{(optional, character) event source label for Plotly click/hover events in Shiny Apps..}
 
-\item{customdata}{(optional, character vector) values to make available to Plotly's
+\item{customdata}{(optional, character vector) values to make available to Plotly
 event data in Shiny Apps. Recycled across values in \code{data} where possible.}
 
 \item{...}{for deprecated arguments up to vistime 1.1.0 (like events, colors, ...)}
