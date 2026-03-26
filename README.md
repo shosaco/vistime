@@ -13,7 +13,7 @@ I'm glad if this can help people save time and effort, like this feedback sugges
 
 ![coffee screenshot](https://github.com/shosaco/vistime/assets/20717764/2af48992-6285-493a-8f4d-d5bb6e991b67)
 
-If you find vistime useful, please consider supporting its development: <a href="https://www.buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a>
+If you find vistime useful, please consider supporting its development: <a href="https://buymeacoffee.com/shosaco" target="_blank"><img src="https://i.imgur.com/kN1GxnC.png" alt="Buy Me A Coffee"></a>
 
 
 **Feedback welcome:** [sa.ra.online@posteo.de](mailto:sa.ra.online@posteo.de)
