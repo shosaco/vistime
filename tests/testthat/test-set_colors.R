@@ -34,7 +34,10 @@ test_that("set_colors correctly identifies categorical data", {
   result <- set_colors(data, col.color = "type", col.fontcolor = NULL)
 
   expect_true(attr(result, "color_is_categorical"))
-  expect_equal(result$col, c("TypeA", "TypeB", "TypeA"))
+  # Categories should be mapped to colors, and stored in .col_category
+  expect_equal(result$.col_category, c("TypeA", "TypeB", "TypeA"))
+  # col should contain actual color codes
+  expect_true(all(grepl("^#[0-9A-Fa-f]{6}$", result$col)))
 })
 
 test_that("set_colors handles NA values correctly", {
@@ -61,6 +64,7 @@ test_that("set_colors handles mixed valid colors and NA", {
   result <- set_colors(data, col.color = "category", col.fontcolor = NULL)
 
   expect_true(attr(result, "color_is_categorical"))
+  expect_equal(result$.col_category, c("Type1", "Type2", NA, "Type1"))
 })
 
 test_that("set_colors generates colors when col.color not found", {
@@ -126,6 +130,7 @@ test_that("set_colors identifies mix of valid colors and invalid as categorical"
 
   # Since not all are valid colors, should be categorical
   expect_true(attr(result, "color_is_categorical"))
+  expect_true(all(grepl("^#[0-9A-Fa-f]{6}$", result$col)))
 })
 
 test_that("set_colors handles empty data frame", {

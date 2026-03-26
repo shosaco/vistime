@@ -2,6 +2,7 @@
 
 ## New features
 - `vistime()` passes `source` and `customdata` to plot for interactive `Plotly` click or hover events in Shiny (closes #34, thanks @jonocarroll).
+- `col.color` argument can now also refer to a categorical column, not a column containing color names or codes. This way, you can color the plot by a given column without providing explicit colors (closes #20).
 
 ## Bugfixes
 - Now asserts that `col.color` and `col.fontcolor` are string type, i.e. `vistime(dat, col.color = color_column)` fails and `vistime(dat, col.color = "color_column")` succeeds. This was implemented for the other columns already.
