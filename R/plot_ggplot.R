@@ -41,22 +41,10 @@
 
 plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
 
-  # Check if color column contains categorical data or actual color codes
-  color_is_categorical <- isTRUE(attr(data, "color_is_categorical"))
-
   # 1. Prepare basic plot
   y_ticks <- tapply(data$y, data$subplot, mean)
 
-  # Create aesthetics based on color type
-  if (color_is_categorical) {
-    # Map color as categorical aesthetic (enables legend)
-    color_aes <- aes(x = .data$start, y = .data$y, xend = .data$end, yend = .data$y, color = .data$col)
-  } else {
-    # Use color codes directly (no legend needed)
-    color_aes <- aes(x = .data$start, y = .data$y, xend = .data$end, yend = .data$y, color = I(.data$col))
-  }
-
-  gg <- ggplot(data, color_aes) +
+  gg <- ggplot(data, aes(x = .data$start, y = .data$y, xend = .data$end, yend = .data$y, color = I(.data$col))) +
     ggtitle(title) + labs(x = NULL, y = NULL) +
     scale_y_continuous(breaks = y_ticks, labels = unique(data$group)) +
     theme_classic() +
@@ -65,7 +53,8 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
       axis.ticks.y = element_blank(),
       axis.text.y  = element_text(hjust = 1),
       # line = element_blank(),
-      panel.background = element_rect(colour = "black", linetype = "solid")) +
+      panel.background = element_rect(colour = "black", linetype = "solid"),
+      legend.position = "none") +
     coord_cartesian(ylim = c(0.5, max(data$y) + 0.5))
 
   # 2. Add background vertical lines
@@ -86,17 +75,9 @@ plot_ggplot <- function(data, linewidth, title, show_labels, background_lines) {
 
   range_dat <- data[data$start != data$end, ]
   event_dat <- data[data$start == data$end, ]
-
-  # Fill aesthetic based on color type
-  if (color_is_categorical) {
-    fill_aes <- aes(fill = .data$col)
-  } else {
-    fill_aes <- aes(fill = I(.data$col))
-  }
-
   gg <- gg +
     geom_segment(data = range_dat, linewidth = lw) +
-    geom_point(data = event_dat, mapping = fill_aes,
+    geom_point(data = event_dat, mapping = aes(fill = I(.data$col)),
                shape = 21, size = 0.7 * lw, colour = "black", stroke = 0.1)
 
   # Labels for Ranges in center of range

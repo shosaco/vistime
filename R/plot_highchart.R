@@ -44,7 +44,7 @@ plot_highchart <- function(data, title, show_labels){
               type = "datetime"),
             categories = c("", y_vals)),
           crosshairs = TRUE, formatter = highcharter::JS("function () {return this.point.tooltip}")) ,
-        enabled=F),
+        enabled = FALSE),
       text = title),
     zoomType = "xy")
 }

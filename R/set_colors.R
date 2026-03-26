@@ -20,6 +20,19 @@ set_colors <- function(data, col.color, col.fontcolor) {
       tryCatch(col2rgb(x), error = function(e) NA)
     })))
 
+    # If categorical, map category values to colors from palette
+    if (color_is_categorical) {
+      unique_categories <- unique(data$col[!is.na(data$col)])
+      palette <- "Set3"
+      category_colors <- RColorBrewer::brewer.pal(min(11, max(3, length(unique_categories))), palette)[1:length(unique_categories)]
+      names(category_colors) <- unique_categories
+
+      # Map each category to its assigned color
+      data$col <- category_colors[data$col]
+      # Preserve the original category names for legend
+      data$.col_category <- trimws(as.character(data[[col.color]]))
+    }
+
   } else {
     # Auto-generate colors from RColorBrewer
     palette <- "Set3"
@@ -32,7 +45,8 @@ set_colors <- function(data, col.color, col.fontcolor) {
   if (!is.null(col.fontcolor) && col.fontcolor %in% names(data)){
     data$fontcol <- trimws(as.character(data[[col.fontcolor]]))
   } else {
-    data$fontcol <- "black"
+    # Replicate "black" to match the number of rows in data
+    data$fontcol <- rep("black", nrow(data))
   }
 
   return(data)
