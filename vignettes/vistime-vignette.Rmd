@@ -79,7 +79,7 @@ col.event | optional | character | the column name in data that contains event n
 col.start | optional | character | the column name in data that contains start dates. Default: *start*
 col.end | optional | character | the column name in data that contains end dates. Default: *end*
 col.group | optional | character | the column name in data to be used for grouping. Default: *group*
-col.color | optional | character | the column name in data that contains colors for events. Default: *color*, if not present, colors are chosen via RColorBrewer.
+col.color | optional | character | the column name in data that contains colors for events. Can be hex codes (e.g., *#FF0000*), named colors (e.g., *red*), or categorical data to be auto-colored. Default: *color*, if not present, colors are chosen via RColorBrewer.
 col.fontcolor | optional | character | the column name in data that contains the font color for event labels. Default: *fontcolor*, if not present, color will be black.
 col.tooltip | optional | character | the column name in data that contains the mouseover tooltips for the events. Default: *tooltip*, if not present, then tooltips are build from event name and date. [Basic HTML](https://plotly.com/chart-studio-help/adding-HTML-and-links-to-charts/#step-2-the-essentials) is allowed.
 optimize_y | optional | logical | distribute events on y-axis by smart heuristic (default) or use order of input data.
