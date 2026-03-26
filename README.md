@@ -34,7 +34,7 @@ To install the package from CRAN, type the following in your R console:
 install.packages("vistime")
 ```
 
-<!--
+
 To install the development version containing most recent fixes and improvements, but not released on CRAN yet, see NEWS.md), run the following code in an R console:
 
 ```{r}
@@ -42,7 +42,6 @@ if (!require("remotes")) install.packages("remotes")
 remotes::install_github("shosaco/vistime")
 ```
 
--->
 
 ## 2. Main functionality
 
