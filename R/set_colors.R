@@ -24,6 +24,7 @@
 #'   - `fontcol`: font color codes
 #'   - `color_is_categorical` attribute: logical indicating if colors are categorical
 #'
+#' @importFrom grDevices col2rgb
 #' @keywords internal
 #' @noRd
 
